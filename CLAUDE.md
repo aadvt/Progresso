@@ -23,7 +23,7 @@ Prototype for **Inferentics** (edtech). Inferentics already scans CBSE Class 11�
 | Phase | Scope | Status |
 |---|---|---|
 | 1 | Foundation, LLM layer, error-record format, provisional concept graph, demo fixtures | done |
-| 2 | Root-cause engine: trace errors through the prerequisite graph to the few root gaps that explain most mistakes, ranked by marks recoverable | |
+| 2 | Root-cause engine: trace errors through the prerequisite graph to the few root gaps that explain most mistakes, ranked by marks recoverable | done |
 | 3 | Web app with the diagnosis view | |
 | 4 | 3D "knowledge constellation" (three.js) of the syllabus, with a chain-reaction ripple when a root is fixed | |
 | 5 | Mission engine: 25-min daily missions, "prove it" questions whose wrong options come from the student's own mistakes, mastery gating, spaced repetition (FSRS), readiness meter | |
@@ -44,13 +44,15 @@ pnpm TypeScript monorepo. Domain logic is UI-independent because both the web ap
 ```
 packages/
   core/   @progresso/core  domain: config, concept graph (schema, loader, validator, queries),
-                            error-record schema, student/exam types.
+                            error-record schema, student/exam types, root-cause engine (root-cause/).
                             ./demo-fixtures entry = SAMPLE DATA loader (deleted in Phase P)
   llm/    @progresso/llm   provider-agnostic LLM layer: per-task routing, Gemini/Anthropic/
                             OpenAI-compatible providers, structured output + repair, rate limit,
                             retry/backoff, model fallback, response cache, usage log, PII guard
   db/     @progresso/db    SQLite (better-sqlite3 + Drizzle): schema, migrations, graph sync, seed
-apps/                      web app (Phase 3), MCP server (Phase 10)
+apps/
+  cli/    @progresso/cli   command-line tools needing several packages (pnpm analyse)
+                           web app (Phase 3), MCP server (Phase 10) to come
 config/
   app.json                 paths: concept graph dir, DB, fixtures, LLM cache, usage log
   llm.json                 per-task LLM routing (provider, model, fallbacks, limits, thinking)
@@ -66,6 +68,7 @@ docs/                         progress log, phase reports, error-record format
 Key contracts:
 - **Error record** (`ErrorRecordSchema`): the parser → engine contract. See `docs/error-record-format.md`.
 - **Concept graph files**: `{ subject, syllabus_source, units[], concepts[] }`, validated by `loadConceptGraph()` (unique ids, no dangling prerequisites, no cycles). Switching to the full graph is the one-line `conceptGraphDir` change in `config/app.json` (or `CONCEPT_GRAPH_DIR`).
+- **Root-cause engine**: `analyseStudent({ graph, records, mastery?, params? })` → `RootCauseAnalysis` (`packages/core/src/root-cause/types.ts`). Pure and deterministic; every tunable in `root-cause/params.ts`. The LLM may only re-word its explanations (`wordExplanations`, task `explain`).
 - **LLM calls**: `createLlmClient().generateObject(task, { prompt, schema })` or `.generateText(task, ...)`. The task name picks provider/model from `config/llm.json`.
 
 ## Conventions
@@ -88,6 +91,7 @@ cp .env.example .env        # then set GEMINI_API_KEY (Google AI Studio)
 
 pnpm verify                 # typecheck + lint + tests + graph validation
 pnpm graph:validate         # validate the configured concept graph and print stats (--json for JSON)
+pnpm analyse demo-riya      # root-cause analysis for a student (--all, --json, --llm to word explanations via the LLM)
 pnpm db:seed                # migrate, sync graph, load demo fixtures, print per-student summary
 pnpm db:reset               # delete the local DB (then db:seed)
 pnpm llm:smoke              # one real structured Gemini call, then the same call from cache

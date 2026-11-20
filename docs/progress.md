@@ -25,3 +25,29 @@ Report: [phase-1-report.md](phase-1-report.md)
 **Open items**
 - Phase 2: root-cause engine, tested against `data/fixtures/_answer-key/expected-roots.json`.
 - Rate limiting is per process. If the web app and MCP server ever run LLM-heavy work at the same time, move the limiter to the DB.
+
+---
+
+## Phase 2: Root-cause engine (2026-11-21) ✅
+
+Report: [phase-2-report.md](phase-2-report.md)
+
+**Built**
+- `analyseStudent({ graph, records, mastery?, params? })` in `@progresso/core` (`src/root-cause/`): finds the smallest set of root gaps that best explains a student's errors across exams and subjects, and ranks them by marks recoverable per study hour. Returns roots (explained errors with prerequisite paths, confidence, marks lost/estimated, board marks resting on it, study hours/missions, branch coverage, counter-evidence, close alternatives, plain-language explanation), standalone errors, habit patterns and a headline.
+- Explainable scoring: error-type weights (slips 0 → habits), per-step decay up the graph, fixed root cost plus a branch-coverage cost, same-exam repeat discount, recency, counter-evidence from slips and optional `MasteryEvidence`. Greedy + add/remove/swap/split search with exact upper-bound pruning. All tunables in `params.ts`.
+- `wordExplanations()` re-words explanations through the LLM layer (task `explain`, cached, PII-guarded, template fallback). Core doesn't depend on `@progresso/llm`.
+- `pnpm analyse <student-id> | --all [--json] [--llm]` in a new `apps/cli` package.
+
+**Results**
+- Demo students: 4/4 match the answer key exactly (roots, explained records, standalones).
+- Scale: 40 random 600-concept graphs, 104/110 planted roots recovered, 2 false roots in total, median 1.1 ms per student; 150-error student in ~180 ms.
+
+**Decisions later phases rely on**
+- The engine depends only on error records + graph; output types in `root-cause/types.ts` are what the web app (Phase 3) and MCP server (Phase 10) render.
+- `MasteryEvidence` is the way to tell the engine a concept works. Phase 5 should feed passed "prove it" checks into it; the Phase P parser should emit report-stated strengths as it.
+- Ranking = confidence × (marks lost + 0.1 × board marks resting on the root) / study hours. How much future board weight should count is an open product question (see Kabir in the report).
+
+**Open items**
+- Re-check parameters on real reports in Phase P (ideally against teacher-labelled roots).
+- Provisional-graph gaps found: multiple-angle formulae → trig limits and inverse-trig simplification; chain rule ↔ composite exp/log derivatives.
+- UI should cap the list of roots for very noisy students and lead with the report's own words when the graph path is long.

@@ -9,6 +9,7 @@
     "lint": "eslint .",
     "test": "vitest run",
     "graph:validate": "pnpm --filter @progresso/core graph:validate",
+    "analyse": "pnpm --filter @progresso/cli analyse",
     "llm:smoke": "pnpm --filter @progresso/llm smoke",
     "llm:usage": "pnpm --filter @progresso/llm usage",
     "db:generate": "pnpm --filter @progresso/db generate",

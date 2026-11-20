@@ -30,6 +30,15 @@ importers:
         specifier: ^5.1.1
         version: 5.1.1(@opentelemetry/api@1.10.0)(@types/node@24.19.2)(vite@8.3.8(@types/node@24.19.2)(esbuild@0.28.2)(tsx@4.23.15))
 
+  apps/cli:
+    dependencies:
+      '@progresso/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+      '@progresso/llm':
+        specifier: workspace:*
+        version: link:../../packages/llm
+
   packages/core:
     dependencies:
       zod:

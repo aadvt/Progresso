@@ -1,0 +1,14 @@
+{
+  "name": "@progresso/cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "analyse": "tsx src/analyse.ts"
+  },
+  "dependencies": {
+    "@progresso/core": "workspace:*",
+    "@progresso/llm": "workspace:*"
+  }
+}
