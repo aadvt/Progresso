@@ -1,6 +1,6 @@
 # Progresso
 
-Turns an Inferentics AI exam-diagnosis report (CBSE Class 11–12) into a short, personal plan:
+Turns an AI exam-diagnosis report (CBSE Class 11–12) into a short, personal plan:
 **diagnose → find the root gap → fix it in daily missions → prove it's fixed → keep it fixed until exam day.**
 
 Prototype. Everything about the product, scope rules, architecture and commands is in [CLAUDE.md](CLAUDE.md).
