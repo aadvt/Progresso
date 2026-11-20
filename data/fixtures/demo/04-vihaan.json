@@ -1,0 +1,152 @@
+{
+  "sample_data": true,
+  "notice": "SAMPLE DATA: hand-written demo fixture, not a real student or a real Inferentics report. Deleted in Phase P.",
+  "student": {
+    "id": "demo-vihaan",
+    "display_name": "Vihaan (sample)",
+    "class": 12,
+    "subjects": ["Mathematics", "Chemistry"],
+    "next_exam": { "name": "Pre-Board 2", "date": "2027-01-13" },
+    "story": "Deep foundation gap. Class 12 calculus marks are lost to Class 9 algebra: (a+b)^2 expanded without the middle term, the a^3 - b^3 factorisation with the wrong signs, and quadratics that cannot be factorised, which then block continuity, first-principles, monotonicity and partial-fraction questions. A determinant sign error, a Bayes' theorem error (outside the provisional graph, so unmapped) and two chemistry errors stand alone."
+  },
+  "exams": [
+    { "id": "demo-vihaan.ut1.math", "name": "Unit Test 1", "date": "2026-07-20", "subject": "Mathematics", "max_marks": 40 },
+    { "id": "demo-vihaan.hy.math", "name": "Half-Yearly Examination", "date": "2026-09-23", "subject": "Mathematics", "max_marks": 80 },
+    { "id": "demo-vihaan.pb1.math", "name": "Pre-Board 1", "date": "2026-11-10", "subject": "Mathematics", "max_marks": 80 },
+    { "id": "demo-vihaan.pb1.chem", "name": "Pre-Board 1", "date": "2026-11-13", "subject": "Chemistry", "max_marks": 70 }
+  ],
+  "records": [
+    {
+      "id": "demo-vihaan.ut1.math.q6",
+      "exam_id": "demo-vihaan.ut1.math",
+      "question": {
+        "ref": "Q6",
+        "section": "C",
+        "text": "Find k if f(x) = (x^3 - 8)/(x - 2) for x != 2 and f(2) = k is continuous at x = 2."
+      },
+      "diagnosis": {
+        "text": "The student used the wrong sign pattern for a^3 - b^3 and wrote x^3 - 8 = (x - 2)(x^2 - 2x + 4), obtaining k = 4. The correct factorisation (x - 2)(x^2 + 2x + 4) gives k = 12."
+      },
+      "error_type": "conceptual",
+      "student_working": { "text": "x^3 - 8 = (x - 2)(x^2 - 2x + 4), so k = 4 - 4 + 4 = 4", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 3, "lost": 2 },
+      "concepts": [
+        { "concept_id": "math.continuity", "confidence": 0.7, "role": "primary" },
+        { "concept_id": "math.algebraic_identities", "confidence": 0.8, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.algebraic_identities.m2", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-vihaan.ut1.math.q9",
+      "exam_id": "demo-vihaan.ut1.math",
+      "question": { "ref": "Q9", "section": "B", "text": "Differentiate (sqrt(x) + 1)^2 / x with respect to x." },
+      "diagnosis": {
+        "text": "(sqrt(x) + 1)^2 was expanded as x + 1, dropping the middle term 2 sqrt(x). The derivative obtained, -1/x^2, is therefore wrong.",
+        "correct_approach": "(x + 2 sqrt(x) + 1)/x = 1 + 2x^(-1/2) + x^(-1), so the derivative is -x^(-3/2) - x^(-2)."
+      },
+      "error_type": "conceptual",
+      "student_working": { "text": "(sqrt(x) + 1)^2 / x = (x + 1)/x = 1 + 1/x, so dy/dx = -1/x^2", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 2, "lost": 2 },
+      "concepts": [
+        { "concept_id": "math.derivative_basics", "confidence": 0.6, "role": "primary" },
+        { "concept_id": "math.algebraic_identities", "confidence": 0.85, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.algebraic_identities.m1", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-vihaan.hy.math.q21",
+      "exam_id": "demo-vihaan.hy.math",
+      "question": { "ref": "Q21", "section": "C", "text": "Find the intervals in which f(x) = 2x^3 - 9x^2 + 12x + 1 is increasing or decreasing." },
+      "diagnosis": {
+        "text": "f'(x) = 6x^2 - 18x + 12 is correct, but x^2 - 3x + 2 was factorised as (x + 1)(x + 2), giving critical points -1 and -2. The correct factors are (x - 1)(x - 2), so f is increasing on (-inf, 1) and (2, inf) and decreasing on (1, 2)."
+      },
+      "error_type": "procedural",
+      "student_working": { "text": "6(x + 1)(x + 2) = 0, so x = -1, -2", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 3, "lost": 2 },
+      "concepts": [
+        { "concept_id": "math.increasing_decreasing", "confidence": 0.7, "role": "primary" },
+        { "concept_id": "math.factorisation", "confidence": 0.85, "role": "secondary" }
+      ]
+    },
+    {
+      "id": "demo-vihaan.hy.math.q27",
+      "exam_id": "demo-vihaan.hy.math",
+      "question": { "ref": "Q27", "section": "C", "text": "Find the integral of 1/(x^2 - 5x + 6) dx." },
+      "diagnosis": {
+        "text": "The student could not factorise x^2 - 5x + 6 as (x - 2)(x - 3), so the partial-fraction decomposition was never set up. A substitution was attempted and the question was left incomplete.",
+        "correct_approach": "1/((x - 2)(x - 3)) = 1/(x - 3) - 1/(x - 2), so the integral is log|(x - 3)/(x - 2)| + C."
+      },
+      "error_type": "incomplete",
+      "marks": { "max": 3, "lost": 3 },
+      "concepts": [
+        { "concept_id": "math.partial_fractions", "confidence": 0.75, "role": "primary" },
+        { "concept_id": "math.factorisation", "confidence": 0.85, "role": "secondary" }
+      ]
+    },
+    {
+      "id": "demo-vihaan.pb1.math.q8",
+      "exam_id": "demo-vihaan.pb1.math",
+      "question": { "ref": "Q8", "section": "B", "text": "Evaluate the determinant |1 2 3; 0 1 4; 5 6 0|." },
+      "diagnosis": {
+        "text": "When expanding along R1 the student ignored the alternating sign of the a12 cofactor and obtained -79. The correct value is 1."
+      },
+      "error_type": "procedural",
+      "marks": { "max": 2, "lost": 1 },
+      "concepts": [{ "concept_id": "math.determinants", "confidence": 0.9, "role": "primary" }],
+      "misconception": { "misconception_id": "math.determinants.m1", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-vihaan.pb1.math.q14",
+      "exam_id": "demo-vihaan.pb1.math",
+      "question": { "ref": "Q14", "section": "C", "text": "Using first principles, show that f(x) = x^2 is differentiable at x = 3 and find f'(3)." },
+      "diagnosis": {
+        "text": "(3 + h)^2 was expanded as 9 + h^2, omitting 6h, so the derivative was wrongly obtained as 0. The correct value is f'(3) = 6."
+      },
+      "error_type": "conceptual",
+      "student_working": { "text": "[(3 + h)^2 - 9]/h = (9 + h^2 - 9)/h = h, which tends to 0", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 3, "lost": 2 },
+      "concepts": [
+        { "concept_id": "math.differentiability", "confidence": 0.6, "role": "primary" },
+        { "concept_id": "math.derivative_first_principles", "confidence": 0.6, "role": "secondary" },
+        { "concept_id": "math.algebraic_identities", "confidence": 0.85, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.algebraic_identities.m1", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-vihaan.pb1.math.q34",
+      "exam_id": "demo-vihaan.pb1.math",
+      "question": { "ref": "Q34", "section": "D" },
+      "diagnosis": {
+        "text": "In the Bayes' theorem problem the student used P(A|B) in place of P(B|A) in the numerator, so the posterior probability computed is incorrect."
+      },
+      "error_type": "conceptual",
+      "marks": { "max": 5, "lost": 3 },
+      "concepts": [],
+      "notes": "Probability is outside the provisional graph slice; this record is intentionally unmapped to exercise that path."
+    },
+    {
+      "id": "demo-vihaan.pb1.chem.q4",
+      "exam_id": "demo-vihaan.pb1.chem",
+      "question": { "ref": "Q4", "section": "A", "text": "State the hybridisation of the positively charged carbon in (CH3)3C+." },
+      "diagnosis": { "text": "Answered sp3. The carbocation carbon is sp2 hybridised (trigonal planar, with an empty p orbital)." },
+      "error_type": "conceptual",
+      "marks": { "max": 1, "lost": 1 },
+      "concepts": [
+        { "concept_id": "chem.reactive_intermediates", "confidence": 0.7, "role": "primary" },
+        { "concept_id": "chem.hybridisation", "confidence": 0.8, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "chem.hybridisation.m1", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-vihaan.pb1.chem.q17",
+      "exam_id": "demo-vihaan.pb1.chem",
+      "question": { "ref": "Q17", "section": "A", "text": "Write the major product when 2-bromobutane is heated with alcoholic KOH." },
+      "diagnosis": {
+        "text": "Answered but-1-ene. By Saytzeff's rule the more substituted alkene, but-2-ene, is the major product."
+      },
+      "error_type": "conceptual",
+      "concepts": [{ "concept_id": "chem.elimination_reactions", "confidence": 0.9, "role": "primary" }],
+      "misconception": { "misconception_id": "chem.elimination_reactions.m1", "confidence": 0.9 }
+    }
+  ]
+}

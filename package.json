@@ -1,0 +1,29 @@
+{
+  "name": "progresso",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.12.1",
+  "engines": { "node": ">=22.12" },
+  "scripts": {
+    "typecheck": "pnpm -r --parallel typecheck",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "graph:validate": "pnpm --filter @progresso/core graph:validate",
+    "llm:smoke": "pnpm --filter @progresso/llm smoke",
+    "llm:usage": "pnpm --filter @progresso/llm usage",
+    "db:generate": "pnpm --filter @progresso/db generate",
+    "db:migrate": "pnpm --filter @progresso/db migrate",
+    "db:seed": "pnpm --filter @progresso/db seed",
+    "db:reset": "pnpm --filter @progresso/db reset",
+    "verify": "pnpm typecheck && pnpm lint && pnpm test && pnpm graph:validate"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.19.2",
+    "eslint": "^10.15.0",
+    "tsx": "^4.23.15",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.73.0",
+    "vitest": "^5.1.1"
+  }
+}

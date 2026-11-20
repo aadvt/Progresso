@@ -1,0 +1,156 @@
+{
+  "sample_data": true,
+  "notice": "SAMPLE DATA: hand-written demo fixture, not a real student or a real Inferentics report. Deleted in Phase P.",
+  "student": {
+    "id": "demo-ananya",
+    "display_name": "Ananya (sample)",
+    "class": 12,
+    "subjects": ["Mathematics", "Chemistry"],
+    "next_exam": { "name": "Pre-Board 2", "date": "2027-01-12" },
+    "story": "Conceptually strong. Methods are right almost everywhere; marks leak through careless slips (sign error, misread reagent, wrong interval copied, mL vs L), notation (missing +C, units, IUPAC numbering, curved-arrow direction) and incomplete final steps. No single conceptual root should dominate."
+  },
+  "exams": [
+    { "id": "demo-ananya.hy.math", "name": "Half-Yearly Examination", "date": "2026-09-22", "subject": "Mathematics", "max_marks": 80 },
+    { "id": "demo-ananya.hy.chem", "name": "Half-Yearly Examination", "date": "2026-09-25", "subject": "Chemistry", "max_marks": 70 },
+    { "id": "demo-ananya.pb1.math", "name": "Pre-Board 1", "date": "2026-11-10", "subject": "Mathematics", "max_marks": 80 },
+    { "id": "demo-ananya.pb1.chem", "name": "Pre-Board 1", "date": "2026-11-12", "subject": "Chemistry", "max_marks": 70 }
+  ],
+  "records": [
+    {
+      "id": "demo-ananya.hy.math.q2",
+      "exam_id": "demo-ananya.hy.math",
+      "question": { "ref": "Q2", "section": "A", "text": "Find the integral of (3x^2 + 2x) dx." },
+      "diagnosis": { "text": "Integration correct (x^3 + x^2) but the constant of integration C is omitted." },
+      "error_type": "notation",
+      "error_type_original": "Presentation",
+      "student_working": { "text": "integral of (3x^2 + 2x) dx = x^3 + x^2", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 1, "lost": 0.5 },
+      "concepts": [{ "concept_id": "math.antiderivative_basics", "confidence": 0.9, "role": "primary" }],
+      "misconception": { "misconception_id": "math.antiderivative_basics.m1", "confidence": 0.95 }
+    },
+    {
+      "id": "demo-ananya.hy.math.q17",
+      "exam_id": "demo-ananya.hy.math",
+      "question": { "ref": "Q17", "section": "C", "text": "Find the inverse of A = [[2, 3], [1, 4]]." },
+      "diagnosis": {
+        "text": "Method correct. |A| computed as 11 instead of 5 (sign slip in 2 x 4 - 3 x 1), so the inverse obtained is wrong.",
+        "correct_approach": "|A| = 5 and A^-1 = (1/5)[[4, -3], [-1, 2]]."
+      },
+      "error_type": "calculation",
+      "error_type_original": "Calculation mistake",
+      "student_working": { "text": "|A| = 2(4) + 3(1) = 11", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 3, "lost": 1 },
+      "concepts": [
+        { "concept_id": "math.determinants", "confidence": 0.8, "role": "primary" },
+        { "concept_id": "math.matrix_inverse", "confidence": 0.6, "role": "secondary" }
+      ]
+    },
+    {
+      "id": "demo-ananya.hy.math.q26",
+      "exam_id": "demo-ananya.hy.math",
+      "question": { "ref": "Q26", "section": "C", "text": "Find the intervals in which f(x) = x^3 - 6x^2 + 9x + 1 is strictly increasing." },
+      "diagnosis": {
+        "text": "f'(x) = 3(x - 1)(x - 3) and the sign chart are correct and show f'(x) > 0 on (-inf, 1) and (3, inf), but the final answer line states (1, 3)."
+      },
+      "error_type": "careless",
+      "error_type_original": "Careless error",
+      "marks": { "max": 3, "lost": 1 },
+      "concepts": [{ "concept_id": "math.increasing_decreasing", "confidence": 0.8, "role": "primary" }]
+    },
+    {
+      "id": "demo-ananya.pb1.math.q13",
+      "exam_id": "demo-ananya.pb1.math",
+      "question": { "ref": "Q13", "section": "B", "text": "If y = x^x, find dy/dx." },
+      "diagnosis": {
+        "text": "Working correct up to (1/y)(dy/dx) = 1 + log x. In the final step dy/dx was written as 1 + log x, dropping the factor y = x^x.",
+        "correct_approach": "dy/dx = x^x (1 + log x)."
+      },
+      "error_type": "careless",
+      "error_type_original": "Final step error",
+      "marks": { "max": 2, "lost": 1 },
+      "concepts": [{ "concept_id": "math.logarithmic_differentiation", "confidence": 0.85, "role": "primary" }],
+      "misconception": { "misconception_id": "math.logarithmic_differentiation.m2", "confidence": 0.5 }
+    },
+    {
+      "id": "demo-ananya.pb1.math.q20",
+      "exam_id": "demo-ananya.pb1.math",
+      "question": { "ref": "Q20", "section": "C", "text": "Find the area of the region bounded by y = x^2 and y = x." },
+      "diagnosis": { "text": "Correct value 1/6 obtained. The answer was written without units (sq. units) and the region was not shaded in the sketch." },
+      "error_type": "notation",
+      "marks": { "max": 3, "lost": 0.5 },
+      "concepts": [{ "concept_id": "math.area_under_curves", "confidence": 0.85, "role": "primary" }]
+    },
+    {
+      "id": "demo-ananya.pb1.math.q28",
+      "exam_id": "demo-ananya.pb1.math",
+      "question": { "ref": "Q28", "section": "C", "text": "Solve the differential equation dy/dx + y/x = x^2." },
+      "diagnosis": {
+        "text": "Integrating factor x and the method are correct, but the constant of integration was omitted, so the general solution is incomplete.",
+        "correct_approach": "xy = x^4/4 + C, i.e. y = x^3/4 + C/x."
+      },
+      "error_type": "incomplete",
+      "student_working": { "text": "xy = x^4/4, so y = x^3/4", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 3, "lost": 1 },
+      "concepts": [
+        { "concept_id": "math.linear_de", "confidence": 0.8, "role": "primary" },
+        { "concept_id": "math.antiderivative_basics", "confidence": 0.5, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.antiderivative_basics.m1", "confidence": 0.7 }
+    },
+    {
+      "id": "demo-ananya.hy.chem.q5",
+      "exam_id": "demo-ananya.hy.chem",
+      "question": { "ref": "Q5", "section": "A", "text": "Write the IUPAC name of CH3-CH2-CH(CH3)-CH2-CH2-Cl." },
+      "diagnosis": {
+        "text": "Named as 3-methyl-5-chloropentane. The chain was numbered from the wrong end and the prefixes were not in alphabetical order.",
+        "correct_approach": "1-chloro-3-methylpentane."
+      },
+      "error_type": "notation",
+      "marks": { "max": 1, "lost": 1 },
+      "concepts": [{ "concept_id": "chem.iupac_nomenclature", "confidence": 0.95, "role": "primary" }],
+      "misconception": { "misconception_id": "chem.iupac_nomenclature.m1", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-ananya.hy.chem.q16",
+      "exam_id": "demo-ananya.hy.chem",
+      "question": { "ref": "Q16", "section": "C", "text": "Write the mechanism of the reaction of CH3Cl with OH- by the SN2 pathway." },
+      "diagnosis": {
+        "text": "Transition state and products are correct, but the curved arrow is drawn from the carbon to the hydroxide ion instead of from the lone pair on OH- to the carbon."
+      },
+      "error_type": "notation",
+      "error_type_original": "Mechanism representation",
+      "marks": { "max": 3, "lost": 1 },
+      "concepts": [
+        { "concept_id": "chem.sn2_mechanism", "confidence": 0.7, "role": "primary" },
+        { "concept_id": "chem.curved_arrow_notation", "confidence": 0.9, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "chem.curved_arrow_notation.m1", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-ananya.pb1.chem.q9",
+      "exam_id": "demo-ananya.pb1.chem",
+      "question": { "ref": "Q9", "section": "B", "text": "Calculate the molarity of a solution containing 4 g of NaOH in 250 mL of solution." },
+      "diagnosis": {
+        "text": "Moles of NaOH (0.1 mol) correct. The student divided by 250 instead of 0.250 L, so the answer is off by a factor of 1000.",
+        "correct_approach": "Molarity = 0.1 mol / 0.250 L = 0.4 M."
+      },
+      "error_type": "careless",
+      "student_working": { "text": "M = 0.1/250 = 0.0004 M", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 2, "lost": 1 },
+      "concepts": [{ "concept_id": "chem.stoichiometry", "confidence": 0.85, "role": "primary" }],
+      "misconception": { "misconception_id": "chem.stoichiometry.m2", "confidence": 0.8 }
+    },
+    {
+      "id": "demo-ananya.pb1.chem.q22",
+      "exam_id": "demo-ananya.pb1.chem",
+      "question": { "ref": "Q22", "section": "A", "text": "Write the main product when 2-bromobutane is heated with aqueous KOH." },
+      "diagnosis": {
+        "text": "The student answered but-2-ene, the product with alcoholic KOH. The question specified aqueous KOH, which gives butan-2-ol by substitution. The reagent appears to have been misread."
+      },
+      "error_type": "careless",
+      "error_type_original": "Misread question",
+      "marks": { "max": 1, "lost": 1 },
+      "concepts": [{ "concept_id": "chem.reaction_types", "confidence": 0.6, "role": "primary" }]
+    }
+  ]
+}

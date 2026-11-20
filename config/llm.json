@@ -1,0 +1,34 @@
+{
+  "defaults": {
+    "provider": "gemini",
+    "model": "gemini-3.8-flash",
+    "fallbackModels": ["gemini-3.6-flash"],
+    "maxOutputTokens": 8192,
+    "thinking": "low",
+    "timeoutMs": 120000
+  },
+  "tasks": {
+    "parse_report": { "maxOutputTokens": 32768, "thinking": "medium" },
+    "explain": {},
+    "generate_questions": { "maxOutputTokens": 16384, "thinking": "medium" },
+    "verify_questions": { "thinking": "medium" },
+    "codegen_manim": { "maxOutputTokens": 16384, "thinking": "medium" },
+    "check_frames": {},
+    "match_clip": { "thinking": "minimal" },
+    "write_message": { "maxOutputTokens": 1024, "thinking": "minimal" },
+    "smoke_test": { "maxOutputTokens": 2048 }
+  },
+  "providers": {
+    "gemini": { "requestsPerMinute": 10, "apiKeyEnv": "GEMINI_API_KEY" },
+    "anthropic": { "requestsPerMinute": 50, "apiKeyEnv": "ANTHROPIC_API_KEY" },
+    "openai_compatible": {
+      "requestsPerMinute": 0,
+      "apiKeyEnv": "OPENAI_COMPAT_API_KEY",
+      "baseUrlEnv": "OPENAI_COMPAT_BASE_URL",
+      "defaultBaseUrl": "http://localhost:11434/v1"
+    }
+  },
+  "retry": { "attemptsPerModel": 2, "baseDelayMs": 1500, "maxDelayMs": 30000 },
+  "repairAttempts": 2,
+  "cacheVersion": 1
+}

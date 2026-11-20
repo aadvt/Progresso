@@ -1,0 +1,842 @@
+{
+  "subject": "Mathematics",
+  "syllabus_source": "PROVISIONAL graph (Phase 1), hand-built from the CBSE Mathematics curriculum for Classes 11-12 (rationalised syllabus, session 2025-26) plus the Class 9-10 prerequisites that calculus actually rests on. Covers a slice: calculus with its algebra and trigonometry foundations, plus a little of matrices and vectors. board_marks are APPROXIMATE unit weightages out of 80; pre-Class-11 foundation units are not examined at Class 11-12 and carry 0. To be replaced in Phase P by the full graph in the same format.",
+  "units": [
+    { "id": "m10.foundations", "name": "Foundations (Classes 9-10)", "class": 10, "board_marks": 0 },
+    { "id": "m11.sets_functions", "name": "Sets and Functions", "class": 11, "board_marks": 23 },
+    { "id": "m11.algebra", "name": "Algebra", "class": 11, "board_marks": 25 },
+    { "id": "m11.coordinate_geometry", "name": "Coordinate Geometry", "class": 11, "board_marks": 12 },
+    { "id": "m11.calculus", "name": "Calculus", "class": 11, "board_marks": 8 },
+    { "id": "m12.relations_functions", "name": "Relations and Functions", "class": 12, "board_marks": 8 },
+    { "id": "m12.algebra", "name": "Algebra", "class": 12, "board_marks": 10 },
+    { "id": "m12.calculus", "name": "Calculus", "class": 12, "board_marks": 35 },
+    { "id": "m12.vectors_3d", "name": "Vectors and Three-Dimensional Geometry", "class": 12, "board_marks": 14 }
+  ],
+  "concepts": [
+    {
+      "id": "math.algebraic_manipulation",
+      "name": "Algebraic manipulation",
+      "class": 9,
+      "unit_id": "m10.foundations",
+      "chapter": "Polynomials",
+      "prerequisites": [],
+      "aliases": ["simplifying expressions", "transposing terms", "rearranging equations"],
+      "misconceptions": [
+        { "id": "math.algebraic_manipulation.m1", "description": "Cancels a term instead of a common factor, e.g. (x + 3)/3 = x" },
+        { "id": "math.algebraic_manipulation.m2", "description": "Distributes a minus sign over only the first term inside brackets" }
+      ]
+    },
+    {
+      "id": "math.exponent_laws",
+      "name": "Laws of exponents",
+      "class": 9,
+      "unit_id": "m10.foundations",
+      "chapter": "Number Systems",
+      "prerequisites": [],
+      "aliases": ["indices", "laws of indices", "powers"],
+      "misconceptions": [
+        { "id": "math.exponent_laws.m1", "description": "Treats (a + b)^n as a^n + b^n" },
+        { "id": "math.exponent_laws.m2", "description": "Multiplies exponents when multiplying powers of the same base (a^m * a^n = a^(mn))" }
+      ]
+    },
+    {
+      "id": "math.algebraic_identities",
+      "name": "Algebraic identities",
+      "class": 9,
+      "unit_id": "m10.foundations",
+      "chapter": "Polynomials",
+      "prerequisites": ["math.algebraic_manipulation", "math.exponent_laws"],
+      "aliases": ["standard identities", "(a+b)^2", "a^3 - b^3", "difference of squares", "difference of cubes"],
+      "misconceptions": [
+        { "id": "math.algebraic_identities.m1", "description": "Expands (a + b)^2 as a^2 + b^2, dropping the 2ab term" },
+        { "id": "math.algebraic_identities.m2", "description": "Factorises a^3 - b^3 as (a - b)(a^2 - ab + b^2), using the sum-of-cubes sign pattern" }
+      ]
+    },
+    {
+      "id": "math.factorisation",
+      "name": "Factorisation of polynomials",
+      "class": 9,
+      "unit_id": "m10.foundations",
+      "chapter": "Polynomials",
+      "prerequisites": ["math.algebraic_identities"],
+      "aliases": ["factorization", "splitting the middle term", "factor theorem"],
+      "misconceptions": [
+        { "id": "math.factorisation.m1", "description": "Chooses a factor pair whose sum is right but whose product is wrong when splitting the middle term" },
+        { "id": "math.factorisation.m2", "description": "Stops after taking out a common factor, leaving a factorisable quadratic" }
+      ]
+    },
+    {
+      "id": "math.algebraic_fractions",
+      "name": "Algebraic fractions",
+      "class": 9,
+      "unit_id": "m10.foundations",
+      "chapter": "Polynomials",
+      "prerequisites": ["math.factorisation"],
+      "aliases": ["rational expressions", "simplifying fractions with variables"],
+      "misconceptions": [
+        { "id": "math.algebraic_fractions.m1", "description": "Adds fractions by adding numerators and denominators separately" },
+        { "id": "math.algebraic_fractions.m2", "description": "Cancels terms across a sum in numerator and denominator" }
+      ]
+    },
+    {
+      "id": "math.linear_equations",
+      "name": "Linear equations",
+      "class": 9,
+      "unit_id": "m10.foundations",
+      "chapter": "Linear Equations in Two Variables",
+      "prerequisites": ["math.algebraic_manipulation"],
+      "aliases": ["simultaneous equations", "pair of linear equations"],
+      "misconceptions": []
+    },
+    {
+      "id": "math.quadratic_equations",
+      "name": "Quadratic equations",
+      "class": 10,
+      "unit_id": "m10.foundations",
+      "chapter": "Quadratic Equations",
+      "prerequisites": ["math.factorisation"],
+      "aliases": ["quadratic formula", "discriminant", "roots of a quadratic"],
+      "misconceptions": [
+        { "id": "math.quadratic_equations.m1", "description": "Divides both sides by a variable expression and loses a root" }
+      ]
+    },
+    {
+      "id": "math.completing_the_square",
+      "name": "Completing the square",
+      "class": 10,
+      "unit_id": "m10.foundations",
+      "chapter": "Quadratic Equations",
+      "prerequisites": ["math.algebraic_identities"],
+      "aliases": ["perfect square form"],
+      "misconceptions": [
+        { "id": "math.completing_the_square.m1", "description": "Adds (b/2)^2 inside the bracket without compensating outside" }
+      ]
+    },
+    {
+      "id": "math.basic_trig_ratios",
+      "name": "Trigonometric ratios of acute angles",
+      "class": 10,
+      "unit_id": "m10.foundations",
+      "chapter": "Introduction to Trigonometry",
+      "prerequisites": [],
+      "aliases": ["sin cos tan", "trigonometric ratios", "standard angle values"],
+      "misconceptions": [
+        { "id": "math.basic_trig_ratios.m1", "description": "Swaps the values of sin 30 degrees and sin 60 degrees" }
+      ]
+    },
+    {
+      "id": "math.trig_identities_basic",
+      "name": "Basic trigonometric identities",
+      "class": 10,
+      "unit_id": "m10.foundations",
+      "chapter": "Introduction to Trigonometry",
+      "prerequisites": ["math.basic_trig_ratios", "math.algebraic_identities"],
+      "aliases": ["Pythagorean identities", "sin^2 + cos^2 = 1", "sec^2 - tan^2 = 1"],
+      "misconceptions": [
+        { "id": "math.trig_identities_basic.m1", "description": "Writes 1 + tan^2 x = cosec^2 x instead of sec^2 x" }
+      ]
+    },
+    {
+      "id": "math.coordinate_geometry_basics",
+      "name": "Coordinate geometry basics",
+      "class": 10,
+      "unit_id": "m10.foundations",
+      "chapter": "Coordinate Geometry",
+      "prerequisites": ["math.linear_equations"],
+      "aliases": ["distance formula", "section formula", "Cartesian plane"],
+      "misconceptions": []
+    },
+    {
+      "id": "math.sets_basics",
+      "name": "Sets",
+      "class": 11,
+      "unit_id": "m11.sets_functions",
+      "chapter": "Sets",
+      "prerequisites": [],
+      "aliases": ["set notation", "intervals", "union and intersection"],
+      "misconceptions": [
+        { "id": "math.sets_basics.m1", "description": "Confuses open and closed interval brackets at endpoints" }
+      ]
+    },
+    {
+      "id": "math.functions_basics",
+      "name": "Functions, domain and range",
+      "class": 11,
+      "unit_id": "m11.sets_functions",
+      "chapter": "Relations and Functions",
+      "prerequisites": ["math.sets_basics", "math.algebraic_manipulation"],
+      "aliases": ["domain", "range", "function notation", "relations"],
+      "misconceptions": [
+        { "id": "math.functions_basics.m1", "description": "Ignores values that make a denominator zero when finding the domain" }
+      ]
+    },
+    {
+      "id": "math.composite_functions",
+      "name": "Composite functions",
+      "class": 11,
+      "unit_id": "m11.sets_functions",
+      "chapter": "Relations and Functions",
+      "prerequisites": ["math.functions_basics"],
+      "aliases": ["composition of functions", "function of a function", "fog", "gof", "inner and outer function"],
+      "misconceptions": [
+        { "id": "math.composite_functions.m1", "description": "Cannot identify the inner and outer function in an expression like sin(x^2)" },
+        { "id": "math.composite_functions.m2", "description": "Treats f(g(x)) as f(x) * g(x)" }
+      ]
+    },
+    {
+      "id": "math.standard_functions",
+      "name": "Standard real functions and their graphs",
+      "class": 11,
+      "unit_id": "m11.sets_functions",
+      "chapter": "Relations and Functions",
+      "prerequisites": ["math.functions_basics"],
+      "aliases": ["modulus function", "signum function", "greatest integer function", "polynomial and rational functions"],
+      "misconceptions": [
+        { "id": "math.standard_functions.m1", "description": "Takes |x| = x for all x, ignoring the case x < 0" }
+      ]
+    },
+    {
+      "id": "math.logarithm_laws",
+      "name": "Logarithms and their laws",
+      "class": 11,
+      "unit_id": "m11.sets_functions",
+      "chapter": "Relations and Functions (exponential and logarithmic functions, bridging topic)",
+      "prerequisites": ["math.exponent_laws"],
+      "aliases": ["log rules", "natural logarithm", "ln", "change of base"],
+      "misconceptions": [
+        { "id": "math.logarithm_laws.m1", "description": "Writes log(a + b) = log a + log b" },
+        { "id": "math.logarithm_laws.m2", "description": "Writes (log a)/(log b) = log(a/b)" }
+      ]
+    },
+    {
+      "id": "math.radian_measure",
+      "name": "Radian measure",
+      "class": 11,
+      "unit_id": "m11.sets_functions",
+      "chapter": "Trigonometric Functions",
+      "prerequisites": ["math.basic_trig_ratios"],
+      "aliases": ["radians", "degree to radian conversion"],
+      "misconceptions": [
+        { "id": "math.radian_measure.m1", "description": "Uses degrees inside a calculus result that only holds in radians, e.g. lim sin x / x = 1" }
+      ]
+    },
+    {
+      "id": "math.trig_functions_general_angle",
+      "name": "Trigonometric functions of any angle",
+      "class": 11,
+      "unit_id": "m11.sets_functions",
+      "chapter": "Trigonometric Functions",
+      "prerequisites": ["math.radian_measure", "math.trig_identities_basic"],
+      "aliases": ["ASTC", "signs in quadrants", "allied angles", "periodicity of trig functions"],
+      "misconceptions": [
+        { "id": "math.trig_functions_general_angle.m1", "description": "Gets the sign of a ratio wrong in the second, third or fourth quadrant" }
+      ]
+    },
+    {
+      "id": "math.trig_compound_angles",
+      "name": "Compound angle formulae",
+      "class": 11,
+      "unit_id": "m11.sets_functions",
+      "chapter": "Trigonometric Functions",
+      "prerequisites": ["math.trig_functions_general_angle"],
+      "aliases": ["sin(A+B)", "cos(A-B)", "tan(A+B)", "addition formulae"],
+      "misconceptions": [
+        { "id": "math.trig_compound_angles.m1", "description": "Writes sin(A + B) = sin A + sin B" },
+        { "id": "math.trig_compound_angles.m2", "description": "Uses a plus sign in cos(A + B) = cos A cos B - sin A sin B" }
+      ]
+    },
+    {
+      "id": "math.trig_multiple_angles",
+      "name": "Multiple and sub-multiple angle formulae",
+      "class": 11,
+      "unit_id": "m11.sets_functions",
+      "chapter": "Trigonometric Functions",
+      "prerequisites": ["math.trig_compound_angles"],
+      "aliases": ["double angle formula", "half angle formula", "cos 2x", "sin 2x", "triple angle formula"],
+      "misconceptions": [
+        { "id": "math.trig_multiple_angles.m1", "description": "Mixes up the forms of cos 2x: writes 1 - cos 2x = 2 cos^2 x instead of 2 sin^2 x" },
+        { "id": "math.trig_multiple_angles.m2", "description": "Writes sin 2x = 2 sin x" }
+      ]
+    },
+    {
+      "id": "math.trig_sum_product",
+      "name": "Sum-to-product and product-to-sum formulae",
+      "class": 11,
+      "unit_id": "m11.sets_functions",
+      "chapter": "Trigonometric Functions",
+      "prerequisites": ["math.trig_compound_angles"],
+      "aliases": ["2 sin A cos B", "transformation formulae", "product to sum"],
+      "misconceptions": [
+        { "id": "math.trig_sum_product.m1", "description": "Treats sin A cos B as a single sine or cosine of a combined angle" }
+      ]
+    },
+    {
+      "id": "math.complex_numbers",
+      "name": "Complex numbers",
+      "class": 11,
+      "unit_id": "m11.algebra",
+      "chapter": "Complex Numbers and Quadratic Equations",
+      "prerequisites": ["math.quadratic_equations"],
+      "aliases": ["iota", "argand plane", "modulus and argument"],
+      "misconceptions": [
+        { "id": "math.complex_numbers.m1", "description": "Writes sqrt(-a) * sqrt(-b) = sqrt(ab) for positive a, b" }
+      ]
+    },
+    {
+      "id": "math.linear_inequalities",
+      "name": "Inequalities and sign analysis",
+      "class": 11,
+      "unit_id": "m11.algebra",
+      "chapter": "Linear Inequalities",
+      "prerequisites": ["math.linear_equations", "math.sets_basics"],
+      "aliases": ["wavy curve method", "sign scheme", "solving inequalities"],
+      "misconceptions": [
+        { "id": "math.linear_inequalities.m1", "description": "Keeps the inequality sign when multiplying or dividing by a negative number" }
+      ]
+    },
+    {
+      "id": "math.permutations_combinations",
+      "name": "Permutations and combinations",
+      "class": 11,
+      "unit_id": "m11.algebra",
+      "chapter": "Permutations and Combinations",
+      "prerequisites": [],
+      "aliases": ["nCr", "nPr", "factorial", "counting principle"],
+      "misconceptions": []
+    },
+    {
+      "id": "math.binomial_theorem",
+      "name": "Binomial theorem",
+      "class": 11,
+      "unit_id": "m11.algebra",
+      "chapter": "Binomial Theorem",
+      "prerequisites": ["math.permutations_combinations", "math.exponent_laws"],
+      "aliases": ["binomial expansion", "general term"],
+      "misconceptions": [
+        { "id": "math.binomial_theorem.m1", "description": "Takes the general term as T_r = nCr a^(n-r) b^r instead of T_(r+1)" }
+      ]
+    },
+    {
+      "id": "math.sequences_series",
+      "name": "Sequences and series (AP and GP)",
+      "class": 11,
+      "unit_id": "m11.algebra",
+      "chapter": "Sequences and Series",
+      "prerequisites": ["math.linear_equations", "math.exponent_laws"],
+      "aliases": ["arithmetic progression", "geometric progression", "sum of n terms"],
+      "misconceptions": []
+    },
+    {
+      "id": "math.straight_lines",
+      "name": "Straight lines",
+      "class": 11,
+      "unit_id": "m11.coordinate_geometry",
+      "chapter": "Straight Lines",
+      "prerequisites": ["math.coordinate_geometry_basics"],
+      "aliases": ["slope", "equation of a line", "point-slope form"],
+      "misconceptions": [
+        { "id": "math.straight_lines.m1", "description": "Takes the slopes of perpendicular lines as equal rather than with product -1" }
+      ]
+    },
+    {
+      "id": "math.conic_sections",
+      "name": "Conic sections",
+      "class": 11,
+      "unit_id": "m11.coordinate_geometry",
+      "chapter": "Conic Sections",
+      "prerequisites": ["math.straight_lines", "math.completing_the_square"],
+      "aliases": ["circle", "parabola", "ellipse", "hyperbola"],
+      "misconceptions": []
+    },
+    {
+      "id": "math.limits_intuitive",
+      "name": "Idea of a limit",
+      "class": 11,
+      "unit_id": "m11.calculus",
+      "chapter": "Limits and Derivatives",
+      "prerequisites": ["math.functions_basics", "math.standard_functions"],
+      "aliases": ["left hand limit", "right hand limit", "limit notation"],
+      "misconceptions": [
+        { "id": "math.limits_intuitive.m1", "description": "Believes the limit at a point must equal the function value there" }
+      ]
+    },
+    {
+      "id": "math.limits_algebraic",
+      "name": "Algebraic limits",
+      "class": 11,
+      "unit_id": "m11.calculus",
+      "chapter": "Limits and Derivatives",
+      "prerequisites": ["math.limits_intuitive", "math.algebraic_fractions"],
+      "aliases": ["0/0 form", "limits by factorisation", "lim (x^n - a^n)/(x - a)"],
+      "misconceptions": [
+        { "id": "math.limits_algebraic.m1", "description": "Substitutes directly into a 0/0 form and reports the limit as 0 or undefined" }
+      ]
+    },
+    {
+      "id": "math.limits_trig",
+      "name": "Trigonometric limits",
+      "class": 11,
+      "unit_id": "m11.calculus",
+      "chapter": "Limits and Derivatives",
+      "prerequisites": ["math.limits_intuitive", "math.radian_measure", "math.trig_functions_general_angle"],
+      "aliases": ["lim sin x / x", "standard trigonometric limits"],
+      "misconceptions": [
+        { "id": "math.limits_trig.m1", "description": "Uses lim sin x / x = 1 when the argument and denominator differ, e.g. sin 3x / x = 1" }
+      ]
+    },
+    {
+      "id": "math.derivative_first_principles",
+      "name": "Derivative from first principles",
+      "class": 11,
+      "unit_id": "m11.calculus",
+      "chapter": "Limits and Derivatives",
+      "prerequisites": ["math.limits_algebraic", "math.limits_trig"],
+      "aliases": ["definition of derivative", "ab initio", "derivative as a limit"],
+      "misconceptions": []
+    },
+    {
+      "id": "math.derivative_basics",
+      "name": "Standard derivatives and basic rules",
+      "class": 11,
+      "unit_id": "m11.calculus",
+      "chapter": "Limits and Derivatives",
+      "prerequisites": ["math.derivative_first_principles"],
+      "aliases": ["power rule", "sum rule", "derivative of sin and cos", "differentiation"],
+      "misconceptions": [
+        { "id": "math.derivative_basics.m1", "description": "Differentiates cos x as sin x (drops the minus sign)" },
+        { "id": "math.derivative_basics.m2", "description": "Differentiates a constant as the constant itself" }
+      ]
+    },
+    {
+      "id": "math.product_rule",
+      "name": "Product rule",
+      "class": 11,
+      "unit_id": "m11.calculus",
+      "chapter": "Limits and Derivatives",
+      "prerequisites": ["math.derivative_basics"],
+      "aliases": ["Leibniz rule", "(uv)'"],
+      "misconceptions": [
+        { "id": "math.product_rule.m1", "description": "Writes (uv)' = u' v'" }
+      ]
+    },
+    {
+      "id": "math.quotient_rule",
+      "name": "Quotient rule",
+      "class": 11,
+      "unit_id": "m11.calculus",
+      "chapter": "Limits and Derivatives",
+      "prerequisites": ["math.derivative_basics", "math.algebraic_fractions"],
+      "aliases": ["(u/v)'", "derivative of a quotient"],
+      "misconceptions": [
+        { "id": "math.quotient_rule.m1", "description": "Reverses the numerator order, writing (u' v - u v')/v^2 as (u v' - v u')/v^2" }
+      ]
+    },
+    {
+      "id": "math.one_one_onto",
+      "name": "Types of functions (one-one, onto, bijective)",
+      "class": 12,
+      "unit_id": "m12.relations_functions",
+      "chapter": "Relations and Functions",
+      "prerequisites": ["math.functions_basics"],
+      "aliases": ["injective", "surjective", "bijection", "equivalence relation"],
+      "misconceptions": [
+        { "id": "math.one_one_onto.m1", "description": "Proves a function onto by checking a few values instead of solving y = f(x) for x" }
+      ]
+    },
+    {
+      "id": "math.inverse_trig_functions",
+      "name": "Inverse trigonometric functions",
+      "class": 12,
+      "unit_id": "m12.relations_functions",
+      "chapter": "Inverse Trigonometric Functions",
+      "prerequisites": ["math.one_one_onto", "math.trig_functions_general_angle"],
+      "aliases": ["principal value", "sin^-1 x", "tan^-1 x", "arcsin"],
+      "misconceptions": [
+        { "id": "math.inverse_trig_functions.m1", "description": "Reads sin^-1 x as 1/sin x" },
+        { "id": "math.inverse_trig_functions.m2", "description": "Gives a principal value outside the principal branch" }
+      ]
+    },
+    {
+      "id": "math.matrix_operations",
+      "name": "Matrices and matrix operations",
+      "class": 12,
+      "unit_id": "m12.algebra",
+      "chapter": "Matrices",
+      "prerequisites": ["math.linear_equations"],
+      "aliases": ["matrix multiplication", "transpose", "symmetric matrix"],
+      "misconceptions": [
+        { "id": "math.matrix_operations.m1", "description": "Assumes matrix multiplication is commutative (AB = BA)" }
+      ]
+    },
+    {
+      "id": "math.determinants",
+      "name": "Determinants",
+      "class": 12,
+      "unit_id": "m12.algebra",
+      "chapter": "Determinants",
+      "prerequisites": ["math.matrix_operations"],
+      "aliases": ["cofactor", "minor", "expansion of a determinant"],
+      "misconceptions": [
+        { "id": "math.determinants.m1", "description": "Ignores the (-1)^(i+j) sign pattern of cofactors when expanding" }
+      ]
+    },
+    {
+      "id": "math.matrix_inverse",
+      "name": "Inverse of a matrix and linear systems",
+      "class": 12,
+      "unit_id": "m12.algebra",
+      "chapter": "Determinants",
+      "prerequisites": ["math.determinants"],
+      "aliases": ["adjoint", "A^-1 = adj A / |A|", "matrix method", "X = A^-1 B"],
+      "misconceptions": [
+        { "id": "math.matrix_inverse.m1", "description": "Uses the cofactor matrix itself instead of its transpose as adj A" }
+      ]
+    },
+    {
+      "id": "math.continuity",
+      "name": "Continuity",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Continuity and Differentiability",
+      "prerequisites": ["math.limits_algebraic", "math.standard_functions"],
+      "aliases": ["continuous function", "LHL = RHL = f(a)"],
+      "misconceptions": [
+        { "id": "math.continuity.m1", "description": "Checks only that the left and right limits agree, not that they equal f(a)" }
+      ]
+    },
+    {
+      "id": "math.differentiability",
+      "name": "Differentiability",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Continuity and Differentiability",
+      "prerequisites": ["math.continuity", "math.derivative_first_principles"],
+      "aliases": ["LHD and RHD", "differentiable at a point"],
+      "misconceptions": [
+        { "id": "math.differentiability.m1", "description": "Concludes a continuous function must be differentiable" }
+      ]
+    },
+    {
+      "id": "math.chain_rule",
+      "name": "Chain rule",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Continuity and Differentiability",
+      "prerequisites": ["math.derivative_basics", "math.composite_functions"],
+      "aliases": ["differentiation of composite functions", "function of a function rule", "dy/dx = dy/du * du/dx"],
+      "misconceptions": [
+        { "id": "math.chain_rule.m1", "description": "Forgets to multiply by the derivative of the inner function" },
+        { "id": "math.chain_rule.m2", "description": "Differentiates the inner function but leaves the outer function undifferentiated" },
+        { "id": "math.chain_rule.m3", "description": "Stops one layer early in a nested composite of three or more functions" }
+      ]
+    },
+    {
+      "id": "math.derivative_exp_log",
+      "name": "Derivatives of exponential and logarithmic functions",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Continuity and Differentiability",
+      "prerequisites": ["math.derivative_basics", "math.logarithm_laws"],
+      "aliases": ["d/dx e^x", "d/dx log x", "derivative of a^x"],
+      "misconceptions": [
+        { "id": "math.derivative_exp_log.m1", "description": "Differentiates a^x as x a^(x-1), applying the power rule to an exponential" }
+      ]
+    },
+    {
+      "id": "math.derivative_inverse_trig",
+      "name": "Derivatives of inverse trigonometric functions",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Continuity and Differentiability",
+      "prerequisites": ["math.chain_rule", "math.inverse_trig_functions"],
+      "aliases": ["d/dx sin^-1 x", "d/dx tan^-1 x"],
+      "misconceptions": [
+        { "id": "math.derivative_inverse_trig.m1", "description": "Differentiates sin^-1 x as -1/sin^2 x, treating it as a reciprocal" }
+      ]
+    },
+    {
+      "id": "math.implicit_differentiation",
+      "name": "Implicit differentiation",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Continuity and Differentiability",
+      "prerequisites": ["math.chain_rule", "math.product_rule"],
+      "aliases": ["differentiating implicit functions", "dy/dx of implicit relation"],
+      "misconceptions": [
+        { "id": "math.implicit_differentiation.m1", "description": "Differentiates y^2 as 2y without the factor dy/dx" }
+      ]
+    },
+    {
+      "id": "math.logarithmic_differentiation",
+      "name": "Logarithmic differentiation",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Continuity and Differentiability",
+      "prerequisites": ["math.derivative_exp_log", "math.implicit_differentiation"],
+      "aliases": ["x^x", "taking log on both sides", "differentiating f(x)^g(x)"],
+      "misconceptions": [
+        { "id": "math.logarithmic_differentiation.m1", "description": "Differentiates x^x with the power rule as x * x^(x-1)" },
+        { "id": "math.logarithmic_differentiation.m2", "description": "Forgets to multiply back by y after finding (1/y) dy/dx" }
+      ]
+    },
+    {
+      "id": "math.parametric_differentiation",
+      "name": "Derivatives of parametric functions",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Continuity and Differentiability",
+      "prerequisites": ["math.chain_rule"],
+      "aliases": ["parametric form", "dy/dx = (dy/dt)/(dx/dt)"],
+      "misconceptions": [
+        { "id": "math.parametric_differentiation.m1", "description": "Computes d2y/dx2 as (d2y/dt2)/(d2x/dt2)" }
+      ]
+    },
+    {
+      "id": "math.second_order_derivatives",
+      "name": "Second order derivatives",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Continuity and Differentiability",
+      "prerequisites": ["math.chain_rule", "math.product_rule"],
+      "aliases": ["d2y/dx2", "second derivative", "y''"],
+      "misconceptions": [
+        { "id": "math.second_order_derivatives.m1", "description": "Squares the first derivative instead of differentiating it again" }
+      ]
+    },
+    {
+      "id": "math.rate_of_change",
+      "name": "Rate of change of quantities",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Application of Derivatives",
+      "prerequisites": ["math.chain_rule"],
+      "aliases": ["related rates", "dA/dt", "rate of increase"],
+      "misconceptions": [
+        { "id": "math.rate_of_change.m1", "description": "Substitutes the instantaneous value before differentiating with respect to time" }
+      ]
+    },
+    {
+      "id": "math.increasing_decreasing",
+      "name": "Increasing and decreasing functions",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Application of Derivatives",
+      "prerequisites": ["math.chain_rule", "math.linear_inequalities", "math.factorisation"],
+      "aliases": ["monotonicity", "intervals of increase", "f'(x) > 0"],
+      "misconceptions": [
+        { "id": "math.increasing_decreasing.m1", "description": "Reads the sign of f'(x) from a single test point across an interval that contains a critical point" }
+      ]
+    },
+    {
+      "id": "math.maxima_minima",
+      "name": "Maxima and minima",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Application of Derivatives",
+      "prerequisites": ["math.increasing_decreasing", "math.second_order_derivatives"],
+      "aliases": ["optimisation", "second derivative test", "local maximum", "absolute maximum"],
+      "misconceptions": [
+        { "id": "math.maxima_minima.m1", "description": "Treats f''(c) < 0 as a minimum and f''(c) > 0 as a maximum" },
+        { "id": "math.maxima_minima.m2", "description": "Forgets to compare endpoint values when finding an absolute extremum on a closed interval" }
+      ]
+    },
+    {
+      "id": "math.antiderivative_basics",
+      "name": "Indefinite integrals: standard forms",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Integrals",
+      "prerequisites": ["math.derivative_basics", "math.derivative_exp_log", "math.derivative_inverse_trig"],
+      "aliases": ["antiderivative", "integration as inverse of differentiation", "standard integrals"],
+      "misconceptions": [
+        { "id": "math.antiderivative_basics.m1", "description": "Omits the constant of integration C" },
+        { "id": "math.antiderivative_basics.m2", "description": "Integrates 1/x as x^0/0 by the power rule instead of log|x|" }
+      ]
+    },
+    {
+      "id": "math.integration_substitution",
+      "name": "Integration by substitution",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Integrals",
+      "prerequisites": ["math.antiderivative_basics", "math.chain_rule"],
+      "aliases": ["u-substitution", "reverse chain rule", "change of variable"],
+      "misconceptions": [
+        { "id": "math.integration_substitution.m1", "description": "Forgets to divide by the derivative of the inner linear function, e.g. integral of cos 3x dx = sin 3x" },
+        { "id": "math.integration_substitution.m2", "description": "Substitutes u but leaves dx unconverted (does not replace dx by du/g'(x))" }
+      ]
+    },
+    {
+      "id": "math.integration_trig_identities",
+      "name": "Integration using trigonometric identities",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Integrals",
+      "prerequisites": ["math.antiderivative_basics", "math.trig_multiple_angles", "math.trig_sum_product"],
+      "aliases": ["integral of sin^2 x", "integral of sin A cos B", "reducing powers of trig functions"],
+      "misconceptions": [
+        { "id": "math.integration_trig_identities.m1", "description": "Integrates sin^2 x as sin^3 x / 3, applying the power rule to a trigonometric function" }
+      ]
+    },
+    {
+      "id": "math.integration_by_parts",
+      "name": "Integration by parts",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Integrals",
+      "prerequisites": ["math.antiderivative_basics", "math.product_rule"],
+      "aliases": ["ILATE", "LIATE", "integral of u dv"],
+      "misconceptions": [
+        { "id": "math.integration_by_parts.m1", "description": "Chooses the first function against the ILATE order so the new integral is harder" },
+        { "id": "math.integration_by_parts.m2", "description": "Drops the minus sign before the second integral" }
+      ]
+    },
+    {
+      "id": "math.partial_fractions",
+      "name": "Integration by partial fractions",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Integrals",
+      "prerequisites": ["math.antiderivative_basics", "math.algebraic_fractions"],
+      "aliases": ["partial fraction decomposition", "A/(x-a) + B/(x-b)"],
+      "misconceptions": [
+        { "id": "math.partial_fractions.m1", "description": "Uses a constant numerator over an irreducible quadratic factor instead of (Ax + B)" },
+        { "id": "math.partial_fractions.m2", "description": "Decomposes an improper fraction without dividing first" }
+      ]
+    },
+    {
+      "id": "math.special_integrals",
+      "name": "Integrals of special forms",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Integrals",
+      "prerequisites": ["math.integration_substitution", "math.completing_the_square"],
+      "aliases": ["integral of 1/(x^2 + a^2)", "integral of 1/sqrt(a^2 - x^2)", "quadratic in denominator"],
+      "misconceptions": []
+    },
+    {
+      "id": "math.definite_integrals",
+      "name": "Definite integrals",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Integrals",
+      "prerequisites": ["math.antiderivative_basics"],
+      "aliases": ["fundamental theorem of calculus", "limits of integration", "F(b) - F(a)"],
+      "misconceptions": [
+        { "id": "math.definite_integrals.m1", "description": "Keeps the original limits after a substitution changes the variable" }
+      ]
+    },
+    {
+      "id": "math.definite_integral_properties",
+      "name": "Properties of definite integrals",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Integrals",
+      "prerequisites": ["math.definite_integrals"],
+      "aliases": ["integral of f(a - x)", "King's rule", "odd and even function property"],
+      "misconceptions": []
+    },
+    {
+      "id": "math.area_under_curves",
+      "name": "Area under simple curves",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Application of Integrals",
+      "prerequisites": ["math.definite_integrals", "math.conic_sections"],
+      "aliases": ["area bounded by curves", "application of integrals"],
+      "misconceptions": [
+        { "id": "math.area_under_curves.m1", "description": "Reports a negative integral as an area without taking the absolute value" }
+      ]
+    },
+    {
+      "id": "math.differential_equations_basics",
+      "name": "Differential equations: order, degree, solutions",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Differential Equations",
+      "prerequisites": ["math.second_order_derivatives"],
+      "aliases": ["order and degree", "general solution", "particular solution"],
+      "misconceptions": [
+        { "id": "math.differential_equations_basics.m1", "description": "States a degree for an equation that is not a polynomial in its derivatives" }
+      ]
+    },
+    {
+      "id": "math.variable_separable",
+      "name": "Variable separable differential equations",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Differential Equations",
+      "prerequisites": ["math.differential_equations_basics", "math.integration_substitution"],
+      "aliases": ["separation of variables"],
+      "misconceptions": []
+    },
+    {
+      "id": "math.homogeneous_de",
+      "name": "Homogeneous differential equations",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Differential Equations",
+      "prerequisites": ["math.variable_separable"],
+      "aliases": ["y = vx substitution"],
+      "misconceptions": [
+        { "id": "math.homogeneous_de.m1", "description": "Substitutes y = vx but writes dy/dx = v instead of v + x dv/dx" }
+      ]
+    },
+    {
+      "id": "math.linear_de",
+      "name": "Linear differential equations",
+      "class": 12,
+      "unit_id": "m12.calculus",
+      "chapter": "Differential Equations",
+      "prerequisites": ["math.differential_equations_basics", "math.integration_by_parts", "math.derivative_exp_log"],
+      "aliases": ["integrating factor", "dy/dx + Py = Q"],
+      "misconceptions": [
+        { "id": "math.linear_de.m1", "description": "Uses e^P instead of e^(integral of P dx) as the integrating factor" }
+      ]
+    },
+    {
+      "id": "math.vectors_basics",
+      "name": "Vectors: basics",
+      "class": 12,
+      "unit_id": "m12.vectors_3d",
+      "chapter": "Vector Algebra",
+      "prerequisites": ["math.coordinate_geometry_basics"],
+      "aliases": ["position vector", "unit vector", "direction cosines", "magnitude of a vector"],
+      "misconceptions": []
+    },
+    {
+      "id": "math.dot_product",
+      "name": "Scalar (dot) product",
+      "class": 12,
+      "unit_id": "m12.vectors_3d",
+      "chapter": "Vector Algebra",
+      "prerequisites": ["math.vectors_basics", "math.basic_trig_ratios"],
+      "aliases": ["projection of a vector", "angle between vectors", "a . b"],
+      "misconceptions": [
+        { "id": "math.dot_product.m1", "description": "Gives the projection of a on b as (a . b)/|a| instead of (a . b)/|b|" }
+      ]
+    },
+    {
+      "id": "math.cross_product",
+      "name": "Vector (cross) product",
+      "class": 12,
+      "unit_id": "m12.vectors_3d",
+      "chapter": "Vector Algebra",
+      "prerequisites": ["math.dot_product", "math.determinants"],
+      "aliases": ["a x b", "area of parallelogram using vectors"],
+      "misconceptions": [
+        { "id": "math.cross_product.m1", "description": "Treats the cross product as commutative (a x b = b x a)" }
+      ]
+    },
+    {
+      "id": "math.lines_3d",
+      "name": "Lines in three-dimensional space",
+      "class": 12,
+      "unit_id": "m12.vectors_3d",
+      "chapter": "Three Dimensional Geometry",
+      "prerequisites": ["math.cross_product", "math.straight_lines"],
+      "aliases": ["skew lines", "shortest distance between lines", "angle between two lines"],
+      "misconceptions": []
+    }
+  ]
+}

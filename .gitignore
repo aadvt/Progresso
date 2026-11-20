@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.next/
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+
+# Never commit real reports (Phase P) or anything derived from them.
+data/reports/
+
+# Local runtime state
+data/*.db
+data/*.db-*
+data/cache/
+data/logs/
+.vitest/

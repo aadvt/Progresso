@@ -1,0 +1,607 @@
+{
+  "subject": "Chemistry",
+  "syllabus_source": "PROVISIONAL graph (Phase 1), hand-built from the CBSE Chemistry curriculum for Classes 11-12 (rationalised syllabus, session 2025-26) plus Class 9-10 foundations. Covers a slice: organic chemistry (GOC, electronic effects, reaction intermediates and mechanisms through Class 12 haloalkanes, alcohols/phenols, carbonyls and amines) and the bonding, atomic-structure and equilibrium ideas it rests on, plus the mole concept. board_marks are APPROXIMATE unit weightages out of 70 (theory); pre-Class-11 foundation units carry 0. To be replaced in Phase P by the full graph in the same format.",
+  "units": [
+    { "id": "c10.foundations", "name": "Foundations (Classes 9-10)", "class": 10, "board_marks": 0 },
+    { "id": "c11.basic_concepts", "name": "Some Basic Concepts of Chemistry", "class": 11, "board_marks": 7 },
+    { "id": "c11.atomic_structure", "name": "Structure of Atom", "class": 11, "board_marks": 9 },
+    { "id": "c11.periodicity", "name": "Classification of Elements and Periodicity in Properties", "class": 11, "board_marks": 6 },
+    { "id": "c11.bonding", "name": "Chemical Bonding and Molecular Structure", "class": 11, "board_marks": 7 },
+    { "id": "c11.equilibrium", "name": "Equilibrium", "class": 11, "board_marks": 7 },
+    { "id": "c11.goc", "name": "Organic Chemistry: Some Basic Principles and Techniques", "class": 11, "board_marks": 11 },
+    { "id": "c11.hydrocarbons", "name": "Hydrocarbons", "class": 11, "board_marks": 10 },
+    { "id": "c12.haloalkanes", "name": "Haloalkanes and Haloarenes", "class": 12, "board_marks": 6 },
+    { "id": "c12.alcohols", "name": "Alcohols, Phenols and Ethers", "class": 12, "board_marks": 6 },
+    { "id": "c12.carbonyls", "name": "Aldehydes, Ketones and Carboxylic Acids", "class": 12, "board_marks": 8 },
+    { "id": "c12.amines", "name": "Amines", "class": 12, "board_marks": 6 }
+  ],
+  "concepts": [
+    {
+      "id": "chem.atoms_valency",
+      "name": "Atoms, valency and chemical formulae",
+      "class": 9,
+      "unit_id": "c10.foundations",
+      "chapter": "Atoms and Molecules",
+      "prerequisites": [],
+      "aliases": ["valency", "writing chemical formulae", "ions and radicals"],
+      "misconceptions": [
+        { "id": "chem.atoms_valency.m1", "description": "Writes formulae without balancing valencies, e.g. AlO for aluminium oxide" }
+      ]
+    },
+    {
+      "id": "chem.balancing_equations",
+      "name": "Balancing chemical equations",
+      "class": 10,
+      "unit_id": "c10.foundations",
+      "chapter": "Chemical Reactions and Equations",
+      "prerequisites": ["chem.atoms_valency"],
+      "aliases": ["balanced equation", "conservation of mass"],
+      "misconceptions": [
+        { "id": "chem.balancing_equations.m1", "description": "Balances an equation by changing subscripts in formulae instead of coefficients" }
+      ]
+    },
+    {
+      "id": "chem.acids_bases_basics",
+      "name": "Acids and bases (introductory)",
+      "class": 10,
+      "unit_id": "c10.foundations",
+      "chapter": "Acids, Bases and Salts",
+      "prerequisites": [],
+      "aliases": ["pH scale", "neutralisation", "indicators"],
+      "misconceptions": []
+    },
+    {
+      "id": "chem.carbon_compounds_basics",
+      "name": "Carbon compounds: bonding and functional groups",
+      "class": 10,
+      "unit_id": "c10.foundations",
+      "chapter": "Carbon and its Compounds",
+      "prerequisites": ["chem.atoms_valency"],
+      "aliases": ["catenation", "homologous series", "functional groups", "tetravalency of carbon"],
+      "misconceptions": [
+        { "id": "chem.carbon_compounds_basics.m1", "description": "Draws a carbon atom with five bonds" }
+      ]
+    },
+    {
+      "id": "chem.mole_concept",
+      "name": "Mole concept and molar mass",
+      "class": 11,
+      "unit_id": "c11.basic_concepts",
+      "chapter": "Some Basic Concepts of Chemistry",
+      "prerequisites": ["chem.atoms_valency"],
+      "aliases": ["Avogadro number", "molar mass", "number of moles"],
+      "misconceptions": [
+        { "id": "chem.mole_concept.m1", "description": "Uses atomic mass where molecular mass is needed (e.g. 16 g/mol for O2)" }
+      ]
+    },
+    {
+      "id": "chem.stoichiometry",
+      "name": "Stoichiometry and concentration terms",
+      "class": 11,
+      "unit_id": "c11.basic_concepts",
+      "chapter": "Some Basic Concepts of Chemistry",
+      "prerequisites": ["chem.mole_concept", "chem.balancing_equations"],
+      "aliases": ["limiting reagent", "molarity", "molality", "mole fraction"],
+      "misconceptions": [
+        { "id": "chem.stoichiometry.m1", "description": "Ignores the mole ratio from the balanced equation and equates masses of reactants and products" },
+        { "id": "chem.stoichiometry.m2", "description": "Uses volume in mL instead of litres when calculating molarity" }
+      ]
+    },
+    {
+      "id": "chem.atomic_orbitals",
+      "name": "Quantum numbers and atomic orbitals",
+      "class": 11,
+      "unit_id": "c11.atomic_structure",
+      "chapter": "Structure of Atom",
+      "prerequisites": ["chem.atoms_valency"],
+      "aliases": ["s p d orbitals", "shapes of orbitals", "quantum numbers"],
+      "misconceptions": []
+    },
+    {
+      "id": "chem.electronic_configuration",
+      "name": "Electronic configuration",
+      "class": 11,
+      "unit_id": "c11.atomic_structure",
+      "chapter": "Structure of Atom",
+      "prerequisites": ["chem.atomic_orbitals"],
+      "aliases": ["aufbau principle", "Hund's rule", "Pauli exclusion principle"],
+      "misconceptions": []
+    },
+    {
+      "id": "chem.electronegativity",
+      "name": "Electronegativity and periodic trends",
+      "class": 11,
+      "unit_id": "c11.periodicity",
+      "chapter": "Classification of Elements and Periodicity in Properties",
+      "prerequisites": ["chem.electronic_configuration"],
+      "aliases": ["Pauling scale", "atomic radius trend", "periodic trends"],
+      "misconceptions": [
+        { "id": "chem.electronegativity.m1", "description": "Thinks electronegativity increases down a group" }
+      ]
+    },
+    {
+      "id": "chem.lewis_structures",
+      "name": "Lewis structures and formal charge",
+      "class": 11,
+      "unit_id": "c11.bonding",
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "prerequisites": ["chem.atoms_valency", "chem.electronic_configuration"],
+      "aliases": ["electron dot structure", "formal charge", "lone pairs", "octet rule"],
+      "misconceptions": [
+        { "id": "chem.lewis_structures.m1", "description": "Omits lone pairs on heteroatoms, so cannot see where electrons can move from" }
+      ]
+    },
+    {
+      "id": "chem.bond_polarity",
+      "name": "Polarity of covalent bonds",
+      "class": 11,
+      "unit_id": "c11.bonding",
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "prerequisites": ["chem.electronegativity", "chem.lewis_structures"],
+      "aliases": ["polar bond", "dipole moment", "partial charges"],
+      "misconceptions": [
+        { "id": "chem.bond_polarity.m1", "description": "Places the partial negative charge on the less electronegative atom" }
+      ]
+    },
+    {
+      "id": "chem.hybridisation",
+      "name": "Hybridisation",
+      "class": 11,
+      "unit_id": "c11.bonding",
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "prerequisites": ["chem.atomic_orbitals", "chem.lewis_structures"],
+      "aliases": ["sp3 sp2 sp", "hybrid orbitals", "geometry from hybridisation"],
+      "misconceptions": [
+        { "id": "chem.hybridisation.m1", "description": "Assigns sp3 hybridisation to a carbocation carbon (it is sp2, trigonal planar)" }
+      ]
+    },
+    {
+      "id": "chem.sigma_pi_bonds",
+      "name": "Sigma and pi bonds",
+      "class": 11,
+      "unit_id": "c11.bonding",
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "prerequisites": ["chem.hybridisation"],
+      "aliases": ["sigma bond", "pi bond", "double bond structure"],
+      "misconceptions": []
+    },
+    {
+      "id": "chem.resonance_structures",
+      "name": "Resonance structures",
+      "class": 11,
+      "unit_id": "c11.bonding",
+      "chapter": "Chemical Bonding and Molecular Structure",
+      "prerequisites": ["chem.lewis_structures", "chem.sigma_pi_bonds"],
+      "aliases": ["canonical structures", "resonance hybrid", "delocalisation"],
+      "misconceptions": [
+        { "id": "chem.resonance_structures.m1", "description": "Moves atoms (not just electrons) between resonance structures" },
+        { "id": "chem.resonance_structures.m2", "description": "Thinks the molecule flips between resonance structures rather than existing as a hybrid" }
+      ]
+    },
+    {
+      "id": "chem.acid_base_equilibria",
+      "name": "Ionic equilibrium: Ka, pKa and conjugate pairs",
+      "class": 11,
+      "unit_id": "c11.equilibrium",
+      "chapter": "Equilibrium",
+      "prerequisites": ["chem.acids_bases_basics"],
+      "aliases": ["pKa", "Ka", "conjugate base", "Bronsted-Lowry", "acid strength"],
+      "misconceptions": [
+        { "id": "chem.acid_base_equilibria.m1", "description": "Thinks a higher pKa means a stronger acid" },
+        { "id": "chem.acid_base_equilibria.m2", "description": "Does not link acid strength to the stability of the conjugate base" }
+      ]
+    },
+    {
+      "id": "chem.iupac_nomenclature",
+      "name": "IUPAC nomenclature of organic compounds",
+      "class": 11,
+      "unit_id": "c11.goc",
+      "chapter": "Organic Chemistry: Some Basic Principles and Techniques",
+      "prerequisites": ["chem.carbon_compounds_basics"],
+      "aliases": ["IUPAC naming", "lowest locant rule", "parent chain", "nomenclature"],
+      "misconceptions": [
+        { "id": "chem.iupac_nomenclature.m1", "description": "Numbers the chain from the wrong end, violating the lowest-locant rule" },
+        { "id": "chem.iupac_nomenclature.m2", "description": "Lists substituent prefixes in numerical order instead of alphabetical order" }
+      ]
+    },
+    {
+      "id": "chem.structural_representation",
+      "name": "Structural formulae and isomerism",
+      "class": 11,
+      "unit_id": "c11.goc",
+      "chapter": "Organic Chemistry: Some Basic Principles and Techniques",
+      "prerequisites": ["chem.carbon_compounds_basics", "chem.lewis_structures"],
+      "aliases": ["bond-line formula", "condensed formula", "structural isomers", "chain isomerism"],
+      "misconceptions": []
+    },
+    {
+      "id": "chem.bond_fission",
+      "name": "Homolytic and heterolytic bond fission",
+      "class": 11,
+      "unit_id": "c11.goc",
+      "chapter": "Organic Chemistry: Some Basic Principles and Techniques",
+      "prerequisites": ["chem.bond_polarity"],
+      "aliases": ["homolysis", "heterolysis", "bond cleavage"],
+      "misconceptions": []
+    },
+    {
+      "id": "chem.reactive_intermediates",
+      "name": "Reactive intermediates",
+      "class": 11,
+      "unit_id": "c11.goc",
+      "chapter": "Organic Chemistry: Some Basic Principles and Techniques",
+      "prerequisites": ["chem.bond_fission", "chem.hybridisation"],
+      "aliases": ["carbocation", "carbanion", "free radical", "carbon reactive intermediates"],
+      "misconceptions": [
+        { "id": "chem.reactive_intermediates.m1", "description": "Confuses a carbocation (6 valence electrons, positive) with a carbanion (8 valence electrons, negative)" }
+      ]
+    },
+    {
+      "id": "chem.electrophiles_nucleophiles",
+      "name": "Electrophiles and nucleophiles",
+      "class": 11,
+      "unit_id": "c11.goc",
+      "chapter": "Organic Chemistry: Some Basic Principles and Techniques",
+      "prerequisites": ["chem.lewis_structures", "chem.bond_polarity"],
+      "aliases": ["electrophile", "nucleophile", "electron-rich and electron-poor centres"],
+      "misconceptions": [
+        { "id": "chem.electrophiles_nucleophiles.m1", "description": "Classifies a species as an electrophile because it carries a lone pair" }
+      ]
+    },
+    {
+      "id": "chem.curved_arrow_notation",
+      "name": "Curved-arrow notation",
+      "class": 11,
+      "unit_id": "c11.goc",
+      "chapter": "Organic Chemistry: Some Basic Principles and Techniques",
+      "prerequisites": ["chem.lewis_structures", "chem.bond_fission"],
+      "aliases": ["arrow pushing", "electron movement arrows", "fish-hook arrow"],
+      "misconceptions": [
+        { "id": "chem.curved_arrow_notation.m1", "description": "Draws arrows from the electrophile to the nucleophile, i.e. from electron-poor to electron-rich" },
+        { "id": "chem.curved_arrow_notation.m2", "description": "Starts an arrow from an atom or a positive charge rather than from a lone pair or bond" }
+      ]
+    },
+    {
+      "id": "chem.inductive_effect",
+      "name": "Inductive effect",
+      "class": 11,
+      "unit_id": "c11.goc",
+      "chapter": "Organic Chemistry: Some Basic Principles and Techniques",
+      "prerequisites": ["chem.bond_polarity"],
+      "aliases": ["+I effect", "-I effect", "electron-withdrawing group", "electron-donating group"],
+      "misconceptions": [
+        { "id": "chem.inductive_effect.m1", "description": "Believes the inductive effect is undiminished over many bonds (it fades rapidly with distance)" },
+        { "id": "chem.inductive_effect.m2", "description": "Treats alkyl groups as electron-withdrawing" }
+      ]
+    },
+    {
+      "id": "chem.resonance_effect",
+      "name": "Resonance (mesomeric) effect",
+      "class": 11,
+      "unit_id": "c11.goc",
+      "chapter": "Organic Chemistry: Some Basic Principles and Techniques",
+      "prerequisites": ["chem.resonance_structures", "chem.inductive_effect"],
+      "aliases": ["mesomeric effect", "+R effect", "-R effect", "+M -M effect", "conjugation"],
+      "misconceptions": [
+        { "id": "chem.resonance_effect.m1", "description": "Judges a group's net effect on a ring or charge by its inductive effect alone, ignoring its resonance effect (e.g. calls -OCH3 deactivating)" },
+        { "id": "chem.resonance_effect.m2", "description": "Applies a resonance effect where the group is not in conjugation with the site" },
+        { "id": "chem.resonance_effect.m3", "description": "Does not recognise that delocalising a lone pair or charge over a ring stabilises it" }
+      ]
+    },
+    {
+      "id": "chem.hyperconjugation",
+      "name": "Hyperconjugation",
+      "class": 11,
+      "unit_id": "c11.goc",
+      "chapter": "Organic Chemistry: Some Basic Principles and Techniques",
+      "prerequisites": ["chem.sigma_pi_bonds", "chem.reactive_intermediates"],
+      "aliases": ["no-bond resonance", "alpha-hydrogen count", "sigma-pi conjugation"],
+      "misconceptions": [
+        { "id": "chem.hyperconjugation.m1", "description": "Counts all hydrogens in the molecule rather than the alpha C-H bonds" }
+      ]
+    },
+    {
+      "id": "chem.electromeric_effect",
+      "name": "Electromeric effect",
+      "class": 11,
+      "unit_id": "c11.goc",
+      "chapter": "Organic Chemistry: Some Basic Principles and Techniques",
+      "prerequisites": ["chem.sigma_pi_bonds", "chem.electrophiles_nucleophiles"],
+      "aliases": ["+E effect", "-E effect", "temporary effect"],
+      "misconceptions": [
+        { "id": "chem.electromeric_effect.m1", "description": "Treats the electromeric effect as permanent like the inductive effect" }
+      ]
+    },
+    {
+      "id": "chem.carbocation_stability",
+      "name": "Stability of carbocations and radicals",
+      "class": 11,
+      "unit_id": "c11.goc",
+      "chapter": "Organic Chemistry: Some Basic Principles and Techniques",
+      "prerequisites": ["chem.reactive_intermediates", "chem.inductive_effect", "chem.hyperconjugation", "chem.resonance_effect"],
+      "aliases": ["3 > 2 > 1 carbocation", "benzylic carbocation", "allylic carbocation", "order of stability"],
+      "misconceptions": [
+        { "id": "chem.carbocation_stability.m1", "description": "Ranks carbocations by degree (3/2/1) only, ignoring resonance stabilisation of allylic or benzylic cations" },
+        { "id": "chem.carbocation_stability.m2", "description": "Reverses the order, ranking methyl > primary > secondary > tertiary" }
+      ]
+    },
+    {
+      "id": "chem.organic_acidity_basicity",
+      "name": "Comparing acidity and basicity of organic compounds",
+      "class": 11,
+      "unit_id": "c11.goc",
+      "chapter": "Organic Chemistry: Some Basic Principles and Techniques",
+      "prerequisites": ["chem.acid_base_equilibria", "chem.inductive_effect", "chem.resonance_effect"],
+      "aliases": ["acidic strength order", "effect of substituents on acidity", "conjugate base stability"],
+      "misconceptions": [
+        { "id": "chem.organic_acidity_basicity.m1", "description": "Compares acids by the stability of the acid rather than of its conjugate base" }
+      ]
+    },
+    {
+      "id": "chem.reaction_types",
+      "name": "Types of organic reactions",
+      "class": 11,
+      "unit_id": "c11.goc",
+      "chapter": "Organic Chemistry: Some Basic Principles and Techniques",
+      "prerequisites": ["chem.electrophiles_nucleophiles"],
+      "aliases": ["substitution", "addition", "elimination", "rearrangement"],
+      "misconceptions": []
+    },
+    {
+      "id": "chem.alkane_halogenation",
+      "name": "Free-radical halogenation of alkanes",
+      "class": 11,
+      "unit_id": "c11.hydrocarbons",
+      "chapter": "Hydrocarbons",
+      "prerequisites": ["chem.reactive_intermediates", "chem.bond_fission"],
+      "aliases": ["chain initiation propagation termination", "chlorination of methane"],
+      "misconceptions": []
+    },
+    {
+      "id": "chem.alkene_electrophilic_addition",
+      "name": "Electrophilic addition to alkenes (Markovnikov)",
+      "class": 11,
+      "unit_id": "c11.hydrocarbons",
+      "chapter": "Hydrocarbons",
+      "prerequisites": ["chem.carbocation_stability", "chem.electrophiles_nucleophiles", "chem.curved_arrow_notation"],
+      "aliases": ["Markovnikov's rule", "addition of HBr", "addition of HX to alkenes"],
+      "misconceptions": [
+        { "id": "chem.alkene_electrophilic_addition.m1", "description": "Applies Markovnikov's rule as a memorised rule without the carbocation-stability reason, so fails on unfamiliar alkenes" }
+      ]
+    },
+    {
+      "id": "chem.peroxide_effect",
+      "name": "Anti-Markovnikov addition (peroxide effect)",
+      "class": 11,
+      "unit_id": "c11.hydrocarbons",
+      "chapter": "Hydrocarbons",
+      "prerequisites": ["chem.alkene_electrophilic_addition", "chem.alkane_halogenation"],
+      "aliases": ["Kharasch effect", "anti-Markovnikov", "HBr with peroxide"],
+      "misconceptions": [
+        { "id": "chem.peroxide_effect.m1", "description": "Applies the peroxide effect to HCl or HI (it is observed only with HBr)" }
+      ]
+    },
+    {
+      "id": "chem.aromaticity",
+      "name": "Aromaticity",
+      "class": 11,
+      "unit_id": "c11.hydrocarbons",
+      "chapter": "Hydrocarbons",
+      "prerequisites": ["chem.resonance_structures", "chem.hybridisation"],
+      "aliases": ["Huckel rule", "(4n+2) pi electrons", "benzene structure"],
+      "misconceptions": []
+    },
+    {
+      "id": "chem.electrophilic_aromatic_substitution",
+      "name": "Electrophilic aromatic substitution",
+      "class": 11,
+      "unit_id": "c11.hydrocarbons",
+      "chapter": "Hydrocarbons",
+      "prerequisites": ["chem.aromaticity", "chem.electrophiles_nucleophiles", "chem.curved_arrow_notation"],
+      "aliases": ["nitration", "sulphonation", "Friedel-Crafts", "halogenation of benzene", "EAS"],
+      "misconceptions": [
+        { "id": "chem.electrophilic_aromatic_substitution.m1", "description": "Expects benzene to undergo addition rather than substitution" }
+      ]
+    },
+    {
+      "id": "chem.directive_influence",
+      "name": "Directive influence of substituents",
+      "class": 11,
+      "unit_id": "c11.hydrocarbons",
+      "chapter": "Hydrocarbons",
+      "prerequisites": ["chem.electrophilic_aromatic_substitution", "chem.resonance_effect"],
+      "aliases": ["ortho-para directing", "meta directing", "activating and deactivating groups"],
+      "misconceptions": [
+        { "id": "chem.directive_influence.m1", "description": "Assumes every ortho/para-directing group is activating (halogens are o/p-directing but deactivating)" },
+        { "id": "chem.directive_influence.m2", "description": "Calls -NO2 or -CHO ortho/para-directing" }
+      ]
+    },
+    {
+      "id": "chem.sn2_mechanism",
+      "name": "SN2 mechanism",
+      "class": 12,
+      "unit_id": "c12.haloalkanes",
+      "chapter": "Haloalkanes and Haloarenes",
+      "prerequisites": ["chem.electrophiles_nucleophiles", "chem.curved_arrow_notation", "chem.reaction_types"],
+      "aliases": ["bimolecular nucleophilic substitution", "backside attack", "Walden inversion"],
+      "misconceptions": [
+        { "id": "chem.sn2_mechanism.m1", "description": "Expects tertiary halides to react fastest by SN2 (steric hindrance makes them slowest)" }
+      ]
+    },
+    {
+      "id": "chem.sn1_mechanism",
+      "name": "SN1 mechanism",
+      "class": 12,
+      "unit_id": "c12.haloalkanes",
+      "chapter": "Haloalkanes and Haloarenes",
+      "prerequisites": ["chem.carbocation_stability", "chem.curved_arrow_notation", "chem.reaction_types"],
+      "aliases": ["unimolecular nucleophilic substitution", "carbocation pathway", "racemisation"],
+      "misconceptions": [
+        { "id": "chem.sn1_mechanism.m1", "description": "Includes the nucleophile in the rate-determining step of SN1" }
+      ]
+    },
+    {
+      "id": "chem.optical_isomerism",
+      "name": "Optical isomerism and chirality",
+      "class": 12,
+      "unit_id": "c12.haloalkanes",
+      "chapter": "Haloalkanes and Haloarenes",
+      "prerequisites": ["chem.structural_representation", "chem.hybridisation"],
+      "aliases": ["chiral carbon", "enantiomers", "racemic mixture", "optical activity"],
+      "misconceptions": [
+        { "id": "chem.optical_isomerism.m1", "description": "Marks a carbon as chiral when two of its four groups are identical" }
+      ]
+    },
+    {
+      "id": "chem.sn1_vs_sn2",
+      "name": "Choosing between SN1 and SN2",
+      "class": 12,
+      "unit_id": "c12.haloalkanes",
+      "chapter": "Haloalkanes and Haloarenes",
+      "prerequisites": ["chem.sn1_mechanism", "chem.sn2_mechanism", "chem.optical_isomerism"],
+      "aliases": ["reactivity order of haloalkanes", "stereochemistry of substitution"],
+      "misconceptions": [
+        { "id": "chem.sn1_vs_sn2.m1", "description": "Predicts inversion for an SN1 reaction and racemisation for SN2" }
+      ]
+    },
+    {
+      "id": "chem.elimination_reactions",
+      "name": "Elimination reactions (Saytzeff rule)",
+      "class": 12,
+      "unit_id": "c12.haloalkanes",
+      "chapter": "Haloalkanes and Haloarenes",
+      "prerequisites": ["chem.reaction_types", "chem.hyperconjugation"],
+      "aliases": ["dehydrohalogenation", "Zaitsev rule", "beta-elimination", "alcoholic KOH"],
+      "misconceptions": [
+        { "id": "chem.elimination_reactions.m1", "description": "Predicts the less substituted alkene as the major product" }
+      ]
+    },
+    {
+      "id": "chem.haloarene_reactivity",
+      "name": "Reactivity of haloarenes",
+      "class": 12,
+      "unit_id": "c12.haloalkanes",
+      "chapter": "Haloalkanes and Haloarenes",
+      "prerequisites": ["chem.resonance_effect", "chem.sn2_mechanism", "chem.directive_influence"],
+      "aliases": ["low reactivity of chlorobenzene", "nucleophilic aromatic substitution", "partial double bond character of C-X"],
+      "misconceptions": [
+        { "id": "chem.haloarene_reactivity.m1", "description": "Expects chlorobenzene to undergo SN2 as easily as chloroalkanes" }
+      ]
+    },
+    {
+      "id": "chem.alcohol_preparation",
+      "name": "Preparation of alcohols",
+      "class": 12,
+      "unit_id": "c12.alcohols",
+      "chapter": "Alcohols, Phenols and Ethers",
+      "prerequisites": ["chem.alkene_electrophilic_addition", "chem.nucleophilic_addition"],
+      "aliases": ["acid-catalysed hydration", "Grignard reagent", "reduction of carbonyls"],
+      "misconceptions": [
+        { "id": "chem.alcohol_preparation.m1", "description": "Expects formaldehyde with a Grignard reagent to give a secondary alcohol (it gives a primary alcohol)" }
+      ]
+    },
+    {
+      "id": "chem.alcohol_dehydration",
+      "name": "Dehydration of alcohols",
+      "class": 12,
+      "unit_id": "c12.alcohols",
+      "chapter": "Alcohols, Phenols and Ethers",
+      "prerequisites": ["chem.elimination_reactions", "chem.carbocation_stability"],
+      "aliases": ["acid-catalysed dehydration", "ease of dehydration 3 > 2 > 1"],
+      "misconceptions": []
+    },
+    {
+      "id": "chem.phenol_acidity",
+      "name": "Acidity of phenols",
+      "class": 12,
+      "unit_id": "c12.alcohols",
+      "chapter": "Alcohols, Phenols and Ethers",
+      "prerequisites": ["chem.organic_acidity_basicity", "chem.resonance_effect"],
+      "aliases": ["phenoxide ion", "effect of nitro group on phenol acidity", "phenol vs alcohol acidity"],
+      "misconceptions": [
+        { "id": "chem.phenol_acidity.m1", "description": "Thinks an electron-withdrawing group such as -NO2 decreases the acidity of phenol" },
+        { "id": "chem.phenol_acidity.m2", "description": "Thinks ethanol is more acidic than phenol" }
+      ]
+    },
+    {
+      "id": "chem.phenol_eas",
+      "name": "Electrophilic substitution in phenols",
+      "class": 12,
+      "unit_id": "c12.alcohols",
+      "chapter": "Alcohols, Phenols and Ethers",
+      "prerequisites": ["chem.directive_influence"],
+      "aliases": ["bromine water with phenol", "2,4,6-tribromophenol", "Kolbe reaction", "Reimer-Tiemann reaction"],
+      "misconceptions": []
+    },
+    {
+      "id": "chem.carbonyl_reactivity",
+      "name": "Structure and reactivity of the carbonyl group",
+      "class": 12,
+      "unit_id": "c12.carbonyls",
+      "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+      "prerequisites": ["chem.bond_polarity", "chem.hybridisation", "chem.inductive_effect"],
+      "aliases": ["C=O polarity", "aldehydes more reactive than ketones", "electrophilic carbonyl carbon"],
+      "misconceptions": [
+        { "id": "chem.carbonyl_reactivity.m1", "description": "Thinks ketones are more reactive than aldehydes towards nucleophiles" }
+      ]
+    },
+    {
+      "id": "chem.nucleophilic_addition",
+      "name": "Nucleophilic addition to carbonyls",
+      "class": 12,
+      "unit_id": "c12.carbonyls",
+      "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+      "prerequisites": ["chem.carbonyl_reactivity", "chem.electrophiles_nucleophiles", "chem.curved_arrow_notation"],
+      "aliases": ["addition of HCN", "cyanohydrin", "tetrahedral intermediate"],
+      "misconceptions": [
+        { "id": "chem.nucleophilic_addition.m1", "description": "Has the nucleophile attack the carbonyl oxygen instead of the carbon" }
+      ]
+    },
+    {
+      "id": "chem.aldol_cannizzaro",
+      "name": "Aldol and Cannizzaro reactions",
+      "class": 12,
+      "unit_id": "c12.carbonyls",
+      "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+      "prerequisites": ["chem.nucleophilic_addition", "chem.organic_acidity_basicity"],
+      "aliases": ["alpha-hydrogen", "aldol condensation", "Cannizzaro reaction", "enolate"],
+      "misconceptions": [
+        { "id": "chem.aldol_cannizzaro.m1", "description": "Expects an aldehyde without alpha-hydrogens (e.g. HCHO, benzaldehyde) to undergo aldol condensation" }
+      ]
+    },
+    {
+      "id": "chem.carboxylic_acidity",
+      "name": "Acidity of carboxylic acids",
+      "class": 12,
+      "unit_id": "c12.carbonyls",
+      "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+      "prerequisites": ["chem.organic_acidity_basicity"],
+      "aliases": ["carboxylate ion", "effect of substituents on acid strength", "chloroacetic acid"],
+      "misconceptions": [
+        { "id": "chem.carboxylic_acidity.m1", "description": "Thinks electron-donating groups increase the acidity of carboxylic acids" }
+      ]
+    },
+    {
+      "id": "chem.amine_basicity",
+      "name": "Basicity of amines",
+      "class": 12,
+      "unit_id": "c12.amines",
+      "chapter": "Amines",
+      "prerequisites": ["chem.organic_acidity_basicity", "chem.resonance_effect"],
+      "aliases": ["aniline vs methylamine", "pKb of amines", "basic strength order"],
+      "misconceptions": [
+        { "id": "chem.amine_basicity.m1", "description": "Thinks aniline is more basic than aliphatic amines, ignoring delocalisation of the nitrogen lone pair into the ring" }
+      ]
+    },
+    {
+      "id": "chem.diazonium_salts",
+      "name": "Diazonium salts and their reactions",
+      "class": 12,
+      "unit_id": "c12.amines",
+      "chapter": "Amines",
+      "prerequisites": ["chem.amine_basicity", "chem.electrophilic_aromatic_substitution"],
+      "aliases": ["diazotisation", "Sandmeyer reaction", "coupling reaction"],
+      "misconceptions": []
+    }
+  ]
+}

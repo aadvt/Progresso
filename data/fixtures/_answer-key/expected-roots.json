@@ -1,0 +1,96 @@
+{
+  "sample_data": true,
+  "purpose": "ANSWER KEY for testing the Phase 2 root-cause engine against the demo fixtures. The roots each demo student was written to have. Never read by the engine or the app; only tests may load this file. Deleted in Phase P with the fixtures.",
+  "students": {
+    "demo-riya": {
+      "expected_roots": [
+        {
+          "concept_id": "math.chain_rule",
+          "acceptable_alternatives": [],
+          "explains_records": [
+            "demo-riya.ut1.q7",
+            "demo-riya.ut1.q11",
+            "demo-riya.hy.q18",
+            "demo-riya.hy.q22",
+            "demo-riya.hy.q30",
+            "demo-riya.pb1.q9",
+            "demo-riya.pb1.q15",
+            "demo-riya.pb1.q24"
+          ],
+          "rationale": "Every one of these errors is a missing inner-function derivative. The chain rule is the common prerequisite of implicit, parametric, inverse-trig and exp/log differentiation, substitution and rates of change. It should rank first: most records and most marks."
+        }
+      ],
+      "standalone_records": ["demo-riya.ut1.q4", "demo-riya.hy.q5", "demo-riya.pb1.q3"],
+      "expected_pattern": "single_root"
+    },
+    "demo-kabir": {
+      "expected_roots": [
+        {
+          "concept_id": "chem.resonance_effect",
+          "acceptable_alternatives": [],
+          "explains_records": [
+            "demo-kabir.hy.chem.q14",
+            "demo-kabir.hy.chem.q19",
+            "demo-kabir.pb1.chem.q8",
+            "demo-kabir.pb1.chem.q11",
+            "demo-kabir.pb1.chem.q21"
+          ],
+          "rationale": "Phenol acidity, directive influence, amine basicity, haloarene reactivity and carbocation stability all fail by ignoring delocalisation (+R/-R)."
+        },
+        {
+          "concept_id": "math.trig_multiple_angles",
+          "acceptable_alternatives": ["math.trig_compound_angles"],
+          "explains_records": [
+            "demo-kabir.hy.math.q8",
+            "demo-kabir.hy.math.q12",
+            "demo-kabir.hy.math.q16",
+            "demo-kabir.pb1.math.q19",
+            "demo-kabir.pb1.math.q25"
+          ],
+          "rationale": "Four errors need double/half-angle formulae and one needs product-to-sum; both families derive from compound-angle formulae. trig_compound_angles is acceptable because it covers q25 too."
+        }
+      ],
+      "standalone_records": ["demo-kabir.hy.chem.q3", "demo-kabir.pb1.math.q6"],
+      "expected_pattern": "two_independent_roots"
+    },
+    "demo-ananya": {
+      "expected_roots": [],
+      "standalone_records": [
+        "demo-ananya.hy.math.q2",
+        "demo-ananya.hy.math.q17",
+        "demo-ananya.hy.math.q26",
+        "demo-ananya.pb1.math.q13",
+        "demo-ananya.pb1.math.q20",
+        "demo-ananya.pb1.math.q28",
+        "demo-ananya.hy.chem.q5",
+        "demo-ananya.hy.chem.q16",
+        "demo-ananya.pb1.chem.q9",
+        "demo-ananya.pb1.chem.q22"
+      ],
+      "expected_pattern": "careless_and_notation: no conceptual root should be reported with high confidence; the engine should surface habits (constant of integration, units, final-step checks, sign care, reading the reagent) rather than a concept to re-teach. Two records share the constant-of-integration slip (math.antiderivative_basics.m1), which is a habit, not a gap."
+    },
+    "demo-vihaan": {
+      "expected_roots": [
+        {
+          "concept_id": "math.algebraic_identities",
+          "acceptable_alternatives": ["math.factorisation"],
+          "explains_records": [
+            "demo-vihaan.ut1.math.q6",
+            "demo-vihaan.ut1.math.q9",
+            "demo-vihaan.hy.math.q21",
+            "demo-vihaan.hy.math.q27",
+            "demo-vihaan.pb1.math.q14"
+          ],
+          "rationale": "Three errors are identity errors ((a+b)^2, a^3 - b^3) and two are factorisation failures. Factorisation depends on algebraic identities, so the deepest root explaining all five is a Class 9 concept. factorisation is acceptable but explains only two directly."
+        }
+      ],
+      "standalone_records": [
+        "demo-vihaan.pb1.math.q8",
+        "demo-vihaan.pb1.math.q34",
+        "demo-vihaan.pb1.chem.q4",
+        "demo-vihaan.pb1.chem.q17"
+      ],
+      "expected_pattern": "deep_foundation_root"
+    }
+  }
+}

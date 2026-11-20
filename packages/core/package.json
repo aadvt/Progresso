@@ -1,0 +1,17 @@
+{
+  "name": "@progresso/core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./demo-fixtures": "./src/demo-fixtures/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json",
+    "graph:validate": "tsx src/cli/validate-graph.ts"
+  },
+  "dependencies": {
+    "zod": "^4.3.6"
+  }
+}

@@ -1,0 +1,215 @@
+{
+  "sample_data": true,
+  "notice": "SAMPLE DATA: hand-written demo fixture, not a real student or a real Inferentics report. Deleted in Phase P.",
+  "student": {
+    "id": "demo-kabir",
+    "display_name": "Kabir (sample)",
+    "class": 12,
+    "subjects": ["Mathematics", "Chemistry"],
+    "next_exam": { "name": "Pre-Board 2", "date": "2027-01-14" },
+    "story": "Two independent roots. In maths, trigonometric integrals, a trig limit and an inverse-trig simplification all fail on multiple-angle (and product-to-sum) formulae. In chemistry, phenol acidity, directing effects, amine basicity, SN1 reactivity and haloarene reactivity all fail on the resonance (mesomeric) effect. One IUPAC slip and one vector error stand alone."
+  },
+  "exams": [
+    { "id": "demo-kabir.hy.math", "name": "Half-Yearly Examination", "date": "2026-09-24", "subject": "Mathematics", "max_marks": 80 },
+    { "id": "demo-kabir.hy.chem", "name": "Half-Yearly Examination", "date": "2026-09-26", "subject": "Chemistry", "max_marks": 70 },
+    { "id": "demo-kabir.pb1.math", "name": "Pre-Board 1", "date": "2026-11-11", "subject": "Mathematics", "max_marks": 80 },
+    { "id": "demo-kabir.pb1.chem", "name": "Pre-Board 1", "date": "2026-11-13", "subject": "Chemistry", "max_marks": 70 }
+  ],
+  "records": [
+    {
+      "id": "demo-kabir.hy.math.q8",
+      "exam_id": "demo-kabir.hy.math",
+      "question": { "ref": "Q8", "section": "B", "text": "Find the integral of cos^2 x dx." },
+      "diagnosis": {
+        "text": "The student used cos^2 x = (1 - cos 2x)/2 and obtained x/2 - (sin 2x)/4 + C. The correct identity is cos^2 x = (1 + cos 2x)/2.",
+        "correct_approach": "Integral of cos^2 x dx = x/2 + (sin 2x)/4 + C."
+      },
+      "error_type": "conceptual",
+      "student_working": { "text": "cos^2 x = (1 - cos 2x)/2, so integral = x/2 - (sin 2x)/4 + C", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 2, "lost": 1 },
+      "concepts": [
+        { "concept_id": "math.integration_trig_identities", "confidence": 0.8, "role": "primary" },
+        { "concept_id": "math.trig_multiple_angles", "confidence": 0.8, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.trig_multiple_angles.m1", "confidence": 0.8 }
+    },
+    {
+      "id": "demo-kabir.hy.math.q12",
+      "exam_id": "demo-kabir.hy.math",
+      "question": { "ref": "Q12", "section": "B", "text": "Find the integral of sin^2 x dx." },
+      "diagnosis": {
+        "text": "The student applied the power rule to sin^2 x as if it were x^2, writing (sin^3 x)/3 + C. sin^2 x should first be rewritten as (1 - cos 2x)/2.",
+        "correct_approach": "Integral of sin^2 x dx = x/2 - (sin 2x)/4 + C."
+      },
+      "error_type": "conceptual",
+      "student_working": { "text": "integral of sin^2 x dx = (sin^3 x)/3 + C", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 2, "lost": 2 },
+      "concepts": [
+        { "concept_id": "math.integration_trig_identities", "confidence": 0.9, "role": "primary" },
+        { "concept_id": "math.trig_multiple_angles", "confidence": 0.6, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.integration_trig_identities.m1", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-kabir.hy.math.q16",
+      "exam_id": "demo-kabir.hy.math",
+      "question": {
+        "ref": "Q16",
+        "section": "C",
+        "text": "Find k so that f(x) = (1 - cos 2x)/x^2 for x != 0 and f(0) = k is continuous at x = 0."
+      },
+      "diagnosis": {
+        "text": "The student rewrote 1 - cos 2x as 2cos^2 x and could not evaluate the limit. The required identity is 1 - cos 2x = 2 sin^2 x, which gives the limit 2, so k = 2."
+      },
+      "error_type": "conceptual",
+      "student_working": { "text": "(1 - cos 2x)/x^2 = 2cos^2 x / x^2", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 3, "lost": 2 },
+      "concepts": [
+        { "concept_id": "math.continuity", "confidence": 0.7, "role": "primary" },
+        { "concept_id": "math.limits_trig", "confidence": 0.7, "role": "secondary" },
+        { "concept_id": "math.trig_multiple_angles", "confidence": 0.65, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.trig_multiple_angles.m1", "confidence": 0.85 }
+    },
+    {
+      "id": "demo-kabir.pb1.math.q6",
+      "exam_id": "demo-kabir.pb1.math",
+      "question": { "ref": "Q6", "section": "B", "text": "Find the projection of a = 2i + 3j + 2k on b = i + 2j + k." },
+      "diagnosis": {
+        "text": "a . b = 10 was computed correctly, but the student divided by |a| = sqrt(17) instead of |b|.",
+        "correct_approach": "Projection of a on b = (a . b)/|b| = 10/sqrt(6)."
+      },
+      "error_type": "conceptual",
+      "marks": { "max": 2, "lost": 1 },
+      "concepts": [{ "concept_id": "math.dot_product", "confidence": 0.9, "role": "primary" }],
+      "misconception": { "misconception_id": "math.dot_product.m1", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-kabir.pb1.math.q19",
+      "exam_id": "demo-kabir.pb1.math",
+      "question": { "ref": "Q19", "section": "C", "text": "Differentiate tan^-1((1 - cos x)/sin x) with respect to x, for -pi < x < pi, x != 0." },
+      "diagnosis": {
+        "text": "The student did not recognise that (1 - cos x)/sin x = tan(x/2) using the half-angle formulae. Instead the quotient rule was applied inside the inverse function, with errors, and the final answer was incorrect.",
+        "correct_approach": "tan^-1(tan(x/2)) = x/2 on the given interval, so the derivative is 1/2."
+      },
+      "error_type": "procedural",
+      "error_type_original": "Wrong method",
+      "marks": { "max": 3, "awarded": 1 },
+      "concepts": [
+        { "concept_id": "math.derivative_inverse_trig", "confidence": 0.7, "role": "primary" },
+        { "concept_id": "math.trig_multiple_angles", "confidence": 0.75, "role": "secondary" }
+      ]
+    },
+    {
+      "id": "demo-kabir.pb1.math.q25",
+      "exam_id": "demo-kabir.pb1.math",
+      "question": { "ref": "Q25", "section": "C", "text": "Find the integral of sin 3x cos 2x dx." },
+      "diagnosis": {
+        "text": "The student wrote sin 3x cos 2x = sin 5x, treating the product as the sine of the sum of the angles. The product-to-sum formula 2 sin A cos B = sin(A + B) + sin(A - B) was needed.",
+        "correct_approach": "sin 3x cos 2x = (sin 5x + sin x)/2, so the integral is -(cos 5x)/10 - (cos x)/2 + C."
+      },
+      "error_type": "conceptual",
+      "student_working": { "text": "integral of sin 3x cos 2x dx = integral of sin 5x dx = -(cos 5x)/5 + C", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 3, "lost": 3 },
+      "concepts": [
+        { "concept_id": "math.integration_trig_identities", "confidence": 0.85, "role": "primary" },
+        { "concept_id": "math.trig_sum_product", "confidence": 0.7, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.trig_sum_product.m1", "confidence": 0.85 }
+    },
+    {
+      "id": "demo-kabir.hy.chem.q3",
+      "exam_id": "demo-kabir.hy.chem",
+      "question": { "ref": "Q3", "section": "A", "text": "Write the IUPAC name of CH3-CH(CH3)-CH2-CH3." },
+      "diagnosis": {
+        "text": "Named as 3-methylbutane. The chain was numbered from the wrong end; the substituent must get the lowest locant.",
+        "correct_approach": "2-methylbutane."
+      },
+      "error_type": "notation",
+      "marks": { "max": 1, "lost": 1 },
+      "concepts": [{ "concept_id": "chem.iupac_nomenclature", "confidence": 0.95, "role": "primary" }],
+      "misconception": { "misconception_id": "chem.iupac_nomenclature.m1", "confidence": 0.95 }
+    },
+    {
+      "id": "demo-kabir.hy.chem.q14",
+      "exam_id": "demo-kabir.hy.chem",
+      "question": { "ref": "Q14", "section": "B", "text": "Arrange in increasing order of acidic strength: phenol, p-nitrophenol, ethanol." },
+      "diagnosis": {
+        "text": "Order given as ethanol < p-nitrophenol < phenol. The student placed p-nitrophenol below phenol. The -NO2 group withdraws electron density by its -R and -I effects and stabilises the phenoxide ion, so p-nitrophenol is the most acidic.",
+        "correct_approach": "ethanol < phenol < p-nitrophenol."
+      },
+      "error_type": "conceptual",
+      "marks": { "max": 2, "lost": 1 },
+      "concepts": [
+        { "concept_id": "chem.phenol_acidity", "confidence": 0.9, "role": "primary" },
+        { "concept_id": "chem.resonance_effect", "confidence": 0.7, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "chem.phenol_acidity.m1", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-kabir.hy.chem.q19",
+      "exam_id": "demo-kabir.hy.chem",
+      "question": { "ref": "Q19", "section": "C", "text": "Explain why the -OCH3 group in anisole is ortho/para-directing and activating towards electrophilic substitution." },
+      "diagnosis": {
+        "text": "The student stated that -OCH3 is electron-withdrawing because oxygen is electronegative, and so deactivates the ring. Only the -I effect was considered; the +R effect of the oxygen lone pair, which increases electron density at the ortho and para positions and outweighs -I, was ignored."
+      },
+      "error_type": "conceptual",
+      "error_type_original": "Conceptual error",
+      "student_working": {
+        "text": "-OCH3 is an electron withdrawing group as O is more electronegative, so it deactivates the benzene ring.",
+        "format": "plain",
+        "origin": "report_quote"
+      },
+      "marks": { "max": 3, "lost": 2 },
+      "concepts": [
+        { "concept_id": "chem.directive_influence", "confidence": 0.85, "role": "primary" },
+        { "concept_id": "chem.resonance_effect", "confidence": 0.8, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "chem.resonance_effect.m1", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-kabir.pb1.chem.q8",
+      "exam_id": "demo-kabir.pb1.chem",
+      "question": { "ref": "Q8", "section": "B", "text": "Aniline is a weaker base than methylamine. Give a reason." },
+      "diagnosis": {
+        "text": "The student argued that aniline is the stronger base because the benzene ring donates electrons. In aniline the nitrogen lone pair is delocalised into the ring by resonance and is less available for protonation; methylamine is more basic because of the +I effect of the methyl group."
+      },
+      "error_type": "conceptual",
+      "marks": { "max": 2, "lost": 2 },
+      "concepts": [
+        { "concept_id": "chem.amine_basicity", "confidence": 0.9, "role": "primary" },
+        { "concept_id": "chem.resonance_effect", "confidence": 0.7, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "chem.amine_basicity.m1", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-kabir.pb1.chem.q11",
+      "exam_id": "demo-kabir.pb1.chem",
+      "question": { "ref": "Q11", "section": "B", "text": "Chlorobenzene is less reactive than chloroethane towards nucleophilic substitution. Explain." },
+      "diagnosis": {
+        "text": "The student's reason was that chlorine is more electronegative in chlorobenzene. The answer missed that the C-Cl bond acquires partial double-bond character through resonance of the chlorine lone pair with the ring (and the carbon is sp2 hybridised), which makes the bond harder to break."
+      },
+      "error_type": "conceptual",
+      "marks": { "max": 2, "lost": 2 },
+      "concepts": [
+        { "concept_id": "chem.haloarene_reactivity", "confidence": 0.85, "role": "primary" },
+        { "concept_id": "chem.resonance_effect", "confidence": 0.6, "role": "secondary" }
+      ]
+    },
+    {
+      "id": "demo-kabir.pb1.chem.q21",
+      "exam_id": "demo-kabir.pb1.chem",
+      "question": { "ref": "Q21", "section": "C", "text": "C6H5CH2Cl undergoes SN1 reaction faster than CH3CH2Cl. Explain." },
+      "diagnosis": {
+        "text": "The student stated that both are primary halides and should react at the same rate. The resonance stabilisation of the benzyl carbocation by the benzene ring was not recognised."
+      },
+      "error_type": "conceptual",
+      "concepts": [
+        { "concept_id": "chem.sn1_mechanism", "confidence": 0.75, "role": "primary" },
+        { "concept_id": "chem.carbocation_stability", "confidence": 0.8, "role": "secondary" },
+        { "concept_id": "chem.resonance_effect", "confidence": 0.6, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "chem.carbocation_stability.m1", "confidence": 0.85 }
+    }
+  ]
+}

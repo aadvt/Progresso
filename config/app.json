@@ -1,0 +1,7 @@
+{
+  "conceptGraphDir": "data/concept-graph-provisional",
+  "databasePath": "data/progresso.db",
+  "fixturesDir": "data/fixtures/demo",
+  "llmCacheDir": "data/cache/llm",
+  "llmUsageLog": "data/logs/llm-usage.jsonl"
+}

@@ -1,0 +1,190 @@
+{
+  "sample_data": true,
+  "notice": "SAMPLE DATA: hand-written demo fixture, not a real student or a real Inferentics report. Deleted in Phase P.",
+  "student": {
+    "id": "demo-riya",
+    "display_name": "Riya (sample)",
+    "class": 12,
+    "subjects": ["Mathematics"],
+    "next_exam": { "name": "Pre-Board 2", "date": "2027-01-12" },
+    "story": "Single root. Across three maths exams, most lost marks (derivatives of sin(x^2), log(cos x), sin^-1(2x), implicit and parametric differentiation, substitution, rates of change) trace back to one gap: the chain rule. Three errors (continuity, a principal value, |adj A|) are unrelated."
+  },
+  "exams": [
+    { "id": "demo-riya.ut1", "name": "Unit Test 1", "date": "2026-07-18", "subject": "Mathematics", "max_marks": 40 },
+    { "id": "demo-riya.hy", "name": "Half-Yearly Examination", "date": "2026-09-22", "subject": "Mathematics", "max_marks": 80 },
+    { "id": "demo-riya.pb1", "name": "Pre-Board 1", "date": "2026-11-10", "subject": "Mathematics", "max_marks": 80 }
+  ],
+  "records": [
+    {
+      "id": "demo-riya.ut1.q7",
+      "exam_id": "demo-riya.ut1",
+      "question": { "ref": "Q7", "section": "B", "text": "Differentiate sin(x^2) with respect to x." },
+      "diagnosis": {
+        "text": "The student wrote the derivative as cos(x^2). The factor 2x from differentiating the inner function x^2 is missing; the chain rule was not applied.",
+        "correct_approach": "dy/dx = cos(x^2) * d/dx(x^2) = 2x cos(x^2)."
+      },
+      "error_type": "conceptual",
+      "error_type_original": "Conceptual error",
+      "student_working": { "text": "d/dx [sin(x^2)] = cos(x^2)", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 2, "awarded": 1 },
+      "concepts": [{ "concept_id": "math.chain_rule", "confidence": 0.95, "role": "primary" }],
+      "misconception": { "misconception_id": "math.chain_rule.m1", "confidence": 0.95 }
+    },
+    {
+      "id": "demo-riya.ut1.q11",
+      "exam_id": "demo-riya.ut1",
+      "question": { "ref": "Q11", "section": "C", "text": "Find dy/dx if y = log(cos x)." },
+      "diagnosis": {
+        "text": "Answer given as 1/cos x. The student differentiated the logarithm but did not multiply by the derivative of cos x.",
+        "correct_approach": "dy/dx = (1/cos x)(-sin x) = -tan x."
+      },
+      "error_type": "conceptual",
+      "marks": { "max": 3, "lost": 2 },
+      "concepts": [
+        { "concept_id": "math.derivative_exp_log", "confidence": 0.8, "role": "primary" },
+        { "concept_id": "math.chain_rule", "confidence": 0.75, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.chain_rule.m1", "confidence": 0.8 }
+    },
+    {
+      "id": "demo-riya.ut1.q4",
+      "exam_id": "demo-riya.ut1",
+      "question": { "ref": "Q4", "section": "A" },
+      "diagnosis": {
+        "text": "For continuity of the piecewise function at x = 2, the student compared the left-hand limit with a value of f(2) computed from the wrong piece of the definition.",
+        "correct_approach": "f(2) must be taken from the piece defined at x = 2, and then LHL = RHL = f(2) checked."
+      },
+      "error_type": "procedural",
+      "marks": { "max": 1, "lost": 1 },
+      "concepts": [{ "concept_id": "math.continuity", "confidence": 0.85, "role": "primary" }]
+    },
+    {
+      "id": "demo-riya.hy.q5",
+      "exam_id": "demo-riya.hy",
+      "question": { "ref": "Q5", "section": "A", "text": "Find the principal value of tan^-1(-1)." },
+      "diagnosis": {
+        "text": "Answer written as 3pi/4, which lies outside the principal value branch (-pi/2, pi/2) of tan^-1.",
+        "correct_approach": "The principal value is -pi/4."
+      },
+      "error_type": "conceptual",
+      "marks": { "max": 1, "lost": 1 },
+      "concepts": [{ "concept_id": "math.inverse_trig_functions", "confidence": 0.9, "role": "primary" }],
+      "misconception": { "misconception_id": "math.inverse_trig_functions.m2", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-riya.hy.q18",
+      "exam_id": "demo-riya.hy",
+      "question": { "ref": "Q18", "section": "C", "text": "Find dy/dx if x^2 + xy + y^2 = 7." },
+      "diagnosis": {
+        "text": "The student differentiated y^2 as 2y and xy as y, with no dy/dx terms, treating y as if it were a constant. As a result dy/dx could not be isolated correctly.",
+        "correct_approach": "2x + y + x(dy/dx) + 2y(dy/dx) = 0, so dy/dx = -(2x + y)/(x + 2y)."
+      },
+      "error_type": "conceptual",
+      "error_type_original": "Concept not clear",
+      "student_working": { "text": "d/dx(x^2 + xy + y^2) = 2x + y + 2y = 0", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 3, "awarded": 1 },
+      "concepts": [
+        { "concept_id": "math.implicit_differentiation", "confidence": 0.9, "role": "primary" },
+        { "concept_id": "math.chain_rule", "confidence": 0.6, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.implicit_differentiation.m1", "confidence": 0.9 }
+    },
+    {
+      "id": "demo-riya.hy.q22",
+      "exam_id": "demo-riya.hy",
+      "question": { "ref": "Q22", "section": "B", "text": "Evaluate the integral of x e^(x^2) dx." },
+      "diagnosis": {
+        "text": "Substitution t = x^2 was chosen correctly, but x dx was not replaced by dt/2. The final answer e^(x^2) + C is missing the factor 1/2.",
+        "correct_approach": "With t = x^2, x dx = dt/2, so the integral is (1/2)e^(x^2) + C."
+      },
+      "error_type": "procedural",
+      "marks": { "max": 2, "lost": 1 },
+      "concepts": [{ "concept_id": "math.integration_substitution", "confidence": 0.9, "role": "primary" }],
+      "misconception": { "misconception_id": "math.integration_substitution.m2", "confidence": 0.75 }
+    },
+    {
+      "id": "demo-riya.hy.q30",
+      "exam_id": "demo-riya.hy",
+      "question": {
+        "ref": "Q30",
+        "section": "C",
+        "text": "The radius of a circular ink blot increases at 0.5 cm/s. Find the rate at which its area is increasing when the radius is 4 cm."
+      },
+      "diagnosis": {
+        "text": "The student wrote dA/dt = 2 pi r = 8 pi, differentiating with respect to r instead of t and omitting the factor dr/dt."
+      },
+      "error_type": "conceptual",
+      "concepts": [
+        { "concept_id": "math.rate_of_change", "confidence": 0.85, "role": "primary" },
+        { "concept_id": "math.chain_rule", "confidence": 0.6, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.chain_rule.m1", "confidence": 0.6 }
+    },
+    {
+      "id": "demo-riya.pb1.q3",
+      "exam_id": "demo-riya.pb1",
+      "question": { "ref": "Q3", "section": "A", "text": "If A is a square matrix of order 3 with |A| = 4, find |adj A|." },
+      "diagnosis": {
+        "text": "Answer given as 4. The student assumed |adj A| = |A|.",
+        "correct_approach": "|adj A| = |A|^(n-1) = 4^2 = 16."
+      },
+      "error_type": "conceptual",
+      "marks": { "max": 1, "lost": 1 },
+      "concepts": [{ "concept_id": "math.matrix_inverse", "confidence": 0.8, "role": "primary" }]
+    },
+    {
+      "id": "demo-riya.pb1.q9",
+      "exam_id": "demo-riya.pb1",
+      "question": { "ref": "Q9", "section": "C", "text": "If x = a cos^3(theta) and y = a sin^3(theta), find dy/dx." },
+      "diagnosis": {
+        "text": "The student took d/d(theta) of cos^3(theta) as 3cos^2(theta) and of sin^3(theta) as 3sin^2(theta), missing the derivatives of the inner functions, and obtained tan^2(theta).",
+        "correct_approach": "dx/d(theta) = -3a cos^2(theta) sin(theta), dy/d(theta) = 3a sin^2(theta) cos(theta), so dy/dx = -tan(theta)."
+      },
+      "error_type": "conceptual",
+      "student_working": {
+        "text": "dy/dx = (3a sin^2 theta)/(3a cos^2 theta) = tan^2 theta",
+        "format": "plain",
+        "origin": "report_quote"
+      },
+      "marks": { "max": 3, "lost": 2 },
+      "concepts": [
+        { "concept_id": "math.parametric_differentiation", "confidence": 0.85, "role": "primary" },
+        { "concept_id": "math.chain_rule", "confidence": 0.7, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.chain_rule.m1", "confidence": 0.85 }
+    },
+    {
+      "id": "demo-riya.pb1.q15",
+      "exam_id": "demo-riya.pb1",
+      "question": { "ref": "Q15", "section": "B", "text": "Differentiate sin^-1(2x) with respect to x." },
+      "diagnosis": {
+        "text": "Answer written as 1/sqrt(1 - 4x^2). The factor 2 from the inner function 2x is missing.",
+        "correct_approach": "d/dx sin^-1(2x) = 2/sqrt(1 - 4x^2)."
+      },
+      "error_type": "conceptual",
+      "student_working": { "text": "d/dx sin^-1(2x) = 1/sqrt(1 - 4x^2)", "format": "plain", "origin": "report_quote" },
+      "marks": { "max": 2, "lost": 1 },
+      "concepts": [
+        { "concept_id": "math.derivative_inverse_trig", "confidence": 0.85, "role": "primary" },
+        { "concept_id": "math.chain_rule", "confidence": 0.7, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.chain_rule.m1", "confidence": 0.85 }
+    },
+    {
+      "id": "demo-riya.pb1.q24",
+      "exam_id": "demo-riya.pb1",
+      "question": { "ref": "Q24", "section": "C", "text": "If y = e^(2x) sin x, show that d2y/dx2 - 4 dy/dx + 5y = 0." },
+      "diagnosis": {
+        "text": "While finding dy/dx the student differentiated e^(2x) as e^(2x) instead of 2e^(2x). The second derivative was therefore wrong and the result could not be shown."
+      },
+      "error_type": "conceptual",
+      "marks": { "max": 3, "awarded": 1 },
+      "concepts": [
+        { "concept_id": "math.second_order_derivatives", "confidence": 0.7, "role": "primary" },
+        { "concept_id": "math.derivative_exp_log", "confidence": 0.6, "role": "secondary" },
+        { "concept_id": "math.chain_rule", "confidence": 0.7, "role": "secondary" }
+      ],
+      "misconception": { "misconception_id": "math.chain_rule.m1", "confidence": 0.7 }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "subject": "Mathematics",
+  "syllabus_source": "DELIBERATELY BROKEN test graph: a prerequisite cycle, a missing prerequisite id, a duplicate id and an unknown unit. The loader must reject it.",
+  "units": [{ "id": "t.unit", "name": "Test unit", "class": 11, "board_marks": 10 }],
+  "concepts": [
+    { "id": "t.a", "name": "A", "class": 11, "unit_id": "t.unit", "chapter": "c", "prerequisites": ["t.c"], "aliases": [], "misconceptions": [] },
+    { "id": "t.b", "name": "B", "class": 11, "unit_id": "t.unit", "chapter": "c", "prerequisites": ["t.a"], "aliases": [], "misconceptions": [] },
+    { "id": "t.c", "name": "C", "class": 11, "unit_id": "t.unit", "chapter": "c", "prerequisites": ["t.b"], "aliases": [], "misconceptions": [] },
+    { "id": "t.d", "name": "D", "class": 11, "unit_id": "t.unit", "chapter": "c", "prerequisites": ["t.does_not_exist"], "aliases": [], "misconceptions": [] },
+    { "id": "t.d", "name": "D again", "class": 11, "unit_id": "t.unit", "chapter": "c", "prerequisites": [], "aliases": [], "misconceptions": [] },
+    { "id": "t.e", "name": "E", "class": 11, "unit_id": "t.no_such_unit", "chapter": "c", "prerequisites": [], "aliases": [], "misconceptions": [] }
+  ]
+}

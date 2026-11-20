@@ -1,0 +1,11 @@
+{
+  "subject": "Testing",
+  "syllabus_source": "Tiny valid test graph: root -> mid -> top, plus side -> top.",
+  "units": [{ "id": "x.unit", "name": "Unit", "class": 12, "board_marks": 5 }],
+  "concepts": [
+    { "id": "x.root", "name": "Root", "class": 10, "unit_id": "x.unit", "chapter": "c", "prerequisites": [], "aliases": ["the base"], "misconceptions": [{ "id": "x.root.m1", "description": "d" }] },
+    { "id": "x.side", "name": "Side", "class": 11, "unit_id": "x.unit", "chapter": "c", "prerequisites": [], "aliases": [], "misconceptions": [] },
+    { "id": "x.mid", "name": "Mid", "class": 11, "unit_id": "x.unit", "chapter": "c", "prerequisites": ["x.root"], "aliases": [], "misconceptions": [] },
+    { "id": "x.top", "name": "Top", "class": 12, "unit_id": "x.unit", "chapter": "c", "prerequisites": ["x.mid", "x.side"], "aliases": [], "misconceptions": [] }
+  ]
+}
