@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.12.1",
-  "engines": { "node": ">=22.12" },
+  "engines": {
+    "node": ">=22.12"
+  },
   "scripts": {
     "typecheck": "pnpm -r --parallel typecheck",
     "lint": "eslint .",
@@ -16,12 +18,18 @@
     "db:migrate": "pnpm --filter @progresso/db migrate",
     "db:seed": "pnpm --filter @progresso/db seed",
     "db:reset": "pnpm --filter @progresso/db reset",
-    "verify": "pnpm typecheck && pnpm lint && pnpm test && pnpm graph:validate"
+    "verify": "pnpm typecheck && pnpm lint && pnpm test && pnpm graph:validate",
+    "web:dev": "pnpm --filter @progresso/web dev",
+    "web:build": "pnpm --filter @progresso/web build",
+    "web:start": "pnpm --filter @progresso/web start",
+    "e2e": "pnpm --filter @progresso/web e2e"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@types/node": "^24.19.2",
     "eslint": "^10.15.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "tsx": "^4.23.15",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.73.0",

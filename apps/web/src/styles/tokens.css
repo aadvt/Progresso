@@ -1,0 +1,124 @@
+/*
+ * Progresso design tokens.
+ *
+ * Visual language "light threads": frosted glass surfaces floating over a slow
+ * aurora; a blue→teal thread of light connects a root gap to what it causes.
+ * Blue = understanding / the root. Teal = recovery / marks won back.
+ * Amber = habits and slips. Every colour pair used for text meets WCAG AA.
+ */
+:root {
+  /* ---- type ---- */
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  --text-2xs: 0.6875rem; /* 11 */
+  --text-xs: 0.75rem; /* 12 */
+  --text-sm: 0.875rem; /* 14 */
+  --text-md: 1rem; /* 16 */
+  --text-lg: 1.125rem; /* 18 */
+  --text-xl: 1.375rem; /* 22 */
+  --text-2xl: clamp(1.5rem, 1.2rem + 1.2vw, 1.875rem); /* 24-30 */
+  --text-3xl: clamp(2rem, 1.4rem + 2.6vw, 3rem); /* 32-48 */
+  --text-display: clamp(2.75rem, 1.6rem + 5.2vw, 5rem); /* 44-80 */
+
+  --leading-tight: 1.08;
+  --leading-snug: 1.3;
+  --leading-body: 1.55;
+  --tracking-display: -0.035em;
+  --tracking-tight: -0.018em;
+  --tracking-caps: 0.08em;
+
+  /* ---- colour: neutrals ---- */
+  --bg: #f3f6fa;
+  --ink-1: #0a1a2f; /* 16.9:1 on --bg */
+  --ink-2: #3a4b63; /* 8.4:1 */
+  --ink-3: #56667d; /* 5.6:1 */
+  --ink-inverse: #ffffff;
+  --line: rgb(10 26 47 / 0.08);
+  --line-strong: rgb(10 26 47 / 0.15);
+
+  /* ---- colour: glass ---- */
+  --glass-1: rgb(255 255 255 / 0.56);
+  --glass-2: rgb(255 255 255 / 0.74);
+  --glass-3: rgb(255 255 255 / 0.9);
+  --glass-edge: rgb(255 255 255 / 0.85);
+  --glass-blur: 22px;
+
+  /* ---- colour: accents ---- */
+  --blue-700: #1d43c4;
+  --blue-600: #2453e0; /* 6.1:1 on white */
+  --blue-500: #3d6ef7;
+  --blue-300: #93b2ff;
+  --blue-100: #e4ecff;
+  --blue-50: #f1f5ff;
+
+  --teal-700: #076b5e; /* 6.3:1 on white */
+  --teal-600: #0b8574;
+  --teal-500: #16b3a0;
+  --teal-300: #7fe0d2;
+  --teal-100: #d4f5ef;
+  --teal-50: #ecfbf8;
+
+  --amber-700: #95500a; /* 6.4:1 on white */
+  --amber-500: #e5920f;
+  --amber-100: #fdf0d6;
+  --amber-50: #fff8ea;
+
+  --violet-300: #c4b5fd;
+
+  --danger-700: #b42318;
+  --danger-100: #fde8e6;
+
+  --thread: linear-gradient(135deg, var(--blue-500) 0%, var(--teal-500) 100%);
+  --thread-vertical: linear-gradient(180deg, var(--blue-500) 0%, var(--teal-500) 100%);
+  --thread-soft: linear-gradient(135deg, rgb(61 110 247 / 0.16), rgb(22 179 160 / 0.16));
+
+  /* ---- space (4px base) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --gutter: clamp(1rem, 0.6rem + 2vw, 2rem);
+  --content-max: 76rem;
+
+  /* ---- shape ---- */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  /* ---- depth ---- */
+  --shadow-1: 0 1px 1px rgb(10 26 47 / 0.04), 0 2px 8px rgb(10 26 47 / 0.04);
+  --shadow-2: 0 1px 2px rgb(10 26 47 / 0.05), 0 8px 24px -6px rgb(10 26 47 / 0.1), 0 24px 48px -24px rgb(10 26 47 / 0.12);
+  --shadow-3: 0 2px 4px rgb(10 26 47 / 0.05), 0 18px 40px -10px rgb(10 26 47 / 0.16), 0 40px 80px -40px rgb(29 67 196 / 0.22);
+  --shadow-glow: 0 0 0 1px rgb(61 110 247 / 0.18), 0 8px 28px -6px rgb(61 110 247 / 0.45);
+  --highlight: inset 0 1px 0 rgb(255 255 255 / 0.9), inset 0 0 0 1px rgb(255 255 255 / 0.35);
+
+  /* ---- focus ---- */
+  --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--blue-600);
+
+  /* ---- motion ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur-1: 140ms;
+  --dur-2: 260ms;
+  --dur-3: 480ms;
+  --dur-4: 900ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-1: 1ms;
+    --dur-2: 1ms;
+    --dur-3: 1ms;
+    --dur-4: 1ms;
+  }
+}

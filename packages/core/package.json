@@ -5,7 +5,8 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./demo-fixtures": "./src/demo-fixtures/index.ts"
+    "./demo-fixtures": "./src/demo-fixtures/index.ts",
+    "./report-parser": "./src/report-parser/index.ts"
   },
   "scripts": {
     "typecheck": "tsc -p tsconfig.json",

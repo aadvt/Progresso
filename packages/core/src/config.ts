@@ -14,7 +14,8 @@ export interface AppConfig {
 
 /** Walk up from `start` to the directory containing pnpm-workspace.yaml. */
 export function findRepoRoot(start: string = process.cwd()): string {
-  let dir = resolve(start);
+  // Paths here are resolved at runtime (env overrides), so bundlers must not trace them.
+  let dir = resolve(/*turbopackIgnore: true*/ start);
   for (;;) {
     if (existsSync(join(dir, "pnpm-workspace.yaml"))) return dir;
     const parent = dirname(dir);
@@ -38,7 +39,7 @@ export function loadAppConfig(repoRoot: string = findRepoRoot()): AppConfig {
   const pick = (key: string, env: string): string => {
     const value = process.env[env] || raw[key];
     if (!value) throw new Error(`config/app.json is missing "${key}"`);
-    return isAbsolute(value) ? value : join(repoRoot, value);
+    return isAbsolute(value) ? value : join(/*turbopackIgnore: true*/ repoRoot, value);
   };
   return {
     repoRoot,

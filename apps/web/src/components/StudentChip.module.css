@@ -1,0 +1,63 @@
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  padding: 0.25rem 0.75rem 0.25rem 0.3rem;
+  border-radius: var(--radius-pill);
+  background: rgb(255 255 255 / 0.75);
+  border: 1px solid var(--line);
+  box-shadow: var(--highlight), var(--shadow-1);
+  color: var(--ink-1);
+  text-decoration: none;
+  transition:
+    background-color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+
+.chip:hover {
+  background: #fff;
+  box-shadow: var(--highlight), var(--shadow-2);
+}
+
+.text {
+  display: grid;
+  line-height: 1.2;
+}
+
+.name {
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.meta {
+  color: var(--ink-3);
+  font-size: var(--text-xs);
+}
+
+.switch {
+  margin-left: var(--space-1);
+  padding-left: var(--space-3);
+  border-left: 1px solid var(--line);
+  color: var(--blue-600);
+  font-size: var(--text-xs);
+  font-weight: 550;
+}
+
+@media (max-width: 480px) {
+  /* Hidden visually but kept for screen readers and voice control. */
+  .meta,
+  .switch {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .chip {
+    position: relative;
+    padding-right: 0.85rem;
+  }
+}

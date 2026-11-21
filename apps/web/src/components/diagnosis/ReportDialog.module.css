@@ -1,0 +1,99 @@
+.sample {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--amber-50);
+  border: 1px solid rgb(229 146 15 / 0.3);
+  font-size: var(--text-sm);
+}
+
+.sample svg {
+  flex: none;
+  margin-top: 0.15em;
+  color: var(--amber-700);
+}
+
+.exam + .exam {
+  margin-top: var(--space-8);
+}
+
+.examHead {
+  position: sticky;
+  top: calc(-1 * var(--space-5));
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-1) var(--space-3);
+  margin: 0 calc(-1 * var(--space-2)) var(--space-3);
+  padding: var(--space-2);
+  background: #f9fbfe;
+  border-bottom: 1px solid var(--line);
+}
+
+.examName {
+  font-size: var(--text-md);
+}
+
+.examMeta {
+  color: var(--ink-3);
+  font-size: var(--text-sm);
+}
+
+.items {
+  display: grid;
+  gap: var(--space-5);
+  padding: 0;
+}
+
+.item {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.itemHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.ref {
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+
+.label {
+  color: var(--ink-2);
+}
+
+.marks {
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Report text: set as a quoted source with a rule, in the reading face for legibility. */
+.text {
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--line-strong);
+  font-size: var(--text-md);
+  line-height: 1.6;
+  color: var(--ink-1);
+}
+
+.correct {
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--teal-300);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--ink-2);
+}
+
+.correctLabel {
+  color: var(--teal-700);
+  font-weight: 600;
+}

@@ -1,0 +1,72 @@
+.surface {
+  position: relative;
+  border-radius: var(--radius-lg);
+  background: var(--glass-1);
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.6);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(1.6);
+  border: 1px solid var(--line);
+  box-shadow: var(--highlight), var(--shadow-1);
+}
+
+/* Specular edge: a soft light along the top of every glass surface. */
+.surface::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.95), rgb(255 255 255 / 0.15) 40%, rgb(255 255 255 / 0) 70%);
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+.l1 {
+  background: var(--glass-1);
+  box-shadow: var(--highlight), var(--shadow-1);
+}
+
+.l2 {
+  background: var(--glass-2);
+  box-shadow: var(--highlight), var(--shadow-2);
+}
+
+.l3 {
+  background: var(--glass-2);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--highlight), var(--shadow-3);
+}
+
+.p-none {
+  padding: 0;
+}
+
+.p-sm {
+  padding: var(--space-4);
+}
+
+.p-md {
+  padding: clamp(var(--space-4), 3vw, var(--space-6));
+}
+
+.p-lg {
+  padding: clamp(var(--space-5), 4vw, var(--space-10));
+}
+
+.interactive {
+  transition:
+    transform var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out),
+    background-color var(--dur-2) var(--ease-out);
+}
+
+.interactive:hover {
+  transform: translateY(-2px);
+  background: var(--glass-3);
+  box-shadow: var(--highlight), var(--shadow-3);
+}
+
+.interactive:active {
+  transform: translateY(0) scale(0.995);
+}

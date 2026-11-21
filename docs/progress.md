@@ -51,3 +51,24 @@ Report: [phase-2-report.md](phase-2-report.md)
 - Re-check parameters on real reports in Phase P (ideally against teacher-labelled roots).
 - Provisional-graph gaps found: multiple-angle formulae → trig limits and inverse-trig simplification; chain rule ↔ composite exp/log derivatives.
 - UI should cap the list of roots for very noisy students and lead with the report's own words when the graph path is long.
+
+---
+
+## Phase 3: Web app and diagnosis view (2026-11-21) ✅
+
+Report: [phase-3-report.md](phase-3-report.md). Screenshots: [screenshots/phase-3/](screenshots/phase-3/).
+
+**Built**
+- `apps/web` (Next.js 16, React 19): student picker → "Add exam report" (paste/upload, live parse progress) → diagnosis (headline "Fix N things → explains X of Y errors → ~Z marks", expandable root cards with a "how one gap spreads" tree of the report's verbatim evidence, one-offs, habits, original-report sheet, comeback-plan placeholder, constellation slot).
+- Core: `ReportParser` interface with streamed stages (`@progresso/core/report-parser`), `DemoFixtureParser` (SAMPLE DATA, never reads pasted text and says so), `buildDiagnosisView()` view model.
+- Design system "light threads": tokens in `apps/web/src/styles/tokens.css`, glass `ui/` components, one motif (blue→teal thread = cause → effect).
+- Playwright e2e (desktop + phone) with axe WCAG 2.1 AA checks, keyboard-only and reduced-motion tests; `pnpm e2e`.
+
+**Decisions later phases rely on**
+- Phase P swaps `getReportParser()` and `getDiagnosis()` in `apps/web/src/server/data.ts`; nothing else in the web app touches fixtures.
+- Phase 4 fills `ConstellationSlot` (`[data-slot="constellation"]`); Phase 5 replaces `PlanDialog`; Phase 10 reuses `buildDiagnosisView`.
+- Client components import only types from `@progresso/core`; runtime constants use browser-safe subpaths.
+
+**Open items**
+- `docs/design-reference/` and `docs/report-format.md` referenced by the brief don't exist; design followed the written brief.
+- Report-added state is a cookie (no logins); move to DB in Phase P. Upload is text-only. No cap yet on very many roots. LLM re-wording not wired into the web app.

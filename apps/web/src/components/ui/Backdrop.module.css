@@ -1,0 +1,89 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 50% -10%, #ffffff 0%, rgb(255 255 255 / 0) 60%),
+    var(--bg);
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.75;
+  will-change: transform;
+}
+
+.a {
+  width: 56vmax;
+  height: 56vmax;
+  left: -18vmax;
+  top: -24vmax;
+  background: radial-gradient(circle at 40% 40%, rgb(120 160 255 / 0.55), rgb(120 160 255 / 0) 65%);
+  animation: drift-a 38s var(--ease-in-out) infinite alternate;
+}
+
+.b {
+  width: 48vmax;
+  height: 48vmax;
+  right: -16vmax;
+  top: -8vmax;
+  background: radial-gradient(circle at 50% 50%, rgb(60 214 190 / 0.42), rgb(60 214 190 / 0) 65%);
+  animation: drift-b 44s var(--ease-in-out) infinite alternate;
+}
+
+.c {
+  width: 60vmax;
+  height: 44vmax;
+  left: 18vmax;
+  bottom: -30vmax;
+  background: radial-gradient(circle at 50% 50%, rgb(196 181 253 / 0.32), rgb(196 181 253 / 0) 65%);
+  animation: drift-c 52s var(--ease-in-out) infinite alternate;
+}
+
+/* A faint measurement grid that fades out from the top: the "instrument" feel. */
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgb(10 26 47 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(10 26 47 / 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(90% 60% at 50% 0%, #000 0%, transparent 75%);
+}
+
+.horizon {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgb(61 110 247 / 0.35), rgb(22 179 160 / 0.35), transparent);
+}
+
+@keyframes drift-a {
+  to {
+    transform: translate3d(8vmax, 6vmax, 0) scale(1.08);
+  }
+}
+
+@keyframes drift-b {
+  to {
+    transform: translate3d(-10vmax, 8vmax, 0) scale(0.92);
+  }
+}
+
+@keyframes drift-c {
+  to {
+    transform: translate3d(-6vmax, -8vmax, 0) scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob {
+    animation: none;
+  }
+}

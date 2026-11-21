@@ -1,0 +1,263 @@
+.wrap {
+  display: grid;
+  grid-template-columns: minmax(10rem, 15rem) 1fr;
+  align-items: center;
+  gap: clamp(var(--space-6), 5vw, var(--space-12));
+}
+
+/* ---- scanner ---- */
+.scanner {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: var(--space-4);
+}
+
+.page {
+  position: relative;
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  padding: 1.4rem 1.2rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(180deg, #fff, #f6f9ff);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-3);
+  overflow: hidden;
+  transform: perspective(900px) rotateY(-10deg) rotateX(4deg);
+}
+
+.line {
+  height: 0.45rem;
+  width: var(--w);
+  border-radius: 4px;
+  background: rgb(10 26 47 / 0.08);
+  animation: line-lit var(--dur-4) var(--ease-out) both;
+  animation-delay: calc(var(--i) * 110ms);
+}
+
+.line:nth-child(4) {
+  margin-bottom: 0.6rem;
+}
+
+@keyframes line-lit {
+  from {
+    opacity: 0;
+    transform: scaleX(0.3);
+    transform-origin: left;
+  }
+}
+
+.wrap[data-complete] .line {
+  background: linear-gradient(90deg, rgb(61 110 247 / 0.28), rgb(22 179 160 / 0.28));
+}
+
+/* The light that sweeps down the page while reading. */
+.sweep {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 0;
+  height: 30%;
+  background: linear-gradient(180deg, rgb(61 110 247 / 0), rgb(61 110 247 / 0.14) 70%, rgb(22 179 160 / 0.55) 98%, rgb(22 179 160 / 0));
+  border-bottom: 2px solid rgb(22 179 160 / 0.9);
+  box-shadow: 0 6px 18px rgb(22 179 160 / 0.45);
+  animation: sweep 1.8s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes sweep {
+  from {
+    transform: translateY(-80%);
+  }
+  to {
+    transform: translateY(300%);
+  }
+}
+
+.orb {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  color: #fff;
+  background:
+    radial-gradient(circle at 32% 28%, rgb(255 255 255 / 0.8), rgb(255 255 255 / 0) 45%),
+    linear-gradient(140deg, var(--blue-500), var(--teal-500));
+  box-shadow: 0 12px 30px -6px rgb(36 83 224 / 0.55);
+}
+
+.orbCore {
+  width: 30%;
+  height: 30%;
+  border-radius: 50%;
+  background: #fff;
+  animation: breathe 1.6s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes breathe {
+  to {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+}
+
+.wrap[data-failed] .orb {
+  background: linear-gradient(140deg, #e8a03a, #d9692b);
+}
+
+/* ---- stages ---- */
+.side {
+  display: grid;
+  gap: var(--space-5);
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--text-2xl);
+}
+
+.bar {
+  height: 4px;
+  border-radius: 4px;
+  background: rgb(10 26 47 / 0.08);
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  height: 100%;
+  background: var(--thread);
+  transform-origin: left;
+  transition: transform var(--dur-3) var(--ease-out);
+}
+
+.stages {
+  display: grid;
+  gap: 0;
+  padding: 0;
+}
+
+.stage {
+  --node: 1.375rem;
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--node) 1fr;
+  gap: var(--space-3);
+  padding-bottom: var(--space-4);
+}
+
+/* The thread between stage nodes. */
+.stage:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--node) / 2 - 1px);
+  top: var(--node);
+  bottom: 0;
+  width: 2px;
+  background: rgb(10 26 47 / 0.1);
+}
+
+.stage[data-status="done"]:not(:last-child)::before {
+  background: var(--thread-vertical);
+}
+
+.node {
+  display: grid;
+  place-items: center;
+  width: var(--node);
+  height: var(--node);
+  border-radius: 50%;
+  border: 2px solid rgb(10 26 47 / 0.18);
+  background: #fff;
+  color: #fff;
+  transition:
+    background var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out);
+}
+
+.stage[data-status="active"] .node {
+  border-color: var(--blue-500);
+  box-shadow: 0 0 0 5px rgb(61 110 247 / 0.16);
+  animation: ring 1.4s var(--ease-out) infinite;
+}
+
+@keyframes ring {
+  50% {
+    box-shadow: 0 0 0 8px rgb(61 110 247 / 0.06);
+  }
+}
+
+.stage[data-status="done"] .node {
+  border: 0;
+  background: var(--thread);
+}
+
+.stage[data-status="failed"] .node {
+  border: 0;
+  background: var(--danger-700);
+}
+
+.text {
+  display: grid;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.label {
+  color: var(--ink-3);
+  font-weight: 500;
+  line-height: var(--node);
+  transition: color var(--dur-2) var(--ease-out);
+}
+
+.stage[data-status="active"] .label,
+.stage[data-status="done"] .label {
+  color: var(--ink-1);
+}
+
+.message {
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  animation: enter var(--dur-3) var(--ease-out) both;
+}
+
+@media (max-width: 640px) {
+  .wrap {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+
+  .scanner {
+    width: 9rem;
+    justify-self: center;
+    padding: var(--space-2);
+  }
+
+  .orb {
+    width: 3rem;
+    height: 3rem;
+    right: -0.5rem;
+    bottom: -0.25rem;
+  }
+
+  .title {
+    text-align: center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sweep {
+    display: none;
+  }
+
+  .page {
+    transform: none;
+  }
+}

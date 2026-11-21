@@ -6,3 +6,5 @@ export * from "./error-record/schema";
 export * from "./error-record/check-against-graph";
 export * from "./student";
 export * from "./root-cause";
+export * from "./report-parser";
+export * from "./diagnosis-view";

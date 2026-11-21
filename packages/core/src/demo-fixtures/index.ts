@@ -149,3 +149,5 @@ export const ExpectedRootsSchema = z
   })
   .strict();
 export type ExpectedRoots = z.infer<typeof ExpectedRootsSchema>;
+
+export { DemoFixtureParser, type DemoParserOptions } from "./demo-parser";

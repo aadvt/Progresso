@@ -11,4 +11,6 @@ pnpm install
 cp .env.example .env   # set GEMINI_API_KEY
 pnpm verify            # typecheck, lint, tests, graph validation
 pnpm db:seed           # load the demo students (sample data)
+pnpm web:dev           # the web app at http://localhost:3100
+pnpm e2e               # production build + end-to-end tests with screenshots
 ```

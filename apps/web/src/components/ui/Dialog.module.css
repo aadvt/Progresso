@@ -1,0 +1,174 @@
+.dialog {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+  color: inherit;
+  overflow: visible;
+}
+
+.dialog::backdrop {
+  background: rgb(10 26 47 / 0.28);
+  backdrop-filter: blur(6px) saturate(1.2);
+  -webkit-backdrop-filter: blur(6px) saturate(1.2);
+  animation: fade var(--dur-3) var(--ease-out);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  /* Solid: long reading surfaces must not let the page bleed through. */
+  background: #f9fbfe;
+  border: 1px solid var(--glass-edge);
+  box-shadow: var(--highlight), var(--shadow-3);
+  overflow: hidden;
+}
+
+/* ---- side sheet ---- */
+.side {
+  margin: 0 0 0 auto;
+  height: 100dvh;
+  width: min(40rem, 100vw);
+}
+
+.side .panel {
+  height: calc(100dvh - 2 * var(--space-3));
+  margin: var(--space-3);
+  border-radius: var(--radius-lg);
+  animation: slide-in var(--dur-3) var(--ease-out);
+}
+
+/* ---- centred ---- */
+.center {
+  margin: auto;
+  width: min(30rem, calc(100vw - 2 * var(--gutter)));
+}
+
+.center .panel {
+  border-radius: var(--radius-xl);
+  animation: pop var(--dur-3) var(--ease-spring);
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-6) var(--space-6) var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.headings {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.title {
+  font-size: var(--text-xl);
+}
+
+.subtitle {
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+
+.close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: -0.25rem -0.5rem 0 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(10 26 47 / 0.05);
+  color: var(--ink-2);
+  transition: background-color var(--dur-1) var(--ease-out);
+}
+
+.close:hover {
+  background: rgb(10 26 47 / 0.1);
+  color: var(--ink-1);
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: var(--space-5) var(--space-6) var(--space-8);
+}
+
+.center .body {
+  padding-bottom: var(--space-6);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-6);
+  border-top: 1px solid var(--line);
+  background: rgb(255 255 255 / 0.6);
+}
+
+@media (max-width: 640px) {
+  .side {
+    margin: auto 0 0;
+    width: 100vw;
+    height: auto;
+  }
+
+  .side .panel {
+    height: auto;
+    max-height: 92dvh;
+    margin: 0;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    animation-name: slide-up;
+  }
+
+  .header {
+    padding: var(--space-5) var(--space-5) var(--space-3);
+  }
+
+  .body {
+    padding: var(--space-4) var(--space-5) var(--space-6);
+  }
+
+  .footer {
+    padding: var(--space-3) var(--space-5) calc(var(--space-3) + env(safe-area-inset-bottom));
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(40px);
+    opacity: 0;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(8px);
+  }
+}
+
+.body:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--blue-600);
+}
