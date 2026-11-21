@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-11-21T17:28:40.260Z",
+  "prompt_version": "prove-it-1",
+  "generator": "gemini-3.6-flash",
+  "solver": [
+    "gemini-3.6-flash",
+    "gemini-3.6-flash (option-by-option method)"
+  ],
+  "totals": {
+    "targets": 2,
+    "misconceptions": 2,
+    "subjects": [
+      "Chemistry"
+    ],
+    "generated": 6,
+    "verified": 6,
+    "rejected": 0
+  },
+  "targets": [
+    {
+      "concept_id": "chem.amine_basicity",
+      "misconception_id": "chem.amine_basicity.m1",
+      "subject": "Chemistry",
+      "for": [
+        "apply for demo-kabir"
+      ],
+      "generated": 3,
+      "verified": 3,
+      "rejected": []
+    },
+    {
+      "concept_id": "chem.directive_influence",
+      "misconception_id": "chem.resonance_effect.m1",
+      "subject": "Chemistry",
+      "for": [
+        "apply for demo-kabir"
+      ],
+      "generated": 3,
+      "verified": 3,
+      "rejected": []
+    }
+  ]
+}

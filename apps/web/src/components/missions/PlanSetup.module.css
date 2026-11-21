@@ -1,0 +1,133 @@
+.wrap {
+  padding-block: var(--space-8) var(--space-16);
+  display: grid;
+  justify-items: center;
+}
+
+.card {
+  width: min(100%, 44rem);
+  display: grid;
+  gap: var(--space-4);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--blue-700);
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.title {
+  font-size: var(--text-3xl);
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
+}
+
+.lede {
+  color: var(--ink-2);
+}
+
+.form {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-2);
+}
+
+.fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.legend {
+  font-weight: 650;
+  margin-bottom: var(--space-3);
+  padding: 0;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--space-3);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+
+.field input {
+  min-height: 2.75rem;
+  padding: 0 var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line-strong);
+  background: rgb(255 255 255 / 0.85);
+  color: var(--ink-1);
+  font-size: var(--text-md);
+}
+
+.field input:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.option {
+  position: relative;
+  display: grid;
+  gap: var(--space-1);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--line-strong);
+  background: rgb(255 255 255 / 0.7);
+  cursor: pointer;
+  transition:
+    border-color var(--dur-1) var(--ease-out),
+    background-color var(--dur-1) var(--ease-out);
+}
+
+.option input {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  accent-color: var(--blue-600);
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.option:has(input:checked) {
+  border-color: var(--blue-600);
+  background: var(--blue-50);
+}
+
+.option:has(input:focus-visible) {
+  box-shadow: var(--focus-ring);
+}
+
+.optionLabel {
+  font-weight: 650;
+  padding-right: var(--space-6);
+}
+
+.optionHint {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+@media (max-width: 40rem) {
+  .row,
+  .options {
+    grid-template-columns: 1fr;
+  }
+}

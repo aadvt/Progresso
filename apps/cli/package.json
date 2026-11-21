@@ -5,10 +5,14 @@
   "type": "module",
   "scripts": {
     "typecheck": "tsc -p tsconfig.json",
-    "analyse": "tsx src/analyse.ts"
+    "analyse": "tsx src/analyse.ts",
+    "questions:generate": "tsx src/questions/generate.ts",
+    "simulate": "tsx src/simulate.ts"
   },
   "dependencies": {
     "@progresso/core": "workspace:*",
-    "@progresso/llm": "workspace:*"
+    "@progresso/db": "workspace:*",
+    "@progresso/llm": "workspace:*",
+    "zod": "^4.6.7"
   }
 }

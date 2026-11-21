@@ -96,3 +96,33 @@ Report: [phase-4-report.md](phase-4-report.md). Screenshots and frame-rate JSON:
 
 **Open items**
 - Verify on a physical mid-range Android phone. Unit labels may need a zoom threshold on the full graph. If the ripple gets heavy on the full graph, move per-star blending into the shader.
+
+---
+
+## Phase 5: Missions, prove-it questions, mastery, readiness (2026-11-21) ✅ (structure; question data to follow)
+
+Report: [phase-5-report.md](phase-5-report.md). Simulation: [phase-5-simulation.md](phase-5-simulation.md). Screenshots: [screenshots/phase-5/](screenshots/phase-5/).
+
+**Built**
+- Core `src/missions/`:
+  - `buildPlan()`: a pure, deterministic day-by-day plan of 25-minute missions back from the exam date. Roots go by marks per hour, deepest root first; learn the root, then apply it per symptom topic; one-offs after the roots; FSRS reviews interleaved; buffer days before the exam.
+  - The plan re-flows by recomputation from progress (skips, early mastery, retries, then needs-help and parking; untestable topics are "studied, not proven").
+  - Also: the mastery gate with FSRS (ts-fsrs, max interval 14 days) and `computeReadiness()` (always a range, labelled Estimate, with a weightage fallback).
+- Core `src/questions/`: the prove-it schema (every wrong option carries a `misconception_id`), server-side grading, selection and the bank loader.
+- CLI `questions:generate`: LLM generation, then a SymPy check (`tools/cas/check.py`), then an independent LLM solve. Saves per target; `--missing` tops up. CLI `simulate` runs N days of missions on a throwaway DB.
+- DB: plan settings, per-slot missions, question attempts, FSRS cards. `startMission` / `answerQuestion` / `finishMission` write `concept_mastery`, so the map's ripple fires.
+- Web: Today (mission, progress, readiness meter, demo clock), mission player (recap → explainer → prove it → result, KaTeX, misconception-specific feedback), Plan timeline, and student tabs.
+
+**Results**
+- 162 unit tests. 33 e2e tests pass on desktop and phone (full mission with a fail → re-flow → retry → proven → ripple; no-questions path; habits-only); axe clean.
+- The 14-day simulation shows the gate refusing a repeated report mistake, the ripple on day 2, a skipped day absorbed, an FSRS review, and readiness 93.0 → 97.0 mid.
+- Question bank: **9 verified of 10 generated over 3 misconceptions** (maths and chemistry), all checked by hand. The ≥10-misconception target is deferred: Gemini outage, memory, then free-tier quota. Data to be added with `pnpm questions:generate --missing`.
+
+**Decisions later phases rely on**
+- Store progress, never plans. `nextMission(buildPlan(...))` is the answer to "what tonight?" (Phase 10).
+- Phase 6 fills the recap and explainer `content` (placeholders now); the structure and timings are fixed.
+- The bank is data in `data/question-bank/`; every screen copes with none.
+
+**Open items**
+- Fill the bank (34 targets), ideally with a second model for the chemistry second opinion (it currently uses the same model with a different method).
+- Re-tune readiness on real reports (absolute levels are high on sparse fixtures).

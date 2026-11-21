@@ -9,3 +9,5 @@ export * from "./root-cause";
 export * from "./report-parser";
 export * from "./diagnosis-view";
 export * from "./constellation";
+export * from "./missions";
+export * from "./questions";

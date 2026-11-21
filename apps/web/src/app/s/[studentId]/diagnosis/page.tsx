@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { Diagnosis } from "@/components/diagnosis/Diagnosis";
-import { StudentChip } from "@/components/StudentChip";
-import { SampleDataBadge } from "@/components/ui/Badge";
-import { TopBar } from "@/components/ui/TopBar";
-import { getConstellation, getDiagnosis, getStudent, listStudents } from "@/server/data";
+import { StudentChrome } from "@/components/missions/StudentChrome";
+import { getConstellation, getDiagnosis, getStudent } from "@/server/data";
 import { hasReport } from "@/server/report-state";
 
 export const dynamic = "force-dynamic";
@@ -18,14 +16,10 @@ export default async function DiagnosisPage({ params }: { params: Promise<{ stud
   const view = getDiagnosis(studentId);
   const constellation = getConstellation(studentId);
   if (!view || !constellation) notFound();
-  const seed = listStudents().findIndex((s) => s.id === studentId);
 
   return (
     <>
-      <TopBar>
-        {student.is_sample && <SampleDataBadge notice={student.sample_notice} />}
-        <StudentChip student={student} seed={seed} />
-      </TopBar>
+      <StudentChrome student={student} current="diagnosis" />
       <main id="main">
         <Diagnosis student={student} view={view} constellation={constellation} />
       </main>

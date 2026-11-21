@@ -4,3 +4,4 @@ export * from "./graph-sync";
 export * from "./seed";
 export * from "./summary";
 export * from "./mastery";
+export * from "./missions";

@@ -7,6 +7,14 @@ function parts(iso: string): { y: number; m: number; d: number } {
   return { y: y ?? 1970, m: (m ?? 1) - 1, d: d ?? 1 };
 }
 
+const WEEKDAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+/** "Sat 21 Nov" */
+export function formatDay(iso: string): string {
+  const { y, m, d } = parts(iso);
+  return `${WEEKDAYS[new Date(Date.UTC(y, m, d)).getUTCDay()]} ${d} ${MONTHS[m]}`;
+}
+
 /** "10 Nov 2026" */
 export function formatDate(iso: string): string {
   const { y, m, d } = parts(iso);

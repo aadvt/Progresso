@@ -10,6 +10,8 @@ export interface AppConfig {
   fixturesDir: string;
   llmCacheDir: string;
   llmUsageLog: string;
+  /** Verified prove-it questions, one JSON file per misconception. */
+  questionBankDir: string;
 }
 
 /** Walk up from `start` to the directory containing pnpm-workspace.yaml. */
@@ -36,8 +38,8 @@ export function loadDotEnv(repoRoot: string = findRepoRoot()): void {
  */
 export function loadAppConfig(repoRoot: string = findRepoRoot()): AppConfig {
   const raw = JSON.parse(readFileSync(join(repoRoot, "config", "app.json"), "utf8")) as Record<string, string>;
-  const pick = (key: string, env: string): string => {
-    const value = process.env[env] || raw[key];
+  const pick = (key: string, env: string, fallback?: string): string => {
+    const value = process.env[env] || raw[key] || fallback;
     if (!value) throw new Error(`config/app.json is missing "${key}"`);
     return isAbsolute(value) ? value : join(/*turbopackIgnore: true*/ repoRoot, value);
   };
@@ -48,5 +50,6 @@ export function loadAppConfig(repoRoot: string = findRepoRoot()): AppConfig {
     fixturesDir: pick("fixturesDir", "FIXTURES_DIR"),
     llmCacheDir: pick("llmCacheDir", "LLM_CACHE_DIR"),
     llmUsageLog: pick("llmUsageLog", "LLM_USAGE_LOG"),
+    questionBankDir: pick("questionBankDir", "QUESTION_BANK_DIR", "data/question-bank"),
   };
 }

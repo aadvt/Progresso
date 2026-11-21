@@ -14,7 +14,13 @@ import {
   findRepoRoot,
   loadAppConfig,
   loadConceptGraph,
+  loadQuestionBank,
+  localDay,
+  addDays,
   type ConceptGraph,
+  type ErrorRecord,
+  type IsoDay,
+  type LoadedBank,
   type ConstellationLayout,
   type ConstellationModel,
   type DiagnosisView,
@@ -22,7 +28,15 @@ import {
   type ReportParser,
 } from "@progresso/core";
 import { DemoFixtureParser, loadDemoFixtures, SAMPLE_DATA_NOTICE, type DemoStudent } from "@progresso/core/demo-fixtures";
-import { clearConceptMastery, getConceptMastery, isSampleStudent, setConceptMastery, type Db } from "@progresso/db";
+import {
+  clearConceptMastery,
+  getConceptMastery,
+  getPlanSettings,
+  isSampleStudent,
+  setConceptMastery,
+  type Db,
+  type StudentContext,
+} from "@progresso/db";
 import type { StudentSummary } from "@/lib/types";
 import { daysUntil } from "@/lib/format";
 import { getDb } from "./db";
@@ -32,6 +46,7 @@ interface Loaded {
   demo: DemoStudent[];
   repoRoot: string;
   databasePath: string;
+  bank: LoadedBank;
 }
 
 let loaded: Loaded | undefined;
@@ -40,7 +55,14 @@ function load(): Loaded {
   if (!loaded) {
     const config = loadAppConfig(findRepoRoot());
     const { graph } = loadConceptGraph(config.conceptGraphDir);
-    loaded = { graph, demo: loadDemoFixtures(config.fixturesDir), repoRoot: config.repoRoot, databasePath: config.databasePath };
+    loaded = {
+      graph,
+      demo: loadDemoFixtures(config.fixturesDir),
+      repoRoot: config.repoRoot,
+      databasePath: config.databasePath,
+      // Verified prove-it questions, generated offline (pnpm questions:generate); never generated at runtime.
+      bank: loadQuestionBank(config.questionBankDir, graph),
+    };
   }
   return loaded;
 }
@@ -87,7 +109,7 @@ export function getReportParser(): ReportParser {
   return new DemoFixtureParser(load().demo, { stageDelayMs: Number.isFinite(delay) ? delay : 550 });
 }
 
-function db(): Db {
+export function db(): Db {
   const l = load();
   return getDb({ repoRoot: l.repoRoot, databasePath: l.databasePath, graph: l.graph, demo: l.demo });
 }
@@ -159,4 +181,30 @@ export function demoResetMastery(studentId: string): boolean {
   if (!analysed(studentId) || !isSampleStudent(d, studentId)) return false;
   clearConceptMastery(d, studentId);
   return true;
+}
+
+// ---------------------------------------------------------------- missions (Phase 5)
+
+/** Everything the mission service needs about one student. Phase P: records from the database. */
+export function studentContext(studentId: string): (StudentContext & { records: ErrorRecord[]; next_exam?: { name: string; date: string } }) | undefined {
+  const a = analysed(studentId);
+  if (!a) return undefined;
+  return {
+    student_id: studentId,
+    graph: getGraph(),
+    analysis: a.analysis,
+    records: a.s.records,
+    bank: load().bank,
+    ...(a.s.student.next_exam ? { next_exam: a.s.student.next_exam } : {}),
+  };
+}
+
+/** The student's "today". SAMPLE DATA students can move their clock forward to demo the plan re-flowing. */
+export function studentToday(studentId: string, now = new Date()): IsoDay {
+  const offset = getPlanSettings(db(), studentId)?.demo_day_offset ?? 0;
+  return addDays(localDay(now), offset);
+}
+
+export function isSample(studentId: string): boolean {
+  return isSampleStudent(db(), studentId);
 }

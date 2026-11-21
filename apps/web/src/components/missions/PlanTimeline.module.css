@@ -1,0 +1,263 @@
+.layout {
+  display: grid;
+  gap: var(--space-8);
+  padding-block: var(--space-6) var(--space-16);
+  max-width: 56rem;
+}
+
+.hero {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.title {
+  font-size: var(--text-3xl);
+  letter-spacing: var(--tracking-display);
+  line-height: var(--leading-tight);
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.summary dt {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.summary dd {
+  margin: 0;
+  font-weight: 650;
+}
+
+.how {
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+  max-width: 70ch;
+}
+
+.warning {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--amber-50);
+  color: var(--amber-700);
+  font-size: var(--text-sm);
+}
+
+.weeks {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.weekTitle {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-3);
+}
+
+.weekTitle span {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--ink-3);
+}
+
+.days {
+  position: relative;
+  display: grid;
+  gap: var(--space-2);
+}
+
+/* The thread through the plan. */
+.days::before {
+  content: "";
+  position: absolute;
+  left: 0.45rem;
+  top: 0.75rem;
+  bottom: 0.75rem;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--thread-vertical);
+  opacity: 0.35;
+}
+
+.day {
+  position: relative;
+  display: grid;
+  grid-template-columns: 9rem minmax(0, 1fr);
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  background: var(--glass-1);
+  border: 1px solid var(--line);
+}
+
+.day::before {
+  content: "";
+  position: absolute;
+  left: 0.2rem;
+  top: 1.05rem;
+  width: 0.6rem;
+  height: 0.6rem;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--blue-500);
+}
+
+.past {
+  background: transparent;
+}
+
+.past::before {
+  background: var(--teal-500);
+  border-color: var(--teal-500);
+}
+
+.today {
+  background: var(--glass-3);
+  border-color: rgb(61 110 247 / 0.35);
+  box-shadow: var(--shadow-glow);
+}
+
+.today::before {
+  background: var(--blue-600);
+  box-shadow: 0 0 0 4px rgb(61 110 247 / 0.2);
+}
+
+.buffer {
+  background: var(--amber-50);
+}
+
+.buffer::before {
+  border-color: var(--amber-500);
+}
+
+.examLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 650;
+  color: var(--ink-1);
+}
+
+.day.exam {
+  background: var(--glass-2);
+}
+
+.day.exam::before {
+  background: var(--ink-1);
+  border-color: var(--ink-1);
+}
+
+.date {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.dateText {
+  font-weight: 600;
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+}
+
+.dayBody {
+  min-width: 0;
+}
+
+.missions {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.mission {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.mission > svg {
+  color: var(--blue-600);
+}
+
+.mission.apply > svg {
+  color: var(--teal-700);
+}
+
+.mission.review > svg {
+  color: var(--ink-3);
+}
+
+.mission.rehearsal > svg {
+  color: var(--amber-700);
+}
+
+.missionTitle {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.missionMeta {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.done .missionTitle {
+  color: var(--ink-2);
+}
+
+.done > svg {
+  color: var(--teal-700);
+}
+
+.skipped .missionTitle {
+  text-decoration: line-through;
+  color: var(--ink-3);
+}
+
+.missed {
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+  font-style: italic;
+}
+
+.left {
+  display: grid;
+}
+
+.leftList {
+  display: grid;
+  gap: var(--space-1);
+  font-size: var(--text-sm);
+}
+
+.leftList span {
+  color: var(--ink-3);
+}
+
+@media (max-width: 40rem) {
+  .day {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+}

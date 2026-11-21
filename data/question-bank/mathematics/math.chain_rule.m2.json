@@ -1,0 +1,235 @@
+{
+  "misconception_id": "math.chain_rule.m2",
+  "concept_id": "math.chain_rule",
+  "subject": "Mathematics",
+  "questions": [
+    {
+      "schema_version": "1.0",
+      "id": "math.chain_rule.m2.chain_rule.1",
+      "subject": "Mathematics",
+      "concept_id": "math.chain_rule",
+      "target_misconception_id": "math.chain_rule.m2",
+      "kind": "mcq",
+      "stem": "Find $\\frac{d}{dx}\\left(\\cos(x^3)\\right)$.",
+      "options": [
+        {
+          "id": "a",
+          "text": "$-\\sin(x^3)$",
+          "correct": false,
+          "misconception_id": "math.chain_rule.m1",
+          "how_it_arises": "Differentiated the outer cosine function to $-\\sin(x^3)$ but forgot to multiply by the derivative of the inner function $x^3$.",
+          "feedback": "You differentiated the outer cosine function correctly, but forgot to multiply by the derivative of $x^3$. Multiplying by $3x^2$ gives $-3x^2 \\sin(x^3)$."
+        },
+        {
+          "id": "b",
+          "text": "$-3x^2 \\sin(x^3)$",
+          "correct": true,
+          "feedback": "Correct! Applying the chain rule gives $\\frac{d}{du}[\\cos(u)] \\cdot \\frac{d}{dx}[x^3] = -\\sin(x^3) \\cdot 3x^2 = -3x^2 \\sin(x^3)$."
+        },
+        {
+          "id": "c",
+          "text": "$3x^2 \\cos(x^3)$",
+          "correct": false,
+          "misconception_id": "math.chain_rule.m2",
+          "how_it_arises": "Differentiated the inner function $x^3$ to $3x^2$, but left the outer cosine function undifferentiated.",
+          "feedback": "You differentiated the inner term $x^3$ to get $3x^2$, but kept the outer cosine function unchanged. Make sure to also differentiate $\\cos(u)$ to $-\\sin(u)$, giving $-3x^2 \\sin(x^3)$."
+        },
+        {
+          "id": "d",
+          "text": "$3x^2 \\sin(x^3)$",
+          "correct": false,
+          "misconception_id": "math.derivative_basics.m1",
+          "how_it_arises": "Differentiated $\\cos(u)$ as $\\sin(u)$ instead of $-\\sin(u)$, dropping the minus sign.",
+          "feedback": "You set up the chain rule properly, but dropped the minus sign when differentiating cosine. Remember that $\\frac{d}{dx}[\\cos(x)] = -\\sin(x)$, so the result is $-3x^2 \\sin(x^3)$."
+        }
+      ],
+      "solution": "Let $y = \\cos(x^3)$ and $u = x^3$. Then $y = \\cos(u)$. By the chain rule, $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx} = -\\sin(u) \\cdot (3x^2) = -3x^2 \\sin(x^3)$.",
+      "difficulty": 1,
+      "verification": {
+        "status": "verified",
+        "checks": [
+          {
+            "method": "cas_sympy",
+            "passed": true,
+            "detail": "SymPy computed -3*x**2*sin(x**3); key matches; distractors distinct: [true,true,true]"
+          },
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "solver chose b (key b); exactly one correct: true; issues: none"
+          }
+        ],
+        "verified_at": "2026-11-21T13:46:35.123Z"
+      },
+      "provenance": {
+        "generator": {
+          "provider": "gemini",
+          "model": "gemini-3.6-flash"
+        },
+        "generated_at": "2026-11-21T13:42:09.759Z",
+        "prompt_version": "prove-it-1",
+        "distractors_from": {
+          "misconceptions": [
+            "math.chain_rule.m2",
+            "math.chain_rule.m1",
+            "math.derivative_basics.m1"
+          ],
+          "report_mistakes": 7
+        }
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "id": "math.chain_rule.m2.chain_rule.2",
+      "subject": "Mathematics",
+      "concept_id": "math.chain_rule",
+      "target_misconception_id": "math.chain_rule.m2",
+      "kind": "mcq",
+      "stem": "Find $\\frac{dy}{dx}$ for $y = \\tan(3x^2)$.",
+      "options": [
+        {
+          "id": "a",
+          "text": "$6x \\tan(3x^2)$",
+          "correct": false,
+          "misconception_id": "math.chain_rule.m2",
+          "how_it_arises": "Differentiated the inner function $3x^2$ to $6x$, but left the outer function $\\tan(\\cdot)$ undifferentiated.",
+          "feedback": "You calculated the derivative of the inner term $3x^2$ as $6x$, but left the outer $\\tan(\\cdot)$ untouched. Differentiate $\\tan(u)$ to $\\sec^2(u)$ to get $6x \\sec^2(3x^2)$."
+        },
+        {
+          "id": "b",
+          "text": "$\\sec^2(3x^2)$",
+          "correct": false,
+          "misconception_id": "math.chain_rule.m1",
+          "how_it_arises": "Differentiated the outer tangent function to $\\sec^2(3x^2)$ but forgot to multiply by the derivative of $3x^2$.",
+          "feedback": "You differentiated the tangent function correctly, but forgot to multiply by the derivative of the inner function $3x^2$. Multiply by $6x$ to get $6x \\sec^2(3x^2)$."
+        },
+        {
+          "id": "c",
+          "text": "$6x \\sec^2(3x^2)$",
+          "correct": true,
+          "feedback": "Correct! Differentiating the outer function gives $\\sec^2(3x^2)$ and multiplying by the inner derivative $6x$ yields $6x \\sec^2(3x^2)$."
+        },
+        {
+          "id": "d",
+          "text": "$6x \\tan(x)$",
+          "correct": false,
+          "misconception_id": "math.composite_functions.m2",
+          "how_it_arises": "Treated $\\tan(3x^2)$ as a product $\\tan(x) \\cdot 3x^2$ and differentiated $3x^2$ to $6x$.",
+          "feedback": "You treated $\\tan(3x^2)$ as a multiplication of two separate terms instead of a composite function. Use the chain rule on the inner argument $3x^2$ to get $6x \\sec^2(3x^2)$."
+        }
+      ],
+      "solution": "Let $y = \\tan(3x^2)$ and $u = 3x^2$. Then $y = \\tan(u)$. By the chain rule, $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx} = \\sec^2(u) \\cdot (6x) = 6x \\sec^2(3x^2)$.",
+      "difficulty": 2,
+      "verification": {
+        "status": "verified",
+        "checks": [
+          {
+            "method": "cas_sympy",
+            "passed": true,
+            "detail": "SymPy computed 6*x*(tan(3*x**2)**2 + 1); key matches; distractors distinct: [true,true,true]"
+          },
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "solver chose c (key c); exactly one correct: true; issues: none"
+          }
+        ],
+        "verified_at": "2026-11-21T13:46:35.126Z"
+      },
+      "provenance": {
+        "generator": {
+          "provider": "gemini",
+          "model": "gemini-3.6-flash"
+        },
+        "generated_at": "2026-11-21T13:42:09.760Z",
+        "prompt_version": "prove-it-1",
+        "distractors_from": {
+          "misconceptions": [
+            "math.chain_rule.m2",
+            "math.chain_rule.m1",
+            "math.composite_functions.m2"
+          ],
+          "report_mistakes": 7
+        }
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "id": "math.chain_rule.m2.chain_rule.3",
+      "subject": "Mathematics",
+      "concept_id": "math.chain_rule",
+      "target_misconception_id": "math.chain_rule.m2",
+      "kind": "mcq",
+      "stem": "Find $\\frac{dy}{dx}$ for $y = e^{\\cos(3x)}$.",
+      "options": [
+        {
+          "id": "a",
+          "text": "$-\\sin(3x) e^{\\cos(3x)}$",
+          "correct": false,
+          "misconception_id": "math.chain_rule.m3",
+          "how_it_arises": "Differentiated $e^u$ and $\\cos(v)$, but stopped one layer early and forgot to multiply by the derivative of $3x$.",
+          "feedback": "You differentiated the exponential and cosine layers correctly, but stopped one layer early. Don't forget to multiply by the derivative of the innermost term $3x$, which is $3$."
+        },
+        {
+          "id": "b",
+          "text": "$3\\sin(3x) e^{\\cos(3x)}$",
+          "correct": false,
+          "misconception_id": "math.derivative_basics.m1",
+          "how_it_arises": "Differentiated $\\cos(3x)$ as $\\sin(3x)$, forgetting the negative sign.",
+          "feedback": "You differentiated all three layers using the chain rule, but forgot the negative sign when taking the derivative of cosine. Since $\\frac{d}{dx}[\\cos(x)] = -\\sin(x)$, the answer is $-3\\sin(3x) e^{\\cos(3x)}$."
+        },
+        {
+          "id": "c",
+          "text": "$3 e^{\\cos(3x)}$",
+          "correct": false,
+          "misconception_id": "math.chain_rule.m2",
+          "how_it_arises": "Differentiated the innermost function $3x$ to $3$, but left the outer function $e^{\\cos(3x)}$ undifferentiated.",
+          "feedback": "You differentiated the innermost term $3x$ to $3$, but left $e^{\\cos(3x)}$ undifferentiated. Differentiate the middle cosine layer as well to introduce the factor $-\\sin(3x)$."
+        },
+        {
+          "id": "d",
+          "text": "$-3\\sin(3x) e^{\\cos(3x)}$",
+          "correct": true,
+          "feedback": "Correct! Working through each layer gives $e^{\\cos(3x)} \\cdot (-\\sin(3x)) \\cdot 3 = -3\\sin(3x) e^{\\cos(3x)}$."
+        }
+      ],
+      "solution": "Applying the chain rule across all three layers: $\\frac{dy}{dx} = \\frac{d}{du}[e^u] \\cdot \\frac{d}{dv}[\\cos(v)] \\cdot \\frac{d}{dx}[3x]$ where $u = \\cos(3x)$ and $v = 3x$. This gives $e^{\\cos(3x)} \\cdot (-\\sin(3x)) \\cdot 3 = -3\\sin(3x) e^{\\cos(3x)}$.",
+      "difficulty": 3,
+      "verification": {
+        "status": "verified",
+        "checks": [
+          {
+            "method": "cas_sympy",
+            "passed": true,
+            "detail": "SymPy computed -3*exp(cos(3*x))*sin(3*x); key matches; distractors distinct: [true,true,true]"
+          },
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "solver chose d (key d); exactly one correct: true; issues: none"
+          }
+        ],
+        "verified_at": "2026-11-21T13:46:35.126Z"
+      },
+      "provenance": {
+        "generator": {
+          "provider": "gemini",
+          "model": "gemini-3.6-flash"
+        },
+        "generated_at": "2026-11-21T13:42:09.760Z",
+        "prompt_version": "prove-it-1",
+        "distractors_from": {
+          "misconceptions": [
+            "math.chain_rule.m2",
+            "math.chain_rule.m3",
+            "math.derivative_basics.m1"
+          ],
+          "report_mistakes": 7
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+  "misconception_id": "chem.resonance_effect.m1",
+  "concept_id": "chem.resonance_effect",
+  "subject": "Chemistry",
+  "questions": [
+    {
+      "schema_version": "1.0",
+      "id": "chem.resonance_effect.m1.directive_influence.1",
+      "subject": "Chemistry",
+      "concept_id": "chem.directive_influence",
+      "target_misconception_id": "chem.resonance_effect.m1",
+      "kind": "mcq",
+      "stem": "Which statement best explains the directive influence and activating nature of the $-\\mathrm{OCH_3}$ group in anisole ($\\mathrm{C_6H_5OCH_3}$) towards electrophilic aromatic substitution?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It is ortho/para-directing but deactivating because all ortho/para-directing substituents decrease the reactivity of the aromatic ring.",
+          "correct": false,
+          "misconception_id": "chem.directive_influence.m1",
+          "how_it_arises": "The student falsely generalizes that all ortho/para-directing groups deactivate the ring (confusing them with halogens).",
+          "feedback": "You assumed that ortho/para directors are deactivating. While halogens are deactivating ortho/para directors due to dominant -I effect, most others like $-\\mathrm{OCH_3}$ are strongly activating."
+        },
+        {
+          "id": "b",
+          "text": "It is meta-directing and deactivating because oxygen is highly electronegative, creating an electron-withdrawing $-I$ effect.",
+          "correct": false,
+          "misconception_id": "chem.resonance_effect.m1",
+          "how_it_arises": "The student considers only the electronegativity (-I effect) of oxygen and ignores the resonance (+R) effect of its lone pair.",
+          "feedback": "You focused only on oxygen's electronegativity (-I effect) and missed resonance. Although oxygen is electronegative, the +R donation of its lone pair into the ring is stronger, making $-\\mathrm{OCH_3}$ activating and ortho/para-directing."
+        },
+        {
+          "id": "c",
+          "text": "It is meta-directing and activating because oxygen withdraws electron density exclusively from the meta position.",
+          "correct": false,
+          "misconception_id": "chem.directive_influence.m2",
+          "how_it_arises": "The student confuses the position of electron density enhancement and misidentifies $-\\mathrm{OCH_3}$ as a meta-director.",
+          "feedback": "Remember that $+\\mathrm{R}$ groups like $-\\mathrm{OCH_3}$ increase electron density at the ortho and para positions, which makes them ortho/para-directing rather than meta-directing."
+        },
+        {
+          "id": "d",
+          "text": "It is ortho/para-directing and activating because its $+R$ effect increases electron density at the ortho and para positions, dominating over its $-I$ effect.",
+          "correct": true,
+          "feedback": "Spot on! Resonance donation (+R) by oxygen's lone pair increases ring electron density—especially at ortho and para positions—overriding the weaker -I effect."
+        }
+      ],
+      "solution": "The methoxy group ($-\\mathrm{OCH_3}$) has a lone pair on the oxygen atom directly bonded to the benzene ring. This lone pair delocalises into the ring via resonance ($+R$ effect), increasing electron density particularly at the ortho and para positions. Although oxygen is electronegative ($-I$ effect), the $+R$ effect is much stronger than the $-I$ effect. Therefore, $-\\mathrm{OCH_3}$ acts as a strongly activating, ortho/para-directing group.",
+      "difficulty": 1,
+      "verification": {
+        "status": "verified",
+        "checks": [
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "solver chose d (key d); exactly one correct: true; issues: none"
+          },
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "second opinion: solver chose d (key d); exactly one correct: true; issues: none"
+          }
+        ],
+        "verified_at": "2026-11-21T17:28:40.253Z"
+      },
+      "provenance": {
+        "generator": {
+          "provider": "gemini",
+          "model": "gemini-3.6-flash"
+        },
+        "generated_at": "2026-11-21T17:28:40.227Z",
+        "prompt_version": "prove-it-1",
+        "distractors_from": {
+          "misconceptions": [
+            "chem.resonance_effect.m1",
+            "chem.directive_influence.m1",
+            "chem.directive_influence.m2"
+          ],
+          "report_mistakes": 1
+        }
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "id": "chem.resonance_effect.m1.directive_influence.2",
+      "subject": "Chemistry",
+      "concept_id": "chem.directive_influence",
+      "target_misconception_id": "chem.resonance_effect.m1",
+      "kind": "mcq",
+      "stem": "Phenol ($\\mathrm{C_6H_5OH}$) reacts rapidly with aqueous bromine to give $2,4,6$-tribromophenol. Why is phenol significantly more reactive than benzene towards electrophilic substitution?",
+      "options": [
+        {
+          "id": "a",
+          "text": "The $-\\mathrm{OH}$ group is an ortho/para director, and all ortho/para directors deactivate the benzene ring compared to unsubstituted benzene.",
+          "correct": false,
+          "misconception_id": "chem.directive_influence.m1",
+          "how_it_arises": "The student treats all ortho/para directors as deactivating groups like halogens.",
+          "feedback": "Halogens are the exception where -I outweighs +R to cause deactivation. For $-\\mathrm{OH}$, the +R effect dominates, making phenol strongly activating, not deactivating."
+        },
+        {
+          "id": "b",
+          "text": "The $-\\mathrm{OH}$ group causes benzene to undergo electrophilic addition across the double bonds instead of aromatic substitution.",
+          "correct": false,
+          "misconception_id": "chem.electrophilic_aromatic_substitution.m1",
+          "how_it_arises": "The student expects an addition reaction instead of aromatic substitution.",
+          "feedback": "Phenol maintains its aromatic stability and undergoes electrophilic aromatic substitution, not addition."
+        },
+        {
+          "id": "c",
+          "text": "The $-\\mathrm{OH}$ group donates electron density into the ring via $+R$ effect, outweighing its $-I$ effect and activating the ring.",
+          "correct": true,
+          "feedback": "Correct! The +R donation of oxygen's lone pair strongly activates the ring, making phenol far more reactive than benzene."
+        },
+        {
+          "id": "d",
+          "text": "The $-\\mathrm{OH}$ group withdraws electron density via $-I$ effect due to oxygen's electronegativity, making the ring electron-deficient.",
+          "correct": false,
+          "misconception_id": "chem.resonance_effect.m1",
+          "how_it_arises": "The student judges the net effect of the $-\\mathrm{OH}$ group solely by inductive withdrawal (-I) and ignores resonance donation (+R).",
+          "feedback": "You evaluated $-\\mathrm{OH}$ based on oxygen's electronegativity (-I effect) alone. The $+R$ resonance donation of the lone pair is actually stronger than the $-I$ effect, making phenol very electron-rich and reactive."
+        }
+      ],
+      "solution": "In phenol, the oxygen atom of the $-\\mathrm{OH}$ group has non-bonding lone pairs in conjugation with the benzene ring. Delocalisation of a lone pair into the ring ($+R$ effect) increases the electron density overall, especially at the ortho and para positions. The $+R$ effect is dominant over oxygen's electronegative inductive withdrawal ($-I$ effect), rendering phenol much more reactive towards electrophiles than benzene.",
+      "difficulty": 2,
+      "verification": {
+        "status": "verified",
+        "checks": [
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "solver chose c (key c); exactly one correct: true; issues: none"
+          },
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "second opinion: solver chose c (key c); exactly one correct: true; issues: none"
+          }
+        ],
+        "verified_at": "2026-11-21T17:28:40.254Z"
+      },
+      "provenance": {
+        "generator": {
+          "provider": "gemini",
+          "model": "gemini-3.6-flash"
+        },
+        "generated_at": "2026-11-21T17:28:40.227Z",
+        "prompt_version": "prove-it-1",
+        "distractors_from": {
+          "misconceptions": [
+            "chem.resonance_effect.m1",
+            "chem.directive_influence.m1",
+            "chem.electrophilic_aromatic_substitution.m1"
+          ],
+          "report_mistakes": 1
+        }
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "id": "chem.resonance_effect.m1.directive_influence.3",
+      "subject": "Chemistry",
+      "concept_id": "chem.directive_influence",
+      "target_misconception_id": "chem.resonance_effect.m1",
+      "kind": "mcq",
+      "stem": "Acetanilide ($\\mathrm{C_6H_5NHCOCH_3}$) undergoes nitration to yield $p$-nitroacetanilide as the major product. How does the acetamido substituent ($-\\mathrm{NHCOCH_3}$) influence the benzene ring?",
+      "options": [
+        {
+          "id": "a",
+          "text": "It is deactivating and meta-directing because nitrogen and oxygen are electronegative atoms that pull electrons away via $-I$ effect.",
+          "correct": false,
+          "misconception_id": "chem.resonance_effect.m1",
+          "how_it_arises": "The student looks only at the electronegativity of N and O (-I effect) and fails to consider resonance donation from the nitrogen lone pair into the ring.",
+          "feedback": "You judged the group using only electronegativity (-I effect). Because nitrogen's lone pair is directly attached to the ring, its $+R$ resonance donation dominates over $-I$, making the group ortho/para-directing and activating."
+        },
+        {
+          "id": "b",
+          "text": "It is ortho/para-directing but deactivating because substituents with heteroatoms always deactivate the aromatic ring.",
+          "correct": false,
+          "misconception_id": "chem.directive_influence.m1",
+          "how_it_arises": "The student believes heteroatom-containing groups automatically deactivate the ring.",
+          "feedback": "Heteroatoms with lone pairs attached directly to the ring (like N in $-\\mathrm{NHCOCH_3}$) donate electron density by $+R$ effect and activate the ring overall."
+        },
+        {
+          "id": "c",
+          "text": "It is activating and ortho/para-directing because nitrogen donates its lone pair into the ring by $+R$ effect, dominating its $-I$ effect.",
+          "correct": true,
+          "feedback": "Great job! The nitrogen atom attached directly to the ring donates its lone pair via +R effect, directing incoming electrophiles to ortho and para positions."
+        },
+        {
+          "id": "d",
+          "text": "It is meta-directing because any substituent containing a carbonyl group ($-\\mathrm{C=O}$) forces meta-substitution.",
+          "correct": false,
+          "misconception_id": "chem.directive_influence.m2",
+          "how_it_arises": "The student sees a carbonyl group in $-\\mathrm{NHCOCH_3}$ and incorrectly classifies the whole substituent as meta-directing without checking which atom is directly bonded to the ring.",
+          "feedback": "Be careful with which atom is directly attached to the benzene ring. Here, nitrogen (with its lone pair) is directly attached to the ring, not the carbonyl carbon, so the group is ortho/para-directing."
+        }
+      ],
+      "solution": "In acetanilide, the nitrogen atom is directly attached to the aromatic ring and possesses a lone pair. This lone pair can delocalise into the ring ($+R$ effect), increasing electron density at the ortho and para positions. Although nitrogen also exerts a weak $-I$ effect, $+R$ predominates. Hence, $-\\mathrm{NHCOCH_3}$ acts as an activating, ortho/para-directing group.",
+      "difficulty": 2,
+      "verification": {
+        "status": "verified",
+        "checks": [
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "solver chose c (key c); exactly one correct: true; issues: none"
+          },
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "second opinion: solver chose c (key c); exactly one correct: true; issues: none"
+          }
+        ],
+        "verified_at": "2026-11-21T17:28:40.254Z"
+      },
+      "provenance": {
+        "generator": {
+          "provider": "gemini",
+          "model": "gemini-3.6-flash"
+        },
+        "generated_at": "2026-11-21T17:28:40.227Z",
+        "prompt_version": "prove-it-1",
+        "distractors_from": {
+          "misconceptions": [
+            "chem.resonance_effect.m1",
+            "chem.directive_influence.m2",
+            "chem.directive_influence.m1"
+          ],
+          "report_mistakes": 1
+        }
+      }
+    }
+  ]
+}

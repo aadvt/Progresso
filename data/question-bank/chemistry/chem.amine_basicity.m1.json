@@ -1,0 +1,238 @@
+{
+  "misconception_id": "chem.amine_basicity.m1",
+  "concept_id": "chem.amine_basicity",
+  "subject": "Chemistry",
+  "questions": [
+    {
+      "schema_version": "1.0",
+      "id": "chem.amine_basicity.m1.amine_basicity.1",
+      "subject": "Chemistry",
+      "concept_id": "chem.amine_basicity",
+      "target_misconception_id": "chem.amine_basicity.m1",
+      "kind": "mcq",
+      "stem": "Which of the following compounds has the HIGHEST basic strength in aqueous solution?",
+      "options": [
+        {
+          "id": "a",
+          "text": "$\\mathrm{(CH_3)_2NH}$",
+          "correct": true,
+          "feedback": "Dimethylamine is an aliphatic amine where the nitrogen lone pair is localized and boosted by two electron-donating methyl groups."
+        },
+        {
+          "id": "b",
+          "text": "$\\mathrm{p-NO_2-C_6H_4-NH_2}$",
+          "correct": false,
+          "misconception_id": "chem.organic_acidity_basicity.m1",
+          "how_it_arises": "The student judges basic strength based on the high thermodynamic stability of the unprotonated p-nitroaniline molecule rather than the availability of its lone pair / stability of its conjugate acid.",
+          "feedback": "You selected p-nitroaniline because of its high molecular stability. Basicity depends on how easily the nitrogen lone pair accepts a proton, which is heavily reduced by the strongly electron-withdrawing $-\\mathrm{NO_2}$ group."
+        },
+        {
+          "id": "c",
+          "text": "$\\mathrm{C_6H_5NH_2}$",
+          "correct": false,
+          "misconception_id": "chem.amine_basicity.m1",
+          "how_it_arises": "The student believes that the benzene ring in aniline donates electrons to the nitrogen atom, making aniline more basic than aliphatic amines.",
+          "feedback": "You picked aniline thinking the benzene ring donates electron density to nitrogen. In reality, nitrogen's lone pair is delocalised into the benzene ring via resonance, making aniline much less basic than aliphatic amines like dimethylamine."
+        },
+        {
+          "id": "d",
+          "text": "$\\mathrm{C_6H_5NHCOCH_3}$",
+          "correct": false,
+          "misconception_id": "chem.resonance_effect.m3",
+          "how_it_arises": "The student fails to recognise that delocalising the lone pair into the adjacent carbonyl group strongly reduces its availability for protonation.",
+          "feedback": "You chose acetanilide, but the lone pair on nitrogen is delocalised into the carbonyl group ($-\\mathrm{C=O}$), which strongly decreases its availability to accept a proton."
+        }
+      ],
+      "solution": "In $\\mathrm{(CH_3)_2NH}$, the lone pair on nitrogen is localized and readily available for protonation, enhanced by the $+I$ inductive effect of two methyl groups. In aniline ($\\mathrm{C_6H_5NH_2}$), acetanilide ($\\mathrm{C_6H_5NHCOCH_3}$), and p-nitroaniline ($\\mathrm{p-NO_2-C_6H_4-NH_2}$), the nitrogen lone pair is delocalised into the aromatic ring or carbonyl group, reducing its availability. Therefore, $\\mathrm{(CH_3)_2NH}$ is the strongest base.",
+      "difficulty": 1,
+      "verification": {
+        "status": "verified",
+        "checks": [
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "solver chose a (key a); exactly one correct: true; issues: none"
+          },
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "second opinion: solver chose a (key a); exactly one correct: true; issues: none"
+          }
+        ],
+        "verified_at": "2026-11-21T17:28:40.247Z"
+      },
+      "provenance": {
+        "generator": {
+          "provider": "gemini",
+          "model": "gemini-3.6-flash"
+        },
+        "generated_at": "2026-11-21T17:28:40.219Z",
+        "prompt_version": "prove-it-1",
+        "distractors_from": {
+          "misconceptions": [
+            "chem.amine_basicity.m1",
+            "chem.resonance_effect.m3",
+            "chem.organic_acidity_basicity.m1"
+          ],
+          "report_mistakes": 1
+        }
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "id": "chem.amine_basicity.m1.amine_basicity.2",
+      "subject": "Chemistry",
+      "concept_id": "chem.amine_basicity",
+      "target_misconception_id": "chem.amine_basicity.m1",
+      "kind": "mcq",
+      "stem": "Consider the compounds: (I) $\\mathrm{CH_3NH_2}$, (II) $\\mathrm{C_6H_5NH_2}$, (III) $\\mathrm{m-nitroaniline}$, and (IV) $\\mathrm{p-nitroaniline}$. Which sequence correctly represents their DECREASING order of basic strength?",
+      "options": [
+        {
+          "id": "a",
+          "text": "$\\mathrm{II > I > III > IV}$",
+          "correct": false,
+          "misconception_id": "chem.amine_basicity.m1",
+          "how_it_arises": "The student places aniline above methylamine, believing that the aromatic benzene ring donates electron density to nitrogen.",
+          "feedback": "You placed aniline as stronger than methylamine. Remember that the lone pair on aniline's nitrogen is delocalised into the benzene ring by resonance, making it less available for protonation than in aliphatic methylamine."
+        },
+        {
+          "id": "b",
+          "text": "$\\mathrm{IV > III > II > I}$",
+          "correct": false,
+          "misconception_id": "chem.organic_acidity_basicity.m1",
+          "how_it_arises": "The student mistakes the high stability of resonance-stabilised neutral molecules (like p-nitroaniline) for higher basicity, reversing the entire order.",
+          "feedback": "You reversed the order based on the stability of the starting neutral molecules. A base is stronger when its lone pair is more available and its conjugate acid is stable, which makes aliphatic methylamine the strongest base."
+        },
+        {
+          "id": "c",
+          "text": "$\\mathrm{I > II > IV > III}$",
+          "correct": false,
+          "misconception_id": "chem.resonance_effect.m2",
+          "how_it_arises": "The student applies the resonance (-R) effect of the nitro group at the meta position, thinking meta-nitroaniline is weaker than para-nitroaniline.",
+          "feedback": "You ranked p-nitroaniline as more basic than m-nitroaniline. Resonance effects operate at ortho and para positions, so $-\\mathrm{NO_2}$ at the para position withdraws electron density by both $-I$ and $-R$ effects, making p-nitroaniline weaker than m-nitroaniline."
+        },
+        {
+          "id": "d",
+          "text": "$\\mathrm{I > II > III > IV}$",
+          "correct": true,
+          "feedback": "Methylamine is an aliphatic amine (most basic), followed by aniline, then m-nitroaniline ($-I$ effect only), and lastly p-nitroaniline (both $-I$ and $-R$ effects)."
+        }
+      ],
+      "solution": "1. $\\mathrm{CH_3NH_2}$ (I) is an aliphatic amine with a localized lone pair ($+I$ effect of methyl group), so it is the strongest base.\n2. $\\mathrm{C_6H_5NH_2}$ (II) has its lone pair delocalised into the benzene ring by resonance, making it weaker than (I).\n3. In $\\mathrm{m-nitroaniline}$ (III), the $-\\mathrm{NO_2}$ group exerts a $-I$ effect (no $-R$ effect at meta position), reducing basicity further.\n4. In $\\mathrm{p-nitroaniline}$ (IV), $-\\mathrm{NO_2}$ exerts both $-I$ and strong $-R$ effects, making it the weakest base.\nThus, the correct order is $\\mathrm{I > II > III > IV}$.",
+      "difficulty": 2,
+      "verification": {
+        "status": "verified",
+        "checks": [
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "solver chose d (key d); exactly one correct: true; issues: none"
+          },
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "second opinion: solver chose d (key d); exactly one correct: true; issues: none"
+          }
+        ],
+        "verified_at": "2026-11-21T17:28:40.250Z"
+      },
+      "provenance": {
+        "generator": {
+          "provider": "gemini",
+          "model": "gemini-3.6-flash"
+        },
+        "generated_at": "2026-11-21T17:28:40.220Z",
+        "prompt_version": "prove-it-1",
+        "distractors_from": {
+          "misconceptions": [
+            "chem.amine_basicity.m1",
+            "chem.resonance_effect.m2",
+            "chem.organic_acidity_basicity.m1"
+          ],
+          "report_mistakes": 1
+        }
+      }
+    },
+    {
+      "schema_version": "1.0",
+      "id": "chem.amine_basicity.m1.amine_basicity.3",
+      "subject": "Chemistry",
+      "concept_id": "chem.amine_basicity",
+      "target_misconception_id": "chem.amine_basicity.m1",
+      "kind": "mcq",
+      "stem": "Among benzylamine ($\\mathrm{C_6H_5CH_2NH_2}$), aniline ($\\mathrm{C_6H_5NH_2}$), p-anisidine ($\\mathrm{p-OCH_3-C_6H_4-NH_2}$), and p-nitroaniline ($\\mathrm{p-NO_2-C_6H_4-NH_2}$), which compound is the MOST basic?",
+      "options": [
+        {
+          "id": "a",
+          "text": "$\\mathrm{C_6H_5CH_2NH_2}$ (Benzylamine)",
+          "correct": true,
+          "feedback": "In benzylamine, the $-\\mathrm{NH_2}$ group is attached to a $-\\mathrm{CH_2}-$ carbon, so its lone pair is not in conjugation with the ring, making it a strong aliphatic base."
+        },
+        {
+          "id": "b",
+          "text": "$\\mathrm{C_6H_5NH_2}$ (Aniline)",
+          "correct": false,
+          "misconception_id": "chem.amine_basicity.m1",
+          "how_it_arises": "The student believes aniline is more basic than benzylamine because they think the benzene ring attached directly to $-\\mathrm{NH_2}$ donates electron density.",
+          "feedback": "You chose aniline over benzylamine. In aniline, the nitrogen lone pair is delocalised into the aromatic ring via resonance, whereas in benzylamine, the $-\\mathrm{CH_2}-$ spacer prevents resonance delocalisation, leaving the lone pair fully available."
+        },
+        {
+          "id": "c",
+          "text": "$\\mathrm{p-NO_2-C_6H_4-NH_2}$ (p-Nitroaniline)",
+          "correct": false,
+          "misconception_id": "chem.organic_acidity_basicity.m1",
+          "how_it_arises": "The student mistakes the overall thermodynamic stability of neutral p-nitroaniline for higher basicity.",
+          "feedback": "You selected p-nitroaniline based on the stability of the neutral molecule. Basicity depends on how easily nitrogen shares its lone pair; the strongly electron-withdrawing $-\\mathrm{NO_2}$ group drastically reduces basicity."
+        },
+        {
+          "id": "d",
+          "text": "$\\mathrm{p-OCH_3-C_6H_4-NH_2}$ (p-Anisidine)",
+          "correct": false,
+          "misconception_id": "chem.resonance_effect.m2",
+          "how_it_arises": "The student incorrectly assumes that benzylamine's lone pair is also conjugated with the benzene ring, ranking p-anisidine higher due to the electron-donating $+R$ effect of $-\\mathrm{OCH_3}$.",
+          "feedback": "You chose p-anisidine thinking benzylamine's lone pair is conjugated with the ring. Because $-\\mathrm{NH_2}$ in benzylamine is attached to a $-\\mathrm{CH_2}-$ group, its lone pair is not in conjugation with the ring, making it an aliphatic amine and stronger than any substituted aniline."
+        }
+      ],
+      "solution": "In benzylamine ($\\mathrm{C_6H_5CH_2NH_2}$), the nitrogen atom is bonded to an $sp^3$ hybridized $-\\mathrm{CH_2}-$ carbon. Thus, the lone pair on nitrogen is localized and NOT in conjugation with the benzene ring. It behaves as an aliphatic amine, making it significantly more basic than aniline and substituted anilines where the lone pair is delocalised into the ring.",
+      "difficulty": 2,
+      "verification": {
+        "status": "verified",
+        "checks": [
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "solver chose a (key a); exactly one correct: true; issues: none"
+          },
+          {
+            "method": "llm_solve",
+            "passed": true,
+            "model": "gemini-3.6-flash",
+            "detail": "second opinion: solver chose a (key a); exactly one correct: true; issues: none"
+          }
+        ],
+        "verified_at": "2026-11-21T17:28:40.250Z"
+      },
+      "provenance": {
+        "generator": {
+          "provider": "gemini",
+          "model": "gemini-3.6-flash"
+        },
+        "generated_at": "2026-11-21T17:28:40.220Z",
+        "prompt_version": "prove-it-1",
+        "distractors_from": {
+          "misconceptions": [
+            "chem.amine_basicity.m1",
+            "chem.resonance_effect.m2",
+            "chem.organic_acidity_basicity.m1"
+          ],
+          "report_mistakes": 1
+        }
+      }
+    }
+  ]
+}

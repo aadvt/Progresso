@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import type { ConstellationModel, DiagnosisView } from "@progresso/core";
-import { Button } from "@/components/ui/Button";
+import { Button, ButtonLink } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Surface } from "@/components/ui/Surface";
 import type { StudentSummary } from "@/lib/types";
@@ -11,7 +11,6 @@ import { Breakdown } from "./Breakdown";
 import { ConstellationSlot } from "./ConstellationSlot";
 import { Headline } from "./Headline";
 import { HabitsSection, StandaloneSection } from "./Sections";
-import { PlanDialog } from "./PlanDialog";
 import { ReportDialog } from "./ReportDialog";
 import { RootCard } from "./RootCard";
 import styles from "./Diagnosis.module.css";
@@ -20,7 +19,6 @@ const delay = (ms: number) => ({ "--enter-delay": `${ms}ms` }) as React.CSSPrope
 
 export function Diagnosis({ student, view, constellation }: { student: StudentSummary; view: DiagnosisView; constellation: ConstellationModel }) {
   const [reportOpen, setReportOpen] = useState(false);
-  const [planOpen, setPlanOpen] = useState(false);
   const first = view.exams[0]?.date ?? "";
   const last = view.exams[view.exams.length - 1]?.date ?? "";
   const examNames = new Set(view.exams.map((e) => e.name)).size;
@@ -64,9 +62,9 @@ export function Diagnosis({ student, view, constellation }: { student: StudentSu
         )}
 
         <div className={styles.ctaRow}>
-          <Button variant="primary" size="lg" trailingIcon="arrowRight" onClick={() => setPlanOpen(true)}>
+          <ButtonLink href={`/s/${student.id}/today`} variant="primary" size="lg" trailingIcon="arrowRight">
             Start my comeback plan
-          </Button>
+          </ButtonLink>
           <Button variant="secondary" size="lg" icon="doc" onClick={() => setReportOpen(true)}>
             View original report
           </Button>
@@ -140,14 +138,13 @@ export function Diagnosis({ student, view, constellation }: { student: StudentSu
                 : "."}
             </p>
           </div>
-          <Button variant="primary" size="lg" trailingIcon="arrowRight" onClick={() => setPlanOpen(true)}>
+          <ButtonLink href={`/s/${student.id}/today`} variant="primary" size="lg" trailingIcon="arrowRight">
             Start my comeback plan
-          </Button>
+          </ButtonLink>
         </Surface>
       </div>
 
       <ReportDialog open={reportOpen} onClose={() => setReportOpen(false)} view={view} student={student} />
-      <PlanDialog open={planOpen} onClose={() => setPlanOpen(false)} view={view} student={student} />
     </div>
   );
 }

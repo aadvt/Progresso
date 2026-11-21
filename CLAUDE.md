@@ -26,7 +26,7 @@ Prototype for **Inferentics** (edtech). Inferentics already scans CBSE Class 11�
 | 2 | Root-cause engine: trace errors through the prerequisite graph to the few root gaps that explain most mistakes, ranked by marks recoverable | done |
 | 3 | Web app with the diagnosis view | done |
 | 4 | 3D "knowledge constellation" (three.js) of the syllabus, with a chain-reaction ripple when a root is fixed | done |
-| 5 | Mission engine: 25-min daily missions, "prove it" questions whose wrong options come from the student's own mistakes, mastery gating, spaced repetition (FSRS), readiness meter | |
+| 5 | Mission engine: 25-min daily missions, "prove it" questions whose wrong options come from the student's own mistakes, mastery gating, spaced repetition (FSRS), readiness meter | done |
 | 6 | Mistake Recap (the student's mistake, marked and corrected) and in-browser step explainers | |
 | 7 | Manim explainer animation pipeline | |
 | 8 | Precise YouTube clips and 3D organic chemistry | |
@@ -47,16 +47,21 @@ packages/
                             error-record schema, student/exam types, root-cause engine (root-cause/),
                             report-parser interface, diagnosis view model (diagnosis-view/),
                             constellation layout + state model + ripple (constellation/; browser
-                            entry ./constellation/client).
+                            entry ./constellation/client), mission engine (missions/: plan generator,
+                            mastery gate + FSRS, readiness; browser entry ./missions/client), prove-it
+                            questions (questions/: schema, grading, selection, bank loader).
                             ./demo-fixtures entry = SAMPLE DATA loader (deleted in Phase P)
   llm/    @progresso/llm   provider-agnostic LLM layer: per-task routing, Gemini/Anthropic/
                             OpenAI-compatible providers, structured output + repair, rate limit,
                             retry/backoff, model fallback, response cache, usage log, PII guard
   db/     @progresso/db    SQLite (better-sqlite3 + Drizzle): schema, migrations, graph sync, seed,
-                            concept mastery (mastery.ts: what drives the constellation)
+                            concept mastery (mastery.ts: what drives the constellation), mission
+                            service (missions.ts: plan settings, start/answer/finish, progress)
 apps/
-  cli/    @progresso/cli   command-line tools needing several packages (pnpm analyse)
-  web/    @progresso/web   Next.js 16 app: picker, add report, diagnosis, constellation (components/
+  cli/    @progresso/cli   command-line tools needing several packages (pnpm analyse, questions:generate,
+                            simulate)
+  web/    @progresso/web   Next.js 16 app: picker, add report, diagnosis, today / plan / mission player
+                           (components/missions, server/missions.ts), constellation (components/
                            constellation: three.js engine/ + SVG Map2D fallback). server/data.ts is the only
                            data seam (parser, records, mastery via server/db.ts); styles/tokens.css +
                            components/ui = design system; e2e/ = Playwright + axe + perf. MCP server (Phase 10) to come
@@ -67,8 +72,11 @@ data/
   concept-graph-provisional/  provisional graph, one JSON per subject (format is fixed)
   fixtures/demo/              SAMPLE DATA demo students (structured error records)
   fixtures/_answer-key/       intended roots per demo student (tests only, never read by the engine)
+  question-bank/              verified prove-it questions, one JSON per misconception (generated offline;
+                              _generation-report.json = what was generated and rejected)
   reports/                    real reports (Phase P), git-ignored, never committed
   progresso.db, cache/, logs/ local runtime state, git-ignored
+tools/cas/check.py            SymPy checker for generated maths questions (allow-listed parsing)
 docs/                         progress log, phase reports, error-record format
 ```
 
@@ -79,6 +87,8 @@ Key contracts:
 - **Report parser**: `ReportParser.parse(input, { graph, onProgress })` → `ParsedReport` (`packages/core/src/report-parser/`). Demo implementation `DemoFixtureParser` (SAMPLE DATA) until Phase P.
 - **Diagnosis view**: `buildDiagnosisView(analysis, records)` → `DiagnosisView`, what the UI renders (report text stays verbatim).
 - **Constellation**: `layoutConstellation(graph, subjects)` (cached per graph) + `buildConstellation({ graph, layout, analysis, records, mastery })` → `ConstellationModel`. Star state comes from `concept_mastery` in the DB: write it with `setConceptMastery()` and the map updates (a root going to `proven` plays the ripple).
+- **Missions**: `buildPlan({ graph, analysis, records, settings, today, progress })` → `ComebackPlan` (pure; re-run after any change and it re-flows). Mastery gate `gradeCheck` + `applyCheck` (FSRS via ts-fsrs, max interval 14 days), readiness `computeReadiness` (always a range). Persistence and orchestration: `@progresso/db` `startMission` / `answerQuestion` / `finishMission` (writes `concept_mastery`, so the constellation updates). Tunables in `missions/params.ts`.
+- **Prove-it questions**: `ProveItQuestionSchema` (`questions/schema.ts`): every wrong option carries a `misconception_id`. Only verified questions enter `data/question-bank/` (`pnpm questions:generate`); nothing is generated at runtime. The browser never receives the answer key.
 - **LLM calls**: `createLlmClient().generateObject(task, { prompt, schema })` or `.generateText(task, ...)`. The task name picks provider/model from `config/llm.json`.
 
 ## Conventions
@@ -105,6 +115,9 @@ pnpm graph:validate         # validate the configured concept graph and print st
 pnpm analyse demo-riya      # root-cause analysis for a student (--all, --json, --llm to word explanations via the LLM)
 pnpm web:dev                # web app at http://localhost:3100
 pnpm e2e                    # production build + Playwright e2e (desktop + phone, axe, then frame-rate runs); screenshots to docs/screenshots/
+pnpm questions:generate     # generate + verify prove-it questions into data/question-bank (LLM + SymPy; needs Python 3 with sympy)
+                            # --missing tops up targets with no verified questions; --only a,b; --list; saves per target
+pnpm simulate demo-riya     # simulate 14 days of missions on a throwaway DB (--days, --minutes, --skip, --out)
 pnpm db:seed                # migrate, sync graph, load demo fixtures, print per-student summary
 pnpm db:reset               # delete the local DB (then db:seed)
 pnpm llm:smoke              # one real structured Gemini call, then the same call from cache

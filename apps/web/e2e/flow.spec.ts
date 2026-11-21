@@ -67,13 +67,10 @@ test("pick a student, add the sample report, see the diagnosis", async ({ page }
   await page.keyboard.press("Escape");
   await expect(dialog).toBeHidden();
 
-  // 5. Call to action (placeholder until Phase 5)
-  await page.getByRole("button", { name: "Start my comeback plan" }).first().click();
-  const plan = page.getByRole("dialog", { name: "Your comeback plan is almost here" });
-  await expect(plan).toBeVisible();
-  await shot(page, info, "08-plan-placeholder");
-  await plan.getByRole("button", { name: "Got it" }).click();
-  await expect(plan).toBeHidden();
+  // 5. Call to action: since Phase 5 it leads to the comeback plan (missions.spec covers that screen).
+  await page.getByRole("link", { name: "Start my comeback plan" }).first().click();
+  await expect(page).toHaveURL(/\/s\/demo-riya\/today$/);
+  await expect(page.getByRole("heading", { level: 1, name: /Two questions, then your plan|Today's mission|Done for today|Nothing due today/ })).toBeVisible();
 
   // Back on the picker, Riya now shows as ready.
   await page.goto("/");

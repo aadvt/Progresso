@@ -56,6 +56,21 @@ function writeSnapshot(m: ConstellationModel): void {
   }
 }
 
+/** The map as it was just before `rootId` was mastered: the root still a gap, its symptoms still weak, nothing lit by it. */
+function beforeMastering(m: ConstellationModel, rootId: string): ConstellationModel {
+  const otherMastered = new Set(m.roots.filter((r) => r.mastered && r.id !== rootId).map((r) => r.id));
+  const nodes = Object.fromEntries(
+    m.nodes.map((n) => {
+      if (n.id === rootId) return [n.id, { s: "root" as StarState, l: false }];
+      const fromThisRoot = n.root_ids.includes(rootId) && !n.root_ids.some((r) => otherMastered.has(r));
+      const s: StarState = n.state === "learning" && fromThisRoot && n.mastery !== "learning" ? "weak" : n.state;
+      return [n.id, { s, l: n.lit && otherMastered.size === 0 ? false : n.lit }];
+    }),
+  );
+  const roots = Object.fromEntries(m.roots.map((r) => [r.id, r.id === rootId ? false : r.mastered]));
+  return withSavedStates(m, nodes, roots);
+}
+
 function useReducedMotion(): boolean {
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
@@ -121,6 +136,16 @@ export function ConstellationView({
     if (!embedded) {
       const snap = readSnapshot(model);
       if (snap && snap.key !== model.state_key) first = withSavedStates(model, snap.nodes, snap.roots);
+      else {
+        // Arriving from a mission that just mastered a root (?ripple=<root id>): replay that root's chain reaction.
+        const url = new URL(window.location.href);
+        const rippleRoot = url.searchParams.get("ripple");
+        if (rippleRoot && model.roots.some((r) => r.id === rippleRoot && r.mastered)) first = beforeMastering(model, rippleRoot);
+        if (rippleRoot) {
+          url.searchParams.delete("ripple");
+          window.history.replaceState(null, "", url.pathname + url.search);
+        }
+      }
     }
     shown.current = first;
     setInitial(first);

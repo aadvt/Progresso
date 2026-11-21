@@ -200,12 +200,33 @@ export const conceptMastery = sqliteTable(
     lapses: integer("lapses").notNull().default(0),
     lastReviewAt: text("last_review_at"),
     dueAt: text("due_at"),
+    /** The full ts-fsrs card (Phase 5). */
+    card: text("card", { mode: "json" }),
+    /** Day the prove-it gate was passed; "retained" needs a passed review some days later. */
+    provenAt: text("proven_at"),
     updatedAt: timestamp("updated_at"),
   },
   (t) => [primaryKey({ columns: [t.studentId, t.conceptId] }), index("mastery_due_idx").on(t.studentId, t.dueAt)],
 );
 
-/** A daily ~25-minute mission (Phase 5). */
+/** A student's comeback-plan settings (Phase 5). The plan itself is recomputed from these plus progress. */
+export const planSettings = sqliteTable("plan_settings", {
+  studentId: text("student_id")
+    .primaryKey()
+    .references(() => students.id, { onDelete: "cascade" }),
+  examName: text("exam_name").notNull(),
+  examDate: text("exam_date").notNull(),
+  dailyMinutes: integer("daily_minutes").notNull(),
+  startDate: text("start_date").notNull(),
+  /** SAMPLE DATA demo only: days added to the real date, to show the plan re-flowing. */
+  demoDayOffset: integer("demo_day_offset").notNull().default(0),
+  updatedAt: timestamp("updated_at"),
+});
+
+/**
+ * A ~25-minute mission (Phase 5), stored once it is started (today's), so its
+ * questions stay fixed. Future missions are a projection and are not stored.
+ */
 export const missions = sqliteTable(
   "missions",
   {
@@ -214,14 +235,41 @@ export const missions = sqliteTable(
       .notNull()
       .references(() => students.id, { onDelete: "cascade" }),
     scheduledFor: text("scheduled_for").notNull(),
+    slot: integer("slot").notNull().default(0),
+    kind: text("kind", { enum: ["learn", "apply", "review", "rehearsal"] }),
+    /** The plan's work key (learn:<concept>:<n>, review:<day>:<slot>). */
+    workKey: text("work_key"),
     targetConceptId: text("target_concept_id"),
     status: text("status", { enum: ["planned", "in_progress", "completed", "skipped"] }).notNull(),
     plannedMinutes: integer("planned_minutes").notNull().default(25),
+    /** The planned mission (PlannedMission) plus the chosen question ids. */
     plan: text("plan", { mode: "json" }),
+    /** Outcome of the check(s): CheckOutcome per concept. */
+    result: text("result", { mode: "json" }),
     completedAt: text("completed_at"),
     createdAt: timestamp("created_at"),
   },
-  (t) => [uniqueIndex("missions_student_day_idx").on(t.studentId, t.scheduledFor)],
+  (t) => [uniqueIndex("missions_student_day_slot_idx").on(t.studentId, t.scheduledFor, t.slot)],
+);
+
+/** Every answered prove-it question: what was picked and which misconception it revealed. */
+export const questionAttempts = sqliteTable(
+  "question_attempts",
+  {
+    id: integer("id").primaryKey({ autoIncrement: true }),
+    studentId: text("student_id")
+      .notNull()
+      .references(() => students.id, { onDelete: "cascade" }),
+    missionId: text("mission_id").references(() => missions.id, { onDelete: "cascade" }),
+    questionId: text("question_id").notNull(),
+    conceptId: text("concept_id").notNull(),
+    targetMisconceptionId: text("target_misconception_id"),
+    answer: text("answer").notNull(),
+    correct: integer("correct", { mode: "boolean" }).notNull(),
+    revealedMisconceptionId: text("revealed_misconception_id"),
+    answeredAt: text("answered_at").notNull(),
+  },
+  (t) => [index("question_attempts_student_idx").on(t.studentId, t.answeredAt), index("question_attempts_mission_idx").on(t.missionId)],
 );
 
 /** Every attempt/review, the raw history FSRS and the readiness meter are computed from. */
