@@ -8,21 +8,30 @@
  */
 import {
   analyseStudent,
+  buildConstellation,
   buildDiagnosisView,
+  layoutConstellation,
   findRepoRoot,
   loadAppConfig,
   loadConceptGraph,
   type ConceptGraph,
+  type ConstellationLayout,
+  type ConstellationModel,
   type DiagnosisView,
+  type RootCauseAnalysis,
   type ReportParser,
 } from "@progresso/core";
 import { DemoFixtureParser, loadDemoFixtures, SAMPLE_DATA_NOTICE, type DemoStudent } from "@progresso/core/demo-fixtures";
+import { clearConceptMastery, getConceptMastery, isSampleStudent, setConceptMastery, type Db } from "@progresso/db";
 import type { StudentSummary } from "@/lib/types";
 import { daysUntil } from "@/lib/format";
+import { getDb } from "./db";
 
 interface Loaded {
   graph: ConceptGraph;
   demo: DemoStudent[];
+  repoRoot: string;
+  databasePath: string;
 }
 
 let loaded: Loaded | undefined;
@@ -31,7 +40,7 @@ function load(): Loaded {
   if (!loaded) {
     const config = loadAppConfig(findRepoRoot());
     const { graph } = loadConceptGraph(config.conceptGraphDir);
-    loaded = { graph, demo: loadDemoFixtures(config.fixturesDir) };
+    loaded = { graph, demo: loadDemoFixtures(config.fixturesDir), repoRoot: config.repoRoot, databasePath: config.databasePath };
   }
   return loaded;
 }
@@ -78,11 +87,76 @@ export function getReportParser(): ReportParser {
   return new DemoFixtureParser(load().demo, { stageDelayMs: Number.isFinite(delay) ? delay : 550 });
 }
 
-/** The student's diagnosis from every report added so far. */
-export function getDiagnosis(studentId: string): DiagnosisView | undefined {
+function db(): Db {
+  const l = load();
+  return getDb({ repoRoot: l.repoRoot, databasePath: l.databasePath, graph: l.graph, demo: l.demo });
+}
+
+/** Records and their analysis for one student. Phase P: read records from the database. */
+function analysed(studentId: string): { s: DemoStudent; analysis: RootCauseAnalysis } | undefined {
   const { graph, demo } = load();
   const s = demo.find((d) => d.student.id === studentId);
   if (!s) return undefined;
-  const analysis = analyseStudent({ graph, records: s.records });
-  return buildDiagnosisView({ ...analysis, student_id: s.student.id }, s.records);
+  return { s, analysis: { ...analyseStudent({ graph, records: s.records }), student_id: s.student.id } };
+}
+
+/** The student's diagnosis from every report added so far. */
+export function getDiagnosis(studentId: string): DiagnosisView | undefined {
+  const a = analysed(studentId);
+  return a ? buildDiagnosisView(a.analysis, a.s.records) : undefined;
+}
+
+const layouts = new Map<string, ConstellationLayout>();
+
+/** The layout depends only on the graph and the subjects shown, so it is computed once. */
+function layoutFor(subjects: readonly string[]): ConstellationLayout {
+  const graph = getGraph();
+  const key = `${graph.fingerprint}|${subjects.join(",")}`;
+  let layout = layouts.get(key);
+  if (!layout) {
+    layout = layoutConstellation(graph, subjects);
+    layouts.set(key, layout);
+  }
+  return layout;
+}
+
+/**
+ * The knowledge constellation: the diagnosis plus mastery read from the
+ * database on every request, so missions (Phase 5) and the MCP server
+ * (Phase 10) change the map just by writing `concept_mastery`.
+ */
+export function getConstellation(studentId: string): ConstellationModel | undefined {
+  const a = analysed(studentId);
+  if (!a) return undefined;
+  const graph = getGraph();
+  const subjects = a.s.student.subjects.filter((x) => graph.subjects.includes(x));
+  return buildConstellation({
+    student_id: studentId,
+    graph,
+    layout: layoutFor(subjects.length > 0 ? subjects : graph.subjects),
+    analysis: a.analysis,
+    records: a.s.records,
+    mastery: getConceptMastery(db(), studentId),
+  });
+}
+
+/**
+ * Demo trigger (SAMPLE DATA students only): record a root as mastered, as a
+ * passed Phase 5 "prove it" check will. Only the student's own roots qualify.
+ */
+export function demoMasterRoot(studentId: string, conceptId: string): boolean {
+  const a = analysed(studentId);
+  if (!a || !a.analysis.roots.some((r) => r.concept.id === conceptId)) return false;
+  const d = db();
+  if (!isSampleStudent(d, studentId)) return false;
+  setConceptMastery(d, { studentId, conceptId, state: "proven" });
+  return true;
+}
+
+/** Demo trigger: forget all mastery for a SAMPLE DATA student. */
+export function demoResetMastery(studentId: string): boolean {
+  const d = db();
+  if (!analysed(studentId) || !isSampleStudent(d, studentId)) return false;
+  clearConceptMastery(d, studentId);
+  return true;
 }

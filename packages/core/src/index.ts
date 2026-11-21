@@ -8,3 +8,4 @@ export * from "./student";
 export * from "./root-cause";
 export * from "./report-parser";
 export * from "./diagnosis-view";
+export * from "./constellation";

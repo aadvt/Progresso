@@ -2,11 +2,12 @@
  * Seeding of DEMO FIXTURES (SAMPLE DATA). Deleted in Phase P together with
  * data/fixtures/ and @progresso/core/demo-fixtures.
  */
-import { eq } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 import { checkRecordAgainstGraph, marksLost, type ConceptGraph, type ErrorRecord } from "@progresso/core";
 import type { DemoStudent } from "@progresso/core/demo-fixtures";
 import type { Db } from "./client";
-import { errorRecordConcepts, errorRecords, exams, students } from "./schema";
+import { syncConceptGraph } from "./graph-sync";
+import { errorRecordConcepts, errorRecords, exams, graphVersions, students } from "./schema";
 
 export class SeedError extends Error {
   override name = "SeedError";
@@ -78,4 +79,18 @@ export function insertErrorRecord(db: Db, r: ErrorRecord, graphFingerprint: stri
       })
       .run();
   }
+}
+
+/**
+ * For apps that open the DB directly (the web app): sync the graph cache if
+ * this graph version is new, and seed the demo students if any are missing.
+ * Existing demo students, and their mastery, are left alone.
+ */
+export function ensureDemoData(db: Db, demo: DemoStudent[], graph: ConceptGraph): void {
+  const known = db.select({ f: graphVersions.fingerprint }).from(graphVersions).all();
+  if (!known.some((k) => k.f === graph.fingerprint)) syncConceptGraph(db, graph);
+  const ids = demo.map((d) => d.student.id);
+  if (ids.length === 0) return;
+  const present = db.select({ id: students.id }).from(students).where(inArray(students.id, ids)).all();
+  if (present.length < ids.length) seedDemoStudents(db, demo, graph);
 }

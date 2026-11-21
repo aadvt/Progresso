@@ -8,7 +8,10 @@ import * as schema from "./schema";
 
 export type Db = BetterSQLite3Database<typeof schema>;
 
-export const MIGRATIONS_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "drizzle");
+/** Default migrations folder, next to this package. Bundlers can move this file, so callers may pass their own. */
+export function migrationsDir(): string {
+  return join(dirname(fileURLToPath(import.meta.url)), "..", "drizzle");
+}
 
 export interface OpenDb {
   db: Db;
@@ -26,6 +29,6 @@ export function openDb(path: string): OpenDb {
   return { db, sqlite, close: () => sqlite.close() };
 }
 
-export function runMigrations(db: Db): void {
-  migrate(db, { migrationsFolder: MIGRATIONS_DIR });
+export function runMigrations(db: Db, migrationsFolder: string = migrationsDir()): void {
+  migrate(db, { migrationsFolder });
 }

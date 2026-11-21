@@ -2,7 +2,19 @@ import { eq } from "drizzle-orm";
 import { describe, expect, it } from "vitest";
 import { loadAppConfig, loadConceptGraph } from "@progresso/core";
 import { loadDemoFixtures } from "@progresso/core/demo-fixtures";
-import { openDb, runMigrations, schema, seedDemoStudents, summariseStudents, syncConceptGraph } from "../src";
+import {
+  clearConceptMastery,
+  ensureDemoData,
+  getConceptMastery,
+  isSampleStudent,
+  openDb,
+  runMigrations,
+  schema,
+  seedDemoStudents,
+  setConceptMastery,
+  summariseStudents,
+  syncConceptGraph,
+} from "../src";
 
 const config = loadAppConfig();
 const { graph } = loadConceptGraph(config.conceptGraphDir);
@@ -64,5 +76,35 @@ describe("database", () => {
       db.insert(schema.exams).values({ id: "e", studentId: "missing", name: "n", subject: "s", date: "2026-01-01" }).run(),
     ).toThrow(/FOREIGN KEY/);
     close();
+  });
+});
+
+describe("concept mastery", () => {
+  it("sets, updates, reads and clears a student's mastery", () => {
+    const { db, close } = freshDb();
+    seedDemoStudents(db, demo, graph);
+    const sid = demo[0]!.student.id;
+    const cid = demo[0]!.records[0]!.concepts[0]!.concept_id;
+    expect(getConceptMastery(db, sid)).toEqual([]);
+    setConceptMastery(db, { studentId: sid, conceptId: cid, state: "learning", at: "2026-11-21T10:00:00.000Z" });
+    setConceptMastery(db, { studentId: sid, conceptId: cid, state: "proven", at: "2026-11-21T11:00:00.000Z" });
+    expect(getConceptMastery(db, sid)).toEqual([{ concept_id: cid, state: "proven", updated_at: "2026-11-21T11:00:00.000Z" }]);
+    expect(isSampleStudent(db, sid)).toBe(true);
+    expect(clearConceptMastery(db, sid)).toBe(1);
+    expect(getConceptMastery(db, sid)).toEqual([]);
+    close();
+  });
+
+  it("ensureDemoData seeds once and keeps existing mastery", () => {
+    const handle = openDb(":memory:");
+    runMigrations(handle.db);
+    ensureDemoData(handle.db, demo, graph);
+    expect(handle.db.select().from(schema.students).all()).toHaveLength(demo.length);
+    const sid = demo[1]!.student.id;
+    setConceptMastery(handle.db, { studentId: sid, conceptId: "math.chain_rule", state: "proven" });
+    ensureDemoData(handle.db, demo, graph);
+    expect(getConceptMastery(handle.db, sid)).toHaveLength(1);
+    expect(handle.db.select().from(schema.concepts).all()).toHaveLength(graph.concepts.size);
+    handle.close();
   });
 });

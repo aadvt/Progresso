@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { DiagnosisView } from "@progresso/core";
+import type { ConstellationModel, DiagnosisView } from "@progresso/core";
 import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Surface } from "@/components/ui/Surface";
@@ -18,7 +18,7 @@ import styles from "./Diagnosis.module.css";
 
 const delay = (ms: number) => ({ "--enter-delay": `${ms}ms` }) as React.CSSProperties;
 
-export function Diagnosis({ student, view }: { student: StudentSummary; view: DiagnosisView }) {
+export function Diagnosis({ student, view, constellation }: { student: StudentSummary; view: DiagnosisView; constellation: ConstellationModel }) {
   const [reportOpen, setReportOpen] = useState(false);
   const [planOpen, setPlanOpen] = useState(false);
   const first = view.exams[0]?.date ?? "";
@@ -75,7 +75,7 @@ export function Diagnosis({ student, view }: { student: StudentSummary; view: Di
 
       <div className={styles.side}>
         <div className={styles.constellation} data-enter style={delay(120)}>
-          <ConstellationSlot roots={view.roots.map((r) => ({ id: r.concept.id, name: r.concept.name }))} />
+          <ConstellationSlot model={constellation} fullHref={`/s/${student.id}/constellation`} />
         </div>
         <div className={styles.sideRest}>
           <Breakdown view={view} />

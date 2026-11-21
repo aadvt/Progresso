@@ -73,6 +73,29 @@
   --thread-vertical: linear-gradient(180deg, var(--blue-500) 0%, var(--teal-500) 100%);
   --thread-soft: linear-gradient(135deg, rgb(61 110 247 / 0.16), rgb(22 179 160 / 0.16));
 
+  /* ---- night sky: the knowledge constellation (the one dark surface) ---- */
+  --sky-0: #03081a;
+  --sky-1: #081230;
+  --sky-2: #13224d;
+  --sky-glass: rgb(10 20 48 / 0.72);
+  --sky-glass-strong: rgb(8 16 40 / 0.9);
+  --sky-edge: rgb(160 190 255 / 0.16);
+  --sky-ink-1: #f2f5ff; /* 17:1 on --sky-1 */
+  --sky-ink-2: #c3cfee; /* 11:1 */
+  --sky-ink-3: #93a3cc; /* 6.6:1 */
+  --sky-focus: #9fc0ff;
+
+  /* Star states. Warm = problem, green = fixed; the dim unit tint comes from each unit's hue. */
+  --star-unassessed: #7d8fbd;
+  --star-weak: #ff9150;
+  --star-root: #ff5435;
+  --star-learning: #d4e968;
+  --star-mastered: #8ef7c9;
+  --star-lit: #d6e8ff;
+  --star-thread: #6a86d6;
+  --star-chain: #ff9d5c;
+  --star-ripple: #fff3cf;
+
   /* ---- space (4px base) ---- */
   --space-1: 0.25rem;
   --space-2: 0.5rem;

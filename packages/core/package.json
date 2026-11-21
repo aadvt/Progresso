@@ -6,7 +6,9 @@
   "exports": {
     ".": "./src/index.ts",
     "./demo-fixtures": "./src/demo-fixtures/index.ts",
-    "./report-parser": "./src/report-parser/index.ts"
+    "./report-parser": "./src/report-parser/index.ts",
+    "./constellation": "./src/constellation/index.ts",
+    "./constellation/client": "./src/constellation/client.ts"
   },
   "scripts": {
     "typecheck": "tsc -p tsconfig.json",

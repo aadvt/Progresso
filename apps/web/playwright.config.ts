@@ -1,10 +1,12 @@
 import { defineConfig, devices } from "@playwright/test";
 
 const PORT = Number(process.env.E2E_PORT ?? 3100);
+const desktop = { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 };
+const phone = { ...devices["Pixel 7"] };
 
 /**
  * End-to-end tests run against the production build (`next build` first).
- * Screenshots land in docs/screenshots/phase-3/ (see e2e/helpers.ts).
+ * Screenshots land in docs/screenshots/phase-N/ (see e2e/helpers.ts).
  */
 export default defineConfig({
   testDir: "e2e",
@@ -12,18 +14,27 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: 0,
+  // Several pages render WebGL at once; more workers than this just fight over one GPU.
+  workers: 3,
   reporter: [["list"]],
   timeout: 60_000,
   use: {
     baseURL: `http://localhost:${PORT}`,
     trace: "retain-on-failure",
+    // Headless Chromium falls back to software WebGL unless told to use the GPU.
+    launchOptions: { args: ["--enable-gpu", "--ignore-gpu-blocklist", ...(process.platform === "win32" ? ["--use-angle=d3d11"] : [])] },
   },
   projects: [
-    { name: "desktop", use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 } },
-    { name: "mobile", use: { ...devices["Pixel 7"] } },
+    { name: "desktop", testIgnore: /perf.spec/, use: desktop },
+    { name: "mobile", testIgnore: /perf.spec/, use: phone },
+    // Frame-rate measurements run last and alone, so nothing competes for the GPU.
+    { name: "perf-desktop", testMatch: /perf.spec/, dependencies: ["desktop", "mobile"], use: desktop },
+    { name: "perf-mobile", testMatch: /perf.spec/, dependencies: ["perf-desktop"], use: phone },
   ],
   webServer: {
     command: `pnpm exec next start --port ${PORT}`,
+    // Its own database, so e2e runs never touch your local demo state.
+    env: { DATABASE_PATH: process.env.DATABASE_PATH ?? "data/progresso-e2e.db" },
     url: `http://localhost:${PORT}`,
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,

@@ -72,3 +72,27 @@ Report: [phase-3-report.md](phase-3-report.md). Screenshots: [screenshots/phase-
 **Open items**
 - `docs/design-reference/` and `docs/report-format.md` referenced by the brief don't exist; design followed the written brief.
 - Report-added state is a cookie (no logins); move to DB in Phase P. Upload is text-only. No cap yet on very many roots. LLM re-wording not wired into the web app.
+
+---
+
+## Phase 4: Knowledge constellation (2026-11-21) ✅
+
+Report: [phase-4-report.md](phase-4-report.md). Screenshots and frame-rate JSON: [screenshots/phase-4/](screenshots/phase-4/).
+
+**Built**
+- Core `src/constellation/`: a deterministic layout (a disc per subject; foundations at the core, Class 11 then Class 12 at the rim; units as sectors ordered to keep threads short), `buildConstellation()` (star states from the analysis plus DB mastery: root, weak, learning, mastered, unassessed, plus `lit` downstream of a mastered root), and the ripple helpers (browser entry `@progresso/core/constellation/client`).
+- DB: `getConceptMastery` / `setConceptMastery` / `clearConceptMastery` and `ensureDemoData()`. The web app now opens the DB (it auto-migrates and seeds the demo students).
+- Web: `/s/[id]/constellation` (full screen: toolbar, "Your roots", focus panel with verbatim evidence and why it matters, demo trigger) and a live preview in the diagnosis slot.
+  - A three.js renderer: instanced stars, shader-driven threads and ripple, no post-processing.
+  - An SVG 2D fallback, chosen for no WebGL, weak devices, Data Saver, or a measured frame rate below 24 fps. The pixel ratio adapts first.
+  - Reduced motion supported.
+
+**Results**
+- 60 fps on desktop and the phone viewport. With the CPU 4× slower: 60 / 58 fps, and 49 / 60 fps during the ripple (Intel UHD; see the report for caveats). All fallback paths tested in e2e.
+
+**Decisions later phases rely on**
+- Missions (Phase 5) and the MCP server (Phase 10) update the map just by writing `concept_mastery`. A root going to `proven` plays the chain reaction on the next render.
+- Mastery is an overlay on the report-based diagnosis; roots are never removed by it.
+
+**Open items**
+- Verify on a physical mid-range Android phone. Unit labels may need a zoom threshold on the full graph. If the ripple gets heavy on the full graph, move per-star blending into the shader.

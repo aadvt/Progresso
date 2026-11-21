@@ -1,0 +1,93 @@
+.wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.host {
+  position: absolute;
+  inset: 0;
+}
+
+.labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.labels > span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: grid;
+  justify-items: center;
+  white-space: nowrap;
+  will-change: transform;
+  transition: opacity var(--dur-2) var(--ease-out);
+}
+
+.labels small {
+  font-size: var(--text-2xs);
+  font-weight: 500;
+}
+
+.subject {
+  color: var(--sky-ink-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  text-shadow: 0 1px 8px var(--sky-0);
+}
+
+.unit {
+  color: var(--sky-ink-3);
+  font-size: var(--text-2xs);
+  font-weight: 500;
+  text-shadow:
+    0 0 6px var(--sky-0),
+    0 1px 2px var(--sky-0);
+}
+
+.root,
+.focus,
+.hover {
+  padding: 0.2rem 0.6rem 0.25rem;
+  border-radius: var(--radius-sm);
+  background: var(--sky-glass);
+  border: 1px solid var(--sky-edge);
+  color: var(--sky-ink-1);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  line-height: 1.25;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.root {
+  border-color: color-mix(in srgb, var(--star-root) 55%, transparent);
+  box-shadow: 0 0 18px -4px color-mix(in srgb, var(--star-root) 70%, transparent);
+}
+
+.root small {
+  color: var(--star-weak);
+}
+
+.root:global(.is-mastered) {
+  border-color: color-mix(in srgb, var(--star-mastered) 55%, transparent);
+  box-shadow: 0 0 18px -4px color-mix(in srgb, var(--star-mastered) 70%, transparent);
+}
+
+.root:global(.is-mastered) small {
+  color: var(--star-mastered);
+}
+
+.focus {
+  border-color: var(--sky-focus);
+}
+
+.focus small,
+.hover small {
+  color: var(--sky-ink-2);
+}

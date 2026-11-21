@@ -4,7 +4,7 @@ import { Diagnosis } from "@/components/diagnosis/Diagnosis";
 import { StudentChip } from "@/components/StudentChip";
 import { SampleDataBadge } from "@/components/ui/Badge";
 import { TopBar } from "@/components/ui/TopBar";
-import { getDiagnosis, getStudent, listStudents } from "@/server/data";
+import { getConstellation, getDiagnosis, getStudent, listStudents } from "@/server/data";
 import { hasReport } from "@/server/report-state";
 
 export const dynamic = "force-dynamic";
@@ -16,7 +16,8 @@ export default async function DiagnosisPage({ params }: { params: Promise<{ stud
   if (!student) notFound();
   if (!(await hasReport(studentId))) redirect(`/s/${studentId}/add-report`);
   const view = getDiagnosis(studentId);
-  if (!view) notFound();
+  const constellation = getConstellation(studentId);
+  if (!view || !constellation) notFound();
   const seed = listStudents().findIndex((s) => s.id === studentId);
 
   return (
@@ -26,7 +27,7 @@ export default async function DiagnosisPage({ params }: { params: Promise<{ stud
         <StudentChip student={student} seed={seed} />
       </TopBar>
       <main id="main">
-        <Diagnosis student={student} view={view} />
+        <Diagnosis student={student} view={view} constellation={constellation} />
       </main>
     </>
   );

@@ -12,6 +12,7 @@ export default tseslint.config(
       "**/next-env.d.ts",
       "**/test-results/**",
       "**/playwright-report/**",
+      "**/e2e/.artifacts/**",
       "data/**",
       "packages/db/drizzle/**",
     ],

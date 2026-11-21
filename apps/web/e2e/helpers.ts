@@ -4,18 +4,25 @@ import { fileURLToPath } from "node:url";
 import AxeBuilder from "@axe-core/playwright";
 import { expect, type Page, type TestInfo } from "@playwright/test";
 
-export const SCREENSHOT_DIR = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "docs", "screenshots", "phase-3");
+export const SCREENSHOTS_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "docs", "screenshots");
+export const SCREENSHOT_DIR = join(SCREENSHOTS_ROOT, "phase-3");
 
-/** Save a screenshot as docs/screenshots/phase-3/<project>-<name>.png. */
-export async function shot(page: Page, info: TestInfo, name: string, options: { fullPage?: boolean } = {}): Promise<void> {
-  mkdirSync(SCREENSHOT_DIR, { recursive: true });
+/** Save a screenshot as docs/screenshots/<phase>/<project>-<name>.png (phase-3 unless given). */
+export async function shot(
+  page: Page,
+  info: TestInfo,
+  name: string,
+  options: { fullPage?: boolean; phase?: string; animations?: "disabled" | "allow" } = {},
+): Promise<void> {
+  const dir = options.phase ? join(SCREENSHOTS_ROOT, options.phase) : SCREENSHOT_DIR;
+  mkdirSync(dir, { recursive: true });
   // Full-page shots are JPEG to keep the repo small; viewport shots stay lossless PNG.
   const fullPage = options.fullPage ?? false;
   await page.screenshot({
-    path: join(SCREENSHOT_DIR, `${info.project.name}-${name}.${fullPage ? "jpg" : "png"}`),
+    path: join(dir, `${info.project.name}-${name}.${fullPage ? "jpg" : "png"}`),
     ...(fullPage ? { type: "jpeg" as const, quality: 85 } : {}),
     fullPage,
-    animations: "disabled",
+    animations: options.animations ?? "disabled",
   });
 }
 

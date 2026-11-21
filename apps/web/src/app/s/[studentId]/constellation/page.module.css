@@ -1,0 +1,74 @@
+/* The constellation gets the whole screen: a night sky with a slim bar on top. */
+.page {
+  --sky-header-h: 3.75rem;
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: var(--sky-header-h) minmax(0, 1fr);
+  background: var(--sky-1);
+  color: var(--sky-ink-1);
+  color-scheme: dark;
+}
+
+.bar {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0 var(--gutter);
+  background: var(--sky-0);
+  border-bottom: 1px solid var(--sky-edge);
+}
+
+.back {
+  justify-self: start;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.5rem;
+  padding: 0 0.8rem 0 0.55rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--sky-edge);
+  color: var(--sky-ink-1);
+  font-size: var(--text-sm);
+  font-weight: 550;
+  text-decoration: none;
+}
+
+.back:hover {
+  background: var(--sky-glass);
+}
+
+.back:focus-visible {
+  outline: 2px solid var(--sky-focus);
+  outline-offset: 2px;
+}
+
+.title {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-md);
+  color: var(--sky-ink-1);
+  white-space: nowrap;
+}
+
+.right {
+  justify-self: end;
+}
+
+.main {
+  min-height: 0;
+}
+
+@media (max-width: 640px) {
+  .backText,
+  .titleRest {
+    display: none;
+  }
+
+  .title {
+    font-size: var(--text-sm);
+  }
+}
