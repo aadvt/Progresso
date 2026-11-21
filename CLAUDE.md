@@ -114,7 +114,7 @@ pnpm verify                 # typecheck + lint + tests + graph validation
 pnpm graph:validate         # validate the configured concept graph and print stats (--json for JSON)
 pnpm analyse demo-riya      # root-cause analysis for a student (--all, --json, --llm to word explanations via the LLM)
 pnpm web:dev                # web app at http://localhost:3100
-pnpm e2e                    # production build + Playwright e2e (desktop + phone, axe, then frame-rate runs); screenshots to docs/screenshots/
+pnpm e2e                    # production build + Playwright e2e (desktop + phone, axe, then frame-rate runs); screenshots to docs/screenshots/ (local only, git-ignored)
 pnpm questions:generate     # generate + verify prove-it questions into data/question-bank (LLM + SymPy; needs Python 3 with sympy)
                             # --missing tops up targets with no verified questions; --only a,b; --list; saves per target
 pnpm simulate demo-riya     # simulate 14 days of missions on a throwaway DB (--days, --minutes, --skip, --out)

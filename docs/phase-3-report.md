@@ -2,7 +2,7 @@
 
 Date: 2026-11-21. Status: verification gate passed: `pnpm verify` (typecheck, lint, 101 tests, graph validation), production build with no warnings, and `pnpm e2e` with 12 Playwright tests at desktop (1440×900) and phone (Pixel 7) sizes, including axe WCAG 2.1 AA checks on every screen. The suite was run three times back to back (36/36) to check for flakiness.
 
-Screenshots: [`docs/screenshots/phase-3/`](screenshots/phase-3/) (`desktop-*` and `mobile-*`; full-page shots are `.jpg`, viewport shots `.png`).
+Screenshots: [`docs/screenshots/phase-3/`](screenshots/phase-3/) (`desktop-*` and `mobile-*`; full-page shots are `.jpg`, viewport shots `.png`). Screenshots are local only (git-ignored, not in the repo); `pnpm e2e` regenerates them.
 
 ## Inputs that were missing
 

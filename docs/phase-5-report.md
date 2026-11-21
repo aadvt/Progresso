@@ -6,7 +6,7 @@ Gate results:
 - `pnpm verify`: typecheck, lint, **162 tests** (13 files), graph validation: all pass.
 - Production build passes. `pnpm e2e`: **33 Playwright tests passed**, 3 skipped by design (desktop-only tests on the phone project); axe WCAG 2.1 AA on every new screen; frame rate unchanged (60 fps desktop and phone, also at 4× and 6× CPU slowdown).
 - 14-day simulation: [`phase-5-simulation.md`](phase-5-simulation.md).
-- Screenshots: [`docs/screenshots/phase-5/`](screenshots/phase-5/).
+- Screenshots: `docs/screenshots/phase-5/`, local only (git-ignored, not in the repo); `pnpm e2e` regenerates them.
 
 Everything shown is SAMPLE DATA (demo fixtures), labelled as such in the UI.
 

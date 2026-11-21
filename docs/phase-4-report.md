@@ -2,7 +2,7 @@
 
 Date: 2026-11-21. Status: verification gate passed. `pnpm verify` (typecheck, lint, 117 tests, graph validation), production build, and `pnpm e2e`: 29 Playwright tests passed, 1 skipped by design (the keyboard test runs on desktop only). That covers desktop (1440×900) and phone (Pixel 7), axe WCAG 2.1 AA on the full map, the 2D map and the diagnosis page with its preview, and two frame-rate projects that run last and alone.
 
-Screenshots: [`docs/screenshots/phase-4/`](screenshots/phase-4/). Frame-rate results: `perf-desktop-perf.json` and `perf-mobile-perf.json` in the same folder.
+Screenshots: [`docs/screenshots/phase-4/`](screenshots/phase-4/). Frame-rate results: `perf-desktop-perf.json` and `perf-mobile-perf.json` in the same folder. Screenshots are local only (git-ignored, not in the repo); `pnpm e2e` regenerates them.
 
 ## What was built
 
