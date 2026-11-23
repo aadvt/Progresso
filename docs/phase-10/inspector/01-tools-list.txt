@@ -1,0 +1,182 @@
+$ mcp-inspector --cli http://127.0.0.1:3101/mcp --header Authorization: Bearer demo-token-123 --method tools/list --strict
+
+{
+  "tools": [
+    {
+      "name": "list_students",
+      "title": "List demo students",
+      "description": "Lists the students this server can act for (pseudonymous ids, class, subjects, next exam). All are SAMPLE DATA demo students.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "get_tonight_mission",
+      "title": "Tonight's mission",
+      "description": "Answers \"what should I study tonight?\": tonight's ~25-minute mission from the student's comeback plan, with the root gap it fixes, a Mistake Recap from their report, explainer links and 3 prove-it questions (shown as an interactive widget). Starts the mission so its questions are fixed; sets up a default plan (next exam, 25 min/day) if there is none.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "student": {
+            "type": "string",
+            "description": "Student id (demo-riya, demo-kabir, demo-ananya, demo-vihaan). See list_students."
+          },
+          "mission_id": {
+            "description": "Re-open a specific mission (from an earlier result) instead of tonight's next one.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "student"
+        ],
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "ui": {
+          "resourceUri": "ui://progresso/mission.html"
+        },
+        "ui/resourceUri": "ui://progresso/mission.html"
+      }
+    },
+    {
+      "name": "submit_answer",
+      "title": "Submit a prove-it answer",
+      "description": "Records the student's answer to one prove-it question: grades it, saves it, and when it is the last one finishes the mission (mastery gate + spaced-repetition update; the web app's constellation updates). Returns feedback, the misconception a wrong answer reveals, and the worked solution. Only call with the student's own answer.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "student": {
+            "type": "string",
+            "description": "Student id (demo-riya, demo-kabir, demo-ananya, demo-vihaan). See list_students."
+          },
+          "mission_id": {
+            "type": "string",
+            "description": "From get_tonight_mission."
+          },
+          "question_id": {
+            "type": "string",
+            "description": "From get_tonight_mission."
+          },
+          "answer": {
+            "type": "string",
+            "minLength": 1,
+            "description": "The option letter (A, B, C, D) or, for numeric questions, the number."
+          }
+        },
+        "required": [
+          "student",
+          "mission_id",
+          "question_id",
+          "answer"
+        ],
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "finish_mission",
+      "title": "Finish a mission",
+      "description": "Finishes a mission. Normally automatic after the last prove-it answer; call it for a mission with no prove-it questions yet (recorded as studied, not proven).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "student": {
+            "type": "string",
+            "description": "Student id (demo-riya, demo-kabir, demo-ananya, demo-vihaan). See list_students."
+          },
+          "mission_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "student",
+          "mission_id"
+        ],
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": false,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      }
+    },
+    {
+      "name": "get_progress",
+      "title": "Progress",
+      "description": "How the student is doing: which root gaps are fixed (proven), the readiness estimate for the next exam (always a range), and a mini knowledge constellation.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "student": {
+            "type": "string",
+            "description": "Student id (demo-riya, demo-kabir, demo-ananya, demo-vihaan). See list_students."
+          }
+        },
+        "required": [
+          "student"
+        ],
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false
+      },
+      "_meta": {
+        "ui": {
+          "resourceUri": "ui://progresso/progress.html"
+        },
+        "ui/resourceUri": "ui://progresso/progress.html"
+      }
+    },
+    {
+      "name": "explain_my_mistake",
+      "title": "Explain my mistake",
+      "description": "Facts for a plain-language explanation of one of the student's mistakes, grounded in their actual report: the report's diagnosis and quoted working (verbatim), the root gap it traces back to, the verified fix and explainer. Pass `about` (a question like \"Q7\", an exam, or a topic like \"chain rule\") or `question_id` (a prove-it question they just answered).",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "student": {
+            "type": "string",
+            "description": "Student id (demo-riya, demo-kabir, demo-ananya, demo-vihaan). See list_students."
+          },
+          "about": {
+            "description": "A question (\"Pre-Board 1 Q9\"), exam or topic (\"chain rule\").",
+            "type": "string"
+          },
+          "question_id": {
+            "description": "A prove-it question id from a mission.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "student"
+        ],
+        "$schema": "https://json-schema.org/draft/2020-12/schema"
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false
+      }
+    }
+  ]
+}
+
+(exit 0)

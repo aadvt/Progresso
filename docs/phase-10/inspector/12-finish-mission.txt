@@ -1,0 +1,47 @@
+$ mcp-inspector --cli http://127.0.0.1:3101/mcp --header Authorization: Bearer demo-token-123 --method tools/call --tool-name finish_mission --tool-arg student=demo-riya mission_id=demo-riya:2026-11-23:0
+
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "### Mission result: not yet\n- Chain rule: 2/3 correct, none → learning. 2 of 3 right; 3 needed.\nReadiness (estimate): 89–98% (most likely 93%) → 89–98% (most likely 93%)."
+    }
+  ],
+  "structuredContent": {
+    "view": "result",
+    "student_id": "demo-riya",
+    "mission_id": "demo-riya:2026-11-23:0",
+    "result": {
+      "passed": false,
+      "outcomes": [
+        {
+          "concept_name": "Chain rule",
+          "passed": false,
+          "correct": 2,
+          "total": 3,
+          "reason": "2 of 3 right; 3 needed.",
+          "before": "none",
+          "after": "learning",
+          "root_mastered": false
+        }
+      ],
+      "readiness_before": {
+        "low": 88.7,
+        "mid": 93,
+        "high": 97.7
+      },
+      "readiness_after": {
+        "low": 88.7,
+        "mid": 93,
+        "high": 97.7
+      }
+    },
+    "links": {
+      "today": "http://localhost:3100/s/demo-riya/today",
+      "constellation": "http://localhost:3100/s/demo-riya/constellation",
+      "mission": "http://localhost:3100/s/demo-riya/mission/demo-riya%3A2026-11-23%3A0"
+    }
+  }
+}
+
+(exit 0)

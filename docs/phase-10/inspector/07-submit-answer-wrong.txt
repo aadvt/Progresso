@@ -1,0 +1,42 @@
+$ mcp-inspector --cli http://127.0.0.1:3101/mcp --header Authorization: Bearer demo-token-123 --method tools/call --tool-name submit_answer --tool-arg student=demo-riya mission_id=demo-riya:2026-11-23:0 question_id=math.chain_rule.m2.chain_rule.2 answer=a
+
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Question 1 of 3 recorded (mission demo-riya:2026-11-23:0).\n\nNot quite (answered A).\nYou calculated the derivative of the inner term $3x^2$ as $6x$, but left the outer $\\tan(\\cdot)$ untouched. Differentiate $\\tan(u)$ to $\\sec^2(u)$ to get $6x \\sec^2(3x^2)$.\nThis wrong answer is the misconception \"Differentiates the inner function but leaves the outer function undifferentiated\".\nWorked solution: Let $y = \\tan(3x^2)$ and $u = 3x^2$. Then $y = \\tan(u)$. By the chain rule, $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx} = \\sec^2(u) \\cdot (6x) = 6x \\sec^2(3x^2)$.\n\n2 to go.\n\nTo go deeper, call `explain_my_mistake` with question_id math.chain_rule.m2.chain_rule.2: it ties this answer back to the mistakes in the student's report."
+    }
+  ],
+  "structuredContent": {
+    "view": "answer",
+    "student_id": "demo-riya",
+    "mission_id": "demo-riya:2026-11-23:0",
+    "question_id": "math.chain_rule.m2.chain_rule.2",
+    "feedback": {
+      "correct": false,
+      "chosen": "a",
+      "feedback": {
+        "text": "You calculated the derivative of the inner term $3x^2$ as $6x$, but left the outer $\\tan(\\cdot)$ untouched. Differentiate $\\tan(u)$ to $\\sec^2(u)$ to get $6x \\sec^2(3x^2)$.",
+        "html": "You calculated the derivative of the inner term <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation encoding=\"application/x-tex\">3x^2</annotation></semantics></math></span> as <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mn>6</mn><mi>x</mi></mrow><annotation encoding=\"application/x-tex\">6x</annotation></semantics></math></span>, but left the outer <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mo>⋅</mo><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">\\tan(\\cdot)</annotation></semantics></math></span> untouched. Differentiate <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>tan</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mi>u</mi><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">\\tan(u)</annotation></semantics></math></span> to <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><msup><mrow><mi>sec</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mo stretchy=\"false\">(</mo><mi>u</mi><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">\\sec^2(u)</annotation></semantics></math></span> to get <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mn>6</mn><mi>x</mi><msup><mrow><mi>sec</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mo stretchy=\"false\">(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">6x \\sec^2(3x^2)</annotation></semantics></math></span>."
+      },
+      "correct_option_id": "c",
+      "misconception": {
+        "id": "math.chain_rule.m2",
+        "description": "Differentiates the inner function but leaves the outer function undifferentiated"
+      },
+      "solution": {
+        "text": "Let $y = \\tan(3x^2)$ and $u = 3x^2$. Then $y = \\tan(u)$. By the chain rule, $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx} = \\sec^2(u) \\cdot (6x) = 6x \\sec^2(3x^2)$.",
+        "html": "Let <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>y</mi><mo>=</mo><mi>tan</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">y = \\tan(3x^2)</annotation></semantics></math></span> and <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>u</mi><mo>=</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation encoding=\"application/x-tex\">u = 3x^2</annotation></semantics></math></span>. Then <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>y</mi><mo>=</mo><mi>tan</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mi>u</mi><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">y = \\tan(u)</annotation></semantics></math></span>. By the chain rule, <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>u</mi></mrow></mfrac><mo>⋅</mo><mfrac><mrow><mi>d</mi><mi>u</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>=</mo><msup><mrow><mi>sec</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mo stretchy=\"false\">(</mo><mi>u</mi><mo stretchy=\"false\">)</mo><mo>⋅</mo><mo stretchy=\"false\">(</mo><mn>6</mn><mi>x</mi><mo stretchy=\"false\">)</mo><mo>=</mo><mn>6</mn><mi>x</mi><msup><mrow><mi>sec</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mo stretchy=\"false\">(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx} = \\sec^2(u) \\cdot (6x) = 6x \\sec^2(3x^2)</annotation></semantics></math></span>."
+      }
+    },
+    "answered": 1,
+    "total": 3,
+    "links": {
+      "today": "http://localhost:3100/s/demo-riya/today",
+      "constellation": "http://localhost:3100/s/demo-riya/constellation",
+      "mission": "http://localhost:3100/s/demo-riya/mission/demo-riya%3A2026-11-23%3A0"
+    }
+  }
+}
+
+(exit 0)

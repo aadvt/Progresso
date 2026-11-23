@@ -1,0 +1,20 @@
+$ mcp-inspector --cli http://127.0.0.1:3101/mcp --header Authorization: Bearer demo-token-123 --method resources/list
+
+{
+  "resources": [
+    {
+      "name": "Tonight's mission",
+      "uri": "ui://progresso/mission.html",
+      "description": "Progresso widget: Tonight's mission",
+      "mimeType": "text/html;profile=mcp-app"
+    },
+    {
+      "name": "Progress",
+      "uri": "ui://progresso/progress.html",
+      "description": "Progresso widget: Progress",
+      "mimeType": "text/html;profile=mcp-app"
+    }
+  ]
+}
+
+(exit 0)

@@ -1,0 +1,63 @@
+$ mcp-inspector --cli http://127.0.0.1:3101/mcp --header Authorization: Bearer demo-token-123 --method tools/call --tool-name submit_answer --tool-arg student=demo-riya mission_id=demo-riya:2026-11-23:0 question_id=math.chain_rule.m2.chain_rule.1 answer=b
+
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Question 3 of 3 recorded (mission demo-riya:2026-11-23:0).\n\nCorrect ✓\nCorrect! Applying the chain rule gives $\\frac{d}{du}[\\cos(u)] \\cdot \\frac{d}{dx}[x^3] = -\\sin(x^3) \\cdot 3x^2 = -3x^2 \\sin(x^3)$.\nWorked solution: Let $y = \\cos(x^3)$ and $u = x^3$. Then $y = \\cos(u)$. By the chain rule, $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx} = -\\sin(u) \\cdot (3x^2) = -3x^2 \\sin(x^3)$.\n\n### Mission result: not yet\n- Chain rule: 2/3 correct, none → learning. 2 of 3 right; 3 needed.\nReadiness (estimate): 88–96% (most likely 91%) → 89–98% (most likely 93%).\n\nSaved to the student's progress; the web app (http://localhost:3100/s/demo-riya/constellation) shows it."
+    }
+  ],
+  "structuredContent": {
+    "view": "answer",
+    "student_id": "demo-riya",
+    "mission_id": "demo-riya:2026-11-23:0",
+    "question_id": "math.chain_rule.m2.chain_rule.1",
+    "feedback": {
+      "correct": true,
+      "chosen": "b",
+      "feedback": {
+        "text": "Correct! Applying the chain rule gives $\\frac{d}{du}[\\cos(u)] \\cdot \\frac{d}{dx}[x^3] = -\\sin(x^3) \\cdot 3x^2 = -3x^2 \\sin(x^3)$.",
+        "html": "Correct! Applying the chain rule gives <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mfrac><mi>d</mi><mrow><mi>d</mi><mi>u</mi></mrow></mfrac><mo stretchy=\"false\">[</mo><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mi>u</mi><mo stretchy=\"false\">)</mo><mo stretchy=\"false\">]</mo><mo>⋅</mo><mfrac><mi>d</mi><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo stretchy=\"false\">[</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy=\"false\">]</mo><mo>=</mo><mo>−</mo><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy=\"false\">)</mo><mo>⋅</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo>=</mo><mo>−</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">\\frac{d}{du}[\\cos(u)] \\cdot \\frac{d}{dx}[x^3] = -\\sin(x^3) \\cdot 3x^2 = -3x^2 \\sin(x^3)</annotation></semantics></math></span>."
+      },
+      "correct_option_id": "b",
+      "solution": {
+        "text": "Let $y = \\cos(x^3)$ and $u = x^3$. Then $y = \\cos(u)$. By the chain rule, $\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx} = -\\sin(u) \\cdot (3x^2) = -3x^2 \\sin(x^3)$.",
+        "html": "Let <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>y</mi><mo>=</mo><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">y = \\cos(x^3)</annotation></semantics></math></span> and <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>u</mi><mo>=</mo><msup><mi>x</mi><mn>3</mn></msup></mrow><annotation encoding=\"application/x-tex\">u = x^3</annotation></semantics></math></span>. Then <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>y</mi><mo>=</mo><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mi>u</mi><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">y = \\cos(u)</annotation></semantics></math></span>. By the chain rule, <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>u</mi></mrow></mfrac><mo>⋅</mo><mfrac><mrow><mi>d</mi><mi>u</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>=</mo><mo>−</mo><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mi>u</mi><mo stretchy=\"false\">)</mo><mo>⋅</mo><mo stretchy=\"false\">(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo><mo>=</mo><mo>−</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">\\frac{dy}{dx} = \\frac{dy}{du} \\cdot \\frac{du}{dx} = -\\sin(u) \\cdot (3x^2) = -3x^2 \\sin(x^3)</annotation></semantics></math></span>."
+      }
+    },
+    "answered": 3,
+    "total": 3,
+    "result": {
+      "passed": false,
+      "outcomes": [
+        {
+          "concept_name": "Chain rule",
+          "passed": false,
+          "correct": 2,
+          "total": 3,
+          "reason": "2 of 3 right; 3 needed.",
+          "before": "none",
+          "after": "learning",
+          "root_mastered": false
+        }
+      ],
+      "readiness_before": {
+        "low": 87.5,
+        "mid": 91.2,
+        "high": 95.7
+      },
+      "readiness_after": {
+        "low": 88.7,
+        "mid": 93,
+        "high": 97.7
+      }
+    },
+    "links": {
+      "today": "http://localhost:3100/s/demo-riya/today",
+      "constellation": "http://localhost:3100/s/demo-riya/constellation",
+      "mission": "http://localhost:3100/s/demo-riya/mission/demo-riya%3A2026-11-23%3A0"
+    }
+  }
+}
+
+(exit 0)

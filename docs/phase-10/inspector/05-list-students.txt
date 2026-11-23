@@ -1,0 +1,71 @@
+$ mcp-inspector --cli http://127.0.0.1:3101/mcp --header Authorization: Bearer demo-token-123 --method tools/call --tool-name list_students
+
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Students:\n- `demo-riya`: Class 12, Mathematics; next exam Pre-Board 2 on 2027-01-12 (SAMPLE DATA)\n- `demo-kabir`: Class 12, Mathematics + Chemistry; next exam Pre-Board 2 on 2027-01-14 (SAMPLE DATA)\n- `demo-ananya`: Class 12, Mathematics + Chemistry; next exam Pre-Board 2 on 2027-01-12 (SAMPLE DATA)\n- `demo-vihaan`: Class 12, Mathematics + Chemistry; next exam Pre-Board 2 on 2027-01-13 (SAMPLE DATA)"
+    }
+  ],
+  "structuredContent": {
+    "students": [
+      {
+        "id": "demo-riya",
+        "sample": true,
+        "class": 12,
+        "subjects": [
+          "Mathematics"
+        ],
+        "next_exam": {
+          "name": "Pre-Board 2",
+          "date": "2027-01-12"
+        },
+        "has_plan": false
+      },
+      {
+        "id": "demo-kabir",
+        "sample": true,
+        "class": 12,
+        "subjects": [
+          "Mathematics",
+          "Chemistry"
+        ],
+        "next_exam": {
+          "name": "Pre-Board 2",
+          "date": "2027-01-14"
+        },
+        "has_plan": false
+      },
+      {
+        "id": "demo-ananya",
+        "sample": true,
+        "class": 12,
+        "subjects": [
+          "Mathematics",
+          "Chemistry"
+        ],
+        "next_exam": {
+          "name": "Pre-Board 2",
+          "date": "2027-01-12"
+        },
+        "has_plan": false
+      },
+      {
+        "id": "demo-vihaan",
+        "sample": true,
+        "class": 12,
+        "subjects": [
+          "Mathematics",
+          "Chemistry"
+        ],
+        "next_exam": {
+          "name": "Pre-Board 2",
+          "date": "2027-01-13"
+        },
+        "has_plan": false
+      }
+    ]
+  }
+}
+
+(exit 0)

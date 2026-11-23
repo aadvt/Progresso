@@ -1,0 +1,34 @@
+{
+  "name": "@progresso/mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p tsconfig.json && tsc -p tsconfig.ui.json",
+    "build:ui": "tsx scripts/build-ui.ts",
+    "start": "tsx src/main.ts",
+    "stdio": "tsx src/main.ts --stdio",
+    "smoke": "tsx scripts/smoke.ts",
+    "host-check": "tsx scripts/host-check.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/client": "^2.4.0",
+    "@modelcontextprotocol/express": "^2.0.2",
+    "@modelcontextprotocol/ext-apps": "^2.0.4",
+    "@modelcontextprotocol/node": "^2.1.2",
+    "@modelcontextprotocol/server": "^2.4.0",
+    "@progresso/core": "workspace:*",
+    "@progresso/db": "workspace:*",
+    "@progresso/service": "workspace:*",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "katex": "0.16.25",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.3",
+    "esbuild": "^0.25.0",
+    "@playwright/test": "^1.65.1"
+  }
+}

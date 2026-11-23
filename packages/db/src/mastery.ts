@@ -3,10 +3,11 @@
  * on every request, so whatever writes here (Phase 5 missions, the Phase 10
  * MCP server, the Phase 4 demo trigger) shows up on the map automatically.
  */
-import { and, eq } from "drizzle-orm";
+import { createHash } from "node:crypto";
+import { and, eq, sql } from "drizzle-orm";
 import type { ConceptMasteryState, MasteryLevel } from "@progresso/core";
 import type { Db } from "./client";
-import { conceptMastery, students } from "./schema";
+import { conceptMastery, missions, planSettings, questionAttempts, students } from "./schema";
 
 export function getConceptMastery(db: Db, studentId: string): ConceptMasteryState[] {
   return db
@@ -32,6 +33,32 @@ export function clearConceptMastery(db: Db, studentId: string, conceptId?: strin
     ? and(eq(conceptMastery.studentId, studentId), eq(conceptMastery.conceptId, conceptId))
     : eq(conceptMastery.studentId, studentId);
   return db.delete(conceptMastery).where(where).run().changes;
+}
+
+/**
+ * A short fingerprint of everything a student's progress screens show: mastery,
+ * answers, missions and plan settings. It changes whenever any process (the web
+ * app, the MCP server, the simulator) writes progress, so an open page can poll
+ * it cheaply and refresh only when something changed.
+ */
+export function progressVersion(db: Db, studentId: string): string {
+  const one = <T>(q: { get(): T | undefined }) => q.get();
+  const m = one(
+    db
+      .select({ n: sql<number>`count(*)`, at: sql<string>`coalesce(max(${conceptMastery.updatedAt}), '')`, s: sql<string>`coalesce(group_concat(${conceptMastery.state}), '')` })
+      .from(conceptMastery)
+      .where(eq(conceptMastery.studentId, studentId)),
+  );
+  const a = one(db.select({ n: sql<number>`count(*)` }).from(questionAttempts).where(eq(questionAttempts.studentId, studentId)));
+  const k = one(
+    db
+      .select({ n: sql<number>`count(*)`, done: sql<number>`coalesce(sum(case when ${missions.status} = 'completed' then 1 else 0 end), 0)` })
+      .from(missions)
+      .where(eq(missions.studentId, studentId)),
+  );
+  const p = one(db.select({ at: planSettings.updatedAt, off: planSettings.demoDayOffset, d: planSettings.examDate }).from(planSettings).where(eq(planSettings.studentId, studentId)));
+  const raw = JSON.stringify([m, a, k, p ?? null]);
+  return createHash("sha1").update(raw).digest("hex").slice(0, 16);
 }
 
 export function isSampleStudent(db: Db, studentId: string): boolean {

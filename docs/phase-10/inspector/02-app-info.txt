@@ -1,0 +1,10 @@
+$ mcp-inspector --cli http://127.0.0.1:3101/mcp --header Authorization: Bearer demo-token-123 --method tools/list --app-info --advertise-apps
+
+{"hasApp":false,"toolName":"list_students"}
+{"hasApp":true,"toolName":"get_tonight_mission","resourceUri":"ui://progresso/mission.html","prefersBorder":false,"resourceMimeType":"text/html;profile=mcp-app"}
+{"hasApp":false,"toolName":"submit_answer"}
+{"hasApp":false,"toolName":"finish_mission"}
+{"hasApp":true,"toolName":"get_progress","resourceUri":"ui://progresso/progress.html","prefersBorder":false,"resourceMimeType":"text/html;profile=mcp-app"}
+{"hasApp":false,"toolName":"explain_my_mistake"}
+
+(exit 0)

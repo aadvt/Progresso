@@ -1,0 +1,38 @@
+$ mcp-inspector --cli http://127.0.0.1:3101/mcp --header Authorization: Bearer demo-token-123 --method tools/call --tool-name submit_answer --tool-arg student=demo-riya mission_id=demo-riya:2026-11-23:0 question_id=math.chain_rule.m2.chain_rule.3 answer=D
+
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Question 2 of 3 recorded (mission demo-riya:2026-11-23:0).\n\nCorrect ✓\nCorrect! Working through each layer gives $e^{\\cos(3x)} \\cdot (-\\sin(3x)) \\cdot 3 = -3\\sin(3x) e^{\\cos(3x)}$.\nWorked solution: Applying the chain rule across all three layers: $\\frac{dy}{dx} = \\frac{d}{du}[e^u] \\cdot \\frac{d}{dv}[\\cos(v)] \\cdot \\frac{d}{dx}[3x]$ where $u = \\cos(3x)$ and $v = 3x$. This gives $e^{\\cos(3x)} \\cdot (-\\sin(3x)) \\cdot 3 = -3\\sin(3x) e^{\\cos(3x)}$.\n\n1 to go."
+    }
+  ],
+  "structuredContent": {
+    "view": "answer",
+    "student_id": "demo-riya",
+    "mission_id": "demo-riya:2026-11-23:0",
+    "question_id": "math.chain_rule.m2.chain_rule.3",
+    "feedback": {
+      "correct": true,
+      "chosen": "d",
+      "feedback": {
+        "text": "Correct! Working through each layer gives $e^{\\cos(3x)} \\cdot (-\\sin(3x)) \\cdot 3 = -3\\sin(3x) e^{\\cos(3x)}$.",
+        "html": "Correct! Working through each layer gives <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><msup><mi>e</mi><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo></mrow></msup><mo>⋅</mo><mo stretchy=\"false\">(</mo><mo>−</mo><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo><mo stretchy=\"false\">)</mo><mo>⋅</mo><mn>3</mn><mo>=</mo><mo>−</mo><mn>3</mn><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo><msup><mi>e</mi><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo></mrow></msup></mrow><annotation encoding=\"application/x-tex\">e^{\\cos(3x)} \\cdot (-\\sin(3x)) \\cdot 3 = -3\\sin(3x) e^{\\cos(3x)}</annotation></semantics></math></span>."
+      },
+      "correct_option_id": "d",
+      "solution": {
+        "text": "Applying the chain rule across all three layers: $\\frac{dy}{dx} = \\frac{d}{du}[e^u] \\cdot \\frac{d}{dv}[\\cos(v)] \\cdot \\frac{d}{dx}[3x]$ where $u = \\cos(3x)$ and $v = 3x$. This gives $e^{\\cos(3x)} \\cdot (-\\sin(3x)) \\cdot 3 = -3\\sin(3x) e^{\\cos(3x)}$.",
+        "html": "Applying the chain rule across all three layers: <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo>=</mo><mfrac><mi>d</mi><mrow><mi>d</mi><mi>u</mi></mrow></mfrac><mo stretchy=\"false\">[</mo><msup><mi>e</mi><mi>u</mi></msup><mo stretchy=\"false\">]</mo><mo>⋅</mo><mfrac><mi>d</mi><mrow><mi>d</mi><mi>v</mi></mrow></mfrac><mo stretchy=\"false\">[</mo><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mi>v</mi><mo stretchy=\"false\">)</mo><mo stretchy=\"false\">]</mo><mo>⋅</mo><mfrac><mi>d</mi><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo stretchy=\"false\">[</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">]</mo></mrow><annotation encoding=\"application/x-tex\">\\frac{dy}{dx} = \\frac{d}{du}[e^u] \\cdot \\frac{d}{dv}[\\cos(v)] \\cdot \\frac{d}{dx}[3x]</annotation></semantics></math></span> where <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>u</mi><mo>=</mo><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">u = \\cos(3x)</annotation></semantics></math></span> and <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>v</mi><mo>=</mo><mn>3</mn><mi>x</mi></mrow><annotation encoding=\"application/x-tex\">v = 3x</annotation></semantics></math></span>. This gives <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><msup><mi>e</mi><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo></mrow></msup><mo>⋅</mo><mo stretchy=\"false\">(</mo><mo>−</mo><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo><mo stretchy=\"false\">)</mo><mo>⋅</mo><mn>3</mn><mo>=</mo><mo>−</mo><mn>3</mn><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo><msup><mi>e</mi><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo></mrow></msup></mrow><annotation encoding=\"application/x-tex\">e^{\\cos(3x)} \\cdot (-\\sin(3x)) \\cdot 3 = -3\\sin(3x) e^{\\cos(3x)}</annotation></semantics></math></span>."
+      }
+    },
+    "answered": 2,
+    "total": 3,
+    "links": {
+      "today": "http://localhost:3100/s/demo-riya/today",
+      "constellation": "http://localhost:3100/s/demo-riya/constellation",
+      "mission": "http://localhost:3100/s/demo-riya/mission/demo-riya%3A2026-11-23%3A0"
+    }
+  }
+}
+
+(exit 0)

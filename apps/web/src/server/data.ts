@@ -1,81 +1,23 @@
 /**
- * Server-side data access for the web app. The only module that knows where
- * students, records and the concept graph come from.
+ * Server-side data access for the web app. Students, records, the concept
+ * graph and the database come from @progresso/service, the data seam shared
+ * with the MCP server (both read and write the same SQLite file, so progress
+ * made in Claude shows up here).
  *
  * Until Phase P everything comes from the demo fixtures (SAMPLE DATA). In
  * Phase P, swap `getReportParser()` for the real parser and the record lookups
- * for the database; pages and components don't change.
+ * in @progresso/service for the database; pages and components don't change.
  */
-import {
-  analyseStudent,
-  buildConstellation,
-  buildDiagnosisView,
-  layoutConstellation,
-  findRepoRoot,
-  loadAppConfig,
-  loadConceptGraph,
-  loadQuestionBank,
-  loadLessons,
-  loadVideoLibrary,
-  type LessonLibrary,
-  type VideoLibrary,
-  localDay,
-  addDays,
-  type ConceptGraph,
-  type ErrorRecord,
-  type IsoDay,
-  type LoadedBank,
-  type ConstellationLayout,
-  type ConstellationModel,
-  type DiagnosisView,
-  type RootCauseAnalysis,
-  type ReportParser,
-} from "@progresso/core";
-import { DemoFixtureParser, loadDemoFixtures, SAMPLE_DATA_NOTICE, type DemoStudent } from "@progresso/core/demo-fixtures";
-import {
-  clearConceptMastery,
-  getConceptMastery,
-  getPlanSettings,
-  isSampleStudent,
-  setConceptMastery,
-  type Db,
-  type StudentContext,
-} from "@progresso/db";
+import { buildDiagnosisView, type ConceptGraph, type ConstellationModel, type DiagnosisView, type ErrorRecord, type IsoDay, type LessonLibrary, type ReportParser, type VideoLibrary } from "@progresso/core";
+import { DemoFixtureParser, SAMPLE_DATA_NOTICE, type DemoStudent } from "@progresso/core/demo-fixtures";
+import { clearConceptMastery, isSampleStudent, progressVersion, setConceptMastery, type Db } from "@progresso/db";
+import * as service from "@progresso/service";
 import type { StudentSummary } from "@/lib/types";
 import { daysUntil } from "@/lib/format";
-import { getDb } from "./db";
 
-interface Loaded {
-  graph: ConceptGraph;
-  demo: DemoStudent[];
-  repoRoot: string;
-  databasePath: string;
-  bank: LoadedBank;
-  lessons: LessonLibrary;
-  videos: VideoLibrary;
-}
-
-let loaded: Loaded | undefined;
-
-function load(): Loaded {
-  if (!loaded) {
-    const config = loadAppConfig(findRepoRoot());
-    const { graph } = loadConceptGraph(config.conceptGraphDir);
-    loaded = {
-      graph,
-      demo: loadDemoFixtures(config.fixturesDir),
-      repoRoot: config.repoRoot,
-      databasePath: config.databasePath,
-      // Verified prove-it questions, generated offline (pnpm questions:generate); never generated at runtime.
-      bank: loadQuestionBank(config.questionBankDir, graph),
-      // Mistake Recaps and step explainers, generated and verified offline (pnpm lessons:generate).
-      lessons: loadLessons(config, graph),
-      // Explainer videos, generated and checked offline (pnpm videos:generate). Only passing ones are served.
-      videos: loadVideoLibrary(config.videosDir, graph),
-    };
-  }
-  return loaded;
-}
+/** Files (graph, fixtures, bank, lessons, videos), loaded once per process by the shared service. */
+const load = service.store;
+const analysed = service.analysed;
 
 /** Passing explainer videos by misconception (failed ones are never served; the step explainer covers them). */
 export function getVideos(): VideoLibrary {
@@ -119,7 +61,7 @@ export function listStudents(today = new Date()): StudentSummary[] {
 }
 
 export function getStudent(id: string, today = new Date()): StudentSummary | undefined {
-  const s = load().demo.find((d) => d.student.id === id);
+  const s = service.demoStudent(id);
   return s ? summarise(s, today) : undefined;
 }
 
@@ -129,17 +71,14 @@ export function getReportParser(): ReportParser {
   return new DemoFixtureParser(load().demo, { stageDelayMs: Number.isFinite(delay) ? delay : 550 });
 }
 
+/** The shared SQLite handle (opened, migrated and seeded once per process). */
 export function db(): Db {
-  const l = load();
-  return getDb({ repoRoot: l.repoRoot, databasePath: l.databasePath, graph: l.graph, demo: l.demo });
+  return service.db();
 }
 
-/** Records and their analysis for one student. Phase P: read records from the database. */
-function analysed(studentId: string): { s: DemoStudent; analysis: RootCauseAnalysis } | undefined {
-  const { graph, demo } = load();
-  const s = demo.find((d) => d.student.id === studentId);
-  if (!s) return undefined;
-  return { s, analysis: { ...analyseStudent({ graph, records: s.records }), student_id: s.student.id } };
+/** Changes whenever this student's progress changes, from any process: open pages poll it to stay in sync. */
+export function getProgressVersion(studentId: string): string | undefined {
+  return service.demoStudent(studentId) ? progressVersion(db(), studentId) : undefined;
 }
 
 /** The student's diagnosis from every report added so far. */
@@ -148,38 +87,13 @@ export function getDiagnosis(studentId: string): DiagnosisView | undefined {
   return a ? buildDiagnosisView(a.analysis, a.s.records) : undefined;
 }
 
-const layouts = new Map<string, ConstellationLayout>();
-
-/** The layout depends only on the graph and the subjects shown, so it is computed once. */
-function layoutFor(subjects: readonly string[]): ConstellationLayout {
-  const graph = getGraph();
-  const key = `${graph.fingerprint}|${subjects.join(",")}`;
-  let layout = layouts.get(key);
-  if (!layout) {
-    layout = layoutConstellation(graph, subjects);
-    layouts.set(key, layout);
-  }
-  return layout;
-}
-
 /**
  * The knowledge constellation: the diagnosis plus mastery read from the
- * database on every request, so missions (Phase 5) and the MCP server
- * (Phase 10) change the map just by writing `concept_mastery`.
+ * database on every request, so missions (web or MCP) change the map just by
+ * writing `concept_mastery`.
  */
 export function getConstellation(studentId: string): ConstellationModel | undefined {
-  const a = analysed(studentId);
-  if (!a) return undefined;
-  const graph = getGraph();
-  const subjects = a.s.student.subjects.filter((x) => graph.subjects.includes(x));
-  return buildConstellation({
-    student_id: studentId,
-    graph,
-    layout: layoutFor(subjects.length > 0 ? subjects : graph.subjects),
-    analysis: a.analysis,
-    records: a.s.records,
-    mastery: getConceptMastery(db(), studentId),
-  });
+  return service.constellation(studentId);
 }
 
 /**
@@ -206,23 +120,13 @@ export function demoResetMastery(studentId: string): boolean {
 // ---------------------------------------------------------------- missions (Phase 5)
 
 /** Everything the mission service needs about one student. Phase P: records from the database. */
-export function studentContext(studentId: string): (StudentContext & { records: ErrorRecord[]; next_exam?: { name: string; date: string } }) | undefined {
-  const a = analysed(studentId);
-  if (!a) return undefined;
-  return {
-    student_id: studentId,
-    graph: getGraph(),
-    analysis: a.analysis,
-    records: a.s.records,
-    bank: load().bank,
-    ...(a.s.student.next_exam ? { next_exam: a.s.student.next_exam } : {}),
-  };
+export function studentContext(studentId: string): (service.Ctx & { records: ErrorRecord[] }) | undefined {
+  return service.studentContext(studentId);
 }
 
 /** The student's "today". SAMPLE DATA students can move their clock forward to demo the plan re-flowing. */
 export function studentToday(studentId: string, now = new Date()): IsoDay {
-  const offset = getPlanSettings(db(), studentId)?.demo_day_offset ?? 0;
-  return addDays(localDay(now), offset);
+  return service.studentToday(studentId, now);
 }
 
 export function isSample(studentId: string): boolean {

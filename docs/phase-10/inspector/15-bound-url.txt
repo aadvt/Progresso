@@ -1,0 +1,162 @@
+$ mcp-inspector --cli http://127.0.0.1:3101/mcp?token=demo-token-123&student=demo-kabir --method tools/call --tool-name get_tonight_mission
+
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "_SAMPLE DATA: a demo student built from hand-written fixtures, not a real report._\n\n(Set up a comeback plan: Pre-Board 2 on 2027-01-14, 25 minutes a day. It can be changed in the web app.)\n\n## Tonight's mission: Fix the root: Multiple and sub-multiple angle formulae\nPart 1 of 3 · 25 min · Mistake Recap → Explainer → Prove it\n\nWhy tonight: Root gap 1: explains 5 of your mistakes.\n\nExam: Pre-Board 2, 2027-01-14 (52 days left).\n\n### The root gap: Multiple and sub-multiple angle formulae\nRoot 1 of 2. Explains 5 mistakes across 2 exams, ~10 marks lost.\n5 of your mistakes in Integration using trigonometric identities, Continuity and Derivatives of inverse trigonometric functions trace back to Multiple and sub-multiple angle formulae. Integration using trigonometric identities is built on Multiple and sub-multiple angle formulae, so one gap there shows up there too. In your Continuity and Derivatives of inverse trigonometric functions questions, the report itself points to Multiple and sub-multiple angle formulae as the step that went wrong. The same wrong idea keeps coming back: Mixes up the forms of cos 2x: writes 1 - cos 2x = 2 cos^2 x instead of 2 sin^2 x (2 times). It happened in 2 different exams, so it is not a one-off. Fixing it is worth 10 marks you already lost.\n\n### Mistake Recap: Half-Yearly Examination · Q12 · 2 of 2 marks lost\nQuestion: Find the integral of sin^2 x dx.\nWhat the report says (verbatim):\n> The student applied the power rule to sin^2 x as if it were x^2, writing (sin^3 x)/3 + C. sin^2 x should first be rewritten as (1 - cos 2x)/2.\nThe student's working, as quoted in the report:\n- integral of sin² x dx \n- ✗ = (sin³ x)/3 + C\nWhat went wrong: It looks like the power rule for $x^n$ was applied to $\\sin x$. This only works when the base is a simple variable, not a function like $\\sin x$.\nThe fix:\n1. $\\int \\sin^2 x dx$\n2. $\\int \\frac{1 - \\cos 2x}{2} dx$\n3. $\\frac{1}{2} \\int (1 - \\cos 2x) dx$\n4. $\\frac{1}{2} (x - \\frac{\\sin 2x}{2}) + C$\n5. $\\frac{x}{2} - \\frac{\\sin 2x}{4} + C$\nKey idea: The power rule $\\int x^n dx = \\frac{x^{n+1}}{n+1}$ cannot be used for trigonometric functions like $\\sin^2 x$. Always use double angle identities to remove the power before integrating.\n(+4 more mistakes from the report in this mission.)\n\n### Explainer\n- Video (107 s): \"Fixing the Cosine Double Angle Confusion\": http://localhost:3100/media/videos/math.trig_multiple_angles.m1/video.mp4\n- Watch for: Mixes up the forms of cos 2x: writes 1 - cos 2x = 2 cos^2 x instead of 2 sin^2 x (the report shows this one); Writes sin 2x = 2 sin x\n\nThere are no verified prove-it questions for this topic yet, so tonight is recap + explainer only (\"studied, not proven\"). Call `finish_mission` with mission_id demo-kabir:2026-11-23:0 when the student has gone through it.\n\nFull mission with the animated recap and explainer: http://localhost:3100/s/demo-kabir/mission/demo-kabir%3A2026-11-23%3A0"
+    }
+  ],
+  "structuredContent": {
+    "view": "mission",
+    "student_id": "demo-kabir",
+    "sample": true,
+    "today": "2026-11-23",
+    "exam": {
+      "name": "Pre-Board 2",
+      "date": "2027-01-14",
+      "days_left": 52
+    },
+    "state": "ready",
+    "plan_created": true,
+    "mission": {
+      "id": "demo-kabir:2026-11-23:0",
+      "kind": "learn",
+      "title": "Fix the root: Multiple and sub-multiple angle formulae",
+      "subtitle": "Part 1 of 3",
+      "minutes": 25,
+      "reason": "Root gap 1: explains 5 of your mistakes.",
+      "status": "in_progress",
+      "steps": [
+        {
+          "kind": "recap",
+          "label": "Mistake Recap",
+          "minutes": 5
+        },
+        {
+          "kind": "explainer",
+          "label": "Explainer",
+          "minutes": 10
+        },
+        {
+          "kind": "prove_it",
+          "label": "Prove it",
+          "minutes": 10
+        }
+      ],
+      "index": 1,
+      "of": 1
+    },
+    "root": {
+      "concept_id": "math.trig_multiple_angles",
+      "name": "Multiple and sub-multiple angle formulae",
+      "chapter": "Trigonometric Functions",
+      "class": 11,
+      "rank": 1,
+      "roots_total": 2,
+      "explanation": "5 of your mistakes in Integration using trigonometric identities, Continuity and Derivatives of inverse trigonometric functions trace back to Multiple and sub-multiple angle formulae. Integration using trigonometric identities is built on Multiple and sub-multiple angle formulae, so one gap there shows up there too. In your Continuity and Derivatives of inverse trigonometric functions questions, the report itself points to Multiple and sub-multiple angle formulae as the step that went wrong. The same wrong idea keeps coming back: Mixes up the forms of cos 2x: writes 1 - cos 2x = 2 cos^2 x instead of 2 sin^2 x (2 times). It happened in 2 different exams, so it is not a one-off. Fixing it is worth 10 marks you already lost.",
+      "errors_explained": 5,
+      "exams": 2,
+      "marks_lost": 10,
+      "marks_estimated": false
+    },
+    "recap": {
+      "record_id": "demo-kabir.hy.math.q12",
+      "exam_name": "Half-Yearly Examination",
+      "question_ref": "Q12",
+      "question": {
+        "text": "Find the integral of sin^2 x dx.",
+        "html": "Find the integral of sin^2 x dx."
+      },
+      "marks_lost": 2,
+      "marks_max": 2,
+      "diagnosis": "The student applied the power rule to sin^2 x as if it were x^2, writing (sin^3 x)/3 + C. sin^2 x should first be rewritten as (1 - cos 2x)/2.",
+      "mode": "student_working",
+      "wrong": {
+        "format": "plain",
+        "lines": [
+          {
+            "segments": [
+              {
+                "html": "integral of sin² x dx "
+              }
+            ],
+            "wrong": false
+          },
+          {
+            "segments": [
+              {
+                "html": "= "
+              },
+              {
+                "html": "(sin³ x)/3",
+                "marked": true
+              },
+              {
+                "html": " + C"
+              }
+            ],
+            "wrong": true
+          }
+        ],
+        "note": {
+          "text": "It looks like the power rule for $x^n$ was applied to $\\sin x$. This only works when the base is a simple variable, not a function like $\\sin x$.",
+          "html": "It looks like the power rule for <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><msup><mi>x</mi><mi>n</mi></msup></mrow><annotation encoding=\"application/x-tex\">x^n</annotation></semantics></math></span> was applied to <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding=\"application/x-tex\">\\sin x</annotation></semantics></math></span>. This only works when the base is a simple variable, not a function like <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>sin</mi><mo>⁡</mo><mi>x</mi></mrow><annotation encoding=\"application/x-tex\">\\sin x</annotation></semantics></math></span>."
+        }
+      },
+      "fix": [
+        {
+          "text": "$\\int \\sin^2 x dx$",
+          "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mo>∫</mo><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>x</mi><mi>d</mi><mi>x</mi></mrow><annotation encoding=\"application/x-tex\">\\int \\sin^2 x dx</annotation></semantics></math></span>"
+        },
+        {
+          "text": "$\\int \\frac{1 - \\cos 2x}{2} dx$",
+          "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mo>∫</mo><mfrac><mrow><mn>1</mn><mo>−</mo><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi></mrow><mn>2</mn></mfrac><mi>d</mi><mi>x</mi></mrow><annotation encoding=\"application/x-tex\">\\int \\frac{1 - \\cos 2x}{2} dx</annotation></semantics></math></span>"
+        },
+        {
+          "text": "$\\frac{1}{2} \\int (1 - \\cos 2x) dx$",
+          "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>∫</mo><mo stretchy=\"false\">(</mo><mn>1</mn><mo>−</mo><mi>cos</mi><mo>⁡</mo><mn>2</mn><mi>x</mi><mo stretchy=\"false\">)</mo><mi>d</mi><mi>x</mi></mrow><annotation encoding=\"application/x-tex\">\\frac{1}{2} \\int (1 - \\cos 2x) dx</annotation></semantics></math></span>"
+        },
+        {
+          "text": "$\\frac{1}{2} (x - \\frac{\\sin 2x}{2}) + C$",
+          "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo stretchy=\"false\">(</mo><mi>x</mi><mo>−</mo><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mn>2</mn><mi>x</mi></mrow><mn>2</mn></mfrac><mo stretchy=\"false\">)</mo><mo>+</mo><mi>C</mi></mrow><annotation encoding=\"application/x-tex\">\\frac{1}{2} (x - \\frac{\\sin 2x}{2}) + C</annotation></semantics></math></span>"
+        },
+        {
+          "text": "$\\frac{x}{2} - \\frac{\\sin 2x}{4} + C$",
+          "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mfrac><mi>x</mi><mn>2</mn></mfrac><mo>−</mo><mfrac><mrow><mi>sin</mi><mo>⁡</mo><mn>2</mn><mi>x</mi></mrow><mn>4</mn></mfrac><mo>+</mo><mi>C</mi></mrow><annotation encoding=\"application/x-tex\">\\frac{x}{2} - \\frac{\\sin 2x}{4} + C</annotation></semantics></math></span>"
+        }
+      ],
+      "key_idea": {
+        "text": "The power rule $\\int x^n dx = \\frac{x^{n+1}}{n+1}$ cannot be used for trigonometric functions like $\\sin^2 x$. Always use double angle identities to remove the power before integrating.",
+        "html": "The power rule <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mo>∫</mo><msup><mi>x</mi><mi>n</mi></msup><mi>d</mi><mi>x</mi><mo>=</mo><mfrac><msup><mi>x</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msup><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding=\"application/x-tex\">\\int x^n dx = \\frac{x^{n+1}}{n+1}</annotation></semantics></math></span> cannot be used for trigonometric functions like <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><msup><mrow><mi>sin</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mi>x</mi></mrow><annotation encoding=\"application/x-tex\">\\sin^2 x</annotation></semantics></math></span>. Always use double angle identities to remove the power before integrating."
+      },
+      "more": 4
+    },
+    "explainer": {
+      "video": {
+        "title": "Fixing the Cosine Double Angle Confusion",
+        "url": "http://localhost:3100/media/videos/math.trig_multiple_angles.m1/video.mp4",
+        "poster": "http://localhost:3100/media/videos/math.trig_multiple_angles.m1/poster.jpg",
+        "duration_s": 107
+      },
+      "watch_for": [
+        {
+          "description": "Mixes up the forms of cos 2x: writes 1 - cos 2x = 2 cos^2 x instead of 2 sin^2 x",
+          "yours": true
+        },
+        {
+          "description": "Writes sin 2x = 2 sin x",
+          "yours": false
+        }
+      ]
+    },
+    "questions": [],
+    "links": {
+      "today": "http://localhost:3100/s/demo-kabir/today",
+      "constellation": "http://localhost:3100/s/demo-kabir/constellation",
+      "mission": "http://localhost:3100/s/demo-kabir/mission/demo-kabir%3A2026-11-23%3A0"
+    }
+  }
+}
+
+(exit 0)

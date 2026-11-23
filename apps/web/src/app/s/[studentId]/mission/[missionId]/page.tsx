@@ -19,7 +19,7 @@ export default async function MissionPage({ params }: { params: Promise<{ studen
   if (!data) redirect(`/s/${studentId}/today`);
   return (
     <>
-      <StudentChrome student={student} current="today" />
+      <StudentChrome student={student} current="today" live={false} />
       <main id="main">
         <MissionPlayer data={data} />
       </main>

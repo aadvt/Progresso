@@ -1,0 +1,5 @@
+$ mcp-inspector --cli http://127.0.0.1:3101/mcp --method tools/list
+
+{"error":{"code":"auth_required","message":"Interactive OAuth requires a TTY on stdin or stderr (or MCP_AUTO_OPEN_ENABLED=true). For CI/non-interactive runs use --stored-auth-only."}}
+
+(exit 0)

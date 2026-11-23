@@ -14,7 +14,7 @@ Prototype for **Inferentics** (edtech). Inferentics already scans CBSE Class 11�
 4. **Only anonymised data goes to any external API.** Students are pseudonymous ids; display names never enter prompts. **Never present invented content as a student's own work**: `student_working` exists only when the report quotes it.
 5. **No reports yet, and we never fake them.** The parser is built in Phase P.
    - Everything downstream (root-cause engine, missions, UI, MCP) depends only on the **error-record format** (`packages/core/src/error-record/schema.ts`, documented in `docs/error-record-format.md`), never on report text. The parser will be an adapter that produces error records.
-   - Until then the UI runs on **demo fixtures**: hand-written structured error records (not report text). They live only in `data/fixtures/` (plus the loader and demo parser `packages/core/src/demo-fixtures/`, `packages/db/src/seed.ts`, and the web data seam `apps/web/src/server/data.ts`), are labelled SAMPLE DATA everywhere they appear, and are deleted in Phase P.
+   - Until then the UI runs on **demo fixtures**: hand-written structured error records (not report text). They live only in `data/fixtures/` (plus the loader and demo parser `packages/core/src/demo-fixtures/`, `packages/db/src/seed.ts`, and the shared data seam `packages/service/src/index.ts`, used by the web app and the MCP server), are labelled SAMPLE DATA everywhere they appear, and are deleted in Phase P.
 6. **The concept graph is provisional.** The full CBSE 11–12 graph arrives in Phase P in the same format. All code treats the graph as data loaded from files and must work unchanged when it is replaced. **Never hard-code concept ids** in source (ESLint enforces this; tests are exempt).
 7. Never commit secrets (`.env`) or anything under `data/reports/`.
 
@@ -29,9 +29,9 @@ Prototype for **Inferentics** (edtech). Inferentics already scans CBSE Class 11�
 | 5 | Mission engine: 25-min daily missions, "prove it" questions whose wrong options come from the student's own mistakes, mastery gating, spaced repetition (FSRS), readiness meter | done |
 | 6 | Mistake Recap (the student's mistake, marked and corrected) and in-browser step explainers | done |
 | 7 | Manim explainer animation pipeline | done |
-| 8 | Precise YouTube clips and 3D organic chemistry | |
-| 9 | Calendar autopilot (in-app calendar + .ics export) and simulated WhatsApp nudges | |
-| 10 | MCP server + MCP App widget ("what should I study tonight?" answered inline in Claude) | |
+| 8 | Precise YouTube clips and 3D organic chemistry | skipped for now |
+| 9 | Calendar autopilot (in-app calendar + .ics export) and simulated WhatsApp nudges | skipped for now |
+| 10 | MCP server + MCP App widget ("what should I study tonight?" answered inline in Claude) | done |
 | 11 | End-to-end polish and final verification | |
 | P | When real reports arrive: report parser, full concept graph, swap fixtures for real data | |
 
@@ -59,16 +59,26 @@ packages/
                             retry/backoff, model fallback, response cache, usage log, PII guard
   db/     @progresso/db    SQLite (better-sqlite3 + Drizzle): schema, migrations, graph sync, seed,
                             concept mastery (mastery.ts: what drives the constellation), mission
-                            service (missions.ts: plan settings, start/answer/finish, progress)
+                            service (missions.ts: plan settings, start/answer/finish, progress),
+                            progressVersion() (what open pages poll to stay in sync)
+  service/ @progresso/service  THE data seam, shared by web and MCP: loads graph, fixtures (SAMPLE DATA),
+                            bank, lessons, videos once; opens/migrates/seeds the one SQLite DB;
+                            studentContext(), studentToday(), constellation(). Phase P swaps it
 apps/
   cli/    @progresso/cli   command-line tools needing several packages (pnpm analyse, questions:generate,
                             lessons:generate, videos:generate/review, simulate)
   web/    @progresso/web   Next.js 16 app: picker, add report, diagnosis, today / plan / mission player
                            (components/missions, server/missions.ts; explainer video with step-explainer fallback,
                            served by app/media/videos), constellation (components/
-                           constellation: three.js engine/ + SVG Map2D fallback). server/data.ts is the only
-                           data seam (parser, records, mastery via server/db.ts); styles/tokens.css +
-                           components/ui = design system; e2e/ = Playwright + axe + perf. MCP server (Phase 10) to come
+                           constellation: three.js engine/ + SVG Map2D fallback). server/data.ts wraps @progresso/service
+                           (+ the report parser); LiveSync polls /api/students/:id/version and refreshes open
+                           pages; styles/tokens.css + components/ui = design system; e2e/ = Playwright + axe + perf
+  mcp/    @progresso/mcp   MCP server (SDK v2 split packages + MCP Apps ext-apps 2.x): tools get_tonight_mission,
+                           submit_answer, finish_mission, get_progress, explain_my_mistake, list_students
+                           (src/server.ts; data in views.ts/explain.ts, model text in text.ts); widgets
+                           src/ui/{mission,progress}.ts bundled by scripts/build-ui.ts into one HTML each
+                           (maths as server-rendered MathML); Streamable HTTP (http.ts) + stdio (main.ts);
+                           Authenticator in auth.ts (demo token + student binding; OAuth slots in here)
 config/
   app.json                 paths: concept graph dir, DB, fixtures, LLM cache, usage log
   llm.json                 per-task LLM routing (provider, model, fallbacks, limits, thinking)
@@ -104,6 +114,7 @@ Key contracts:
   `data/videos/manifest.json` (`VideoEntrySchema`). Served only when `isServable()` (passed, not rejected on hand
   review via `pnpm videos:review`); otherwise the mission player shows the step explainer. Narration is optional
   behind `NarrationProvider` (only `none` now). Needs Manim CE, LaTeX (MiKTeX) and ffmpeg.
+- **MCP server**: `createServer(principal)` per connection/request. Tools return Markdown `content` (what the model reads; enough on its own in hosts without UI) + `structuredContent` (shared/types.ts) for the widgets. The answer key never leaves the server before an answer; display names never appear; no LLM calls (the student's Claude does the talking). Widgets answer via `submit_answer` and tell the model with `updateModelContext`. Connector setup + demo script: `docs/mcp-connector.md`.
 - **LLM calls**: `createLlmClient().generateObject(task, { prompt, schema, images? })` or `.generateText(task, ...)`. The task name picks provider/model from `config/llm.json`.
 
 ## Conventions
@@ -137,6 +148,10 @@ pnpm lessons:generate       # generate + verify Mistake Recaps and step explaine
 pnpm videos:generate        # explainer videos for the top 5 maths/physics misconceptions (--top, --only, --subjects, --missing,
                             # --list, --max-attempts, --fresh, --narration); needs manim, latex, dvisvgm, ffmpeg on PATH
 pnpm videos:review --list   # hand-review verdicts; <id> --approve|--reject "notes" (rejected = never served)
+pnpm mcp                    # MCP server, Streamable HTTP on http://127.0.0.1:3101/mcp (PROGRESSO_MCP_TOKEN, ?student=…); builds the widgets first
+pnpm mcp:stdio              # stdio transport (desktop clients: run node --import tsx apps/mcp/src/main.ts --stdio directly)
+pnpm mcp:smoke              # print every tool's text output on a throwaway DB copy
+pnpm mcp:host-check         # Playwright: widget in the ext-apps basic-host → DB → open web constellation (see the script header)
 pnpm simulate demo-riya     # simulate 14 days of missions on a throwaway DB (--days, --minutes, --skip, --out)
 pnpm db:seed                # migrate, sync graph, load demo fixtures, print per-student summary
 pnpm db:reset               # delete the local DB (then db:seed)

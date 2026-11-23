@@ -27,7 +27,12 @@
     "simulate": "pnpm --filter @progresso/cli simulate",
     "lessons:generate": "pnpm --filter @progresso/cli lessons:generate",
     "videos:generate": "pnpm --filter @progresso/cli videos:generate",
-    "videos:review": "pnpm --filter @progresso/cli videos:review"
+    "videos:review": "pnpm --filter @progresso/cli videos:review",
+    "mcp": "pnpm --filter @progresso/mcp start",
+    "mcp:stdio": "pnpm --filter @progresso/mcp stdio",
+    "mcp:build": "pnpm --filter @progresso/mcp build:ui",
+    "mcp:smoke": "pnpm --filter @progresso/mcp smoke",
+    "mcp:host-check": "pnpm --filter @progresso/mcp host-check"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

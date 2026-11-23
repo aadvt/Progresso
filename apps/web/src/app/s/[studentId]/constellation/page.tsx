@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { ConstellationView } from "@/components/constellation/ConstellationView";
+import { LiveSync } from "@/components/LiveSync";
 import { LogoMark } from "@/components/ui/Logo";
 import { Icon } from "@/components/ui/Icon";
 import { SampleDataBadge } from "@/components/ui/Badge";
@@ -38,6 +39,7 @@ export default async function ConstellationPage({ params }: { params: Promise<{ 
       </header>
       <main id="main" className={styles.main}>
         <ConstellationView model={model} variant="full" demoEnabled={student.is_sample} />
+        <LiveSync studentId={studentId} />
       </main>
     </div>
   );

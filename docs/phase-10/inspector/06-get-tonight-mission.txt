@@ -1,0 +1,281 @@
+$ mcp-inspector --cli http://127.0.0.1:3101/mcp --header Authorization: Bearer demo-token-123 --method tools/call --tool-name get_tonight_mission --tool-arg student=demo-riya
+
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "_SAMPLE DATA: a demo student built from hand-written fixtures, not a real report._\n\n(Set up a comeback plan: Pre-Board 2 on 2027-01-12, 25 minutes a day. It can be changed in the web app.)\n\n## Tonight's mission: Fix the root: Chain rule\nPart 1 of 3 · 25 min · Mistake Recap → Explainer → Prove it\n\nWhy tonight: Root gap 1: explains 8 of your mistakes.\n\nExam: Pre-Board 2, 2027-01-12 (50 days left).\n\n### The root gap: Chain rule\nRoot 1 of 1. Explains 8 mistakes across 3 exams, ~12 (partly estimated) marks lost.\n8 of your mistakes, in Chain rule itself and in Derivatives of exponential and logarithmic functions, Implicit differentiation, Integration by substitution and Rate of change of quantities and more, trace back to Chain rule. Implicit differentiation, Integration by substitution, Rate of change of quantities and Derivatives of inverse trigonometric functions and more are built on Chain rule, so one gap there shows up there too. In your Derivatives of exponential and logarithmic functions question, the report itself points to Chain rule as the step that went wrong. The same wrong idea keeps coming back: Forgets to multiply by the derivative of the inner function (6 times). It happened in 3 different exams, so it is not a one-off. Fixing it is worth about 12 marks you already lost.\n\n### Mistake Recap: Unit Test 1 · Q7 · 1 of 2 marks lost\nQuestion: Differentiate sin(x^2) with respect to x.\nWhat the report says (verbatim):\n> The student wrote the derivative as cos(x^2). The factor 2x from differentiating the inner function x^2 is missing; the chain rule was not applied.\nThe student's working, as quoted in the report:\n- d/dx [sin(x²)]\n- ✗  = cos(x²)\nWhat went wrong: It looks like the derivative of the outer sine function was found, but the derivative of the inner $x^2$ was missed. We need to multiply by $2x$ to complete the chain rule.\nThe fix:\n1. $\\frac{d}{dx} [\\sin(x^2)]$\n2. $\\cos(x^2) \\cdot \\frac{d}{dx}(x^2)$\n3. $2x \\cos(x^2)$\nKey idea: When a function is nested inside another, like $x^2$ inside $\\sin$, you must multiply by the derivative of that inner part. This is the heart of the chain rule.\n(+7 more mistakes from the report in this mission.)\n\n### Explainer\n- Video (91 s): \"Why the inside needs its own derivative\": http://localhost:3100/media/videos/math.chain_rule.m1/video.mp4\n- Step-by-step: \"Why the inside needs its own derivative\" (6 steps, in the full mission: http://localhost:3100/s/demo-riya/mission/demo-riya%3A2026-11-23%3A0). Takeaway: To differentiate a nested function, always multiply by the 'inner speed'—the derivative of the inside part.\n- Watch for: Forgets to multiply by the derivative of the inner function (the report shows this one); Differentiates the inner function but leaves the outer function undifferentiated; Stops one layer early in a nested composite of three or more functions\n\n### Prove it (3 questions, mission_id: demo-riya:2026-11-23:0)\n1. [question_id: math.chain_rule.m2.chain_rule.2] Find $\\frac{dy}{dx}$ for $y = \\tan(3x^2)$.\n   A) $6x \\tan(3x^2)$\n   B) $\\sec^2(3x^2)$\n   C) $6x \\sec^2(3x^2)$\n   D) $6x \\tan(x)$\n2. [question_id: math.chain_rule.m2.chain_rule.3] Find $\\frac{dy}{dx}$ for $y = e^{\\cos(3x)}$.\n   A) $-\\sin(3x) e^{\\cos(3x)}$\n   B) $3\\sin(3x) e^{\\cos(3x)}$\n   C) $3 e^{\\cos(3x)}$\n   D) $-3\\sin(3x) e^{\\cos(3x)}$\n3. [question_id: math.chain_rule.m2.chain_rule.1] Find $\\frac{d}{dx}\\left(\\cos(x^3)\\right)$.\n   A) $-\\sin(x^3)$\n   B) $-3x^2 \\sin(x^3)$\n   C) $3x^2 \\cos(x^3)$\n   D) $3x^2 \\sin(x^3)$\n\nHow to run this: if the interactive widget is showing, the student answers inside it and each answer is reported back to you. Otherwise, ask the questions one at a time and call `submit_answer` with mission_id, question_id and the option letter (or the number). Don't reveal answers before the student has tried. The mission finishes automatically after the last answer.\n\nFull mission with the animated recap and explainer: http://localhost:3100/s/demo-riya/mission/demo-riya%3A2026-11-23%3A0"
+    }
+  ],
+  "structuredContent": {
+    "view": "mission",
+    "student_id": "demo-riya",
+    "sample": true,
+    "today": "2026-11-23",
+    "exam": {
+      "name": "Pre-Board 2",
+      "date": "2027-01-12",
+      "days_left": 50
+    },
+    "state": "ready",
+    "plan_created": true,
+    "mission": {
+      "id": "demo-riya:2026-11-23:0",
+      "kind": "learn",
+      "title": "Fix the root: Chain rule",
+      "subtitle": "Part 1 of 3",
+      "minutes": 25,
+      "reason": "Root gap 1: explains 8 of your mistakes.",
+      "status": "in_progress",
+      "steps": [
+        {
+          "kind": "recap",
+          "label": "Mistake Recap",
+          "minutes": 5
+        },
+        {
+          "kind": "explainer",
+          "label": "Explainer",
+          "minutes": 10
+        },
+        {
+          "kind": "prove_it",
+          "label": "Prove it",
+          "minutes": 10
+        }
+      ],
+      "index": 1,
+      "of": 1
+    },
+    "root": {
+      "concept_id": "math.chain_rule",
+      "name": "Chain rule",
+      "chapter": "Continuity and Differentiability",
+      "class": 12,
+      "rank": 1,
+      "roots_total": 1,
+      "explanation": "8 of your mistakes, in Chain rule itself and in Derivatives of exponential and logarithmic functions, Implicit differentiation, Integration by substitution and Rate of change of quantities and more, trace back to Chain rule. Implicit differentiation, Integration by substitution, Rate of change of quantities and Derivatives of inverse trigonometric functions and more are built on Chain rule, so one gap there shows up there too. In your Derivatives of exponential and logarithmic functions question, the report itself points to Chain rule as the step that went wrong. The same wrong idea keeps coming back: Forgets to multiply by the derivative of the inner function (6 times). It happened in 3 different exams, so it is not a one-off. Fixing it is worth about 12 marks you already lost.",
+      "errors_explained": 8,
+      "exams": 3,
+      "marks_lost": 12,
+      "marks_estimated": true
+    },
+    "recap": {
+      "record_id": "demo-riya.ut1.q7",
+      "exam_name": "Unit Test 1",
+      "question_ref": "Q7",
+      "question": {
+        "text": "Differentiate sin(x^2) with respect to x.",
+        "html": "Differentiate sin(x^2) with respect to x."
+      },
+      "marks_lost": 1,
+      "marks_max": 2,
+      "diagnosis": "The student wrote the derivative as cos(x^2). The factor 2x from differentiating the inner function x^2 is missing; the chain rule was not applied.",
+      "mode": "student_working",
+      "wrong": {
+        "format": "plain",
+        "lines": [
+          {
+            "segments": [
+              {
+                "html": "d/dx [sin(x²)]"
+              }
+            ],
+            "wrong": false
+          },
+          {
+            "segments": [
+              {
+                "html": " = "
+              },
+              {
+                "html": "cos(x²)",
+                "marked": true
+              }
+            ],
+            "wrong": true
+          }
+        ],
+        "note": {
+          "text": "It looks like the derivative of the outer sine function was found, but the derivative of the inner $x^2$ was missed. We need to multiply by $2x$ to complete the chain rule.",
+          "html": "It looks like the derivative of the outer sine function was found, but the derivative of the inner <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation encoding=\"application/x-tex\">x^2</annotation></semantics></math></span> was missed. We need to multiply by <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mn>2</mn><mi>x</mi></mrow><annotation encoding=\"application/x-tex\">2x</annotation></semantics></math></span> to complete the chain rule."
+        }
+      },
+      "fix": [
+        {
+          "text": "$\\frac{d}{dx} [\\sin(x^2)]$",
+          "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mfrac><mi>d</mi><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo stretchy=\"false\">[</mo><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo><mo stretchy=\"false\">]</mo></mrow><annotation encoding=\"application/x-tex\">\\frac{d}{dx} [\\sin(x^2)]</annotation></semantics></math></span>"
+        },
+        {
+          "text": "$\\cos(x^2) \\cdot \\frac{d}{dx}(x^2)$",
+          "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo><mo>⋅</mo><mfrac><mi>d</mi><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mo stretchy=\"false\">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">\\cos(x^2) \\cdot \\frac{d}{dx}(x^2)</annotation></semantics></math></span>"
+        },
+        {
+          "text": "$2x \\cos(x^2)$",
+          "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mn>2</mn><mi>x</mi><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><msup><mi>x</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">2x \\cos(x^2)</annotation></semantics></math></span>"
+        }
+      ],
+      "key_idea": {
+        "text": "When a function is nested inside another, like $x^2$ inside $\\sin$, you must multiply by the derivative of that inner part. This is the heart of the chain rule.",
+        "html": "When a function is nested inside another, like <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation encoding=\"application/x-tex\">x^2</annotation></semantics></math></span> inside <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>sin</mi><mo>⁡</mo></mrow><annotation encoding=\"application/x-tex\">\\sin</annotation></semantics></math></span>, you must multiply by the derivative of that inner part. This is the heart of the chain rule."
+      },
+      "more": 7
+    },
+    "explainer": {
+      "video": {
+        "title": "Why the inside needs its own derivative",
+        "url": "http://localhost:3100/media/videos/math.chain_rule.m1/video.mp4",
+        "poster": "http://localhost:3100/media/videos/math.chain_rule.m1/poster.jpg",
+        "duration_s": 91
+      },
+      "steps": {
+        "title": "Why the inside needs its own derivative",
+        "takeaway": {
+          "text": "To differentiate a nested function, always multiply by the 'inner speed'—the derivative of the inside part.",
+          "html": "To differentiate a nested function, always multiply by the &#39;inner speed&#39;—the derivative of the inside part."
+        },
+        "count": 6
+      },
+      "watch_for": [
+        {
+          "description": "Forgets to multiply by the derivative of the inner function",
+          "yours": true
+        },
+        {
+          "description": "Differentiates the inner function but leaves the outer function undifferentiated",
+          "yours": false
+        },
+        {
+          "description": "Stops one layer early in a nested composite of three or more functions",
+          "yours": false
+        }
+      ]
+    },
+    "questions": [
+      {
+        "id": "math.chain_rule.m2.chain_rule.2",
+        "kind": "mcq",
+        "stem": {
+          "text": "Find $\\frac{dy}{dx}$ for $y = \\tan(3x^2)$.",
+          "html": "Find <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac></mrow><annotation encoding=\"application/x-tex\">\\frac{dy}{dx}</annotation></semantics></math></span> for <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>y</mi><mo>=</mo><mi>tan</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">y = \\tan(3x^2)</annotation></semantics></math></span>."
+        },
+        "options": [
+          {
+            "id": "a",
+            "label": {
+              "text": "$6x \\tan(3x^2)$",
+              "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mn>6</mn><mi>x</mi><mi>tan</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">6x \\tan(3x^2)</annotation></semantics></math></span>"
+            }
+          },
+          {
+            "id": "b",
+            "label": {
+              "text": "$\\sec^2(3x^2)$",
+              "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><msup><mrow><mi>sec</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mo stretchy=\"false\">(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">\\sec^2(3x^2)</annotation></semantics></math></span>"
+            }
+          },
+          {
+            "id": "c",
+            "label": {
+              "text": "$6x \\sec^2(3x^2)$",
+              "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mn>6</mn><mi>x</mi><msup><mrow><mi>sec</mi><mo>⁡</mo></mrow><mn>2</mn></msup><mo stretchy=\"false\">(</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">6x \\sec^2(3x^2)</annotation></semantics></math></span>"
+            }
+          },
+          {
+            "id": "d",
+            "label": {
+              "text": "$6x \\tan(x)$",
+              "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mn>6</mn><mi>x</mi><mi>tan</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mi>x</mi><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">6x \\tan(x)</annotation></semantics></math></span>"
+            }
+          }
+        ],
+        "concept_name": "Chain rule"
+      },
+      {
+        "id": "math.chain_rule.m2.chain_rule.3",
+        "kind": "mcq",
+        "stem": {
+          "text": "Find $\\frac{dy}{dx}$ for $y = e^{\\cos(3x)}$.",
+          "html": "Find <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>y</mi></mrow><mrow><mi>d</mi><mi>x</mi></mrow></mfrac></mrow><annotation encoding=\"application/x-tex\">\\frac{dy}{dx}</annotation></semantics></math></span> for <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mi>y</mi><mo>=</mo><msup><mi>e</mi><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo></mrow></msup></mrow><annotation encoding=\"application/x-tex\">y = e^{\\cos(3x)}</annotation></semantics></math></span>."
+        },
+        "options": [
+          {
+            "id": "a",
+            "label": {
+              "text": "$-\\sin(3x) e^{\\cos(3x)}$",
+              "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mo>−</mo><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo><msup><mi>e</mi><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo></mrow></msup></mrow><annotation encoding=\"application/x-tex\">-\\sin(3x) e^{\\cos(3x)}</annotation></semantics></math></span>"
+            }
+          },
+          {
+            "id": "b",
+            "label": {
+              "text": "$3\\sin(3x) e^{\\cos(3x)}$",
+              "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mn>3</mn><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo><msup><mi>e</mi><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo></mrow></msup></mrow><annotation encoding=\"application/x-tex\">3\\sin(3x) e^{\\cos(3x)}</annotation></semantics></math></span>"
+            }
+          },
+          {
+            "id": "c",
+            "label": {
+              "text": "$3 e^{\\cos(3x)}$",
+              "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mn>3</mn><msup><mi>e</mi><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo></mrow></msup></mrow><annotation encoding=\"application/x-tex\">3 e^{\\cos(3x)}</annotation></semantics></math></span>"
+            }
+          },
+          {
+            "id": "d",
+            "label": {
+              "text": "$-3\\sin(3x) e^{\\cos(3x)}$",
+              "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mo>−</mo><mn>3</mn><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo><msup><mi>e</mi><mrow><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><mn>3</mn><mi>x</mi><mo stretchy=\"false\">)</mo></mrow></msup></mrow><annotation encoding=\"application/x-tex\">-3\\sin(3x) e^{\\cos(3x)}</annotation></semantics></math></span>"
+            }
+          }
+        ],
+        "concept_name": "Chain rule"
+      },
+      {
+        "id": "math.chain_rule.m2.chain_rule.1",
+        "kind": "mcq",
+        "stem": {
+          "text": "Find $\\frac{d}{dx}\\left(\\cos(x^3)\\right)$.",
+          "html": "Find <span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mfrac><mi>d</mi><mrow><mi>d</mi><mi>x</mi></mrow></mfrac><mrow><mo fence=\"true\">(</mo><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy=\"false\">)</mo><mo fence=\"true\">)</mo></mrow></mrow><annotation encoding=\"application/x-tex\">\\frac{d}{dx}\\left(\\cos(x^3)\\right)</annotation></semantics></math></span>."
+        },
+        "options": [
+          {
+            "id": "a",
+            "label": {
+              "text": "$-\\sin(x^3)$",
+              "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mo>−</mo><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">-\\sin(x^3)</annotation></semantics></math></span>"
+            }
+          },
+          {
+            "id": "b",
+            "label": {
+              "text": "$-3x^2 \\sin(x^3)$",
+              "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mo>−</mo><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">-3x^2 \\sin(x^3)</annotation></semantics></math></span>"
+            }
+          },
+          {
+            "id": "c",
+            "label": {
+              "text": "$3x^2 \\cos(x^3)$",
+              "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mi>cos</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">3x^2 \\cos(x^3)</annotation></semantics></math></span>"
+            }
+          },
+          {
+            "id": "d",
+            "label": {
+              "text": "$3x^2 \\sin(x^3)$",
+              "html": "<span class=\"katex\"><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><semantics><mrow><mn>3</mn><msup><mi>x</mi><mn>2</mn></msup><mi>sin</mi><mo>⁡</mo><mo stretchy=\"false\">(</mo><msup><mi>x</mi><mn>3</mn></msup><mo stretchy=\"false\">)</mo></mrow><annotation encoding=\"application/x-tex\">3x^2 \\sin(x^3)</annotation></semantics></math></span>"
+            }
+          }
+        ],
+        "concept_name": "Chain rule"
+      }
+    ],
+    "links": {
+      "today": "http://localhost:3100/s/demo-riya/today",
+      "constellation": "http://localhost:3100/s/demo-riya/constellation",
+      "mission": "http://localhost:3100/s/demo-riya/mission/demo-riya%3A2026-11-23%3A0"
+    }
+  }
+}
+
+(exit 0)

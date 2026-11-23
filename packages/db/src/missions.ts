@@ -11,7 +11,7 @@
  *  - review_log: one row per check (FSRS rating), concept_mastery: state + FSRS card.
  * Writing concept_mastery is what updates the constellation (and its ripple).
  */
-import { and, asc, eq, inArray, lt } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, lt } from "drizzle-orm";
 import {
   applyCheck,
   buildPlan,
@@ -464,4 +464,26 @@ export function finishMission(
     tx.update(missions).set({ status: "completed", completedAt: at, result }).where(eq(missions.id, missionId)).run();
   });
   return { outcomes, finished_at: at };
+}
+
+/** The student's latest answer to one prove-it question (any mission), for "explain my mistake". */
+export function lastAttempt(
+  db: Db,
+  studentId: string,
+  questionId: string,
+): { answer: string; correct: boolean; concept_id: string; revealed_misconception_id?: string; mission_id: string | null } | undefined {
+  const a = db
+    .select()
+    .from(questionAttempts)
+    .where(and(eq(questionAttempts.studentId, studentId), eq(questionAttempts.questionId, questionId)))
+    .orderBy(desc(questionAttempts.id))
+    .get();
+  if (!a) return undefined;
+  return {
+    answer: a.answer,
+    correct: a.correct,
+    concept_id: a.conceptId,
+    ...(a.revealedMisconceptionId ? { revealed_misconception_id: a.revealedMisconceptionId } : {}),
+    mission_id: a.missionId,
+  };
 }

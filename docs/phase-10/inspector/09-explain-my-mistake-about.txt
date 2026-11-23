@@ -1,0 +1,53 @@
+$ mcp-inspector --cli http://127.0.0.1:3101/mcp --header Authorization: Bearer demo-token-123 --method tools/call --tool-name explain_my_mistake --tool-arg student=demo-riya about=Half-Yearly Q18
+
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "Use only the facts below to explain this in plain language. The report's words are quoted verbatim. Only describe working as the student's own when it is marked as quoted from the report; don't invent their steps.\n\n### Half-Yearly Examination (2026-09-22) · Q18 · Implicit differentiation · 2/3 marks lost\nQuestion: Find dy/dx if x^2 + xy + y^2 = 7.\nReport diagnosis (verbatim):\n> The student differentiated y^2 as 2y and xy as y, with no dy/dx terms, treating y as if it were a constant. As a result dy/dx could not be isolated correctly.\nStudent's working, quoted in the report:\n> d/dx(x^2 + xy + y^2) = 2x + y + 2y = 0\nReport's correct approach (verbatim):\n> 2x + y + x(dy/dx) + 2y(dy/dx) = 0, so dy/dx = -(2x + y)/(x + 2y).\nMisconception: Differentiates y^2 as 2y without the factor dy/dx\nTraces back to the root gap **Chain rule**: Chain rule → Implicit differentiation.\nWhy Chain rule is the root: 8 of your mistakes, in Chain rule itself and in Derivatives of exponential and logarithmic functions, Implicit differentiation, Integration by substitution and Rate of change of quantities and more, trace back to Chain rule. Implicit differentiation, Integration by substitution, Rate of change of quantities and Derivatives of inverse trigonometric functions and more are built on Chain rule, so one gap there shows up there too. In your Derivatives of exponential and logarithmic functions question, the report itself points to Chain rule as the step that went wrong. The same wrong idea keeps coming back: Forgets to multiply by the derivative of the inner function (6 times). It happened in 3 different exams, so it is not a one-off. Fixing it is worth about 12 marks you already lost.\nVerified fix:\n1. $\\frac{d}{dx}(x^2 + xy + y^2) = \\frac{d}{dx}(7)$\n2. $2x + (x\\frac{dy}{dx} + y\\cdot 1) + 2y\\frac{dy}{dx} = 0$\n3. $(x + 2y)\\frac{dy}{dx} = -2x - y$\n4. $\\frac{dy}{dx} = -\\frac{2x + y}{x + 2y}$\nKey idea: When differentiating implicitly, remember that $y$ depends on $x$. Every time you differentiate a term containing $y$, you must include a $\\frac{dy}{dx}$ factor due to the Chain Rule."
+    }
+  ],
+  "structuredContent": {
+    "view": "explain",
+    "student_id": "demo-riya",
+    "query": "Half-Yearly Q18",
+    "matched_by": "search",
+    "mistakes": [
+      {
+        "record_id": "demo-riya.hy.q18",
+        "exam_name": "Half-Yearly Examination",
+        "exam_date": "2026-09-22",
+        "question_ref": "Q18",
+        "question_text": "Find dy/dx if x^2 + xy + y^2 = 7.",
+        "marks_lost": 2,
+        "marks_max": 3,
+        "error_type": "conceptual",
+        "report_diagnosis": "The student differentiated y^2 as 2y and xy as y, with no dy/dx terms, treating y as if it were a constant. As a result dy/dx could not be isolated correctly.",
+        "student_working": "d/dx(x^2 + xy + y^2) = 2x + y + 2y = 0",
+        "report_correct_approach": "2x + y + x(dy/dx) + 2y(dy/dx) = 0, so dy/dx = -(2x + y)/(x + 2y).",
+        "concept": "Implicit differentiation",
+        "misconception": "Differentiates y^2 as 2y without the factor dy/dx",
+        "traces_to": {
+          "root": "Chain rule",
+          "path": [
+            "Chain rule",
+            "Implicit differentiation"
+          ],
+          "root_explanation": "8 of your mistakes, in Chain rule itself and in Derivatives of exponential and logarithmic functions, Implicit differentiation, Integration by substitution and Rate of change of quantities and more, trace back to Chain rule. Implicit differentiation, Integration by substitution, Rate of change of quantities and Derivatives of inverse trigonometric functions and more are built on Chain rule, so one gap there shows up there too. In your Derivatives of exponential and logarithmic functions question, the report itself points to Chain rule as the step that went wrong. The same wrong idea keeps coming back: Forgets to multiply by the derivative of the inner function (6 times). It happened in 3 different exams, so it is not a one-off. Fixing it is worth about 12 marks you already lost."
+        },
+        "verified_fix": {
+          "lines": [
+            "$\\frac{d}{dx}(x^2 + xy + y^2) = \\frac{d}{dx}(7)$",
+            "$2x + (x\\frac{dy}{dx} + y\\cdot 1) + 2y\\frac{dy}{dx} = 0$",
+            "$(x + 2y)\\frac{dy}{dx} = -2x - y$",
+            "$\\frac{dy}{dx} = -\\frac{2x + y}{x + 2y}$"
+          ],
+          "key_idea": "When differentiating implicitly, remember that $y$ depends on $x$. Every time you differentiate a term containing $y$, you must include a $\\frac{dy}{dx}$ factor due to the Chain Rule.",
+          "recap_mode": "student_working"
+        }
+      }
+    ]
+  }
+}
+
+(exit 0)

@@ -183,3 +183,38 @@ Report: [phase-7-report.md](phase-7-report.md). Sample frames: [phase-7/](phase-
 
 **Open items**
 - Hand review before serving (1 in 5 automatic passes was wrong). Bigger formulas for phones. Remaining misconceptions once the quota resets. Chemistry-specific checks.
+
+---
+
+## Phases 8 and 9: skipped for now (2026-11-23)
+
+YouTube clips / 3D organic chemistry (8) and the calendar autopilot / WhatsApp nudges (9) are deferred. Phase 10 was built first.
+
+---
+
+## Phase 10: MCP server and MCP Apps widgets (2026-11-24) ✅
+
+Report: [phase-10-report.md](phase-10-report.md). Connector setup and demo script: [mcp-connector.md](mcp-connector.md). Inspector runs: [phase-10/inspector/](phase-10/inspector/). Screenshots: [phase-10/screenshots/](phase-10/screenshots/).
+
+**Built**
+- `@progresso/service`: the one data seam (graph, fixtures, bank, lessons, videos, the SQLite DB, student context, today, constellation), now used by both the web app and the MCP server.
+- `apps/mcp`: an MCP server on the current SDKs (`@modelcontextprotocol/server`/`node`/`express` 2.x and `ext-apps` 2.0.4).
+  - Tools: `get_tonight_mission` (widget), `submit_answer`, `finish_mission`, `get_progress` (widget), `explain_my_mistake` (grounded in the report, no LLM call), `list_students`.
+  - Every tool returns stand-alone Markdown plus `structuredContent`. The answer key never leaves the server before an answer, and no display names are sent.
+  - Two widgets, each one self-contained HTML file: maths as server-rendered MathML; zod locales trimmed (675 → 420 KB, ~115 KB gzipped); the web app's visual language; host theme followed.
+  - Answers in the widget are saved through `submit_answer` and reported to the model (`updateModelContext`); "Ask Claude why" / "Go over my mistakes" use `sendMessage`.
+  - Transports: Streamable HTTP (stateless) and stdio. An `Authenticator` at the HTTP boundary handles the demo shared token and student binding; OAuth plugs in there (steps in the report).
+- Web: `LiveSync` polls `progressVersion()` and refreshes open pages, so an answer in Claude updates the constellation and plays the ripple.
+
+**Results**
+- 16 MCP tests (220 in all); every tool run through the MCP Inspector CLI (HTTP and stdio, `--strict` clean, `--app-info` confirms both UI resources).
+- In the ext-apps basic-host, scripted (`pnpm mcp:host-check`): widget answer → SQLite row → web `/version` changes → the open constellation updates; all-correct run → "Chain rule is fixed" → the ripple plays on the open web page. Model-context and message panels show both messages.
+
+**Decisions later phases rely on**
+- Phase P swaps records in `@progresso/service` only.
+- Cross-process sync = shared SQLite + `progressVersion()`. Tools stay text first, widget second, with no LLM calls.
+
+**Open items**
+- Live test in Claude via a tunnel (user to confirm).
+- Links to videos and the web app point at `PROGRESSO_WEB_URL` (localhost) until the web app is deployed.
+- Widget weight is mostly the MCP client SDK.
