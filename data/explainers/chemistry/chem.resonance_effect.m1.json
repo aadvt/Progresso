@@ -1,0 +1,76 @@
+{
+  "explainer": {
+    "schema_version": "1.0",
+    "misconception_id": "chem.resonance_effect.m1",
+    "concept_id": "chem.resonance_effect",
+    "subject": "Chemistry",
+    "title": "Resonance vs Inductive Effect in Anisole",
+    "steps": [
+      {
+        "kind": "wrong",
+        "say": "Looking at the -OCH3 group, oxygen is highly electronegative. It's natural to think it only pulls electrons away from the benzene ring via the inductive (-I) effect.",
+        "math": "-OCH_3 \\implies \\text{Electronegativity} \\implies -I \\text{ effect}"
+      },
+      {
+        "kind": "why",
+        "say": "If the -I effect were dominant, anisole would be less reactive than benzene. In reality, anisole reacts much faster than benzene in electrophilic substitution.",
+        "math": "\\text{Rate: Anisole} \\gg \\text{Benzene}"
+      },
+      {
+        "kind": "idea",
+        "say": "The oxygen atom has lone pairs that are right next to the ring's pi system. These electrons can delocalize into the ring through overlapping p-orbitals.",
+        "math": "\\text{Ring}-\\ddot{O}-CH_3 \\longleftrightarrow \\text{Ring}^- = \\text{O}^+-CH_3"
+      },
+      {
+        "kind": "idea",
+        "say": "This resonance (+R) effect pushes electron density into the ring, making it much more attractive to electrophiles (E+).",
+        "math": "\\text{Net Electron Density Increase in Ring}"
+      },
+      {
+        "kind": "rule",
+        "say": "For groups with lone pairs on the joining atom (like -OH, -OR, -NH2), the +R effect is significantly stronger than the -I effect.",
+        "math": "+R \\text{ effect} > -I \\text{ effect}"
+      },
+      {
+        "kind": "example",
+        "say": "Therefore, even though oxygen is electronegative, -OCH3 is a strongly activating group that directs substitution to ortho and para positions.",
+        "math": "-OCH_3 = \\text{Activating Group}"
+      },
+      {
+        "kind": "check",
+        "say": "Always check for lone pairs on the atom bonded to the ring. If a lone pair is present, think Resonance (+R) before Induction (-I).",
+        "math": "\\text{Atom with Lone Pair} = \\text{Usually Activating}"
+      }
+    ],
+    "takeaway": "For oxygen and nitrogen groups, the electron-donating resonance effect is much stronger than their inductive withdrawal.",
+    "verification": {
+      "status": "verified",
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "wrong step, correctness and progression confirmed; reviewer issues: none"
+        }
+      ],
+      "verified_at": "2026-11-21T18:59:45.824Z"
+    },
+    "provenance": {
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "reviewer": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash"
+      },
+      "generated_at": "2026-11-21T18:59:37.622Z",
+      "prompt_version": "explainer-1"
+    }
+  }
+}

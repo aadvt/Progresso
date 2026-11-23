@@ -23,7 +23,8 @@ export class GeminiProvider implements LlmProvider {
 
   constructor(apiKey: string) {
     // Retries are owned by LlmClient (so they are counted, logged and can fall back to another model).
-    this.client = new GoogleGenAI({ apiKey, httpOptions: { retryOptions: { attempts: 1 } } });
+    // v1beta serves every model, including previews (v1 returns 404 for those).
+    this.client = new GoogleGenAI({ apiKey, apiVersion: process.env.GEMINI_API_VERSION || "v1beta", httpOptions: { retryOptions: { attempts: 1 } } });
   }
 
   async generate(req: GenerateRequest): Promise<GenerateResult> {
@@ -36,7 +37,7 @@ export class GeminiProvider implements LlmProvider {
           ...(req.system ? { systemInstruction: req.system } : {}),
           ...(req.temperature !== undefined ? { temperature: req.temperature } : {}),
           maxOutputTokens: req.maxOutputTokens,
-          ...(req.thinking ? { thinkingConfig: { thinkingLevel: THINKING[req.thinking] } } : {}),
+          ...(req.thinking ? { thinkingConfig: thinkingConfig(req.model, req.thinking) } : {}),
           ...(req.jsonSchema ? { responseMimeType: "application/json", responseJsonSchema: req.jsonSchema } : {}),
           ...(req.timeoutMs ? { httpOptions: { timeout: req.timeoutMs } } : {}),
         },
@@ -90,4 +91,10 @@ function parseRetryDelay(message: string): number | undefined {
   const m = /retryDelay"?\s*:\s*"(\d+(?:\.\d+)?)s"|retry in (\d+(?:\.\d+)?)s/i.exec(message);
   const seconds = m ? Number(m[1] ?? m[2]) : NaN;
   return Number.isFinite(seconds) ? Math.ceil(seconds * 1000) : undefined;
+}
+
+/** Gemini 2.x takes a token budget instead of a thinking level. */
+const BUDGET = { minimal: 0, low: 1024, medium: 4096, high: 16384 } as const;
+function thinkingConfig(model: string, level: keyof typeof BUDGET) {
+  return /^gemini-2\./.test(model) ? { thinkingBudget: BUDGET[level] } : { thinkingLevel: THINKING[level] };
 }

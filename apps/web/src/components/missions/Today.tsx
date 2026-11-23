@@ -113,6 +113,11 @@ export function Today({ data, studentName }: { data: TodayData; studentName: str
           <ButtonLink href={`/s/${data.student_id}/plan`} variant="secondary" icon="calendar" block>
             See the whole plan
           </ButtonLink>
+          {data.replays_available > 0 && (
+            <ButtonLink href={`/s/${data.student_id}/replays`} variant="ghost" icon="repeat" block>
+              Replay your mistakes ({data.replays_available})
+            </ButtonLink>
+          )}
         </Surface>
       </div>
 

@@ -1,0 +1,109 @@
+{
+  "notice": "SAMPLE DATA: hand-written demo fixture, not a real student or a real Inferentics report.",
+  "recap": {
+    "schema_version": "1.0",
+    "record_id": "demo-riya.hy.q30",
+    "source_hash": "8df7e8a1",
+    "subject": "Mathematics",
+    "concept_id": "math.rate_of_change",
+    "misconception_id": "math.chain_rule.m1",
+    "mode": "typical_step",
+    "wrong": {
+      "format": "latex",
+      "lines": [
+        {
+          "text": "$A = \\pi r^2$",
+          "wrong": false
+        },
+        {
+          "text": "$\\frac{dA}{dt} = 2\\pi r$",
+          "wrong": true,
+          "cas": {
+            "expr": "2*pi*4",
+            "expect": "not_answer"
+          }
+        },
+        {
+          "text": "$\\frac{dA}{dt} = 2\\pi(4) = 8\\pi$",
+          "wrong": false
+        }
+      ],
+      "note": "You differentiated the area with respect to the radius $r$ but used the notation for time $t$. Because the radius is also changing over time, you must multiply by $\\frac{dr}{dt}$ according to the Chain Rule."
+    },
+    "fix": {
+      "lines": [
+        {
+          "text": "$A = \\pi r^2$",
+          "note": "Area of a circle"
+        },
+        {
+          "text": "$\\frac{dA}{dt} = 2\\pi r \\frac{dr}{dt}$",
+          "note": "Apply Chain Rule",
+          "cas": {
+            "expr": "2*pi*4*0.5",
+            "expect": "answer"
+          }
+        },
+        {
+          "text": "$\\frac{dA}{dt} = 2\\pi(4)(0.5)$",
+          "note": "Substitute $r=4, \\frac{dr}{dt}=0.5$",
+          "cas": {
+            "expr": "2*pi*4*0.5",
+            "expect": "answer"
+          }
+        },
+        {
+          "text": "$\\frac{dA}{dt} = 4\\pi \\text{ cm}^2/\\text{s}$",
+          "note": "Final answer",
+          "cas": {
+            "expr": "4*pi",
+            "expect": "answer"
+          }
+        }
+      ]
+    },
+    "key_idea": "Whenever you differentiate a formula involving a variable that depends on time (like $r$ or $h$), always include its rate of change (like $\\frac{dr}{dt}$) using the Chain Rule.",
+    "cas": {
+      "mode": "equal",
+      "symbols": [
+        "pi"
+      ],
+      "compute": "2 * pi * 4 * 0.5"
+    },
+    "verification": {
+      "status": "verified",
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the typical step, labelled; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed 4.0*pi; 3 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "verified_at": "2026-11-21T18:37:29.762Z"
+    },
+    "provenance": {
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "reviewer": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash"
+      },
+      "generated_at": "2026-11-21T18:37:23.834Z",
+      "prompt_version": "recap-1",
+      "sample_data": true
+    }
+  }
+}

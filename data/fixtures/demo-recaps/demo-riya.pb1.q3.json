@@ -1,0 +1,93 @@
+{
+  "notice": "SAMPLE DATA: hand-written demo fixture, not a real student or a real Inferentics report.",
+  "recap": {
+    "schema_version": "1.0",
+    "record_id": "demo-riya.pb1.q3",
+    "source_hash": "9c2a1374",
+    "subject": "Mathematics",
+    "concept_id": "math.matrix_inverse",
+    "mode": "typical_step",
+    "wrong": {
+      "format": "latex",
+      "lines": [
+        {
+          "text": "$|adj A| = |A|$",
+          "wrong": true,
+          "cas": {
+            "expr": "4",
+            "expect": "not_answer"
+          }
+        },
+        {
+          "text": "$|adj A| = 4$",
+          "wrong": false
+        }
+      ],
+      "note": "It looks like the determinant of the adjoint was assumed to be equal to the determinant of the matrix itself. In order 3 matrices, we need to account for the matrix dimension."
+    },
+    "fix": {
+      "lines": [
+        {
+          "text": "$|adj A| = |A|^{n-1}$",
+          "note": "formula for order $n$"
+        },
+        {
+          "text": "$|adj A| = 4^{3-1}$",
+          "note": "$n=3$",
+          "cas": {
+            "expr": "4**(3-1)",
+            "expect": "answer"
+          }
+        },
+        {
+          "text": "$|adj A| = 4^2 = 16$",
+          "cas": {
+            "expr": "16",
+            "expect": "answer"
+          }
+        }
+      ]
+    },
+    "key_idea": "The determinant of the adjoint of a matrix of order $n$ is given by $|adj A| = |A|^{n-1}$. Always check the order of the matrix before calculating.",
+    "cas": {
+      "mode": "numeric",
+      "symbols": [],
+      "compute": "4**(3-1)"
+    },
+    "verification": {
+      "status": "verified",
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the typical step, labelled; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed 16; 2 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "verified_at": "2026-11-21T18:37:31.114Z"
+    },
+    "provenance": {
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "reviewer": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash"
+      },
+      "generated_at": "2026-11-21T18:37:24.594Z",
+      "prompt_version": "recap-1",
+      "sample_data": true
+    }
+  }
+}

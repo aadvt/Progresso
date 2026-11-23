@@ -1,0 +1,91 @@
+{
+  "explainer": {
+    "schema_version": "1.0",
+    "misconception_id": "math.chain_rule.m1",
+    "concept_id": "math.chain_rule",
+    "subject": "Mathematics",
+    "title": "Why the inside needs its own derivative",
+    "steps": [
+      {
+        "kind": "wrong",
+        "say": "To differentiate $\\sin(x^2)$, it feels natural to just change the sine to cosine and keep the $x^2$ the same.",
+        "math": "\\frac{d}{dx} \\sin(x^2) = \\cos(x^2)",
+        "cas": {
+          "expr": "cos(x**2)",
+          "expect": "not_answer"
+        }
+      },
+      {
+        "kind": "why",
+        "say": "If $x$ changes by a little, $x^2$ changes by about $2x$ times as much. The rate of change of the whole function must account for this 'inner speed'.",
+        "math": "\\Delta (x^2) \\approx 2x \\cdot \\Delta x"
+      },
+      {
+        "kind": "idea",
+        "say": "Think of it as two linked gears: the outer gear (sine) is being turned by an inner gear ($x^2$). The final speed depends on both.",
+        "math": "\\text{Total Speed} = \\text{Outer Speed} \\times \\text{Inner Speed}"
+      },
+      {
+        "kind": "rule",
+        "say": "The Chain Rule states we multiply the derivative of the outer layer by the derivative of the inner layer.",
+        "math": "\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)"
+      },
+      {
+        "kind": "example",
+        "say": "We take the derivative of the sine part first, then multiply by the derivative of the inner $x^2$ part.",
+        "math": "\\cos(x^2) \\cdot \\frac{d}{dx}(x^2) = 2x \\cos(x^2)",
+        "cas": {
+          "expr": "2*x*cos(x**2)",
+          "expect": "answer"
+        }
+      },
+      {
+        "kind": "check",
+        "say": "Before moving on, identify the 'inside' part and verify its derivative is multiplied at the end.",
+        "math": "\\frac{d}{dx}(x^2) = 2x"
+      }
+    ],
+    "takeaway": "To differentiate a nested function, always multiply by the 'inner speed'—the derivative of the inside part.",
+    "cas": {
+      "mode": "equal",
+      "symbols": [
+        "x"
+      ],
+      "compute": "diff(sin(x**2), x)"
+    },
+    "verification": {
+      "status": "verified",
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed 2*x*cos(x**2); 1 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "wrong step, correctness and progression confirmed; reviewer issues: none"
+        }
+      ],
+      "verified_at": "2026-11-21T18:40:24.038Z"
+    },
+    "provenance": {
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "reviewer": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash"
+      },
+      "generated_at": "2026-11-21T18:40:15.633Z",
+      "prompt_version": "explainer-1"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+.wrap {
+  display: grid;
+  gap: var(--space-6);
+  max-width: 48rem;
+  padding-block: var(--space-5) var(--space-16);
+}
+
+.head {
+  display: grid;
+  gap: var(--space-2);
+  justify-items: start;
+}
+
+.h1 {
+  font-size: var(--text-2xl);
+  letter-spacing: var(--tracking-tight);
+}
+
+.h2 {
+  font-size: var(--text-lg);
+  letter-spacing: var(--tracking-tight);
+}
+
+.lede {
+  color: var(--ink-2);
+}
+
+.section {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.list {
+  display: grid;
+  gap: var(--space-4);
+}

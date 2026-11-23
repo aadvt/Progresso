@@ -1,0 +1,76 @@
+{
+  "explainer": {
+    "schema_version": "1.0",
+    "misconception_id": "chem.amine_basicity.m1",
+    "concept_id": "chem.amine_basicity",
+    "subject": "Chemistry",
+    "title": "Aniline vs Aliphatic Amines: Basicity",
+    "steps": [
+      {
+        "kind": "wrong",
+        "say": "It might seem that the large benzene ring in aniline would push more electron density toward the nitrogen, making aniline a stronger base than methylamine.",
+        "math": "C_6H_5NH_2 > CH_3NH_2 \\text{ (Basicity)}"
+      },
+      {
+        "kind": "why",
+        "say": "Basicity depends on how easily the nitrogen's lone pair can be donated to a proton ($H^+$). If the lone pair is busy elsewhere, basicity drops.",
+        "math": "R-NH_2 + H^+ \\rightarrow R-NH_3^+"
+      },
+      {
+        "kind": "idea",
+        "say": "In aniline, the lone pair on nitrogen is in conjugation with the pi-electrons of the benzene ring, spreading out over the whole molecule via resonance.",
+        "math": "\\text{Lone pair delocalized in ring}"
+      },
+      {
+        "kind": "idea",
+        "say": "Accepting a proton would 'lock' the lone pair, destroying the resonance stability of the ring-nitrogen system. Aniline is much more stable as it is.",
+        "math": "\\text{Anilinium: no lone-pair delocalisation}"
+      },
+      {
+        "kind": "rule",
+        "say": "Aliphatic amines are more basic than ammonia, and ammonia is significantly more basic than aniline due to this delocalisation.",
+        "math": "R-NH_2 > NH_3 > C_6H_5NH_2"
+      },
+      {
+        "kind": "example",
+        "say": "In methylamine, the $CH_3$ group actually pushes electrons ($+I$ effect) toward nitrogen, keeping the lone pair localized and ready to react.",
+        "math": "CH_3 \\rightarrow \\ddot{N}H_2 > C_6H_5NH_2"
+      },
+      {
+        "kind": "check",
+        "say": "Always check: is the nitrogen lone pair 'free' or 'busy' in resonance? If it's part of a ring's resonance, the amine is a weak base.",
+        "math": "\\text{Resonance} = \\text{Lower Basicity}"
+      }
+    ],
+    "takeaway": "Aniline is a weaker base because its lone pair is delocalized into the benzene ring by resonance.",
+    "verification": {
+      "status": "verified",
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "wrong step, correctness and progression confirmed; reviewer issues: none"
+        }
+      ],
+      "verified_at": "2026-11-21T18:39:30.017Z"
+    },
+    "provenance": {
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "reviewer": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash"
+      },
+      "generated_at": "2026-11-21T18:39:19.070Z",
+      "prompt_version": "explainer-1"
+    }
+  }
+}

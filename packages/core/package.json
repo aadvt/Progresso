@@ -9,7 +9,8 @@
     "./report-parser": "./src/report-parser/index.ts",
     "./constellation": "./src/constellation/index.ts",
     "./constellation/client": "./src/constellation/client.ts",
-    "./missions/client": "./src/missions/client.ts"
+    "./missions/client": "./src/missions/client.ts",
+    "./lessons/client": "./src/lessons/client.ts"
   },
   "scripts": {
     "typecheck": "tsc -p tsconfig.json",

@@ -1,0 +1,102 @@
+{
+  "notice": "SAMPLE DATA: hand-written demo fixture, not a real student or a real Inferentics report.",
+  "recap": {
+    "schema_version": "1.0",
+    "record_id": "demo-kabir.hy.math.q12",
+    "source_hash": "e287820b",
+    "subject": "Mathematics",
+    "concept_id": "math.integration_trig_identities",
+    "misconception_id": "math.integration_trig_identities.m1",
+    "mode": "student_working",
+    "wrong": {
+      "format": "plain",
+      "lines": [
+        {
+          "text": "integral of sin^2 x dx ",
+          "wrong": false
+        },
+        {
+          "text": "= (sin^3 x)/3 + C",
+          "wrong": true,
+          "mark": "(sin^3 x)/3",
+          "cas": {
+            "expr": "sin(x)**3/3",
+            "expect": "not_answer"
+          }
+        }
+      ],
+      "note": "It looks like the power rule for $x^n$ was applied to $\\sin x$. This only works when the base is a simple variable, not a function like $\\sin x$."
+    },
+    "fix": {
+      "lines": [
+        {
+          "text": "$\\int \\sin^2 x dx$"
+        },
+        {
+          "text": "$\\int \\frac{1 - \\cos 2x}{2} dx$",
+          "note": "Identity: $\\sin^2 x = \\frac{1 - \\cos 2x}{2}$"
+        },
+        {
+          "text": "$\\frac{1}{2} \\int (1 - \\cos 2x) dx$"
+        },
+        {
+          "text": "$\\frac{1}{2} (x - \\frac{\\sin 2x}{2}) + C$",
+          "cas": {
+            "expr": "x/2 - sin(2*x)/4",
+            "expect": "answer"
+          }
+        },
+        {
+          "text": "$\\frac{x}{2} - \\frac{\\sin 2x}{4} + C$",
+          "cas": {
+            "expr": "x/2 - sin(2*x)/4",
+            "expect": "answer"
+          }
+        }
+      ]
+    },
+    "key_idea": "The power rule $\\int x^n dx = \\frac{x^{n+1}}{n+1}$ cannot be used for trigonometric functions like $\\sin^2 x$. Always use double angle identities to remove the power before integrating.",
+    "cas": {
+      "mode": "antiderivative",
+      "symbols": [
+        "x"
+      ],
+      "compute": "integrate(sin(x)**2, x)"
+    },
+    "verification": {
+      "status": "verified",
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed x/2 - sin(x)*cos(x)/2; 2 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "verified_at": "2026-11-21T18:38:27.803Z"
+    },
+    "provenance": {
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "reviewer": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash"
+      },
+      "generated_at": "2026-11-21T18:38:21.286Z",
+      "prompt_version": "recap-1",
+      "sample_data": true
+    }
+  }
+}

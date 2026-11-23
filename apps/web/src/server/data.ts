@@ -15,6 +15,8 @@ import {
   loadAppConfig,
   loadConceptGraph,
   loadQuestionBank,
+  loadLessons,
+  type LessonLibrary,
   localDay,
   addDays,
   type ConceptGraph,
@@ -47,6 +49,7 @@ interface Loaded {
   repoRoot: string;
   databasePath: string;
   bank: LoadedBank;
+  lessons: LessonLibrary;
 }
 
 let loaded: Loaded | undefined;
@@ -62,9 +65,16 @@ function load(): Loaded {
       databasePath: config.databasePath,
       // Verified prove-it questions, generated offline (pnpm questions:generate); never generated at runtime.
       bank: loadQuestionBank(config.questionBankDir, graph),
+      // Mistake Recaps and step explainers, generated and verified offline (pnpm lessons:generate).
+      lessons: loadLessons(config, graph),
     };
   }
   return loaded;
+}
+
+/** Cached Mistake Recaps (per record; demo ones are SAMPLE DATA) and step explainers (per misconception). */
+export function getLessons(): LessonLibrary {
+  return load().lessons;
 }
 
 export function getGraph(): ConceptGraph {

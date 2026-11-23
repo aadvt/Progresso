@@ -85,7 +85,7 @@ async function throughRecapAndExplainer(page: Page, concept: string, info: Param
   await expect(page).toHaveURL(/\/mission\//);
   // 1. Mistake Recap: the report's own words.
   await expect(page.getByRole("heading", { level: 1, name: /mistake/ })).toBeVisible();
-  await expect(page.getByText("The report says").first()).toBeVisible();
+  await expect(page.getByText(/report says/).first()).toBeVisible();
   if (info) {
     await shot(page, info, "04-recap", { phase: PHASE });
     await expectAccessible(page, "mission recap");

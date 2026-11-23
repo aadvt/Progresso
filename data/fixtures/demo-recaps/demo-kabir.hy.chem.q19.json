@@ -1,0 +1,78 @@
+{
+  "notice": "SAMPLE DATA: hand-written demo fixture, not a real student or a real Inferentics report.",
+  "recap": {
+    "schema_version": "1.0",
+    "record_id": "demo-kabir.hy.chem.q19",
+    "source_hash": "9b13523b",
+    "subject": "Chemistry",
+    "concept_id": "chem.directive_influence",
+    "misconception_id": "chem.resonance_effect.m1",
+    "mode": "student_working",
+    "wrong": {
+      "format": "plain",
+      "lines": [
+        {
+          "text": "-OCH3 is an electron withdrawing group as O is more electronegative",
+          "wrong": true,
+          "mark": "electron withdrawing group"
+        },
+        {
+          "text": ", so it deactivates the benzene ring.",
+          "wrong": true,
+          "mark": "deactivates"
+        }
+      ],
+      "note": "While oxygen is electronegative, you only considered the $-I$ effect. In aromatic rings, the resonance ($+R$) effect of the oxygen lone pair is stronger and pushes electrons into the ring."
+    },
+    "fix": {
+      "lines": [
+        {
+          "text": "Oxygen in $-OCH_3$ has lone pairs for $+R$ effect",
+          "note": "lone pair donation"
+        },
+        {
+          "text": "The $+R$ effect is stronger than the $-I$ effect",
+          "note": "$+R > -I$"
+        },
+        {
+          "text": "Electron density increases at ortho and para positions",
+          "note": "resonance structures"
+        },
+        {
+          "text": "Thus, $-OCH_3$ is activating and $o/p$-directing"
+        }
+      ]
+    },
+    "key_idea": "When a group like $-OCH_3$ is attached to a benzene ring, the resonance ($+R$) effect of its lone pairs usually outweighs its inductive ($-I$) effect, making the ring more reactive and directing substitutions to the $o/p$ positions.",
+    "verification": {
+      "status": "verified",
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "verified_at": "2026-11-21T18:38:41.143Z"
+    },
+    "provenance": {
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "reviewer": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash"
+      },
+      "generated_at": "2026-11-21T18:38:34.773Z",
+      "prompt_version": "recap-1",
+      "sample_data": true
+    }
+  }
+}

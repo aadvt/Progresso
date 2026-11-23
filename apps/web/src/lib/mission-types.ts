@@ -46,6 +46,8 @@ export interface TodayData {
   demo_offset: number;
   habits_only: boolean;
   questions_available: number;
+  /** Mistake Recaps ready for this student's records (the replays page). */
+  replays_available: number;
 }
 
 export interface PlanDayView {
@@ -77,6 +79,49 @@ export interface RecapEvidence {
   working?: string;
   correct_approach?: string;
   marks_lost?: number;
+  marks_max?: number;
+  /** The animated Mistake Recap, when one has been generated and verified for this record. */
+  lesson?: RecapLesson;
+}
+
+/** One piece of a working line: `marked` is the part the report says is wrong (circled). */
+export interface WorkingSegment {
+  text: string;
+  marked?: boolean;
+}
+
+export interface RecapLesson {
+  /** student_working: the report's quote of the student's own working; typical_step: labelled, not theirs. */
+  mode: "student_working" | "typical_step";
+  wrong: {
+    /** plain: handwriting rendering of the verbatim quote; latex: $…$ text. */
+    format: "plain" | "latex";
+    lines: { segments: WorkingSegment[]; wrong: boolean }[];
+    note: string;
+  };
+  fix: { text: string; note?: string }[];
+  key_idea: string;
+  /** How it was checked, in words ("SymPy + independent review"). */
+  checked: string;
+}
+
+export interface ExplainerLesson {
+  misconception_id: string;
+  /** The misconception in the graph's words. */
+  description: string;
+  /** The student's report shows this misconception. */
+  yours: boolean;
+  title: string;
+  steps: { kind: "wrong" | "why" | "idea" | "example" | "check" | "rule"; say: string; math?: string }[];
+  takeaway: string;
+  checked: string;
+}
+
+/** Every recap and explainer prepared for a student: the "Replay your mistakes" page. */
+export interface ReplaysData {
+  student_id: string;
+  recaps: (RecapEvidence & { lesson: RecapLesson })[];
+  explainers: ExplainerLesson[];
 }
 
 export interface FeedbackView {
@@ -133,6 +178,8 @@ export interface MissionData {
     class: number;
     root_name?: string;
     watch_for: { id: string; description: string; yours: boolean }[];
+    /** Animated step explainers for this mission's misconceptions (the student's own first). */
+    lessons: ExplainerLesson[];
   } | null;
   questions: QuestionView[];
   result?: ResultView;

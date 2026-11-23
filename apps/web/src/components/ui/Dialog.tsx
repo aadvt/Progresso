@@ -73,7 +73,6 @@ export function Dialog({
           </button>
         </header>
         {/* Focusable so keyboard users can scroll long content (e.g. the report) with arrow keys. */}
-        {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
         <div className={styles.body} role="region" aria-labelledby={titleId} tabIndex={0}>
           {children}
         </div>

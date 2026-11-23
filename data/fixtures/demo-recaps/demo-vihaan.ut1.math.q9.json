@@ -1,0 +1,97 @@
+{
+  "notice": "SAMPLE DATA: hand-written demo fixture, not a real student or a real Inferentics report.",
+  "recap": {
+    "schema_version": "1.0",
+    "record_id": "demo-vihaan.ut1.math.q9",
+    "source_hash": "a22355ab",
+    "subject": "Mathematics",
+    "concept_id": "math.derivative_basics",
+    "misconception_id": "math.algebraic_identities.m1",
+    "mode": "student_working",
+    "wrong": {
+      "format": "plain",
+      "lines": [
+        {
+          "text": "(sqrt(x) + 1)^2 / x = (x + 1)/x",
+          "wrong": true,
+          "mark": "(x + 1)/x"
+        },
+        {
+          "text": " = 1 + 1/x",
+          "wrong": false
+        },
+        {
+          "text": ", so dy/dx = -1/x^2",
+          "wrong": false
+        }
+      ],
+      "note": "The middle term $2\\sqrt{x}$ from the expansion of $(\\sqrt{x}+1)^2$ is missing. Remember that $(a+b)^2 = a^2 + 2ab + b^2$."
+    },
+    "fix": {
+      "lines": [
+        {
+          "text": "$y = \\frac{(\\sqrt{x} + 1)^2}{x}$"
+        },
+        {
+          "text": "$y = \\frac{x + 2\\sqrt{x} + 1}{x}$",
+          "note": "expand using $(a+b)^2$"
+        },
+        {
+          "text": "$y = 1 + 2x^{-1/2} + x^{-1}$",
+          "note": "split the fraction"
+        },
+        {
+          "text": "$\\frac{dy}{dx} = -x^{-3/2} - x^{-2}$",
+          "note": "differentiate each term",
+          "cas": {
+            "expr": "-x**Rational(-3, 2) - x**(-2)",
+            "expect": "answer"
+          }
+        }
+      ]
+    },
+    "key_idea": "Expansion of $(a+b)^2$ always includes the $2ab$ term. Writing this out carefully prevents missing terms when roots or complex expressions are involved.",
+    "cas": {
+      "mode": "equal",
+      "symbols": [
+        "x"
+      ],
+      "compute": "diff((sqrt(x)+1)**2/x, x)"
+    },
+    "verification": {
+      "status": "verified",
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed -(sqrt(x) + 1)**2/x**2 + (sqrt(x) + 1)/x**(3/2); 1 answer line(s) equal it; 0 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "verified_at": "2026-11-21T18:39:08.656Z"
+    },
+    "provenance": {
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "reviewer": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash"
+      },
+      "generated_at": "2026-11-21T18:39:02.879Z",
+      "prompt_version": "recap-1",
+      "sample_data": true
+    }
+  }
+}

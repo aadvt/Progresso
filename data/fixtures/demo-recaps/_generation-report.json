@@ -1,0 +1,357 @@
+{
+  "generated_at": "2026-11-21T18:40:06.074Z",
+  "items": [
+    {
+      "kind": "recap",
+      "id": "demo-kabir.hy.chem.q19",
+      "mode": "student_working",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:38:41.144Z"
+    },
+    {
+      "kind": "recap",
+      "id": "demo-kabir.hy.math.q12",
+      "mode": "student_working",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed x/2 - sin(x)*cos(x)/2; 2 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:38:27.805Z"
+    },
+    {
+      "kind": "recap",
+      "id": "demo-kabir.hy.math.q8",
+      "mode": "student_working",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed x/2 + sin(x)*cos(x)/2; 2 answer line(s) equal it; 0 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:38:33.385Z"
+    },
+    {
+      "kind": "recap",
+      "id": "demo-kabir.pb1.chem.q8",
+      "mode": "typical_step",
+      "passed": false,
+      "reasons": [
+        "reviewer puts the error on line 2, we marked 1"
+      ],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the typical step, labelled; marks inside their lines"
+        },
+        {
+          "method": "llm_review",
+          "passed": false,
+          "model": "gemini-2.5-flash",
+          "detail": "reviewer puts the error on line 2, we marked 1; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:39:04.793Z"
+    },
+    {
+      "kind": "recap",
+      "id": "demo-riya.hy.q18",
+      "mode": "student_working",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed (-2*x - y)/(x + 2*y); 1 answer line(s) equal it; 0 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:37:20.113Z"
+    },
+    {
+      "kind": "recap",
+      "id": "demo-riya.hy.q22",
+      "mode": "typical_step",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the typical step, labelled; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed exp(x**2)/2; 3 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:37:13.868Z"
+    },
+    {
+      "kind": "recap",
+      "id": "demo-riya.hy.q30",
+      "mode": "typical_step",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the typical step, labelled; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed 4.0*pi; 3 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:37:29.763Z"
+    },
+    {
+      "kind": "recap",
+      "id": "demo-riya.pb1.q15",
+      "mode": "student_working",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed 2/sqrt(1 - 4*x**2); 1 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:38:01.908Z"
+    },
+    {
+      "kind": "recap",
+      "id": "demo-riya.pb1.q3",
+      "mode": "typical_step",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the typical step, labelled; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed 16; 2 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:37:31.115Z"
+    },
+    {
+      "kind": "recap",
+      "id": "demo-riya.pb1.q9",
+      "mode": "student_working",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed -sin(t)/cos(t); 2 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:38:10.084Z"
+    },
+    {
+      "kind": "recap",
+      "id": "demo-riya.ut1.q11",
+      "mode": "typical_step",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the typical step, labelled; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed -sin(x)/cos(x); 2 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:36:44.252Z"
+    },
+    {
+      "kind": "recap",
+      "id": "demo-riya.ut1.q7",
+      "mode": "student_working",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed 2*x*cos(x**2); 1 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:36:44.919Z"
+    },
+    {
+      "kind": "recap",
+      "id": "demo-vihaan.pb1.math.q14",
+      "mode": "student_working",
+      "passed": false,
+      "reasons": [
+        "SymPy: error unsafe: forbidden syntax in 'diff(x**2, x).subs(x, 3)'; error unsafe: forbidden syntax in 'diff(x**2, x).subs(x, 3)'; error unsafe: forbidden syntax in 'diff(x**2, x).subs(x, 3)'; error unsafe: forbidden syntax in 'diff(x**2, x).subs(x, 3)'; error unsafe: forbidden syntax in 'diff(x**2, x).subs(x, 3)'"
+      ],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": false,
+          "detail": "SymPy: error unsafe: forbidden syntax in 'diff(x**2, x).subs(x, 3)'; error unsafe: forbidden syntax in 'diff(x**2, x).subs(x, 3)'; error unsafe: forbidden syntax in 'diff(x**2, x).subs(x, 3)'; error unsafe: forbidden syntax in 'diff(x**2, x).subs(x, 3)'; error unsafe: forbidden syntax in 'diff(x**2, x).subs(x, 3)'"
+        }
+      ],
+      "at": "2026-11-21T18:40:06.074Z"
+    },
+    {
+      "kind": "recap",
+      "id": "demo-vihaan.ut1.math.q9",
+      "mode": "student_working",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed -(sqrt(x) + 1)**2/x**2 + (sqrt(x) + 1)/x**(3/2); 1 answer line(s) equal it; 0 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:39:08.657Z"
+    }
+  ]
+}

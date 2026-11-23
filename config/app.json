@@ -4,5 +4,7 @@
   "fixturesDir": "data/fixtures/demo",
   "llmCacheDir": "data/cache/llm",
   "llmUsageLog": "data/logs/llm-usage.jsonl",
-  "questionBankDir": "data/question-bank"
+  "questionBankDir": "data/question-bank",
+  "recapsDir": "data/fixtures/demo-recaps",
+  "explainersDir": "data/explainers"
 }

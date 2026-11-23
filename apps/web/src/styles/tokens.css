@@ -10,6 +10,8 @@
   /* ---- type ---- */
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Consolas, monospace;
+  /* Only for a student's own working, as quoted by the report. */
+  --font-hand: var(--font-kalam), "Segoe Print", "Bradley Hand", cursive;
 
   --text-2xs: 0.6875rem; /* 11 */
   --text-xs: 0.75rem; /* 12 */
@@ -68,6 +70,14 @@
 
   --danger-700: #b42318;
   --danger-100: #fde8e6;
+
+  /* ---- answer sheet: the Mistake Recap ---- */
+  --paper: #fffdf7;
+  --paper-rule: rgb(36 83 224 / 0.13);
+  --paper-margin: rgb(180 35 24 / 0.32);
+  --paper-ink: #1d2a6b; /* student's pen, 11:1 on --paper */
+  --pen-red: #c0261a; /* examiner's red pen, 5.6:1 on --paper */
+  --pen-fix: #076b5e; /* the correction, 6.2:1 on --paper */
 
   --thread: linear-gradient(135deg, var(--blue-500) 0%, var(--teal-500) 100%);
   --thread-vertical: linear-gradient(180deg, var(--blue-500) 0%, var(--teal-500) 100%);

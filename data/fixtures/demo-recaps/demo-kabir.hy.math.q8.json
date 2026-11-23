@@ -1,0 +1,99 @@
+{
+  "notice": "SAMPLE DATA: hand-written demo fixture, not a real student or a real Inferentics report.",
+  "recap": {
+    "schema_version": "1.0",
+    "record_id": "demo-kabir.hy.math.q8",
+    "source_hash": "2c8889c3",
+    "subject": "Mathematics",
+    "concept_id": "math.integration_trig_identities",
+    "misconception_id": "math.trig_multiple_angles.m1",
+    "mode": "student_working",
+    "wrong": {
+      "format": "plain",
+      "lines": [
+        {
+          "text": "cos^2 x = (1 - cos 2x)/2",
+          "wrong": true,
+          "mark": "(1 - cos 2x)/2"
+        },
+        {
+          "text": ", so integral = x/2 - (sin 2x)/4 + C",
+          "wrong": false
+        }
+      ],
+      "note": "The identity for $\\cos^2 x$ should have a plus sign. The version with the minus sign is actually the identity for $\\sin^2 x$."
+    },
+    "fix": {
+      "lines": [
+        {
+          "text": "$\\cos^2 x = \\frac{1 + \\cos 2x}{2}$",
+          "note": "using $\\cos 2x = 2\\cos^2 x - 1$"
+        },
+        {
+          "text": "$\\int \\cos^2 x \\, dx = \\int \\frac{1 + \\cos 2x}{2} \\, dx$"
+        },
+        {
+          "text": "$= \\frac{1}{2} \\int (1 + \\cos 2x) \\, dx$"
+        },
+        {
+          "text": "$= \\frac{1}{2} (x + \\frac{\\sin 2x}{2}) + C$",
+          "note": "integral of $\\cos 2x$ is $\\frac{\\sin 2x}{2}$",
+          "cas": {
+            "expr": "x/2 + sin(2*x)/4",
+            "expect": "answer"
+          }
+        },
+        {
+          "text": "$= \\frac{x}{2} + \\frac{\\sin 2x}{4} + C$",
+          "cas": {
+            "expr": "x/2 + sin(2*x)/4",
+            "expect": "answer"
+          }
+        }
+      ]
+    },
+    "key_idea": "The $\\cos^2 x$ identity always uses a plus sign: $\\cos^2 x = \\frac{1 + \\cos 2x}{2}$. If you ever forget, just rearrange the double-angle formula $\\cos 2x = 2\\cos^2 x - 1$.",
+    "cas": {
+      "mode": "antiderivative",
+      "symbols": [
+        "x"
+      ],
+      "compute": "integrate(cos(x)**2, x)"
+    },
+    "verification": {
+      "status": "verified",
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed x/2 + sin(x)*cos(x)/2; 2 answer line(s) equal it; 0 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "verified_at": "2026-11-21T18:38:33.384Z"
+    },
+    "provenance": {
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "reviewer": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash"
+      },
+      "generated_at": "2026-11-21T18:38:25.646Z",
+      "prompt_version": "recap-1",
+      "sample_data": true
+    }
+  }
+}

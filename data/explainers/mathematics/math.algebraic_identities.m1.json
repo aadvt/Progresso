@@ -1,0 +1,91 @@
+{
+  "explainer": {
+    "schema_version": "1.0",
+    "misconception_id": "math.algebraic_identities.m1",
+    "concept_id": "math.algebraic_identities",
+    "subject": "Mathematics",
+    "title": "Why (a+b)^2 is not just a^2 + b^2",
+    "steps": [
+      {
+        "kind": "wrong",
+        "say": "It is common to think that we just square each part of the sum, as if the exponent distributes like multiplication.",
+        "math": "(x + 3)^2 = x^2 + 3^2 = x^2 + 9",
+        "cas": {
+          "expr": "x**2 + 9",
+          "expect": "not_answer"
+        }
+      },
+      {
+        "kind": "why",
+        "say": "Let's test this with $x = 1$. The original side is $(1+3)^2 = 16$, but our result gives $1^2 + 9 = 10$. We are missing $6$!",
+        "math": "(1+3)^2 \\neq 1^2 + 9"
+      },
+      {
+        "kind": "idea",
+        "say": "Think of a square with side $(a+b)$. Its area is the whole square, which includes $a^2$, $b^2$, and two rectangles of area $ab$.",
+        "math": "(a+b)(a+b) = a(a+b) + b(a+b)"
+      },
+      {
+        "kind": "rule",
+        "say": "This gives us the standard identity: the two squares plus the 'cross-term' $2ab$.",
+        "math": "(a+b)^2 = a^2 + 2ab + b^2"
+      },
+      {
+        "kind": "example",
+        "say": "Now we expand $(x+3)^2$ correctly by including that middle term: $2 \\cdot x \\cdot 3$.",
+        "math": "(x+3)^2 = x^2 + 6x + 9",
+        "cas": {
+          "expr": "x**2 + 6*x + 9",
+          "expect": "answer"
+        }
+      },
+      {
+        "kind": "check",
+        "say": "Check again with $x=1$: $1 + 6 + 9 = 16$. It works! Always do a quick mental check with a small number.",
+        "math": "16 = 1 + 6 + 9"
+      }
+    ],
+    "takeaway": "Squaring a sum always creates a middle term 2ab to account for the 'overlap' area.",
+    "cas": {
+      "mode": "equal",
+      "symbols": [
+        "x"
+      ],
+      "compute": "expand((x+3)**2)"
+    },
+    "verification": {
+      "status": "verified",
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed x**2 + 6*x + 9; 1 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "wrong step, correctness and progression confirmed; reviewer issues: none"
+        }
+      ],
+      "verified_at": "2026-11-21T18:40:05.514Z"
+    },
+    "provenance": {
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "reviewer": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash"
+      },
+      "generated_at": "2026-11-21T18:39:56.923Z",
+      "prompt_version": "explainer-1"
+    }
+  }
+}

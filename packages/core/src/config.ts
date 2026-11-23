@@ -12,6 +12,10 @@ export interface AppConfig {
   llmUsageLog: string;
   /** Verified prove-it questions, one JSON file per misconception. */
   questionBankDir: string;
+  /** Mistake Recaps, one JSON per error record. Demo: data/fixtures/demo-recaps (SAMPLE DATA); Phase P: a git-ignored dir. */
+  recapsDir: string;
+  /** Step explainers, one JSON per misconception (not student data). */
+  explainersDir: string;
 }
 
 /** Walk up from `start` to the directory containing pnpm-workspace.yaml. */
@@ -51,5 +55,7 @@ export function loadAppConfig(repoRoot: string = findRepoRoot()): AppConfig {
     llmCacheDir: pick("llmCacheDir", "LLM_CACHE_DIR"),
     llmUsageLog: pick("llmUsageLog", "LLM_USAGE_LOG"),
     questionBankDir: pick("questionBankDir", "QUESTION_BANK_DIR", "data/question-bank"),
+    recapsDir: pick("recapsDir", "RECAPS_DIR", "data/fixtures/demo-recaps"),
+    explainersDir: pick("explainersDir", "EXPLAINERS_DIR", "data/explainers"),
   };
 }

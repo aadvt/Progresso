@@ -19,6 +19,8 @@ import type { FeedbackView, MissionData, QuestionView, ResultView } from "@/lib/
 import { marks, plural } from "@/lib/format";
 import { MathText, plainMath } from "./MathText";
 import { KIND } from "./MissionCard";
+import { MistakeRecap } from "./MistakeRecap";
+import { StepExplainer } from "./StepExplainer";
 import styles from "./MissionPlayer.module.css";
 
 type Step = "recap" | "explainer" | "prove_it" | "result";
@@ -57,6 +59,8 @@ export function MissionPlayer({ data }: { data: MissionData }) {
   }, [step, qIndex]);
 
   const k = KIND[data.card.kind];
+  const recapLessons = data.recap.filter((e) => e.lesson).length;
+  const recapRest = data.recap.filter((e) => !e.lesson);
   const stepIndex = steps.indexOf(step);
   const allAnswered = data.questions.every((q) => answers[q.id]);
 
@@ -99,28 +103,49 @@ export function MissionPlayer({ data }: { data: MissionData }) {
       {step === "recap" && (
         <Surface as="section" level={3} pad="lg" className={styles.panel} aria-labelledby="step-title" data-enter>
           <p className={styles.kicker}>Step 1 · Mistake Recap</p>
-          <h1 id="step-title" ref={headingRef} tabIndex={-1} className={styles.h1}>
-            {data.recap.length === 1 ? "The mistake we're fixing" : `The ${data.recap.length} mistakes we're fixing`}
-          </h1>
-          <p className={styles.lede}>In your report&apos;s own words. Read what went wrong; the next step is about why.</p>
-          <ul role="list" className={styles.evidence}>
-            {data.recap.slice(0, RECAP_SHOWN).map((e) => (
-              <EvidenceItem key={e.record_id} e={e} />
-            ))}
-          </ul>
-          {data.recap.length > RECAP_SHOWN && (
-            <details className={styles.more}>
-              <summary>Show the other {plural(data.recap.length - RECAP_SHOWN, "mistake")}</summary>
+          {recapLessons > 0 ? (
+            <>
+              <h1 id="step-title" ref={headingRef} tabIndex={-1} className={styles.h1}>
+                {recapLessons === 1 ? "Your mistake, replayed" : `Your mistakes, replayed (${recapLessons})`}
+              </h1>
+              <p className={styles.lede}>Where it went wrong on your paper, marked, then the fix. Under a minute.</p>
+              <MistakeRecap items={data.recap} />
+              {recapRest.length > 0 && (
+                <details className={styles.more}>
+                  <summary>
+                    {plural(recapRest.length, "other mistake")} on this in your report
+                  </summary>
+                  <ul role="list" className={styles.evidence}>
+                    {recapRest.map((e) => (
+                      <EvidenceItem key={e.record_id} e={e} />
+                    ))}
+                  </ul>
+                </details>
+              )}
+            </>
+          ) : (
+            <>
+              <h1 id="step-title" ref={headingRef} tabIndex={-1} className={styles.h1}>
+                {data.recap.length === 1 ? "The mistake we're fixing" : `The ${data.recap.length} mistakes we're fixing`}
+              </h1>
+              <p className={styles.lede}>In your report&apos;s own words. Read what went wrong; the next step is about why.</p>
               <ul role="list" className={styles.evidence}>
-                {data.recap.slice(RECAP_SHOWN).map((e) => (
+                {data.recap.slice(0, RECAP_SHOWN).map((e) => (
                   <EvidenceItem key={e.record_id} e={e} />
                 ))}
               </ul>
-            </details>
+              {data.recap.length > RECAP_SHOWN && (
+                <details className={styles.more}>
+                  <summary>Show the other {plural(data.recap.length - RECAP_SHOWN, "mistake")}</summary>
+                  <ul role="list" className={styles.evidence}>
+                    {data.recap.slice(RECAP_SHOWN).map((e) => (
+                      <EvidenceItem key={e.record_id} e={e} />
+                    ))}
+                  </ul>
+                </details>
+              )}
+            </>
           )}
-          <p className={styles.placeholder}>
-            <Icon name="info" size={16} /> Coming soon: the full Mistake Recap, with your working marked and corrected line by line.
-          </p>
           <div className={styles.actions}>
             <Button variant="primary" size="lg" trailingIcon="arrowRight" onClick={() => setStep("explainer")}>
               Continue
@@ -144,13 +169,17 @@ export function MissionPlayer({ data }: { data: MissionData }) {
               </>
             )}
           </p>
-          <div className={styles.explainerSlot}>
-            <Icon name="play" size={28} />
-            <div>
-              <p className={styles.slotTitle}>Step-by-step explainer</p>
-              <p className={styles.slotText}>An animated walk-through of this topic arrives in a later update. Use your textbook section for now.</p>
+          {data.explainer.lessons.length > 0 ? (
+            <StepExplainer lessons={data.explainer.lessons} />
+          ) : (
+            <div className={styles.explainerSlot}>
+              <Icon name="play" size={28} />
+              <div>
+                <p className={styles.slotTitle}>Step-by-step explainer</p>
+                <p className={styles.slotText}>The animated walk-through for this topic hasn&apos;t been made yet. Use your textbook section for now.</p>
+              </div>
             </div>
-          </div>
+          )}
           <h2 className={styles.h2}>
             <Icon name="bulb" size={18} /> Watch out for
           </h2>

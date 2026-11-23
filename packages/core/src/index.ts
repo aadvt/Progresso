@@ -11,3 +11,4 @@ export * from "./diagnosis-view";
 export * from "./constellation";
 export * from "./missions";
 export * from "./questions";
+export * from "./lessons";

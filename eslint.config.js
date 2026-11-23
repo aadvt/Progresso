@@ -43,6 +43,8 @@ export default tseslint.config(
       ...jsxA11y.flatConfigs.recommended.rules,
       // role="list" is deliberate: Safari/VoiceOver drops list semantics when list-style is none.
       "jsx-a11y/no-redundant-roles": ["error", { ul: ["list"], ol: ["list"] }],
+      // A region that can scroll sideways (a long formula on a phone) must be keyboard-focusable (axe: scrollable-region-focusable).
+      "jsx-a11y/no-noninteractive-tabindex": ["error", { roles: ["tabpanel", "region"], allowExpressionValues: true }],
     },
   },
   {

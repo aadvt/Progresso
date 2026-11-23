@@ -1,9 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { GeistMono } from "geist/font/mono";
 import { GeistSans } from "geist/font/sans";
+import { Kalam } from "next/font/google";
 import type { ReactNode } from "react";
 import { Backdrop } from "@/components/ui/Backdrop";
 import "@/styles/globals.css";
+
+/** Handwriting, used only to show a student's own working as quoted by their report (never for typical or generated steps). */
+const hand = Kalam({ weight: ["400", "700"], subsets: ["latin"], variable: "--font-kalam", display: "swap" });
 
 export const metadata: Metadata = {
   title: { default: "Progresso", template: "%s · Progresso" },
@@ -19,7 +23,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en-IN" className={`${GeistSans.variable} ${GeistMono.variable}`}>
+    <html lang="en-IN" className={`${GeistSans.variable} ${GeistMono.variable} ${hand.variable}`}>
       <body>
         <a href="#main" className="skip-link">
           Skip to content

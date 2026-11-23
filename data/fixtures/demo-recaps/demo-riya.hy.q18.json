@@ -1,0 +1,95 @@
+{
+  "notice": "SAMPLE DATA: hand-written demo fixture, not a real student or a real Inferentics report.",
+  "recap": {
+    "schema_version": "1.0",
+    "record_id": "demo-riya.hy.q18",
+    "source_hash": "8c061bf5",
+    "subject": "Mathematics",
+    "concept_id": "math.implicit_differentiation",
+    "misconception_id": "math.implicit_differentiation.m1",
+    "mode": "student_working",
+    "wrong": {
+      "format": "plain",
+      "lines": [
+        {
+          "text": "d/dx(x^2 + xy + y^2) = ",
+          "wrong": false
+        },
+        {
+          "text": "2x + y + 2y = 0",
+          "wrong": true,
+          "mark": "y + 2y"
+        }
+      ],
+      "note": "The terms $xy$ and $y^2$ were differentiated without considering that $y$ is a function of $x$. This missed the $\\frac{dy}{dx}$ terms required by the product and chain rules."
+    },
+    "fix": {
+      "lines": [
+        {
+          "text": "$\\frac{d}{dx}(x^2 + xy + y^2) = \\frac{d}{dx}(7)$",
+          "note": "Start by differentiating both sides"
+        },
+        {
+          "text": "$2x + (x\\frac{dy}{dx} + y\\cdot 1) + 2y\\frac{dy}{dx} = 0$",
+          "note": "Apply product rule and chain rule"
+        },
+        {
+          "text": "$(x + 2y)\\frac{dy}{dx} = -2x - y$",
+          "note": "Collect $\\frac{dy}{dx}$ terms together"
+        },
+        {
+          "text": "$\\frac{dy}{dx} = -\\frac{2x + y}{x + 2y}$",
+          "note": "Isolate the derivative",
+          "cas": {
+            "expr": "-(2*x + y)/(x + 2*y)",
+            "expect": "answer"
+          }
+        }
+      ]
+    },
+    "key_idea": "When differentiating implicitly, remember that $y$ depends on $x$. Every time you differentiate a term containing $y$, you must include a $\\frac{dy}{dx}$ factor due to the Chain Rule.",
+    "cas": {
+      "mode": "equal",
+      "symbols": [
+        "x",
+        "y"
+      ],
+      "compute": "-(2*x + y)/(x + 2*y)"
+    },
+    "verification": {
+      "status": "verified",
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "lines reproduce the quoted working exactly; marks inside their lines"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed (-2*x - y)/(x + 2*y); 1 answer line(s) equal it; 0 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "error line, mark, note, fix and report agreement confirmed; reviewer issues: none"
+        }
+      ],
+      "verified_at": "2026-11-21T18:37:20.112Z"
+    },
+    "provenance": {
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "reviewer": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash"
+      },
+      "generated_at": "2026-11-21T18:37:11.526Z",
+      "prompt_version": "recap-1",
+      "sample_data": true
+    }
+  }
+}

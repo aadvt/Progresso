@@ -27,7 +27,7 @@ Prototype for **Inferentics** (edtech). Inferentics already scans CBSE Class 11�
 | 3 | Web app with the diagnosis view | done |
 | 4 | 3D "knowledge constellation" (three.js) of the syllabus, with a chain-reaction ripple when a root is fixed | done |
 | 5 | Mission engine: 25-min daily missions, "prove it" questions whose wrong options come from the student's own mistakes, mastery gating, spaced repetition (FSRS), readiness meter | done |
-| 6 | Mistake Recap (the student's mistake, marked and corrected) and in-browser step explainers | |
+| 6 | Mistake Recap (the student's mistake, marked and corrected) and in-browser step explainers | done |
 | 7 | Manim explainer animation pipeline | |
 | 8 | Precise YouTube clips and 3D organic chemistry | |
 | 9 | Calendar autopilot (in-app calendar + .ics export) and simulated WhatsApp nudges | |
@@ -49,7 +49,9 @@ packages/
                             constellation layout + state model + ripple (constellation/; browser
                             entry ./constellation/client), mission engine (missions/: plan generator,
                             mastery gate + FSRS, readiness; browser entry ./missions/client), prove-it
-                            questions (questions/: schema, grading, selection, bank loader).
+                            questions (questions/: schema, grading, selection, bank loader), lesson content
+                            (lessons/: Mistake Recap + step explainer schemas, structure checks, library;
+                            browser entry ./lessons/client).
                             ./demo-fixtures entry = SAMPLE DATA loader (deleted in Phase P)
   llm/    @progresso/llm   provider-agnostic LLM layer: per-task routing, Gemini/Anthropic/
                             OpenAI-compatible providers, structured output + repair, rate limit,
@@ -72,6 +74,8 @@ data/
   concept-graph-provisional/  provisional graph, one JSON per subject (format is fixed)
   fixtures/demo/              SAMPLE DATA demo students (structured error records)
   fixtures/_answer-key/       intended roots per demo student (tests only, never read by the engine)
+  fixtures/demo-recaps/       SAMPLE DATA Mistake Recaps, one per error record (deleted with the fixtures in Phase P)
+  explainers/                 verified step explainers, <subject>/<misconception_id>.json (_generation-report.json)
   question-bank/              verified prove-it questions, one JSON per misconception (generated offline;
                               _generation-report.json = what was generated and rejected)
   reports/                    real reports (Phase P), git-ignored, never committed
@@ -89,6 +93,7 @@ Key contracts:
 - **Constellation**: `layoutConstellation(graph, subjects)` (cached per graph) + `buildConstellation({ graph, layout, analysis, records, mastery })` → `ConstellationModel`. Star state comes from `concept_mastery` in the DB: write it with `setConceptMastery()` and the map updates (a root going to `proven` plays the ripple).
 - **Missions**: `buildPlan({ graph, analysis, records, settings, today, progress })` → `ComebackPlan` (pure; re-run after any change and it re-flows). Mastery gate `gradeCheck` + `applyCheck` (FSRS via ts-fsrs, max interval 14 days), readiness `computeReadiness` (always a range). Persistence and orchestration: `@progresso/db` `startMission` / `answerQuestion` / `finishMission` (writes `concept_mastery`, so the constellation updates). Tunables in `missions/params.ts`.
 - **Prove-it questions**: `ProveItQuestionSchema` (`questions/schema.ts`): every wrong option carries a `misconception_id`. Only verified questions enter `data/question-bank/` (`pnpm questions:generate`); nothing is generated at runtime. The browser never receives the answer key.
+- **Lesson content**: `MistakeRecapSchema` (per record; mode `student_working` only when the report quotes the working, and then its lines must reproduce the quote exactly, checked by `checkRecapStructure`; otherwise `typical_step`, labelled "Not your working") and `StepExplainerSchema` (per misconception, starts from the typical wrong step). Generated offline by `pnpm lessons:generate` (structure → SymPy → independent review on a different model), loaded with `loadLessons()` / `recapFor()` (stale recaps ignored via `source_hash`). Nothing generated at runtime.
 - **LLM calls**: `createLlmClient().generateObject(task, { prompt, schema })` or `.generateText(task, ...)`. The task name picks provider/model from `config/llm.json`.
 
 ## Conventions
@@ -117,6 +122,8 @@ pnpm web:dev                # web app at http://localhost:3100
 pnpm e2e                    # production build + Playwright e2e (desktop + phone, axe, then frame-rate runs); screenshots to docs/screenshots/ (local only, git-ignored)
 pnpm questions:generate     # generate + verify prove-it questions into data/question-bank (LLM + SymPy; needs Python 3 with sympy)
                             # --missing tops up targets with no verified questions; --only a,b; --list; saves per target
+pnpm lessons:generate       # generate + verify Mistake Recaps and step explainers (--recaps/--explainers, --missing, --only, --list,
+                            # --model M --review-model R: the reviewer must be a different model)
 pnpm simulate demo-riya     # simulate 14 days of missions on a throwaway DB (--days, --minutes, --skip, --out)
 pnpm db:seed                # migrate, sync graph, load demo fixtures, print per-student summary
 pnpm db:reset               # delete the local DB (then db:seed)

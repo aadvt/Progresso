@@ -25,13 +25,16 @@ export default defineConfig({
     launchOptions: { args: ["--enable-gpu", "--ignore-gpu-blocklist", ...(process.platform === "win32" ? ["--use-angle=d3d11"] : [])] },
   },
   projects: [
-    { name: "desktop", testIgnore: /perf.spec|missions.spec/, use: desktop },
-    { name: "mobile", testIgnore: /perf.spec|missions.spec/, use: phone },
+    { name: "desktop", testIgnore: /perf.spec|missions.spec|lessons.spec/, use: desktop },
+    { name: "mobile", testIgnore: /perf.spec|missions.spec|lessons.spec/, use: phone },
     // Missions write mastery for demo students the map tests also use, so they run after those, desktop then phone.
     { name: "missions-desktop", testMatch: /missions.spec/, dependencies: ["desktop", "mobile"], use: desktop },
     { name: "missions-mobile", testMatch: /missions.spec/, dependencies: ["missions-desktop"], use: phone },
+    // Mistake Recap and explainers (Phase 6): they also build plans for the demo students, so after the mission runs.
+    { name: "lessons-desktop", testMatch: /lessons.spec/, dependencies: ["missions-mobile"], use: desktop },
+    { name: "lessons-mobile", testMatch: /lessons.spec/, dependencies: ["lessons-desktop"], use: phone },
     // Frame-rate measurements run last and alone, so nothing competes for the GPU.
-    { name: "perf-desktop", testMatch: /perf.spec/, dependencies: ["missions-mobile"], use: desktop },
+    { name: "perf-desktop", testMatch: /perf.spec/, dependencies: ["lessons-mobile"], use: desktop },
     { name: "perf-mobile", testMatch: /perf.spec/, dependencies: ["perf-desktop"], use: phone },
   ],
   webServer: {

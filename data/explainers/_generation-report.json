@@ -1,0 +1,213 @@
+{
+  "generated_at": "2026-11-23T06:33:44.966Z",
+  "items": [
+    {
+      "kind": "explainer",
+      "id": "chem.amine_basicity.m1",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "wrong step, correctness and progression confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:39:30.019Z"
+    },
+    {
+      "kind": "explainer",
+      "id": "chem.phenol_acidity.m1",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "wrong step, correctness and progression confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-23T06:27:07.585Z"
+    },
+    {
+      "kind": "explainer",
+      "id": "chem.resonance_effect.m1",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "wrong step, correctness and progression confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:59:45.825Z"
+    },
+    {
+      "kind": "explainer",
+      "id": "math.algebraic_identities.m1",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed x**2 + 6*x + 9; 1 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "wrong step, correctness and progression confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:40:05.517Z"
+    },
+    {
+      "kind": "explainer",
+      "id": "math.chain_rule.m1",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed 2*x*cos(x**2); 1 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "wrong step, correctness and progression confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:40:24.040Z"
+    },
+    {
+      "kind": "explainer",
+      "id": "math.chain_rule.m2",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed 2*x*cos(x**2); 1 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "wrong step, correctness and progression confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-21T18:40:21.996Z"
+    },
+    {
+      "kind": "explainer",
+      "id": "math.implicit_differentiation.m1",
+      "passed": false,
+      "reasons": [
+        "a step is incorrect"
+      ],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed -x/y; 1 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": false,
+          "model": "gemini-2.5-flash",
+          "detail": "a step is incorrect; reviewer issues: Step 7's explanation ('did every term that originally had a y end up producing a dy/dx factor?') is imprecise. Not every term containing 'y' necessarily results in a factor of 'dy/dx' being multiplied by the 'y' term itself. For instance, d/dx(y) yields dy/dx, and d/dx(xy) yields y + x(dy/dx). The check should focus on whether every *differentiation of a function of y* with respect to x includes the dy/dx factor."
+        }
+      ],
+      "at": "2026-11-23T06:32:31.967Z"
+    },
+    {
+      "kind": "explainer",
+      "id": "math.increasing_decreasing.m1",
+      "passed": false,
+      "reasons": [
+        "SymPy: line \"3*x**2 - 6*x\" ok 3*x**2 - 6*x; wrong steps distinct [false]"
+      ],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": false,
+          "detail": "SymPy: line \"3*x**2 - 6*x\" ok 3*x**2 - 6*x; wrong steps distinct [false]"
+        }
+      ],
+      "at": "2026-11-23T06:33:44.966Z"
+    },
+    {
+      "kind": "explainer",
+      "id": "math.integration_trig_identities.m1",
+      "passed": true,
+      "reasons": [],
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed x/2 - sin(x)*cos(x)/2; 1 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "wrong step, correctness and progression confirmed; reviewer issues: none"
+        }
+      ],
+      "at": "2026-11-23T06:30:06.774Z"
+    }
+  ]
+}

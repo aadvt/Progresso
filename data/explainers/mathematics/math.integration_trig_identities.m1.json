@@ -1,0 +1,95 @@
+{
+  "explainer": {
+    "schema_version": "1.0",
+    "misconception_id": "math.integration_trig_identities.m1",
+    "concept_id": "math.integration_trig_identities",
+    "subject": "Mathematics",
+    "title": "Why Power Rule Fails for sin^2 x",
+    "steps": [
+      {
+        "kind": "wrong",
+        "say": "It is tempting to treat $\\sin x$ like a single variable $x$ and apply the power rule $\\int u^n du = \\frac{u^{n+1}}{n+1}$.",
+        "math": "\\int \\sin^2 x \\, dx = \\frac{\\sin^3 x}{3} + C",
+        "cas": {
+          "expr": "sin(x)**3 / 3",
+          "expect": "not_answer"
+        }
+      },
+      {
+        "kind": "why",
+        "say": "But if we differentiate our answer, the Chain Rule forces a $\\cos x$ to appear. The original problem didn't have one!",
+        "math": "\\frac{d}{dx}\\left(\\frac{\\sin^3 x}{3}\\right) = \\sin^2 x \\cdot \\cos x"
+      },
+      {
+        "kind": "idea",
+        "say": "Powers of trig functions are difficult to integrate directly. We must 'flatten' the power into a simple angle multiple using identities.",
+        "math": "\\cos 2x = 1 - 2\\sin^2 x"
+      },
+      {
+        "kind": "rule",
+        "say": "Rearranging the double angle identity gives us a way to replace the square with a first-order cosine term.",
+        "math": "\\sin^2 x = \\frac{1 - \\cos 2x}{2}"
+      },
+      {
+        "kind": "example",
+        "say": "Now substitute this identity into the integral. We can now integrate each part separately.",
+        "math": "\\int \\frac{1 - \\cos 2x}{2} \\, dx"
+      },
+      {
+        "kind": "example",
+        "say": "The integral of $1/2$ is $x/2$, and the integral of $\\cos 2x$ is $(\\sin 2x)/2$. We combine these for the final answer.",
+        "math": "\\frac{x}{2} - \\frac{\\sin 2x}{4} + C",
+        "cas": {
+          "expr": "x/2 - sin(2*x)/4",
+          "expect": "answer"
+        }
+      },
+      {
+        "kind": "check",
+        "say": "Before you use the power rule, ask: Is the base just $x$? If it's a function like $\\sin x$, you usually need an identity first."
+      }
+    ],
+    "takeaway": "Trig powers like $\\sin^2 x$ must be reduced to first-degree terms using identities before integration.",
+    "cas": {
+      "mode": "antiderivative",
+      "symbols": [
+        "x"
+      ],
+      "compute": "integrate(sin(x)**2, x)"
+    },
+    "verification": {
+      "status": "verified",
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "cas_sympy",
+          "passed": true,
+          "detail": "SymPy computed x/2 - sin(x)*cos(x)/2; 1 answer line(s) equal it; 1 wrong step(s) differ from it"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "wrong step, correctness and progression confirmed; reviewer issues: none"
+        }
+      ],
+      "verified_at": "2026-11-23T06:30:06.773Z"
+    },
+    "provenance": {
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "reviewer": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash"
+      },
+      "generated_at": "2026-11-23T06:29:57.616Z",
+      "prompt_version": "explainer-1"
+    }
+  }
+}

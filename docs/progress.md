@@ -126,3 +126,27 @@ Report: [phase-5-report.md](phase-5-report.md). Simulation: [phase-5-simulation.
 **Open items**
 - Fill the bank (34 targets), ideally with a second model for the chemistry second opinion (it currently uses the same model with a different method).
 - Re-tune readiness on real reports (absolute levels are high on sparse fixtures).
+
+---
+
+## Phase 6: Mistake Recap and step explainers (2026-11-23) ✅
+
+Report: [phase-6-report.md](phase-6-report.md). Screenshots: `docs/screenshots/phase-6/` (local only).
+
+**Built**
+- Core `src/lessons/`: recap and explainer schemas, structure checks (own working must reproduce the report's quote exactly; typical steps can't use handwriting), a file library with stale-recap detection. Browser entry `@progresso/core/lessons/client`.
+- CLI `lessons:generate`: LLM generation, then structure checks, SymPy, and an independent review on a different model. Rejects are logged, nothing is saved for them.
+- Web: Mistake Recap in mission step 1 (handwritten own working with the error circled, or a printed typical step labelled "Not your working"; then the fix line by line and the key idea; exam, question and marks lost on top; skippable, replayable, reduced motion). Step explainer in step 2 (a board, narration, auto-play, step controls; formulas shrink to fit on a phone). A Replays page per student.
+
+**Results**
+- 11 verified recaps (7 from the student's quoted working, 4 typical steps) and 6 verified explainers (3 maths, 3 chemistry), each read against its report or misconception. All 11 recaps were correct. 4 explainers had factual slips that the automatic review missed (3 chemistry, 1 maths); their text was corrected after verification and is listed in the report for confirmation.
+- 174 unit tests; 37 e2e tests pass on desktop and phone (axe clean), including a no-overflow check on every explainer board.
+
+**Decisions later phases rely on**
+- `student_working` alone decides the recap mode (Phase P parser). Manim videos (Phase 7) sit on top of the step explainer, which stays the fallback.
+
+**Open items**
+- Confirm the 4 hand edits; add a second-vendor or human reviewer for chemistry content.
+- Fill the remaining 30 recaps and 27 explainers (`--missing`; Gemini returned 503s this session).
+- Allow `.subs()` in the CAS checker; render `adj` and chemical formulas upright.
+

@@ -7,8 +7,9 @@ import { Fragment } from "react";
  * Content comes from the verified question bank, never from user input;
  * KaTeX escapes its own output and `trust` stays off.
  */
-export function MathText({ text, className }: { text: string; className?: string }) {
-  const parts = split(text);
+export function MathText({ text, className, display }: { text: string; className?: string; display?: boolean }) {
+  // display: maths in display style (full-size fractions), for worked steps on the board.
+  const parts = split(text).map((p) => (p.math && display ? { ...p, text: `\\displaystyle ${p.text}` } : p));
   return (
     <span className={className}>
       {parts.map((p, i) =>
@@ -20,6 +21,11 @@ export function MathText({ text, className }: { text: string; className?: string
       )}
     </span>
   );
+}
+
+/** One display formula (LaTeX without $), for explainer boards. */
+export function Tex({ tex, className }: { tex: string; className?: string }) {
+  return <span className={className} dangerouslySetInnerHTML={{ __html: katex.renderToString(tex, { displayMode: true, throwOnError: false, output: "htmlAndMathml", strict: "ignore", trust: false }) }} />;
 }
 
 function render(tex: string): string {

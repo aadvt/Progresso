@@ -1,0 +1,71 @@
+{
+  "explainer": {
+    "schema_version": "1.0",
+    "misconception_id": "chem.phenol_acidity.m1",
+    "concept_id": "chem.phenol_acidity",
+    "subject": "Chemistry",
+    "title": "Why -NO2 makes Phenols more acidic",
+    "steps": [
+      {
+        "kind": "wrong",
+        "say": "It is tempting to think that because $-NO_2$ pulls electrons away, it makes the $O-H$ bond stronger or harder to break, which would decrease acidity.",
+        "math": "\\text{Acidity: Phenol} > p\\text{-Nitrophenol}"
+      },
+      {
+        "kind": "why",
+        "say": "Actually, acidity depends on the stability of the conjugate base. We need to see if the phenoxide ion formed is happy with its negative charge.",
+        "math": "ArOH \\rightleftharpoons ArO^{-} + H^{+}"
+      },
+      {
+        "kind": "idea",
+        "say": "The $-NO_2$ group is an electron-withdrawing group (EWG). Through the ring, by resonance, it pulls the negative charge away from the oxygen and onto itself.",
+        "math": "O^{-} \\longrightarrow \\text{Ring} \\longrightarrow NO_{2}"
+      },
+      {
+        "kind": "rule",
+        "say": "In chemistry, spreading out (delocalizing) a charge increases stability. Electron-withdrawing groups stabilize negative ions and thus increase acidity.",
+        "math": "\\text{EWG} \\implies \\uparrow \\text{Stability} \\implies \\uparrow \\text{Acidity}"
+      },
+      {
+        "kind": "example",
+        "say": "Because the nitro group at the para position stabilizes the phenoxide ion through both -I and -R effects, p-Nitrophenol is significantly more acidic than phenol.",
+        "math": "\\text{Acidity: } p\\text{-Nitrophenol} > \\text{Phenol}"
+      },
+      {
+        "kind": "check",
+        "say": "Quick check: Does the substituent 'pull' or 'push'? If it pulls electrons away (EWG), it helps carry the negative charge 'burden', boosting acidity.",
+        "math": "\\text{Puller (-I/-R) = Acid Booster}"
+      }
+    ],
+    "takeaway": "Electron-withdrawing groups like nitro groups stabilize the phenoxide ion, making it easier for phenol to release a proton.",
+    "verification": {
+      "status": "verified",
+      "checks": [
+        {
+          "method": "structure",
+          "passed": true,
+          "detail": "starts from the wrong step, states the correct idea"
+        },
+        {
+          "method": "llm_review",
+          "passed": true,
+          "model": "gemini-2.5-flash",
+          "detail": "wrong step, correctness and progression confirmed; reviewer issues: none"
+        }
+      ],
+      "verified_at": "2026-11-23T06:27:07.583Z"
+    },
+    "provenance": {
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "reviewer": {
+        "provider": "gemini",
+        "model": "gemini-2.5-flash"
+      },
+      "generated_at": "2026-11-23T06:26:59.344Z",
+      "prompt_version": "explainer-1"
+    }
+  }
+}
