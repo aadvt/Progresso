@@ -16,6 +16,8 @@ export interface AppConfig {
   recapsDir: string;
   /** Step explainers, one JSON per misconception (not student data). */
   explainersDir: string;
+  /** Explainer videos (Phase 7): manifest.json plus <subject>/<misconception_id>.{mp4,jpg,vtt,py}. Not student data. */
+  videosDir: string;
 }
 
 /** Walk up from `start` to the directory containing pnpm-workspace.yaml. */
@@ -57,5 +59,6 @@ export function loadAppConfig(repoRoot: string = findRepoRoot()): AppConfig {
     questionBankDir: pick("questionBankDir", "QUESTION_BANK_DIR", "data/question-bank"),
     recapsDir: pick("recapsDir", "RECAPS_DIR", "data/fixtures/demo-recaps"),
     explainersDir: pick("explainersDir", "EXPLAINERS_DIR", "data/explainers"),
+    videosDir: pick("videosDir", "VIDEOS_DIR", "data/videos"),
   };
 }

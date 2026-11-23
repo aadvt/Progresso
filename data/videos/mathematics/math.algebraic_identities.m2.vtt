@@ -1,0 +1,29 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:10.000
+Does a^3 - b^3 factorize like this?
+
+2
+00:00:10.000 --> 00:00:27.000
+Let's test it. If we expand these brackets, do we get back to the start?
+
+3
+00:00:27.000 --> 00:00:40.000
+The middle terms don't cancel! This formula is incorrect.
+
+4
+00:00:40.000 --> 00:00:52.000
+To cancel those terms, the middle sign must be positive.
+
+5
+00:00:52.000 --> 00:01:11.500
+Now, the expansion works perfectly.
+
+6
+00:01:11.500 --> 00:01:28.500
+Example: Factorize x^3 - 27
+
+7
+00:01:28.500 --> 00:01:38.000
+Takeaway: In a^3 - b^3, the signs are (minus) then (plus).

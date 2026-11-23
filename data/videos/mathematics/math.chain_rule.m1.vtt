@@ -1,0 +1,25 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:13.000
+Differentiating sin(x²): it feels natural to just write cos(x²). But is that complete?
+
+2
+00:00:13.000 --> 00:00:29.000
+When x changes slightly, x² changes by 2x times as much! That is the inner speed.
+
+3
+00:00:29.000 --> 00:00:46.000
+Think of nested functions as linked gears: total speed is outer speed times inner speed.
+
+4
+00:00:46.000 --> 00:01:01.000
+The Chain Rule: multiply the outer derivative by the derivative of the inner layer.
+
+5
+00:01:01.000 --> 00:01:18.000
+First take derivative of sine, then multiply by the derivative of the inner x² part.
+
+6
+00:01:18.000 --> 00:01:30.500
+Takeaway: Always identify the inner part and multiply by its derivative!

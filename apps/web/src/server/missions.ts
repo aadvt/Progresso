@@ -17,6 +17,7 @@ import {
   type PlannedMission,
   type Readiness,
   type StepExplainer,
+  type VideoEntry,
 } from "@progresso/core";
 import {
   answerQuestion,
@@ -33,8 +34,8 @@ import {
   startMission,
   type MissionResultJson,
 } from "@progresso/db";
-import type { ExplainerLesson, FeedbackView, MissionCard, MissionData, PlanData, RecapEvidence, RecapLesson, ReplaysData, ResultView, TodayData, WorkingSegment } from "@/lib/mission-types";
-import { db, getLessons, isSample, studentContext, studentToday } from "./data";
+import type { ExplainerLesson, ExplainerVideoView, FeedbackView, MissionCard, MissionData, PlanData, RecapEvidence, RecapLesson, ReplaysData, ResultView, TodayData, WorkingSegment } from "@/lib/mission-types";
+import { db, getLessons, getVideos, isSample, studentContext, studentToday } from "./data";
 
 type Ctx = NonNullable<ReturnType<typeof studentContext>>;
 
@@ -53,7 +54,7 @@ function stepContent(ctx: Ctx, m: Pick<PlannedMission, "record_ids" | "misconcep
       const r = byId.get(id);
       return r !== undefined && recapFor(lessons, r) !== undefined;
     }),
-    explainer: m.misconception_ids.some((id) => lessons.explainers.has(id)),
+    explainer: m.misconception_ids.some((id) => lessons.explainers.has(id) || getVideos().passing.has(id)),
   };
 }
 
@@ -249,6 +250,30 @@ function explainerLesson(ctx: Ctx, e: StepExplainer, yours: boolean): ExplainerL
   };
 }
 
+export function videoView(ctx: Ctx, v: VideoEntry, yours: boolean): ExplainerVideoView {
+  const base = `/media/videos/${encodeURIComponent(v.misconception_id)}`;
+  return {
+    misconception_id: v.misconception_id,
+    description: ctx.graph.misconceptions.get(v.misconception_id)?.description ?? "",
+    yours,
+    title: v.title,
+    src: `${base}/video.mp4`,
+    poster: `${base}/poster.jpg`,
+    captions_src: `${base}/captions.vtt`,
+    duration_s: v.duration_s ?? 0,
+    transcript: (v.captions ?? []).map((c) => c.text),
+    checked: `Checked: rendered, measured for overlaps and off-screen text, and every frame reviewed${v.frame_check ? ` (${v.frame_check.frames} frames)` : ""}`,
+  };
+}
+
+function videosFor(ctx: Ctx, ids: string[], own: Set<string>): ExplainerVideoView[] {
+  return [...ids]
+    .sort((a, b) => Number(own.has(b)) - Number(own.has(a)))
+    .map((id) => getVideos().passing.get(id))
+    .filter((v) => v !== undefined)
+    .map((v) => videoView(ctx, v, own.has(v.misconception_id)));
+}
+
 function feedbackView(ctx: Ctx, questionId: string, given: string): FeedbackView | undefined {
   const q = ctx.bank.byId.get(questionId);
   if (!q) return undefined;
@@ -326,7 +351,7 @@ export function getReplays(studentId: string): ReplaysData | undefined {
     const e = getLessons().explainers.get(id);
     return e ? [explainerLesson(ctx, e, true)] : [];
   });
-  return { student_id: studentId, recaps, explainers };
+  return { student_id: studentId, recaps, explainers, videos: videosFor(ctx, [...own].sort(), own) };
 }
 
 export function getMissionData(studentId: string, missionId: string): MissionData | undefined {
@@ -363,6 +388,7 @@ export function getMissionData(studentId: string, missionId: string): MissionDat
           .map((id) => getLessons().explainers.get(id))
           .filter((x) => x !== undefined)
           .map((x) => explainerLesson(ctx, x, own.has(x.misconception_id))),
+        videos: videosFor(ctx, m.misconception_ids, own),
       }
     : null;
   let result: ResultView | undefined;

@@ -16,7 +16,9 @@ import {
   loadConceptGraph,
   loadQuestionBank,
   loadLessons,
+  loadVideoLibrary,
   type LessonLibrary,
+  type VideoLibrary,
   localDay,
   addDays,
   type ConceptGraph,
@@ -50,6 +52,7 @@ interface Loaded {
   databasePath: string;
   bank: LoadedBank;
   lessons: LessonLibrary;
+  videos: VideoLibrary;
 }
 
 let loaded: Loaded | undefined;
@@ -67,9 +70,16 @@ function load(): Loaded {
       bank: loadQuestionBank(config.questionBankDir, graph),
       // Mistake Recaps and step explainers, generated and verified offline (pnpm lessons:generate).
       lessons: loadLessons(config, graph),
+      // Explainer videos, generated and checked offline (pnpm videos:generate). Only passing ones are served.
+      videos: loadVideoLibrary(config.videosDir, graph),
     };
   }
   return loaded;
+}
+
+/** Passing explainer videos by misconception (failed ones are never served; the step explainer covers them). */
+export function getVideos(): VideoLibrary {
+  return load().videos;
 }
 
 /** Cached Mistake Recaps (per record; demo ones are SAMPLE DATA) and step explainers (per misconception). */

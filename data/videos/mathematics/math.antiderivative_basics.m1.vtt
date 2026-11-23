@@ -1,0 +1,29 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:09.000
+A common student answer for a standard integral:
+
+2
+00:00:09.000 --> 00:00:20.000
+Let's check this by differentiating. It seems correct!
+
+3
+00:00:20.000 --> 00:00:33.000
+But wait... what about these functions?
+
+4
+00:00:33.000 --> 00:00:52.000
+An integral finds a family of curves with the same slope.
+
+5
+00:00:52.000 --> 00:01:05.000
+The Correct Rule: Always add the constant of integration C.
+
+6
+00:01:05.000 --> 00:01:18.000
+Worked Example: Integrating cos x correctly.
+
+7
+00:01:18.000 --> 00:01:28.500
+Takeaway: C represents the infinite family of possible solutions.

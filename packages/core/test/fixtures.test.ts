@@ -80,7 +80,8 @@ describe("answer key (expected roots)", () => {
       for (const name of readdirSync(dir)) {
         const p = join(dir, name);
         if (statSync(p).isDirectory()) {
-          if (name !== "node_modules" && name !== "test") walk(p);
+          // Build output and test-results aren't source; skipping them also keeps this fast.
+          if (!["node_modules", "test", ".next", "test-results", "playwright-report"].includes(name)) walk(p);
         } else if (/\.(ts|tsx|js)$/.test(name) && /expected-roots|_answer-key/.test(readFileSync(p, "utf8"))) {
           offenders.push(p);
         }
@@ -94,5 +95,5 @@ describe("answer key (expected roots)", () => {
       }
     }
     expect(offenders).toEqual([]);
-  });
+  }, 30_000);
 });

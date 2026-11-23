@@ -18,9 +18,11 @@ import { Surface } from "@/components/ui/Surface";
 import type { FeedbackView, MissionData, QuestionView, ResultView } from "@/lib/mission-types";
 import { marks, plural } from "@/lib/format";
 import { MathText, plainMath } from "./MathText";
+import { ExplainerVideo } from "./ExplainerVideo";
 import { KIND } from "./MissionCard";
 import { MistakeRecap } from "./MistakeRecap";
 import { StepExplainer } from "./StepExplainer";
+import lessonStyles from "./Lessons.module.css";
 import styles from "./MissionPlayer.module.css";
 
 type Step = "recap" | "explainer" | "prove_it" | "result";
@@ -45,6 +47,8 @@ export function MissionPlayer({ data }: { data: MissionData }) {
   );
   const [result, setResult] = useState<ResultView | undefined>(data.result);
   const [error, setError] = useState("");
+  // A video that can't be played falls back to the step explainer.
+  const [videoFailed, setVideoFailed] = useState(false);
   const [pending, start] = useTransition();
   const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -169,7 +173,17 @@ export function MissionPlayer({ data }: { data: MissionData }) {
               </>
             )}
           </p>
-          {data.explainer.lessons.length > 0 ? (
+          {data.explainer.videos.length > 0 && !videoFailed ? (
+            <>
+              <ExplainerVideo videos={data.explainer.videos} onUnavailable={() => setVideoFailed(true)} />
+              {data.explainer.lessons.length > 0 && (
+                <details className={lessonStyles.stepByStep}>
+                  <summary>Prefer to go step by step?</summary>
+                  <StepExplainer lessons={data.explainer.lessons} autoPlay={false} />
+                </details>
+              )}
+            </>
+          ) : data.explainer.lessons.length > 0 ? (
             <StepExplainer lessons={data.explainer.lessons} />
           ) : (
             <div className={styles.explainerSlot}>

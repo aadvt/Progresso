@@ -117,11 +117,28 @@ export interface ExplainerLesson {
   checked: string;
 }
 
+/** A checked explainer animation for one misconception (Phase 7). Served from /media/videos/<misconception>/… */
+export interface ExplainerVideoView {
+  misconception_id: string;
+  /** The misconception in the graph's words. */
+  description: string;
+  yours: boolean;
+  title: string;
+  src: string;
+  poster: string;
+  captions_src: string;
+  duration_s: number;
+  /** The on-screen captions, also offered as a transcript. */
+  transcript: string[];
+  checked: string;
+}
+
 /** Every recap and explainer prepared for a student: the "Replay your mistakes" page. */
 export interface ReplaysData {
   student_id: string;
   recaps: (RecapEvidence & { lesson: RecapLesson })[];
   explainers: ExplainerLesson[];
+  videos: ExplainerVideoView[];
 }
 
 export interface FeedbackView {
@@ -180,6 +197,8 @@ export interface MissionData {
     watch_for: { id: string; description: string; yours: boolean }[];
     /** Animated step explainers for this mission's misconceptions (the student's own first). */
     lessons: ExplainerLesson[];
+    /** Checked explainer videos for this mission's misconceptions (the student's own first). Shown instead of the step explainer when present. */
+    videos: ExplainerVideoView[];
   } | null;
   questions: QuestionView[];
   result?: ResultView;

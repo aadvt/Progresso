@@ -150,3 +150,36 @@ Report: [phase-6-report.md](phase-6-report.md). Screenshots: `docs/screenshots/p
 - Fill the remaining 30 recaps and 27 explainers (`--missing`; Gemini returned 503s this session).
 - Allow `.subs()` in the CAS checker; render `adj` and chemical formulas upright.
 
+
+---
+
+## Phase 7: Manim explainer videos (2026-11-23) ✅
+
+Report: [phase-7-report.md](phase-7-report.md). Sample frames: [phase-7/](phase-7/). Screenshots: `docs/screenshots/phase-7/` (local only).
+
+**Built**
+- CLI `videos:generate` (offline, one video per misconception, most frequent first):
+  - storyboard of 60–120 s, starting from the wrong step and built on the verified step explainer;
+  - Manim code on a shared base scene;
+  - a capped quality loop, each failure fed back to the code generator: safety lint → render → duration → measured layout audit → Gemini vision check of frames taken at still moments;
+  - output: web MP4, poster, WebVTT and code, plus `data/videos/manifest.json`.
+- `videos:review` records hand verdicts; a rejected video is never served.
+- Narration is optional, behind `NarrationProvider` (captions only for now).
+- Core `src/videos/`: schemas, `loadVideoLibrary`, `rankMisconceptions`, `isServable`, `captionsToVtt`.
+- LLM layer: image inputs (Gemini, Anthropic, OpenAI-compatible), task `write_storyboard`, a hard Gemini deadline, and fallback instead of sleeping on long quota waits.
+- Web:
+  - `/media/videos/…` (manifest-only, byte ranges);
+  - the mission player shows the video as the explainer, with the step explainer behind "Prefer to go step by step?" and as the fallback (no video, or the file fails to load);
+  - Replays lists the videos.
+
+**Results**
+- 6 maths misconceptions run (there is no physics in the provisional graph). 5 passed, with 0–2 fix iterations each; 1 stopped on the free-tier quota (retry with `--missing`).
+- Every frame of every passing video checked by hand: 4 correct as made, 1 rejected (a correct line crossed out, missed by the frame check), then remade and approved. The frame-check prompt was tightened, and in the remake it caught a missing + C.
+- Fallback confirmed in e2e on desktop and phone.
+
+**Decisions later phases rely on**
+- Videos are per misconception and data-only (`data/videos/`); every screen copes with none.
+- `isServable()` is the single gate; switching to "approved only" is a one-line change.
+
+**Open items**
+- Hand review before serving (1 in 5 automatic passes was wrong). Bigger formulas for phones. Remaining misconceptions once the quota resets. Chemistry-specific checks.

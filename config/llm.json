@@ -15,8 +15,9 @@
     "write_recap": { "thinking": "medium" },
     "write_explainer": { "thinking": "medium" },
     "review_lesson": { "thinking": "medium" },
-    "codegen_manim": { "maxOutputTokens": 16384, "thinking": "medium" },
-    "check_frames": {},
+    "write_storyboard": { "fallbackModels": ["gemini-3.6-flash", "gemini-3-flash-preview"], "thinking": "medium" },
+    "codegen_manim": { "fallbackModels": ["gemini-3.6-flash", "gemini-3-flash-preview"], "maxOutputTokens": 24576, "thinking": "medium", "timeoutMs": 240000 },
+    "check_frames": { "fallbackModels": ["gemini-3.6-flash", "gemini-3-flash-preview"], "thinking": "medium" },
     "match_clip": { "thinking": "minimal" },
     "write_message": { "maxOutputTokens": 1024, "thinking": "minimal" },
     "smoke_test": { "maxOutputTokens": 2048 }

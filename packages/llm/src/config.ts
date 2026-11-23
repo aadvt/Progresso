@@ -15,6 +15,7 @@ export const LLM_TASKS = [
   "write_recap",
   "write_explainer",
   "review_lesson",
+  "write_storyboard",
   "codegen_manim",
   "check_frames",
   "match_clip",

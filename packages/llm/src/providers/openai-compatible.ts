@@ -30,7 +30,7 @@ export class OpenAICompatibleProvider implements LlmProvider {
   async generate(req: GenerateRequest): Promise<GenerateResult> {
     const body = {
       model: req.model,
-      messages: [...(req.system ? [{ role: "system", content: req.system }] : []), { role: "user", content: req.prompt }],
+      messages: [...(req.system ? [{ role: "system", content: req.system }] : []), { role: "user", content: userContent(req) }],
       max_tokens: req.maxOutputTokens,
       ...(req.temperature !== undefined ? { temperature: req.temperature } : {}),
       ...(req.jsonSchema
@@ -82,4 +82,16 @@ export class OpenAICompatibleProvider implements LlmProvider {
       },
     };
   }
+}
+
+/** Plain text, or text + image parts (OpenAI vision format: data URLs) when images are attached. */
+function userContent(req: GenerateRequest): string | unknown[] {
+  if (!req.images?.length) return req.prompt;
+  return [
+    { type: "text", text: req.prompt },
+    ...req.images.flatMap((i) => [
+      ...(i.label ? [{ type: "text", text: i.label }] : []),
+      { type: "image_url", image_url: { url: `data:${i.mimeType};base64,${i.data}` } },
+    ]),
+  ];
 }

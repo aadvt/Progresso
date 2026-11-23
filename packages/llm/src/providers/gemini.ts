@@ -29,10 +29,23 @@ export class GeminiProvider implements LlmProvider {
 
   async generate(req: GenerateRequest): Promise<GenerateResult> {
     let response;
+    // A hard deadline: the SDK's own timeout is not always enforced (seen on large image requests).
+    const controller = new AbortController();
+    const deadline = setTimeout(() => controller.abort(), req.timeoutMs ?? 120_000);
     try {
       response = await this.client.models.generateContent({
         model: req.model,
-        contents: req.prompt,
+        contents: req.images?.length
+          ? [
+              {
+                role: "user",
+                parts: [
+                  { text: req.prompt },
+                  ...req.images.flatMap((i) => [...(i.label ? [{ text: i.label }] : []), { inlineData: { mimeType: i.mimeType, data: i.data } }]),
+                ],
+              },
+            ]
+          : req.prompt,
         config: {
           ...(req.system ? { systemInstruction: req.system } : {}),
           ...(req.temperature !== undefined ? { temperature: req.temperature } : {}),
@@ -40,10 +53,15 @@ export class GeminiProvider implements LlmProvider {
           ...(req.thinking ? { thinkingConfig: thinkingConfig(req.model, req.thinking) } : {}),
           ...(req.jsonSchema ? { responseMimeType: "application/json", responseJsonSchema: req.jsonSchema } : {}),
           ...(req.timeoutMs ? { httpOptions: { timeout: req.timeoutMs } } : {}),
+          abortSignal: controller.signal,
         },
       });
     } catch (e) {
-      throw toProviderError(e);
+      throw controller.signal.aborted
+        ? errorFromStatus("gemini", undefined, `Gemini request timed out after ${req.timeoutMs ?? 120_000} ms`, e)
+        : toProviderError(e);
+    } finally {
+      clearTimeout(deadline);
     }
 
     const candidate = response.candidates?.[0];

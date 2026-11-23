@@ -6,5 +6,6 @@
   "llmUsageLog": "data/logs/llm-usage.jsonl",
   "questionBankDir": "data/question-bank",
   "recapsDir": "data/fixtures/demo-recaps",
-  "explainersDir": "data/explainers"
+  "explainersDir": "data/explainers",
+  "videosDir": "data/videos"
 }

@@ -12,3 +12,4 @@ export * from "./constellation";
 export * from "./missions";
 export * from "./questions";
 export * from "./lessons";
+export * from "./videos";

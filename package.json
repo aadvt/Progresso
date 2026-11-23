@@ -25,7 +25,9 @@
     "e2e": "pnpm --filter @progresso/web e2e",
     "questions:generate": "pnpm --filter @progresso/cli questions:generate",
     "simulate": "pnpm --filter @progresso/cli simulate",
-    "lessons:generate": "pnpm --filter @progresso/cli lessons:generate"
+    "lessons:generate": "pnpm --filter @progresso/cli lessons:generate",
+    "videos:generate": "pnpm --filter @progresso/cli videos:generate",
+    "videos:review": "pnpm --filter @progresso/cli videos:review"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

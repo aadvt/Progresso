@@ -8,7 +8,9 @@
     "analyse": "tsx src/analyse.ts",
     "questions:generate": "tsx src/questions/generate.ts",
     "simulate": "tsx src/simulate.ts",
-    "lessons:generate": "tsx src/lessons/generate.ts"
+    "lessons:generate": "tsx src/lessons/generate.ts",
+    "videos:generate": "tsx src/videos/generate.ts",
+    "videos:review": "tsx src/videos/review.ts"
   },
   "dependencies": {
     "@progresso/core": "workspace:*",

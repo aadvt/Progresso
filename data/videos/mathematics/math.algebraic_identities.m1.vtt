@@ -1,0 +1,25 @@
+WEBVTT
+
+1
+00:00:00.000 --> 00:00:13.000
+Does squaring a sum mean just squaring each individual term?
+
+2
+00:00:13.000 --> 00:00:28.000
+Let us test x = 1 to check if both sides give the same value.
+
+3
+00:00:28.000 --> 00:00:45.000
+Picture a large square with total side length (a + b).
+
+4
+00:00:45.000 --> 00:01:01.000
+The total area combines the two squares and two rectangle terms!
+
+5
+00:01:01.000 --> 00:01:17.000
+Now expand (x + 3)^2 correctly by including the 2ab term.
+
+6
+00:01:17.000 --> 00:01:31.500
+Checking x = 1 gives 1 + 6 + 9 = 16. It works!

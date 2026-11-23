@@ -1,0 +1,122 @@
+from manim import *
+from progresso_manim import *
+
+class ExplainerScene(ProgressoScene):
+    def construct(self):
+        # Scene 1 (10 s)
+        self.caption("Is this identity correct? 1 - cos 2x = 2 cos^2 x")
+        eq1 = MathTex(r"1 - \cos 2x = 2 \cos^2 x", font_size=50)
+        lbl1 = Text("Is this really true?", font_size=34, color=MUTED)
+        g1 = VGroup(eq1, lbl1).arrange(DOWN, buff=0.5)
+        fit(g1).move_to(CONTENT_CENTER)
+        
+        self.play(Write(eq1), run_time=2)
+        self.wait(1.5)
+        self.play(FadeIn(lbl1), run_time=1.5)
+        self.wait(5)
+        
+        # Scene 2 (15 s)
+        self.clear_content()
+        self.caption("Wait! Let's test it with x = 0. Does 0 = 2?")
+        eq_sub = MathTex(r"1 - \cos(0^\circ) \stackrel{?}{=} 2 \cos^2(0^\circ)", font_size=46)
+        lhs = MathTex(r"\text{LHS: } 1 - 1 = 0", font_size=42)
+        rhs = MathTex(r"\text{RHS: } 2(1)^2 = 2", font_size=42)
+        wrong_res = MathTex(r"0 \neq 2", font_size=46, color=WRONG)
+        
+        g2 = VGroup(eq_sub, lhs, rhs, wrong_res).arrange(DOWN, buff=0.35)
+        fit(g2).move_to(CONTENT_CENTER)
+        
+        self.play(Write(eq_sub), run_time=2)
+        self.wait(1.5)
+        self.play(FadeIn(lhs), run_time=1.5)
+        self.wait(1)
+        self.play(FadeIn(rhs), run_time=1.5)
+        self.wait(1.5)
+        cross = Cross(eq_sub, stroke_color=WRONG, stroke_width=5)
+        self.play(Create(cross), FadeIn(wrong_res), run_time=2)
+        self.wait(4)
+        
+        # Scene 3 (15 s)
+        self.clear_content()
+        self.caption("Start from the root: cos 2x = cos^2 x - sin^2 x")
+        id1 = MathTex(r"\cos 2x = \cos^2 x - \sin^2 x", font_size=46)
+        id_sub = MathTex(r"\text{Replace } \cos^2 x \text{ with } 1 - \sin^2 x", font_size=36, color=ACCENT)
+        id2 = MathTex(r"\cos 2x = (1 - \sin^2 x) - \sin^2 x", font_size=46)
+        
+        g3 = VGroup(id1, id_sub, id2).arrange(DOWN, buff=0.45)
+        fit(g3).move_to(CONTENT_CENTER)
+        
+        self.play(Write(id1), run_time=2)
+        self.wait(2)
+        self.play(FadeIn(id_sub), run_time=1.5)
+        self.wait(2)
+        self.play(Write(id2), run_time=2.5)
+        self.wait(5)
+        
+        # Scene 4 (18 s)
+        self.clear_content()
+        self.caption("Simplify to find: 1 - cos 2x = 2 sin^2 x")
+        step1 = MathTex(r"\cos 2x = 1 - 2 \sin^2 x", font_size=46)
+        step2 = MathTex(r"2 \sin^2 x = 1 - \cos 2x", font_size=46)
+        step3 = MathTex(r"1 - \cos 2x = 2 \sin^2 x", font_size=50, color=CORRECT)
+        
+        g4 = VGroup(step1, step2, step3).arrange(DOWN, buff=0.45)
+        fit(g4).move_to(CONTENT_CENTER)
+        
+        self.play(Write(step1), run_time=2)
+        self.wait(2)
+        self.play(Write(step2), run_time=2.5)
+        self.wait(2)
+        self.play(Write(step3), run_time=2)
+        box4 = SurroundingRectangle(step3, color=CORRECT, buff=0.15)
+        self.play(Create(box4), run_time=1.5)
+        self.wait(6)
+        
+        # Scene 5 (15 s)
+        self.clear_content()
+        self.caption("Remember the pair: Minus gives Sine, Plus gives Cosine")
+        eq_minus = MathTex(r"1 - \cos 2x = 2 \sin^2 x", font_size=46, color=CORRECT)
+        lbl_minus = Text("Minus  →  Sine", font_size=32, color=CORRECT)
+        eq_plus = MathTex(r"1 + \cos 2x = 2 \cos^2 x", font_size=46, color=HILITE)
+        lbl_plus = Text("Plus  →  Cosine", font_size=32, color=HILITE)
+        
+        pair1 = VGroup(eq_minus, lbl_minus).arrange(DOWN, buff=0.2)
+        pair2 = VGroup(eq_plus, lbl_plus).arrange(DOWN, buff=0.2)
+        g5 = VGroup(pair1, pair2).arrange(DOWN, buff=0.5)
+        fit(g5).move_to(CONTENT_CENTER)
+        
+        self.play(FadeIn(pair1), run_time=2)
+        self.wait(3)
+        self.play(FadeIn(pair2), run_time=2)
+        self.wait(3)
+        self.play(Indicate(lbl_minus), Indicate(lbl_plus), run_time=2)
+        self.wait(3)
+        
+        # Scene 6 (15 s)
+        self.clear_content()
+        self.caption("Worked Example: Solve 1 - cos(60).")
+        t1 = MathTex(r"1 - \cos(60^\circ) = 1 - 0.5 = 0.5", font_size=44)
+        t2 = MathTex(r"2 \sin^2(30^\circ) = 2 (0.5)^2 = 0.5", font_size=44, color=CORRECT)
+        match_txt = Text("Both methods equal 0.5!", font_size=32, color=CORRECT)
+        
+        g6 = VGroup(t1, t2, match_txt).arrange(DOWN, buff=0.45)
+        fit(g6).move_to(CONTENT_CENTER)
+        
+        self.play(Write(t1), run_time=2.5)
+        self.wait(2)
+        self.play(Write(t2), run_time=2.5)
+        self.wait(2)
+        self.play(FadeIn(match_txt), run_time=1.5)
+        self.wait(4.5)
+        
+        # Scene 7 (12 s)
+        self.clear_content()
+        self.caption("Takeaway: 1 - cos 2x is always 2 sin^2 x.")
+        final_eq = MathTex(r"1 - \cos 2x = 2 \sin^2 x", font_size=54, color=CORRECT)
+        fit(final_eq).move_to(CONTENT_CENTER)
+        box7 = SurroundingRectangle(final_eq, color=CORRECT, buff=0.25, stroke_width=4)
+        
+        self.play(Write(final_eq), run_time=2)
+        self.play(Create(box7), run_time=1.5)
+        self.play(Circumscribe(final_eq, color=HILITE), run_time=2)
+        self.wait(6.5)

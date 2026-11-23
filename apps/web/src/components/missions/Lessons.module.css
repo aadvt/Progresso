@@ -452,3 +452,49 @@
     stroke-dashoffset: 0;
   }
 }
+
+/* ---- explainer video (Phase 7) ---- */
+.video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-md);
+  background: var(--sky-1);
+  box-shadow: 0 0 0 1px var(--line-strong);
+}
+
+.videoLength {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.transcript {
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+
+.transcript summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--blue-700);
+}
+
+.transcript ol {
+  margin-top: var(--space-2);
+  padding-left: var(--space-5);
+  display: grid;
+  gap: var(--space-1);
+}
+
+.stepByStep {
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-3);
+}
+
+.stepByStep > summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--blue-700);
+  margin-bottom: var(--space-3);
+}

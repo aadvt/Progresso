@@ -9,6 +9,7 @@ import {
   LlmProviderError,
   type GenerateRequest,
   type GenerateResult,
+  type ImageInput,
   type LlmProvider,
   type ProviderName,
   type TokenUsage,
@@ -21,6 +22,8 @@ export type CacheMode = "use" | "refresh" | "off";
 export interface RunOptions {
   system?: string;
   prompt: string;
+  /** Images sent after the prompt (vision tasks). Part of the cache key by content hash. */
+  images?: ImageInput[];
   cache?: CacheMode;
   /** Per-call overrides of the task's configured provider/model/limits. */
   overrides?: Partial<TaskConfig>;
@@ -60,6 +63,9 @@ export interface LlmClientDeps {
   random?: () => number;
   now?: () => number;
 }
+
+/** Longer than this, a retry-after means an exhausted quota, not a per-minute limit. */
+const LONG_RETRY_AFTER_MS = 60_000;
 
 type Parsed<T> = { ok: true; data: T } | { ok: false; error: string };
 
@@ -109,12 +115,16 @@ export class LlmClient {
     const cacheMode = options.cache ?? "use";
     const provider = this.deps.getProvider(cfg.provider);
 
-    if (provider.external) assertNoPii(`${options.system ?? ""}\n${options.prompt}`, this.deps.piiGuard);
+    if (provider.external) {
+      const labels = (options.images ?? []).map((i) => i.label ?? "").join("\n");
+      assertNoPii(`${options.system ?? ""}\n${options.prompt}\n${labels}`, this.deps.piiGuard);
+    }
 
     const request: GenerateRequest = {
       model: cfg.model,
       system: options.system,
       prompt: options.prompt,
+      ...(options.images?.length ? { images: options.images } : {}),
       jsonSchema,
       temperature: cfg.temperature,
       maxOutputTokens: cfg.maxOutputTokens,
@@ -128,6 +138,7 @@ export class LlmClient {
       models: [cfg.model, ...cfg.fallbackModels],
       system: request.system,
       prompt: request.prompt,
+      images: request.images?.map((i) => ({ mimeType: i.mimeType, label: i.label, sha: hashKey(i.data) })),
       jsonSchema,
       temperature: request.temperature,
       maxOutputTokens: request.maxOutputTokens,
@@ -255,6 +266,11 @@ export class LlmClient {
             throw e;
           }
           if (attempt === attemptsPerModel) break;
+          // A quota that resets in minutes or hours: don't sleep on it, move to the next model.
+          if ((e.retryAfterMs ?? 0) > LONG_RETRY_AFTER_MS) {
+            if (hasNext) break;
+            throw e;
+          }
           const backoff = Math.min(maxDelayMs, baseDelayMs * 2 ** (attempt - 1)) * (0.5 + this.random() * 0.5);
           await this.sleep(Math.max(backoff, e.retryAfterMs ?? 0));
         }

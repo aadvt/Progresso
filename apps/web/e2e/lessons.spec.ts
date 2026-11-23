@@ -90,6 +90,9 @@ test("a mission's recap animates, marks the step and corrects it; the explainer 
 
   // 2. Explainer: plays from the wrong step; can be stepped through.
   await page.getByRole("button", { name: "Continue" }).click();
+  // Phase 7: a checked video leads when one exists; the step explainer is one click away.
+  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  if (await page.locator("[data-video]").count()) await page.getByText("Prefer to go step by step?").click();
   const ex = page.locator("[data-explainer]").first();
   await expect(ex).toBeVisible();
   await expect(ex.getByText("The tempting step")).toBeVisible();

@@ -6,10 +6,21 @@ export type ProviderName = (typeof PROVIDER_NAMES)[number];
 /** Provider-neutral reasoning depth. Mapped to Gemini thinkingLevel / Anthropic effort; ignored where unsupported. */
 export type ThinkingLevel = "minimal" | "low" | "medium" | "high";
 
+/** An image sent with the prompt (multimodal tasks such as check_frames). */
+export interface ImageInput {
+  mimeType: "image/png" | "image/jpeg" | "image/webp";
+  /** Base64-encoded bytes. */
+  data: string;
+  /** Optional label sent as text right before the image ("Frame 3 at 12.0 s"). */
+  label?: string;
+}
+
 export interface GenerateRequest {
   model: string;
   system?: string;
   prompt: string;
+  /** Images to send after the prompt text, in order. Providers without vision support reject them. */
+  images?: ImageInput[];
   /** When set, the provider is asked for JSON matching this schema (native structured output where available). */
   jsonSchema?: Record<string, unknown>;
   temperature?: number;

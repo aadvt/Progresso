@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import "katex/dist/katex.min.css";
+import { ExplainerVideo } from "@/components/missions/ExplainerVideo";
 import { MistakeRecapBoard } from "@/components/missions/MistakeRecap";
 import { StepExplainer } from "@/components/missions/StepExplainer";
 import { StudentChrome } from "@/components/missions/StudentChrome";
@@ -49,6 +50,23 @@ export default async function ReplaysPage({ params }: { params: Promise<{ studen
             ))}
           </ul>
         </section>
+
+        {data.videos.length > 0 && (
+          <section aria-labelledby="videos-title" className={styles.section}>
+            <h2 id="videos-title" className={styles.h2}>
+              Explainer videos ({data.videos.length})
+            </h2>
+            <ul role="list" className={styles.list}>
+              {data.videos.map((v) => (
+                <li key={v.misconception_id}>
+                  <Surface level={3} pad="lg">
+                    <ExplainerVideo videos={[v]} />
+                  </Surface>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )}
 
         {data.explainers.length > 0 && (
           <section aria-labelledby="explainers-title" className={styles.section}>

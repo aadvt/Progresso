@@ -226,3 +226,45 @@ describe("RateLimiter", () => {
     for (let i = 0; i < 100; i++) await limiter.acquire();
   });
 });
+
+describe("images (vision tasks)", () => {
+  const img = (data: string) => ({ mimeType: "image/jpeg" as const, data, label: "Frame 1" });
+
+  it("passes images to the provider and keys the cache by their content", async () => {
+    const { client, provider } = setup(["a", "b"]);
+    await client.generateText("check_frames", { prompt: "p", images: [img("AAAA")] });
+    expect(provider.requests[0]!.images).toEqual([img("AAAA")]);
+    // Same prompt, same image: cache hit. Different image: a new call.
+    expect((await client.generateText("check_frames", { prompt: "p", images: [img("AAAA")] })).cached).toBe(true);
+    expect((await client.generateText("check_frames", { prompt: "p", images: [img("BBBB")] })).cached).toBe(false);
+    expect(provider.requests).toHaveLength(2);
+  });
+
+  it("sends no images field for text-only calls", async () => {
+    const { client, provider } = setup(["a"]);
+    await client.generateText("explain", { prompt: "p" });
+    expect(provider.requests[0]!.images).toBeUndefined();
+  });
+
+  it("applies the PII guard to image labels", async () => {
+    const { client } = setup(["a"]);
+    await expect(client.generateText("check_frames", { prompt: "p", images: [{ ...img("AAAA"), label: "student@example.com" }] })).rejects.toBeInstanceOf(PiiGuardError);
+  });
+});
+
+describe("long retry-after (exhausted quota)", () => {
+  it("moves to the fallback model instead of sleeping for the quota reset", async () => {
+    const quota = new LlmProviderError({ provider: "gemini", status: 429, message: "quota", retryable: true, retryAfterMs: 3_600_000 });
+    const { client, provider, sleeps } = setup([quota, "ok"]);
+    const r = await client.generateText("explain", { prompt: "p" });
+    expect(r.data).toBe("ok");
+    expect(provider.requests.map((q) => q.model)).toEqual(["primary", "backup"]);
+    expect(sleeps).toEqual([]);
+  });
+  it("throws instead of sleeping when there is no fallback left", async () => {
+    const quota = () => new LlmProviderError({ provider: "gemini", status: 429, message: "quota", retryable: true, retryAfterMs: 3_600_000 });
+    const { client, sleeps } = setup([quota(), quota()]);
+    await expect(client.generateText("explain", { prompt: "p" })).rejects.toThrow("quota");
+    expect(sleeps).toEqual([]);
+  });
+});

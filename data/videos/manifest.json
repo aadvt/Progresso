@@ -1,0 +1,771 @@
+{
+  "schema_version": "1.0",
+  "videos": [
+    {
+      "misconception_id": "math.algebraic_identities.m1",
+      "concept_id": "math.algebraic_identities",
+      "subject": "Mathematics",
+      "status": "passed",
+      "title": "Why (a + b)^2 is Not Just a^2 + b^2",
+      "storyboard": {
+        "title": "Why (a + b)^2 is Not Just a^2 + b^2",
+        "idea": "Visualizing why squaring a sum produces the middle term 2ab instead of distributing the exponent.",
+        "scenes": [
+          {
+            "caption": "Does squaring a sum mean just squaring each individual term?",
+            "narration": "It feels natural to distribute the square to each term inside, but let us test if this actually works.",
+            "visual": "In the center screen, (x + 3)^2 = x^2 + 3^2 = x^2 + 9 appears in white, looking plausible for a moment. Then the equation turns red and a large red cross appears over it.",
+            "math": [
+              "(x + 3)^2 = x^2 + 3^2",
+              "= x^2 + 9"
+            ],
+            "seconds": 12
+          },
+          {
+            "caption": "Let us test x = 1 to check if both sides give the same value.",
+            "narration": "Substituting x equals 1 gives 16 on the left, but only 10 on the right. We are missing 6!",
+            "visual": "The left side evaluates (1 + 3)^2 = 16 in green. The right side evaluates 1^2 + 9 = 10 in red. A red inequality symbol 16 != 10 flashes, and yellow highlight shows the missing difference of 6.",
+            "math": [
+              "(1+3)^2 = 16",
+              "1^2 + 9 = 10",
+              "(1+3)^2 \\neq 1^2 + 9"
+            ],
+            "seconds": 14
+          },
+          {
+            "caption": "Picture a large square with total side length (a + b).",
+            "narration": "The total area breaks into four separate regions, not just two squares.",
+            "visual": "A square of side (a+b) splits into four areas: a blue square of area a^2, a green square of area b^2, and two yellow rectangles each of area ab.",
+            "math": [
+              "(a+b)(a+b) = a(a+b) + b(a+b)"
+            ],
+            "seconds": 16
+          },
+          {
+            "caption": "The total area combines the two squares and two rectangle terms!",
+            "narration": "Adding all four sub-regions together gives us the correct identity with the crucial 2ab middle term.",
+            "visual": "The four geometric sub-regions transform into algebraic terms a^2, ab, ab, and b^2. The two ab rectangles merge to highlight 2ab in yellow, leading to the bright green formula.",
+            "math": [
+              "(a+b)^2 = a^2 + ab + ab + b^2",
+              "(a+b)^2 = a^2 + 2ab + b^2"
+            ],
+            "seconds": 15
+          },
+          {
+            "caption": "Now expand (x + 3)^2 correctly by including the 2ab term.",
+            "narration": "We multiply 2 times x times 3 to get the correct middle term 6x.",
+            "visual": "The expression (x + 3)^2 expands step by step. The term 2*x*3 glows in yellow before simplifying to 6x. The full correct expansion x^2 + 6x + 9 glows in bright green.",
+            "math": [
+              "(x+3)^2 = x^2 + 2 \\cdot x \\cdot 3 + 3^2",
+              "= x^2 + 6x + 9"
+            ],
+            "seconds": 15
+          },
+          {
+            "caption": "Checking x = 1 gives 1 + 6 + 9 = 16. It works!",
+            "narration": "Always remember: squaring a sum creates a middle term 2ab for the rectangle areas.",
+            "visual": "Substituting x = 1 gives 1 + 6 + 9 = 16 with a green checkmark. A takeaway box slides up: Squaring a sum always creates a middle term 2ab.",
+            "math": [
+              "16 = 1 + 6 + 9"
+            ],
+            "seconds": 14
+          }
+        ]
+      },
+      "files": {
+        "video": "mathematics/math.algebraic_identities.m1.mp4",
+        "poster": "mathematics/math.algebraic_identities.m1.jpg",
+        "captions": "mathematics/math.algebraic_identities.m1.vtt",
+        "code": "mathematics/math.algebraic_identities.m1.py"
+      },
+      "duration_s": 91.5,
+      "width": 1280,
+      "height": 720,
+      "captions": [
+        {
+          "start": 0,
+          "end": 13,
+          "text": "Does squaring a sum mean just squaring each individual term?"
+        },
+        {
+          "start": 13,
+          "end": 28,
+          "text": "Let us test x = 1 to check if both sides give the same value."
+        },
+        {
+          "start": 28,
+          "end": 45,
+          "text": "Picture a large square with total side length (a + b)."
+        },
+        {
+          "start": 45,
+          "end": 61,
+          "text": "The total area combines the two squares and two rectangle terms!"
+        },
+        {
+          "start": 61,
+          "end": 77,
+          "text": "Now expand (x + 3)^2 correctly by including the 2ab term."
+        },
+        {
+          "start": 77,
+          "end": 91.5,
+          "text": "Checking x = 1 gives 1 + 6 + 9 = 16. It works!"
+        }
+      ],
+      "narration": "none",
+      "attempts": [
+        {
+          "n": 1,
+          "stage": "layout_audit",
+          "problems": [
+            "too_small at t=31.5s: \"a\": font size 32 is too small to read on a phone (minimum 34)",
+            "too_small at t=31.5s: \"b\": font size 32 is too small to read on a phone (minimum 34)"
+          ],
+          "render_seconds": 60,
+          "duration_s": 91.5
+        },
+        {
+          "n": 2,
+          "stage": "passed",
+          "problems": [],
+          "render_seconds": 58,
+          "duration_s": 91.5
+        }
+      ],
+      "fix_iterations": 1,
+      "frame_check": {
+        "model": "gemini-3.6-flash",
+        "frames": 12,
+        "summary": "The video rendered cleanly without any visual glitches, overlaps, or layout issues. All mathematical steps follow the storyboard closely and correctly explain the identity (a + b)^2 = a^2 + 2ab + b^2."
+      },
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3.6-flash"
+      },
+      "review": {
+        "verdict": "approved",
+        "notes": "All 12 frames checked by hand: maths correct (x=1 test 16≠10, area model, x²+6x+9); no overlaps. Nits: muted 'Missing Difference' label is low contrast; caption uses ^.",
+        "at": "2026-11-23T10:14:02.680Z"
+      },
+      "source_explainer_hash": "9724c1b452c65fa3",
+      "prompt_version": "video-1",
+      "generated_at": "2026-11-23T09:54:58.341Z"
+    },
+    {
+      "misconception_id": "math.algebraic_identities.m2",
+      "concept_id": "math.algebraic_identities",
+      "subject": "Mathematics",
+      "status": "passed",
+      "title": "Fixing the Difference of Cubes Identity",
+      "storyboard": {
+        "title": "Fixing the Difference of Cubes Identity",
+        "idea": "Correcting the sign in the factorization of a^3 - b^3 to ensure middle terms cancel out.",
+        "scenes": [
+          {
+            "caption": "Does a^3 - b^3 factorize like this?",
+            "narration": "You might think the negative sign in the cube carries over to the middle term of the quadratic part.",
+            "visual": "The expression appears in the center. The minus sign in the second bracket is highlighted in a cautious yellow.",
+            "math": [
+              "a^3 - b^3 = (a - b)(a^2 - ab + b^2)"
+            ],
+            "seconds": 10
+          },
+          {
+            "caption": "Let's test it. If we expand these brackets, do we get back to the start?",
+            "narration": "Let us distribute the terms and see if we actually get a cubed minus b cubed.",
+            "visual": "Arrows draw from 'a' to all terms in the second bracket, then from '-b' to all terms. The expanded terms appear below.",
+            "math": [
+              "(a - b)(a^2 - ab + b^2)",
+              "a^3 - a^2b + ab^2 - ba^2 + ab^2 - b^3"
+            ],
+            "seconds": 15
+          },
+          {
+            "caption": "The middle terms don't cancel! This formula is incorrect.",
+            "narration": "The a squared b and ab squared terms add up instead of disappearing. This isn't the identity we need.",
+            "visual": "The middle terms turn red and combine to show they don't equal zero. A large red X appears over the initial equation.",
+            "math": [
+              "a^3 - 2a^2b + 2ab^2 - b^3 \\neq a^3 - b^3"
+            ],
+            "seconds": 12
+          },
+          {
+            "caption": "To cancel those terms, the middle sign must be positive.",
+            "narration": "By changing the minus to a plus in the trinomial, the cross-multiplications will have opposite signs.",
+            "visual": "The wrong minus sign transforms smoothly into a green plus sign. The 'right' version glows slightly.",
+            "math": [
+              "a^3 - b^3 = (a - b)(a^2 + ab + b^2)"
+            ],
+            "seconds": 12
+          },
+          {
+            "caption": "Now, the expansion works perfectly.",
+            "narration": "Now, when we multiply, the positive and negative terms pair up and cancel out completely.",
+            "visual": "Expansion shows terms appearing. Identical terms with opposite signs are struck through with thin yellow lines.",
+            "math": [
+              "a^3 + a^2b + ab^2 - a^2b - ab^2 - b^3",
+              "a^3 - b^3"
+            ],
+            "seconds": 18
+          },
+          {
+            "caption": "Example: Factorize x^3 - 27",
+            "narration": "Let us apply this to x cubed minus 27. Here, a is x and b is 3.",
+            "visual": "x^3 - 3^3 is written. Below it, x and 3 are substituted into the correct formula structure.",
+            "math": [
+              "x^3 - 3^3",
+              "(x - 3)(x^2 + 3x + 3^2)",
+              "(x - 3)(x^2 + 3x + 9)"
+            ],
+            "seconds": 15
+          },
+          {
+            "caption": "Takeaway: In a^3 - b^3, the signs are (minus) then (plus).",
+            "visual": "The correct identity is displayed in the center in a green box. The signs are highlighted for emphasis.",
+            "math": [
+              "a^3 - b^3 = (a - b)(a^2 + ab + b^2)"
+            ],
+            "seconds": 8
+          }
+        ]
+      },
+      "files": {
+        "video": "mathematics/math.algebraic_identities.m2.mp4",
+        "poster": "mathematics/math.algebraic_identities.m2.jpg",
+        "captions": "mathematics/math.algebraic_identities.m2.vtt",
+        "code": "mathematics/math.algebraic_identities.m2.py"
+      },
+      "duration_s": 98,
+      "width": 1280,
+      "height": 720,
+      "captions": [
+        {
+          "start": 0,
+          "end": 10,
+          "text": "Does a^3 - b^3 factorize like this?"
+        },
+        {
+          "start": 10,
+          "end": 27,
+          "text": "Let's test it. If we expand these brackets, do we get back to the start?"
+        },
+        {
+          "start": 27,
+          "end": 40,
+          "text": "The middle terms don't cancel! This formula is incorrect."
+        },
+        {
+          "start": 40,
+          "end": 52,
+          "text": "To cancel those terms, the middle sign must be positive."
+        },
+        {
+          "start": 52,
+          "end": 71.5,
+          "text": "Now, the expansion works perfectly."
+        },
+        {
+          "start": 71.5,
+          "end": 88.5,
+          "text": "Example: Factorize x^3 - 27"
+        },
+        {
+          "start": 88.5,
+          "end": 98,
+          "text": "Takeaway: In a^3 - b^3, the signs are (minus) then (plus)."
+        }
+      ],
+      "narration": "none",
+      "attempts": [
+        {
+          "n": 1,
+          "stage": "passed",
+          "problems": [],
+          "render_seconds": 78,
+          "duration_s": 98
+        }
+      ],
+      "fix_iterations": 0,
+      "frame_check": {
+        "model": "gemini-3-flash-preview",
+        "frames": 11,
+        "summary": "The explainer video is mathematically accurate and follows the storyboard precisely. All frames are clear, with high contrast and no technical issues like text overlap or off-screen elements. The use of color-coded signs and strike-throughs effectively clarifies the sign pattern of the difference of cubes identity."
+      },
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "review": {
+        "verdict": "approved",
+        "notes": "All 11 frames checked by hand: maths correct (expansion with −ab gives a³−2a²b+2ab²−b³; +ab cancels; x³−27=(x−3)(x²+3x+9)); no overlaps. Nits: the cross covers the whole '≠ a³−b³' block; long expansion line is small on a phone.",
+        "at": "2026-11-23T10:14:08.861Z"
+      },
+      "prompt_version": "video-1",
+      "generated_at": "2026-11-23T10:10:31.580Z"
+    },
+    {
+      "misconception_id": "math.antiderivative_basics.m1",
+      "concept_id": "math.antiderivative_basics",
+      "subject": "Mathematics",
+      "status": "passed",
+      "title": "The Vanishing Constant: Why +C Matters",
+      "storyboard": {
+        "title": "The Vanishing Constant: Why +C Matters",
+        "idea": "An indefinite integral represents a family of functions, not just one, because constants disappear during differentiation.",
+        "scenes": [
+          {
+            "caption": "A common student answer for a standard integral:",
+            "narration": "Often, students solve an integral and stop right here, thinking they are done.",
+            "visual": "A dark blue background appears. The integral expression is written in white in the center of the screen.",
+            "math": [
+              "\\int 2x \\, dx = x^2"
+            ],
+            "seconds": 8
+          },
+          {
+            "caption": "Let's check this by differentiating. It seems correct!",
+            "narration": "If we differentiate x², we indeed get 2x. It looks perfect, but we are missing something huge.",
+            "visual": "An arrow curves from the result back to the original function. The 2x is highlighted in yellow.",
+            "math": [
+              "\\frac{d}{dx}(x^2) = 2x"
+            ],
+            "seconds": 10
+          },
+          {
+            "caption": "But wait... what about these functions?",
+            "narration": "Consider these other functions. When we differentiate them, the constant term always becomes zero.",
+            "visual": "The original x² moves up. Below it, two new lines appear in yellow. The constants +5 and -3 flash red before being crossed out.",
+            "math": [
+              "\\frac{d}{dx}(x^2 + 5) = 2x",
+              "\\frac{d}{dx}(x^2 - 3) = 2x"
+            ],
+            "seconds": 12
+          },
+          {
+            "caption": "An integral finds a family of curves with the same slope.",
+            "narration": "Graphically, these are all the same parabola shifted vertically. They all have the same derivative at any x.",
+            "visual": "A coordinate plane appears. A green parabola y = x² is drawn. Multiple 'ghost' parabolas slide up and down the y-axis to show the vertical shifts.",
+            "math": [
+              "y = x^2 + C"
+            ],
+            "seconds": 18
+          },
+          {
+            "caption": "The Correct Rule: Always add the constant of integration C.",
+            "narration": "To represent every possible vertical shift, we add an arbitrary constant C.",
+            "visual": "The general formula appears. The '+ C' part is larger and glows in a vibrant green color.",
+            "math": [
+              "\\int f(x) \\, dx = F(x) + C"
+            ],
+            "seconds": 12
+          },
+          {
+            "caption": "Worked Example: Integrating cos x correctly.",
+            "narration": "Let's apply this. The integral of cosine is sine, plus our essential constant C.",
+            "visual": "The problem is written. The solution transforms from cos to sin, and the +C fades in clearly at the end.",
+            "math": [
+              "\\int \\cos x \\, dx = \\sin x + C"
+            ],
+            "seconds": 12
+          },
+          {
+            "caption": "Takeaway: C represents the infinite family of possible solutions.",
+            "narration": "Never forget C. Without it, you lose an infinite number of valid solutions.",
+            "visual": "The word 'Indefinite' is highlighted. The family of curves from earlier briefly reappears to reinforce the visual link.",
+            "math": [
+              "\\text{Indefinite} = \\text{Family of Curves}"
+            ],
+            "seconds": 10
+          }
+        ]
+      },
+      "files": {
+        "video": "mathematics/math.antiderivative_basics.m1.mp4",
+        "poster": "mathematics/math.antiderivative_basics.m1.jpg",
+        "captions": "mathematics/math.antiderivative_basics.m1.vtt",
+        "code": "mathematics/math.antiderivative_basics.m1.py"
+      },
+      "duration_s": 88.5,
+      "width": 1280,
+      "height": 720,
+      "captions": [
+        {
+          "start": 0,
+          "end": 9,
+          "text": "A common student answer for a standard integral:"
+        },
+        {
+          "start": 9,
+          "end": 20,
+          "text": "Let's check this by differentiating. It seems correct!"
+        },
+        {
+          "start": 20,
+          "end": 33,
+          "text": "But wait... what about these functions?"
+        },
+        {
+          "start": 33,
+          "end": 52,
+          "text": "An integral finds a family of curves with the same slope."
+        },
+        {
+          "start": 52,
+          "end": 65,
+          "text": "The Correct Rule: Always add the constant of integration C."
+        },
+        {
+          "start": 65,
+          "end": 78,
+          "text": "Worked Example: Integrating cos x correctly."
+        },
+        {
+          "start": 78,
+          "end": 88.5,
+          "text": "Takeaway: C represents the infinite family of possible solutions."
+        }
+      ],
+      "narration": "none",
+      "attempts": [
+        {
+          "n": 1,
+          "stage": "frame_check",
+          "problems": [
+            "frame 7 (t=55.5 s, caption \"The Correct Rule: Always add the constant of integration C.\"): wrong_maths: The formula shown is 'integral f(x) dx = F(x)', which is missing the constant of integration '+ C'. This is presented as 'The Correct Rule', which is mathematically incorrect in this context.",
+            "frame 7 (t=55.5 s, caption \"The Correct Rule: Always add the constant of integration C.\"): mismatch: The formula is missing the '+ C' component specified in the storyboard for the rule definition in Scene 5.",
+            "maths: Frame 7 presents the indefinite integral rule without the constant of integration C, which is the very misconception the video aims to correct. While Frame 8 shows the correct version, displaying the incomplete one under a 'Correct Rule' caption is confusing for students."
+          ],
+          "render_seconds": 153,
+          "duration_s": 88.5
+        },
+        {
+          "n": 2,
+          "stage": "lint",
+          "problems": [
+            "SyntaxError line 2: unexpected indent"
+          ]
+        },
+        {
+          "n": 3,
+          "stage": "passed",
+          "problems": [],
+          "render_seconds": 98,
+          "duration_s": 88.5
+        }
+      ],
+      "fix_iterations": 2,
+      "frame_check": {
+        "model": "gemini-3-flash-preview",
+        "frames": 12,
+        "summary": "The animation is mathematically sound and follows the educational goal of the storyboard. However, there are multiple cosmetic mismatches where storyboard-specified highlights (yellow text for derivatives, green glowing text for +C in the general rule, and highlighting of the word 'Indefinite') were missed in the final render."
+      },
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3-flash-preview"
+      },
+      "review": {
+        "verdict": "approved",
+        "notes": "Regenerated after rejection. All 12 frames checked by hand: maths correct (d/dx of x², x²+5, x²−3 all 2x; family y=x²+C; ∫f=F+C; ∫cos x=sin x+C); no overlaps or off-screen. Nits: the small red ✗ over +5/−3 means 'the constant vanishes' but red reads as wrong; the opening ∫2x dx=x² is not completed as x²+C on screen.",
+        "at": "2026-11-23T10:29:52.280Z"
+      },
+      "prompt_version": "video-1",
+      "generated_at": "2026-11-23T10:15:07.517Z"
+    },
+    {
+      "misconception_id": "math.chain_rule.m1",
+      "concept_id": "math.chain_rule",
+      "subject": "Mathematics",
+      "status": "passed",
+      "title": "Why the inside needs its own derivative",
+      "storyboard": {
+        "title": "Why the inside needs its own derivative",
+        "idea": "Understanding the Chain Rule by accounting for the rate of change of the inner function",
+        "scenes": [
+          {
+            "caption": "Differentiating sin(x²): it feels natural to just write cos(x²). But is that complete?",
+            "visual": "Dark background. Centered white LaTeX equation appears. A bright red strike-through line draws across it with a red question mark appearing above, showing this common attempt is incorrect.",
+            "math": [
+              "\\frac{d}{dx} \\sin(x^2) = \\cos(x^2)"
+            ],
+            "seconds": 12
+          },
+          {
+            "caption": "When x changes slightly, x² changes by 2x times as much! That is the inner speed.",
+            "visual": "Two horizontal number lines appear. On top, x takes a small step Δx in cyan. On the bottom, x² takes a magnified step Δ(x²) in yellow, labeled as 2x times Δx.",
+            "math": [
+              "\\Delta (x^2) \\approx 2x \\cdot \\Delta x"
+            ],
+            "seconds": 15
+          },
+          {
+            "caption": "Think of nested functions as linked gears: total speed is outer speed times inner speed.",
+            "visual": "Two animated meshed gears appear. The smaller inner gear representing x² rotates at rate 2x, driving the outer sine gear. A glowing yellow formula highlights the speed multiplication.",
+            "math": [
+              "\\text{Total Speed} = \\text{Outer Speed} \\times \\text{Inner Speed}"
+            ],
+            "seconds": 16
+          },
+          {
+            "caption": "The Chain Rule: multiply the outer derivative by the derivative of the inner layer.",
+            "visual": "The general Chain Rule formula fades in. The inner function g(x) highlights in blue, and its derivative g'(x) highlights in bright green to emphasize its position.",
+            "math": [
+              "\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)"
+            ],
+            "seconds": 14
+          },
+          {
+            "caption": "First take derivative of sine, then multiply by the derivative of the inner x² part.",
+            "visual": "The differentiation process transforms step by step. cos(x²) appears, followed by multiplication by (x²)' in yellow, which simplifies into a final green boxed answer 2x cos(x²).",
+            "math": [
+              "\\cos(x^2) \\cdot \\frac{d}{dx}(x^2)",
+              "= 2x \\cos(x^2)"
+            ],
+            "seconds": 16
+          },
+          {
+            "caption": "Takeaway: Always identify the inner part and multiply by its derivative!",
+            "visual": "Summary screen showing sin(x²) with x² highlighted in blue, pointing directly to its derivative 2x in green. A large green checkmark animates onto the final correct result.",
+            "math": [
+              "\\frac{d}{dx}(x^2) = 2x"
+            ],
+            "seconds": 12
+          }
+        ]
+      },
+      "files": {
+        "video": "mathematics/math.chain_rule.m1.mp4",
+        "poster": "mathematics/math.chain_rule.m1.jpg",
+        "captions": "mathematics/math.chain_rule.m1.vtt",
+        "code": "mathematics/math.chain_rule.m1.py"
+      },
+      "duration_s": 90.5,
+      "width": 1280,
+      "height": 720,
+      "captions": [
+        {
+          "start": 0,
+          "end": 13,
+          "text": "Differentiating sin(x²): it feels natural to just write cos(x²). But is that complete?"
+        },
+        {
+          "start": 13,
+          "end": 29,
+          "text": "When x changes slightly, x² changes by 2x times as much! That is the inner speed."
+        },
+        {
+          "start": 29,
+          "end": 46,
+          "text": "Think of nested functions as linked gears: total speed is outer speed times inner speed."
+        },
+        {
+          "start": 46,
+          "end": 61,
+          "text": "The Chain Rule: multiply the outer derivative by the derivative of the inner layer."
+        },
+        {
+          "start": 61,
+          "end": 78,
+          "text": "First take derivative of sine, then multiply by the derivative of the inner x² part."
+        },
+        {
+          "start": 78,
+          "end": 90.5,
+          "text": "Takeaway: Always identify the inner part and multiply by its derivative!"
+        }
+      ],
+      "narration": "none",
+      "attempts": [
+        {
+          "n": 1,
+          "stage": "layout_audit",
+          "problems": [
+            "too_small at t=31.5s: \"Innerlayer(x²)\": font size 26 is too small to read on a phone (minimum 28)",
+            "too_small at t=31.5s: \"Outerlayer(sin)\": font size 26 is too small to read on a phone (minimum 28)"
+          ],
+          "render_seconds": 212,
+          "duration_s": 90.5
+        },
+        {
+          "n": 2,
+          "stage": "passed",
+          "problems": [],
+          "render_seconds": 220,
+          "duration_s": 90.5
+        }
+      ],
+      "fix_iterations": 1,
+      "frame_check": {
+        "model": "gemini-3.6-flash",
+        "frames": 12,
+        "summary": "Overall execution is very clean with correct mathematics and clear visual explanations of the Chain Rule. Frame 11 shows a minor text overlap glitch during an entrance animation, which resolves cleanly in Frame 12."
+      },
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3.6-flash"
+      },
+      "review": {
+        "verdict": "approved",
+        "notes": "All 12 frames checked by hand: maths correct (wrong step crossed in red, chain rule, 2x cos(x²)); no overlaps or off-screen text. Nit: formulas smallish on a phone.",
+        "at": "2026-11-23T10:13:59.831Z"
+      },
+      "source_explainer_hash": "ad7824173d1029df",
+      "prompt_version": "video-1",
+      "generated_at": "2026-11-23T07:29:37.665Z"
+    },
+    {
+      "misconception_id": "math.trig_multiple_angles.m1",
+      "concept_id": "math.trig_multiple_angles",
+      "subject": "Mathematics",
+      "status": "passed",
+      "title": "Fixing the Cosine Double Angle Confusion",
+      "storyboard": {
+        "title": "Fixing the Cosine Double Angle Confusion",
+        "idea": "Clarifying that 1 - cos 2x equals 2 sin² x, not 2 cos² x, by using the identity cos 2x = cos² x - sin² x.",
+        "scenes": [
+          {
+            "caption": "Is this identity correct? 1 - cos 2x = 2 cos^2 x",
+            "narration": "Many students think that since there is a cosine on the left, there must be a cosine on the right.",
+            "visual": "The expression 1 - cos 2x = 2 cos² x appears in the center in a neutral white font. It looks plausible at first.",
+            "math": [
+              "1 - \\cos 2x = 2 \\cos^2 x"
+            ],
+            "seconds": 10
+          },
+          {
+            "caption": "Wait! Let's test it with x = 0. Does 0 = 2?",
+            "narration": "If we plug in zero, the left side becomes one minus one, which is zero. But the right side becomes two.",
+            "visual": "The x in the equation is replaced by 0. The left side calculates to 0, the right to 2. A large red 'X' appears over the equal sign.",
+            "math": [
+              "1 - \\cos(0) = 0",
+              "2 \\cos^2(0) = 2"
+            ],
+            "seconds": 15
+          },
+          {
+            "caption": "Start from the root: cos 2x = cos^2 x - sin^2 x",
+            "narration": "To find the truth, we go back to the fundamental double-angle identity for cosine.",
+            "visual": "The identity cos 2x = cos² x - sin² x fades in. We use the identity cos² x = 1 - sin² x to replace the first term.",
+            "math": [
+              "\\cos 2x = \\cos^2 x - \\sin^2 x",
+              "\\cos 2x = (1 - \\sin^2 x) - \\sin^2 x"
+            ],
+            "seconds": 15
+          },
+          {
+            "caption": "Simplify to find: 1 - cos 2x = 2 sin^2 x",
+            "narration": "By combining the sine terms and rearranging the equation, we see that subtraction leads to sine.",
+            "visual": "The terms 1 and -2 sin² x are shifted. The 2 sin² x moves to the left and cos 2x moves to the right. The result glows green.",
+            "math": [
+              "\\cos 2x = 1 - 2 \\sin^2 x",
+              "1 - \\cos 2x = 2 \\sin^2 x"
+            ],
+            "seconds": 18
+          },
+          {
+            "caption": "Remember the pair: Minus gives Sine, Plus gives Cosine",
+            "narration": "Here is the pattern: subtraction gives you sine squared, while addition gives you cosine squared.",
+            "visual": "Two equations appear side-by-side. 1 - cos 2x = 2 sin² x in green, and 1 + cos 2x = 2 cos² x in yellow.",
+            "math": [
+              "1 - \\cos 2x = 2 \\sin^2 x",
+              "1 + \\cos 2x = 2 \\cos^2 x"
+            ],
+            "seconds": 15
+          },
+          {
+            "caption": "Worked Example: Solve 1 - cos(60).",
+            "narration": "Let's use our rule for 1 minus cosine of sixty degrees. Here, the half-angle is thirty degrees.",
+            "visual": "Calculation: 1 - 0.5 = 0.5. Then using the formula: 2 times sin squared of 30. Both match perfectly.",
+            "math": [
+              "1 - \\cos(60^\\circ) = 0.5",
+              "2 \\sin^2(30^\\circ) = 2(0.5)^2 = 0.5"
+            ],
+            "seconds": 15
+          },
+          {
+            "caption": "Takeaway: 1 - cos 2x is always 2 sin^2 x.",
+            "narration": "Never mix them up again. Subtraction is for sine, addition is for cosine.",
+            "visual": "The correct identity 1 - cos 2x = 2 sin² x is centered and boxed in a bold green rectangle.",
+            "math": [
+              "1 - \\cos 2x = 2 \\sin^2 x"
+            ],
+            "seconds": 12
+          }
+        ]
+      },
+      "files": {
+        "video": "mathematics/math.trig_multiple_angles.m1.mp4",
+        "poster": "mathematics/math.trig_multiple_angles.m1.jpg",
+        "captions": "mathematics/math.trig_multiple_angles.m1.vtt",
+        "code": "mathematics/math.trig_multiple_angles.m1.py"
+      },
+      "duration_s": 106.5,
+      "width": 1280,
+      "height": 720,
+      "captions": [
+        {
+          "start": 0,
+          "end": 11,
+          "text": "Is this identity correct? 1 - cos 2x = 2 cos^2 x"
+        },
+        {
+          "start": 11,
+          "end": 27,
+          "text": "Wait! Let's test it with x = 0. Does 0 = 2?"
+        },
+        {
+          "start": 27,
+          "end": 43,
+          "text": "Start from the root: cos 2x = cos^2 x - sin^2 x"
+        },
+        {
+          "start": 43,
+          "end": 62,
+          "text": "Simplify to find: 1 - cos 2x = 2 sin^2 x"
+        },
+        {
+          "start": 62,
+          "end": 78,
+          "text": "Remember the pair: Minus gives Sine, Plus gives Cosine"
+        },
+        {
+          "start": 78,
+          "end": 94,
+          "text": "Worked Example: Solve 1 - cos(60)."
+        },
+        {
+          "start": 94,
+          "end": 106.5,
+          "text": "Takeaway: 1 - cos 2x is always 2 sin^2 x."
+        }
+      ],
+      "narration": "none",
+      "attempts": [
+        {
+          "n": 1,
+          "stage": "passed",
+          "problems": [],
+          "render_seconds": 104,
+          "duration_s": 106.5
+        }
+      ],
+      "fix_iterations": 0,
+      "frame_check": {
+        "model": "gemini-3-flash-preview",
+        "frames": 13,
+        "summary": "The video clearly and accurately addresses the common confusion between the minus and plus forms of the cosine double-angle identity. It uses a counter-example, a formal derivation, and a mnemonic to solidify the correct formula."
+      },
+      "generator": {
+        "provider": "gemini",
+        "model": "gemini-3.6-flash"
+      },
+      "review": {
+        "verdict": "approved",
+        "notes": "All 13 frames checked by hand: maths correct (x=0 test, derivation from cos²−sin², minus→sine/plus→cosine, 60° example); no overlaps. Nits: captions use ^, '1 - cos(60)' lacks the degree sign.",
+        "at": "2026-11-23T10:14:05.775Z"
+      },
+      "prompt_version": "video-1",
+      "generated_at": "2026-11-23T10:07:07.282Z"
+    }
+  ]
+}

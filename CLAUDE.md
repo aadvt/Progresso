@@ -28,7 +28,7 @@ Prototype for **Inferentics** (edtech). Inferentics already scans CBSE Class 11�
 | 4 | 3D "knowledge constellation" (three.js) of the syllabus, with a chain-reaction ripple when a root is fixed | done |
 | 5 | Mission engine: 25-min daily missions, "prove it" questions whose wrong options come from the student's own mistakes, mastery gating, spaced repetition (FSRS), readiness meter | done |
 | 6 | Mistake Recap (the student's mistake, marked and corrected) and in-browser step explainers | done |
-| 7 | Manim explainer animation pipeline | |
+| 7 | Manim explainer animation pipeline | done |
 | 8 | Precise YouTube clips and 3D organic chemistry | |
 | 9 | Calendar autopilot (in-app calendar + .ics export) and simulated WhatsApp nudges | |
 | 10 | MCP server + MCP App widget ("what should I study tonight?" answered inline in Claude) | |
@@ -51,7 +51,8 @@ packages/
                             mastery gate + FSRS, readiness; browser entry ./missions/client), prove-it
                             questions (questions/: schema, grading, selection, bank loader), lesson content
                             (lessons/: Mistake Recap + step explainer schemas, structure checks, library;
-                            browser entry ./lessons/client).
+                            browser entry ./lessons/client), explainer videos (videos/: storyboard + manifest
+                            schemas, library loader, misconception ranking, WebVTT).
                             ./demo-fixtures entry = SAMPLE DATA loader (deleted in Phase P)
   llm/    @progresso/llm   provider-agnostic LLM layer: per-task routing, Gemini/Anthropic/
                             OpenAI-compatible providers, structured output + repair, rate limit,
@@ -61,9 +62,10 @@ packages/
                             service (missions.ts: plan settings, start/answer/finish, progress)
 apps/
   cli/    @progresso/cli   command-line tools needing several packages (pnpm analyse, questions:generate,
-                            simulate)
+                            lessons:generate, videos:generate/review, simulate)
   web/    @progresso/web   Next.js 16 app: picker, add report, diagnosis, today / plan / mission player
-                           (components/missions, server/missions.ts), constellation (components/
+                           (components/missions, server/missions.ts; explainer video with step-explainer fallback,
+                           served by app/media/videos), constellation (components/
                            constellation: three.js engine/ + SVG Map2D fallback). server/data.ts is the only
                            data seam (parser, records, mastery via server/db.ts); styles/tokens.css +
                            components/ui = design system; e2e/ = Playwright + axe + perf. MCP server (Phase 10) to come
@@ -76,11 +78,14 @@ data/
   fixtures/_answer-key/       intended roots per demo student (tests only, never read by the engine)
   fixtures/demo-recaps/       SAMPLE DATA Mistake Recaps, one per error record (deleted with the fixtures in Phase P)
   explainers/                 verified step explainers, <subject>/<misconception_id>.json (_generation-report.json)
+  videos/                     explainer videos: manifest.json + mathematics/<misconception_id>.{mp4,jpg,vtt,py}
   question-bank/              verified prove-it questions, one JSON per misconception (generated offline;
                               _generation-report.json = what was generated and rejected)
   reports/                    real reports (Phase P), git-ignored, never committed
   progresso.db, cache/, logs/ local runtime state, git-ignored
 tools/cas/check.py            SymPy checker for generated maths questions (allow-listed parsing)
+tools/manim/                  progresso_manim.py (base scene: palette, caption band, layout audit) + lint.py
+                              (allow-list check of generated Manim code before it runs)
 docs/                         progress log, phase reports, error-record format
 ```
 
@@ -94,7 +99,12 @@ Key contracts:
 - **Missions**: `buildPlan({ graph, analysis, records, settings, today, progress })` → `ComebackPlan` (pure; re-run after any change and it re-flows). Mastery gate `gradeCheck` + `applyCheck` (FSRS via ts-fsrs, max interval 14 days), readiness `computeReadiness` (always a range). Persistence and orchestration: `@progresso/db` `startMission` / `answerQuestion` / `finishMission` (writes `concept_mastery`, so the constellation updates). Tunables in `missions/params.ts`.
 - **Prove-it questions**: `ProveItQuestionSchema` (`questions/schema.ts`): every wrong option carries a `misconception_id`. Only verified questions enter `data/question-bank/` (`pnpm questions:generate`); nothing is generated at runtime. The browser never receives the answer key.
 - **Lesson content**: `MistakeRecapSchema` (per record; mode `student_working` only when the report quotes the working, and then its lines must reproduce the quote exactly, checked by `checkRecapStructure`; otherwise `typical_step`, labelled "Not your working") and `StepExplainerSchema` (per misconception, starts from the typical wrong step). Generated offline by `pnpm lessons:generate` (structure → SymPy → independent review on a different model), loaded with `loadLessons()` / `recapFor()` (stale recaps ignored via `source_hash`). Nothing generated at runtime.
-- **LLM calls**: `createLlmClient().generateObject(task, { prompt, schema })` or `.generateText(task, ...)`. The task name picks provider/model from `config/llm.json`.
+- **Explainer videos**: one per misconception, made offline by `pnpm videos:generate` (storyboard → Manim code →
+  lint → render → duration → layout audit → Gemini frame check; failures fed back, attempts capped). Listed in
+  `data/videos/manifest.json` (`VideoEntrySchema`). Served only when `isServable()` (passed, not rejected on hand
+  review via `pnpm videos:review`); otherwise the mission player shows the step explainer. Narration is optional
+  behind `NarrationProvider` (only `none` now). Needs Manim CE, LaTeX (MiKTeX) and ffmpeg.
+- **LLM calls**: `createLlmClient().generateObject(task, { prompt, schema, images? })` or `.generateText(task, ...)`. The task name picks provider/model from `config/llm.json`.
 
 ## Conventions
 
@@ -124,6 +134,9 @@ pnpm questions:generate     # generate + verify prove-it questions into data/que
                             # --missing tops up targets with no verified questions; --only a,b; --list; saves per target
 pnpm lessons:generate       # generate + verify Mistake Recaps and step explainers (--recaps/--explainers, --missing, --only, --list,
                             # --model M --review-model R: the reviewer must be a different model)
+pnpm videos:generate        # explainer videos for the top 5 maths/physics misconceptions (--top, --only, --subjects, --missing,
+                            # --list, --max-attempts, --fresh, --narration); needs manim, latex, dvisvgm, ffmpeg on PATH
+pnpm videos:review --list   # hand-review verdicts; <id> --approve|--reject "notes" (rejected = never served)
 pnpm simulate demo-riya     # simulate 14 days of missions on a throwaway DB (--days, --minutes, --skip, --out)
 pnpm db:seed                # migrate, sync graph, load demo fixtures, print per-student summary
 pnpm db:reset               # delete the local DB (then db:seed)
